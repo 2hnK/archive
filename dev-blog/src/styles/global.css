@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/container-queries";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-on-surface: #1a1a1a;
+  --color-on-error: #fff7f7;
+  --color-secondary-container: #f4f4f5;
+  --color-inverse-primary: #ffffff;
+  --color-tertiary-container: #f8f9fa;
+  --color-on-tertiary: #1a1a1a;
+  --color-inverse-surface: #000000;
+  --color-outline-variant: #e4e4e7;
+  --color-on-background: #1a1a1a;
+  --color-surface-bright: #ffffff;
+  --color-secondary-fixed: #f4f4f5;
+  --color-primary-container: #f4f4f5;
+  --color-secondary-dim: #71717a;
+  --color-on-primary-container: #18181b;
+  --color-error-container: #fee2e2;
+  --color-on-secondary-container: #18181b;
+  --color-primary: #000000;
+  --color-on-error-container: #991b1b;
+  --color-surface-container-highest: #f4f4f5;
+  --color-surface-container: #fafafa;
+  --color-secondary: #71717a;
+  --color-on-surface-variant: #52525b;
+  --color-primary-dim: #27272a;
+  --color-surface-container-lowest: #ffffff;
+  --color-error: #ef4444;
+  --color-primary-fixed: #f4f4f5;
+  --color-background: #ffffff;
+  --color-surface-container-high: #f4f4f5;
+  --color-surface-dim: #e4e4e7;
+  --color-outline: #d4d4d8;
+  --color-on-secondary: #ffffff;
+  --color-on-primary: #ffffff;
+  --color-surface-tint: #000000;
+  --color-surface-variant: #f4f4f5;
+  --color-surface-container-low: #ffffff;
+  --color-surface: #ffffff;
+
+  --font-family-headline: "Inter", sans-serif;
+  --font-family-body: "Inter", sans-serif;
+  --font-family-label: "Inter", sans-serif;
+  --font-family-mono: "Fira Code", "JetBrains Mono", monospace;
+
+  --radius-DEFAULT: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+}
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #1a1a1a;
+  --border-color: #f4f4f5;
+}
+.dark {
+  --bg-color: #09090b;
+  --text-color: #fafafa;
+  --border-color: #27272a;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+
+/* Custom Typography overrides for Dark mode */
+.prose {
+  color: var(--text-color);
+}
+.dark .prose h1, .dark .prose h2, .dark .prose h3, .dark .prose h4 {
+  color: #fafafa;
+}
+.dark .prose strong {
+  color: #f4f4f5;
+}
+.dark .prose a {
+  color: #a1a1aa;
+}
+.dark .prose pre {
+  background-color: #18181b !important;
+  border: 1px solid #27272a;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+.dark .prose code {
+  color: #e4e4e7;
+  font-family: var(--font-family-mono);
+}
+
+/* Code Copy Button Layout */
+.code-block-wrapper {
+  position: relative;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #a1a1aa;
+  font-size: 0.75rem;
+  border-radius: 0.25rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+.code-block-wrapper:hover .copy-btn {
+  opacity: 1;
+}
+.copy-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}

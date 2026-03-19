@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-bright": "#f9f9fb",
+            "secondary": "#5e5f63",
+            "tertiary-fixed": "#f8d9f6",
+            "tertiary-container": "#f8d9f6",
+            "primary-fixed": "#e2e2e2",
+            "surface-container-high": "#e4e9ee",
+            "surface-variant": "#dde3e9",
+            "surface": "#f9f9fb",
+            "primary-fixed-dim": "#d4d4d4",
+            "on-surface-variant": "#596065",
+            "primary": "#5e5e5e",
+            "on-tertiary-fixed": "#4e384e",
+            "error-container": "#ff8b9a",
+            "inverse-surface": "#0c0e10",
+            "on-tertiary-container": "#614a61",
+            "on-tertiary": "#fff7fa",
+            "secondary-fixed": "#e3e2e7",
+            "on-primary": "#f8f8f8",
+            "on-tertiary-fixed-variant": "#6c546c",
+            "on-secondary": "#faf8fe",
+            "on-secondary-container": "#515156",
+            "on-secondary-fixed-variant": "#5b5b60",
+            "primary-container": "#e2e2e2",
+            "on-background": "#2d3338",
+            "surface-container-low": "#f2f4f6",
+            "tertiary-dim": "#634c63",
+            "outline-variant": "#acb3b8",
+            "on-secondary-fixed": "#3e3f43",
+            "on-surface": "#2d3338",
+            "secondary-dim": "#525357",
+            "surface-container-highest": "#dde3e9",
+            "surface-tint": "#5e5e5e",
+            "on-primary-fixed-variant": "#5b5b5b",
+            "secondary-fixed-dim": "#d5d4d9",
+            "on-primary-container": "#525252",
+            "background": "#f9f9fb",
+            "tertiary-fixed-dim": "#eacbe7",
+            "on-error": "#fff7f7",
+            "surface-container": "#ebeef2",
+            "outline": "#757c81",
+            "tertiary": "#6f576f",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-fixed": "#3f3f3f",
+            "error": "#9e3f4e",
+            "on-error-container": "#782232",
+            "secondary-container": "#e3e2e7",
+            "primary-dim": "#525252",
+            "inverse-on-surface": "#9c9d9f",
+            "surface-dim": "#d3dbe2",
+            "inverse-primary": "#ffffff",
+            "error-dim": "#4f0116"
+          },
+          fontFamily: {
+            "headline": ["Inter"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          },
+          borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .no-line {
+      border: none !important;
+    }
+
+    .tonal-shift {
+      transition: background-color 0.3s ease;
+    }
+  </style>
+</head>
+
+<body class="bg-surface text-on-surface font-body antialiased">
+  <!-- Top Navigation Bar -->
+  <header class="fixed top-0 w-full z-50 bg-white/20 dark:bg-neutral-900/20 backdrop-blur-xl">
+    <nav
+      class="flex justify-between items-center h-16 px-6 md:px-12 w-full max-w-screen-2xl mx-auto font-['Inter'] antialiased tracking-tight">
+      <div class="text-xl font-bold tracking-tighter text-neutral-900 dark:text-neutral-50">DevJournal</div>
+      <div class="hidden md:flex items-center gap-8">
+        <a class="text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors"
+          href="#">Articles</a>
+        <a class="text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors"
+          href="#">Projects</a>
+        <a class="text-neutral-900 dark:text-white font-semibold border-b-2 border-neutral-900 dark:border-white pb-1"
+          href="#">About</a>
+        <a class="text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-neutral-200 transition-colors"
+          href="#">Archive</a>
+      </div>
+      <div class="flex items-center gap-4">
+        <button
+          class="material-symbols-outlined text-neutral-900 dark:text-neutral-50 hover:opacity-70 transition-opacity duration-300">dark_mode</button>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <!-- Immersive Hero Section -->
+    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <img class="w-full h-full object-cover" data-alt="Minimalist workspace with soft morning light"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSMObE4-VS8328-PH8V3FwxP39zgM7dIDDXwYuUCB384uShdjRcxXeU62k1VlccJWgpr9nmxF8XBKAIBOCM_e9sSwRMYYYYwVs2nljhymuHrRdv4HKQRwMi2FkqbmKpGIfBeABUXnrU52dDEqBEXYX7kM3UEp9KLq-D6XGMEwOtxbvMYb1o_ZLdQz0_2NJen2Y_paMoAS7QayCOAXo3sHpIgWfztrLgK_cuPqZGshaNafrBzYCayMgYGd9D2fCbwL4iVWUB9Zf5iFh" />
+        <!-- Dark gradient overlay for text legibility -->
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20"></div>
+      </div>
+      <div class="relative z-10 max-w-[900px] mx-auto text-center px-6">
+        <span class="text-[0.75rem] tracking-[0.2em] font-semibold uppercase text-white/80 mb-6 block">The
+          Narrative</span>
+        <h1 class="text-5xl md:text-8xl font-bold tracking-tight text-white mb-8 leading-[1.05]">
+          Crafting logic into <br />human stories.
+        </h1>
+        <p class="text-xl md:text-2xl text-white/90 font-medium max-w-2xl mx-auto leading-relaxed">
+          A decade of architectural precision met with human-centric intent.
+        </p>
+      </div>
+      <!-- Scroll Indicator -->
+      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+        <span class="material-symbols-outlined text-white text-3xl opacity-60">keyboard_arrow_down</span>
+      </div>
+    </section>
+    <div class="bg-surface pt-24">
+      <!-- Essay Content -->
+      <section class="max-w-[700px] mx-auto px-6 mb-32">
+        <div class="space-y-8 text-lg leading-relaxed text-on-surface-variant">
+          <p
+            class="first-letter:text-7xl first-letter:font-bold first-letter:mr-3 first-letter:float-left first-letter:text-on-background">
+            I believe that software is more than just a sequence of commands and responses. It is a medium of
+            expression, a digital canvas where architecture meets intent. My journey began not with a keyboard, but with
+            a fascination for how things fit together—how a collection of small parts can create a cohesive whole.
+          </p>
+          <p>
+            Over the past decade, I've transitioned from building simple websites to architecting complex distributed
+            systems. Yet, my philosophy remains the same: clarity above cleverness. A well-written block of code should
+            read like a paragraph of fine prose—predictable, elegant, and purposeful.
+          </p>
+          <h3 class="text-2xl font-semibold text-on-background pt-6">The Pursuit of Simplicity</h3>
+          <p>
+            In an industry that often prizes complexity, I find myself gravitating towards the "quiet" interfaces. The
+            ones that don't scream for attention but reward it. This blog, DevJournal, is my curated gallery of thoughts
+            on that intersection—where the cold efficiency of engineering meets the warmth of human-centric design.
+          </p>
+        </div>
+      </section>
+      <!-- Tech Stack Grid -->
+      <section class="max-w-screen-xl mx-auto px-6 md:px-12 mb-40">
+        <div class="text-center mb-16">
+          <span class="text-[0.75rem] tracking-[0.08em] font-medium uppercase text-secondary mb-2 block">Toolbox</span>
+          <h2 class="text-3xl font-bold tracking-tight text-on-background">Modern Architectures</h2>
+        </div>
+        <div
+          class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-px bg-outline-variant/10 rounded-xl overflow-hidden border border-outline-variant/10">
+          <div
+            class="bg-surface p-8 flex flex-col items-center justify-center gap-4 hover:bg-surface-container-low transition-colors duration-300">
+            <span class="material-symbols-outlined text-3xl opacity-60">code</span>
+            <span class="text-[0.75rem] font-medium tracking-widest uppercase text-on-surface">TypeScript</span>
+          </div>
+          <div
+            class="bg-surface p-8 flex flex-col items-center justify-center gap-4 hover:bg-surface-container-low transition-colors duration-300">
+            <span class="material-symbols-outlined text-3xl opacity-60">layers</span>
+            <span class="text-[0.75rem] font-medium tracking-widest uppercase text-on-surface">React</span>
+          </div>
+          <div
+            class="bg-surface p-8 flex flex-col items-center justify-center gap-4 hover:bg-surface-container-low transition-colors duration-300">
+            <span class="material-symbols-outlined text-3xl opacity-60">database</span>
+            <span class="text-[0.75rem] font-medium tracking-widest uppercase text-on-surface">PostgreSQL</span>
+          </div>
+          <div
+            class="bg-surface p-8 flex flex-col items-center justify-center gap-4 hover:bg-surface-container-low transition-colors duration-300">
+            <span class="material-symbols-outlined text-3xl opacity-60">terminal</span>
+            <span class="text-[0.75rem] font-medium tracking-widest uppercase text-on-surface">Node.js</span>
+          </div>
+          <div
+            class="bg-surface p-8 flex flex-col items-center justify-center gap-4 hover:bg-surface-container-low transition-colors duration-300">
+            <span class="material-symbols-outlined text-3xl opacity-60">cloud</span>
+            <span class="text-[0.75rem] font-medium tracking-widest uppercase text-on-surface">AWS</span>
+          </div>
+          <div
+            class="bg-surface p-8 flex flex-col items-center justify-center gap-4 hover:bg-surface-container-low transition-colors duration-300">
+            <span class="material-symbols-outlined text-3xl opacity-60">brush</span>
+            <span class="text-[0.75rem] font-medium tracking-widest uppercase text-on-surface">Tailwind</span>
+          </div>
+        </div>
+      </section>
+      <!-- Timeline Section -->
+      <section class="max-w-[700px] mx-auto px-6 pb-32">
+        <div class="mb-16">
+          <span class="text-[0.75rem] tracking-[0.08em] font-medium uppercase text-secondary mb-2 block">The
+            Timeline</span>
+          <h2 class="text-3xl font-bold tracking-tight text-on-background">Key Milestones</h2>
+        </div>
+        <div class="space-y-16 relative">
+          <!-- Vertical Line -->
+          <div class="absolute left-[3px] top-2 bottom-2 w-[1px] bg-outline-variant/30"></div>
+          <div class="relative pl-10">
+            <div class="absolute left-0 top-2.5 w-2 h-2 rounded-full bg-primary ring-4 ring-surface"></div>
+            <div>
+              <span class="text-[0.75rem] font-bold text-primary mb-1 block">2024 — Present</span>
+              <h4 class="text-xl font-semibold text-on-background mb-2">Senior Product Engineer</h4>
+              <p class="text-on-surface-variant leading-relaxed">Leading the core experience team at a high-growth
+                fintech startup, focusing on performance optimization and design systems.</p>
+            </div>
+          </div>
+          <div class="relative pl-10">
+            <div class="absolute left-0 top-2.5 w-2 h-2 rounded-full bg-outline ring-4 ring-surface"></div>
+            <div>
+              <span class="text-[0.75rem] font-bold text-on-surface-variant mb-1 block">2021 — 2023</span>
+              <h4 class="text-xl font-semibold text-on-background mb-2">Full-Stack Architect</h4>
+              <p class="text-on-surface-variant leading-relaxed">Engineered scalable cloud-native applications using
+                Next.js and Go for international clients in the healthcare sector.</p>
+            </div>
+          </div>
+          <div class="relative pl-10">
+            <div class="absolute left-0 top-2.5 w-2 h-2 rounded-full bg-outline ring-4 ring-surface"></div>
+            <div>
+              <span class="text-[0.75rem] font-bold text-on-surface-variant mb-1 block">2018 — 2026</span>
+              <h4 class="text-xl font-semibold text-on-background mb-2">Creative Developer</h4>
+              <p class="text-on-surface-variant leading-relaxed">Focused on the intersection of interaction design and
+                front-end engineering, winning multiple AWWWARDS for digital agency projects.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <!-- Footer -->
+  <footer
+    class="w-full py-12 px-6 md:px-12 bg-neutral-50 dark:bg-neutral-950 border-t border-neutral-200 dark:border-neutral-800">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6 w-full max-w-screen-2xl mx-auto">
+      <div
+        class="text-[12px] font-medium tracking-widest uppercase font-['Inter'] text-neutral-400 dark:text-neutral-500">
+        © 2024 DevJournal. Built for the web.
+      </div>
+      <div class="flex gap-8 items-center">
+        <a class="text-[12px] font-medium tracking-widest uppercase font-['Inter'] text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors underline-offset-4 hover:underline"
+          href="#">RSS</a>
+        <a class="text-[12px] font-medium tracking-widest uppercase font-['Inter'] text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors underline-offset-4 hover:underline"
+          href="#">GitHub</a>
+        <a class="text-[12px] font-medium tracking-widest uppercase font-['Inter'] text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors underline-offset-4 hover:underline"
+          href="#">LinkedIn</a>
+        <a class="text-[12px] font-medium tracking-widest uppercase font-['Inter'] text-neutral-400 dark:text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors underline-offset-4 hover:underline"
+          href="#">Threads</a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

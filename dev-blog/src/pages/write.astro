@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Write | DevArchive" description="블로그 포스트 작성 에디터">
+  <main class="pt-28 pb-24 max-w-7xl mx-auto px-6 min-h-[80vh]">
+    <div class="mb-10 flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6 border-b border-zinc-200 dark:border-zinc-800 pb-8">
+      <div>
+        <span class="text-[10px] tracking-[0.25em] font-bold text-zinc-400 dark:text-zinc-600 uppercase mb-3 block">Studio</span>
+        <h1 class="text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">새 포스트 작성</h1>
+      </div>
+      <div class="flex gap-3">
+        <button id="btn-copy" class="px-4 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 text-xs font-bold text-zinc-600 dark:text-zinc-300 transition-colors flex items-center gap-2">
+          <span class="material-symbols-outlined text-[14px] leading-none">content_copy</span>
+          클립보드 복사
+        </button>
+        <button id="btn-download" class="px-4 py-2 rounded-lg bg-zinc-900 dark:bg-zinc-100 hover:opacity-90 text-xs font-bold text-white dark:text-zinc-900 transition-opacity flex items-center gap-2 shadow-sm">
+          <span class="material-symbols-outlined text-[14px] leading-none">download</span>
+          .md 다운로드
+        </button>
+      </div>
+    </div>
+
+    <form id="write-form" onsubmit="return false;">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-10">
+        <div class="space-y-2">
+          <label class="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-[0.15em]">제목</label>
+          <input id="input-title" required class="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-sm font-bold text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-600" placeholder="포스트 제목을 입력하세요" />
+        </div>
+        <div class="space-y-2">
+          <label class="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-[0.15em]">설명</label>
+          <input id="input-desc" required class="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-600" placeholder="짧은 한 줄 요약문" />
+        </div>
+        <div class="space-y-2">
+          <label class="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-[0.15em] flex items-center justify-between">
+            <span>카테고리</span>
+            <button type="button" id="toggle-custom-cat" class="text-[10px] text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors cursor-pointer font-semibold tracking-wider">+ 직접 입력</button>
+          </label>
+          <select id="input-category" class="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-sm font-semibold text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all cursor-pointer">
+            <option value="엔지니어링">엔지니어링</option>
+            <option value="아키텍처">아키텍처</option>
+            <option value="프론트엔드">프론트엔드</option>
+            <option value="회고">회고</option>
+            <option value="UI/UX">UI/UX</option>
+          </select>
+          <input id="input-category-custom" class="hidden w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-sm font-semibold text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-600" placeholder="새 카테고리를 입력하세요" />
+        </div>
+        <div class="space-y-2">
+          <label class="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-[0.15em]">커버 이미지</label>
+          <div class="flex gap-2">
+            <input id="input-image" class="flex-grow bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-xs text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all font-mono truncate placeholder:text-zinc-400 dark:placeholder:text-zinc-600" placeholder="URL 또는 로컬 이미지 업로드" />
+            <label class="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 text-xs font-bold text-zinc-500 dark:text-zinc-400 transition-colors cursor-pointer flex-shrink-0">
+              <span class="material-symbols-outlined text-[14px] leading-none">upload</span>
+              업로드
+              <input type="file" id="input-image-file" accept="image/*" class="hidden" />
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-zinc-200 dark:border-zinc-800 pt-8">
+        <div class="flex items-center justify-between mb-4">
+          <label class="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-[0.15em]">본문 (Markdown)</label>
+          <div class="flex items-center gap-1 bg-zinc-100 dark:bg-zinc-800/80 p-0.5 rounded-lg border border-zinc-200/50 dark:border-zinc-700/30">
+            <button type="button" id="tab-edit" class="px-3 py-1.5 rounded-md text-[10px] font-bold bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-sm transition-all cursor-pointer">Editor</button>
+            <button type="button" id="tab-preview" class="px-3 py-1.5 rounded-md text-[10px] font-bold text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-all cursor-pointer">Preview</button>
+            <button type="button" id="tab-split" class="px-3 py-1.5 rounded-md text-[10px] font-bold text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-all cursor-pointer hidden md:block">Split</button>
+          </div>
+        </div>
+        <div id="editor-wrapper" class="flex gap-4" style="min-height:500px;">
+          <textarea id="input-body" required class="flex-1 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800/80 rounded-xl p-6 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all font-mono leading-relaxed resize-y placeholder:text-zinc-400" placeholder="마크다운 형식으로 포스트 본문을 작성하세요...
+
+## 예시 제목
+일반 텍스트를 작성하세요.
+
+```javascript
+console.log('Hello DevArchive!');
+```"></textarea>
+          <div id="preview-pane" class="hidden flex-1 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800/80 rounded-xl p-6 text-sm text-zinc-900 dark:text-zinc-100 overflow-y-auto prose max-w-none dark:prose-invert prose-headings:font-bold prose-sm">
+            <p class="text-zinc-400 dark:text-zinc-600 italic">미리보기가 여기에 표시됩니다...</p>
+          </div>
+        </div>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    document.addEventListener('astro:page-load', () => {
+      const btnCopy = document.getElementById('btn-copy');
+      const btnDownload = document.getElementById('btn-download');
+      const toggleCustomCat = document.getElementById('toggle-custom-cat');
+      const selectCat = document.getElementById('input-category') as HTMLSelectElement;
+      const customCat = document.getElementById('input-category-custom') as HTMLInputElement;
+      const imageFileInput = document.getElementById('input-image-file') as HTMLInputElement;
+      const imageUrlInput = document.getElementById('input-image') as HTMLInputElement;
+      const tabEdit = document.getElementById('tab-edit');
+      const tabPreview = document.getElementById('tab-preview');
+      const tabSplit = document.getElementById('tab-split');
+      const editorTextarea = document.getElementById('input-body') as HTMLTextAreaElement;
+      const previewPane = document.getElementById('preview-pane');
+
+      const activateTab = (btn: HTMLElement) => {
+        [tabEdit, tabPreview, tabSplit].forEach(b => {
+          b?.classList.remove('bg-white','dark:bg-zinc-700','text-zinc-900','dark:text-zinc-100','shadow-sm');
+          b?.classList.add('text-zinc-400','dark:text-zinc-500');
+        });
+        btn.classList.add('bg-white','dark:bg-zinc-700','text-zinc-900','dark:text-zinc-100','shadow-sm');
+        btn.classList.remove('text-zinc-400','dark:text-zinc-500');
+      };
+
+      const renderPreview = () => {
+        if (!previewPane || !editorTextarea) return;
+        const md = editorTextarea.value;
+        let html = md
+          .replace(/```(\w*)\n([\s\S]*?)```/g, '<pre class="bg-zinc-900 dark:bg-zinc-800 text-zinc-100 p-4 rounded-lg overflow-x-auto text-xs my-4"><code>$2</code></pre>')
+          .replace(/`([^`]+)`/g, '<code class="bg-zinc-200 dark:bg-zinc-800 px-1.5 py-0.5 rounded text-xs font-mono">$1</code>')
+          .replace(/^### (.+)$/gm, '<h3 class="text-lg font-bold mt-6 mb-2">$1</h3>')
+          .replace(/^## (.+)$/gm, '<h2 class="text-xl font-bold mt-8 mb-3">$1</h2>')
+          .replace(/^# (.+)$/gm, '<h1 class="text-2xl font-bold mt-8 mb-4">$1</h1>')
+          .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*(.+?)\*/g, '<em>$1</em>')
+          .replace(/^\- (.+)$/gm, '<li class="ml-4 list-disc">$1</li>')
+          .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="underline text-zinc-600 dark:text-zinc-300">$1</a>')
+          .replace(/\n\n/g, '</p><p class="mb-4">')
+          .replace(/\n/g, '<br/>');
+        previewPane.innerHTML = '<p class="mb-4">' + html + '</p>';
+      };
+
+      tabEdit?.addEventListener('click', () => { activateTab(tabEdit); editorTextarea?.classList.remove('hidden'); previewPane?.classList.add('hidden'); });
+      tabPreview?.addEventListener('click', () => { activateTab(tabPreview); renderPreview(); editorTextarea?.classList.add('hidden'); previewPane?.classList.remove('hidden'); });
+      tabSplit?.addEventListener('click', () => { activateTab(tabSplit); renderPreview(); editorTextarea?.classList.remove('hidden'); previewPane?.classList.remove('hidden'); });
+      editorTextarea?.addEventListener('input', () => { if (!previewPane?.classList.contains('hidden')) renderPreview(); });
+      
+      let isCustom = false;
+      toggleCustomCat?.addEventListener('click', () => {
+        isCustom = !isCustom;
+        if (isCustom) { selectCat?.classList.add('hidden'); customCat?.classList.remove('hidden'); customCat?.focus(); if(toggleCustomCat) toggleCustomCat.textContent = '← 목록 선택'; }
+        else { selectCat?.classList.remove('hidden'); customCat?.classList.add('hidden'); if(toggleCustomCat) toggleCustomCat.textContent = '+ 직접 입력'; }
+      });
+
+      imageFileInput?.addEventListener('change', () => {
+        const file = imageFileInput.files?.[0]; if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (e) => { if (imageUrlInput) imageUrlInput.value = e.target?.result as string; };
+        reader.readAsDataURL(file);
+      });
+
+      const getCategoryVal = () => (isCustom && customCat?.value.trim()) ? customCat.value.trim() : (selectCat?.value || '엔지니어링');
+
+      const getMarkdown = () => {
+        const title = (document.getElementById('input-title') as HTMLInputElement).value || 'Untitled';
+        const desc = (document.getElementById('input-desc') as HTMLInputElement).value || '';
+        const category = getCategoryVal();
+        const image = imageUrlInput?.value || '';
+        const body = editorTextarea?.value || '';
+        return `---\ntitle: "${title.replace(/"/g, '\\"')}"\ndescription: "${desc.replace(/"/g, '\\"')}"\ncategory: "${category}"\ndate: ${new Date().toISOString().split('T')[0]}\nimageUrl: "${image}"\nisFeatured: false\n---\n\n${body}`;
+      };
+
+      btnCopy?.addEventListener('click', async () => {
+        await navigator.clipboard.writeText(getMarkdown());
+        const o = btnCopy.innerHTML; btnCopy.innerHTML = '<span class="material-symbols-outlined text-[14px] leading-none">check</span> 완료!'; setTimeout(() => btnCopy.innerHTML = o, 2000);
+      });
+      btnDownload?.addEventListener('click', () => {
+        const title = (document.getElementById('input-title') as HTMLInputElement).value || 'untitled';
+        const slug = title.toLowerCase().replace(/[^a-z0-9가-힣]+/g, '-').replace(/(^-|-$)/g, '');
+        const blob = new Blob([getMarkdown()], { type: 'text/markdown;charset=utf-8' });
+        const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `${slug||'new-post'}.md`;
+        document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+      });
+    });
+  </script>
+</BaseLayout>

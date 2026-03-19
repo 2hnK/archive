@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="New Project | DevArchive" description="프로젝트 카드 생성 에디터">
+  <main class="pt-28 pb-24 max-w-4xl mx-auto px-6 min-h-[80vh]">
+    <div class="mb-10 flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6 border-b border-zinc-200 dark:border-zinc-800 pb-8">
+      <div>
+        <span class="text-[10px] tracking-[0.25em] font-bold text-zinc-400 dark:text-zinc-600 uppercase mb-3 block">Project Studio</span>
+        <h1 class="text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">새 프로젝트 등록</h1>
+      </div>
+      <div class="flex gap-3">
+        <button id="btn-copy-proj" class="px-4 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 text-xs font-bold text-zinc-600 dark:text-zinc-300 transition-colors flex items-center gap-2">
+          <span class="material-symbols-outlined text-[14px] leading-none">content_copy</span>
+          복사
+        </button>
+        <button id="btn-download-proj" class="px-4 py-2 rounded-lg bg-zinc-900 dark:bg-zinc-100 hover:opacity-90 text-xs font-bold text-white dark:text-zinc-900 transition-opacity flex items-center gap-2 shadow-sm">
+          <span class="material-symbols-outlined text-[14px] leading-none">download</span>
+          JSON 다운로드
+        </button>
+      </div>
+    </div>
+
+    <form id="proj-form" onsubmit="return false;">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-10">
+        <div class="space-y-2">
+          <label class="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-[0.15em]">프로젝트명</label>
+          <input id="proj-title" required class="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-sm font-bold text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-600" placeholder="프로젝트 이름" />
+        </div>
+        <div class="space-y-2">
+          <label class="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-[0.15em]">연도</label>
+          <input id="proj-year" class="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-600" placeholder="2026" value="2026" />
+        </div>
+        <div class="space-y-2 md:col-span-2">
+          <label class="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-[0.15em]">설명</label>
+          <textarea id="proj-desc" class="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-600 resize-y h-28" placeholder="프로젝트에 대한 설명을 입력하세요"></textarea>
+        </div>
+        <div class="space-y-2">
+          <label class="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-[0.15em]">기술 스택 (쉼표 구분)</label>
+          <input id="proj-tags" class="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-600" placeholder="React, TypeScript, Tailwind" />
+        </div>
+        <div class="space-y-2">
+          <label class="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-[0.15em]">링크 URL</label>
+          <input id="proj-url" class="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all font-mono placeholder:text-zinc-400 dark:placeholder:text-zinc-600" placeholder="https://github.com/..." />
+        </div>
+        <div class="space-y-2 md:col-span-2">
+          <label class="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-[0.15em]">커버 이미지</label>
+          <div class="flex gap-2">
+            <input id="proj-image" class="flex-grow bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg px-4 py-3 text-xs text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all font-mono truncate placeholder:text-zinc-400 dark:placeholder:text-zinc-600" placeholder="URL 또는 업로드" />
+            <label class="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 text-xs font-bold text-zinc-500 dark:text-zinc-400 transition-colors cursor-pointer flex-shrink-0">
+              <span class="material-symbols-outlined text-[14px] leading-none">upload</span>
+              업로드
+              <input type="file" id="proj-image-file" accept="image/*" class="hidden" />
+            </label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    document.addEventListener('astro:page-load', () => {
+      const imageFile = document.getElementById('proj-image-file') as HTMLInputElement;
+      const imageInput = document.getElementById('proj-image') as HTMLInputElement;
+      
+      imageFile?.addEventListener('change', () => {
+        const file = imageFile.files?.[0]; if(!file) return;
+        const reader = new FileReader();
+        reader.onload = (e) => { if(imageInput) imageInput.value = e.target?.result as string; };
+        reader.readAsDataURL(file);
+      });
+
+      const getProjectJSON = () => {
+        const title = (document.getElementById('proj-title') as HTMLInputElement).value || 'Untitled';
+        const year = (document.getElementById('proj-year') as HTMLInputElement).value || '2026';
+        const desc = (document.getElementById('proj-desc') as HTMLTextAreaElement).value || '';
+        const tags = (document.getElementById('proj-tags') as HTMLInputElement).value.split(',').map(t => t.trim()).filter(Boolean);
+        const url = (document.getElementById('proj-url') as HTMLInputElement).value || '#';
+        const image = imageInput?.value || '';
+        return JSON.stringify({ title, description: desc, tags, url, year, image }, null, 2);
+      };
+
+      document.getElementById('btn-copy-proj')?.addEventListener('click', async () => {
+        await navigator.clipboard.writeText(getProjectJSON());
+        const btn = document.getElementById('btn-copy-proj')!;
+        const o = btn.innerHTML; btn.innerHTML = '<span class="material-symbols-outlined text-[14px] leading-none">check</span> 완료!'; setTimeout(() => btn.innerHTML = o, 2000);
+      });
+
+      document.getElementById('btn-download-proj')?.addEventListener('click', () => {
+        const title = (document.getElementById('proj-title') as HTMLInputElement).value || 'project';
+        const slug = title.toLowerCase().replace(/[^a-z0-9가-힣]+/g, '-').replace(/(^-|-$)/g, '');
+        const blob = new Blob([getProjectJSON()], { type: 'application/json;charset=utf-8' });
+        const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `${slug}.json`;
+        document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+      });
+    });
+  </script>
+</BaseLayout>
