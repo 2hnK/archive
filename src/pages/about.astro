@@ -1,21 +1,45 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import hanbatLogo from "../assets/hanbat_logo.svg";
+import ssafyLogo from "../assets/ssafy_logo.svg";
 ---
-<BaseLayout title="소개 | DevArchive" description="시스템 설계와 인간 중심의 의도에 대해 고민합니다.">
+
+<BaseLayout
+  title="소개 | DevArchive"
+  description="시스템 설계와 인간 중심의 의도에 대해 고민합니다."
+>
   <main>
     <!-- Immersive Hero Section -->
-    <section class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">
+    <section
+      class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black"
+    >
       <div class="absolute inset-0 z-0">
-        <img id="hero-bg" class="parallax-bg w-full h-[120%] object-cover object-center opacity-80" alt="Minimalist workspace" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSMObE4-VS8328-PH8V3FwxP39zgM7dIDDXwYuUCB384uShdjRcxXeU62k1VlccJWgpr9nmxF8XBKAIBOCM_e9sSwRMYYYYwVs2nljhymuHrRdv4HKQRwMi2FkqbmKpGIfBeABUXnrU52dDEqBEXYX7kM3UEp9KLq-D6XGMEwOtxbvMYb1o_ZLdQz0_2NJen2Y_paMoAS7QayCOAXo3sHpIgWfztrLgK_cuPqZGshaNafrBzYCayMgYGd9D2fCbwL4iVWUB9Zf5iFh"/>
-        <div class="absolute inset-0 bg-black/40"></div>
+        <img
+          id="hero-bg"
+          class="parallax-bg w-full h-[120%] object-cover object-center opacity-60"
+          alt="Warm desk workspace"
+          src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2670&auto=format&fit=crop"
+        />
+        <div class="absolute inset-0 bg-black/50"></div>
       </div>
-      <div id="hero-text" class="relative z-10 max-w-[900px] mx-auto text-center px-6 transition-transform duration-75">
-        <span class="text-[0.75rem] tracking-[0.2em] font-semibold uppercase text-white/80 mb-6 block">The Narrative</span>
-        <h1 class="text-5xl md:text-8xl font-bold tracking-tight text-white mb-8 leading-[1.05] break-keep">
-          의도를 코드로 엮어내는<br/>소프트웨어 아키텍트.
+      <div
+        id="hero-text"
+        class="relative z-10 w-full max-w-[1400px] mx-auto text-center px-4 md:px-8 transition-transform duration-75"
+      >
+        <span
+          class="text-[0.75rem] md:text-[0.85rem] tracking-[0.3em] font-semibold uppercase text-white/70 mb-5 block"
+          >The Vision</span
+        >
+        <h1
+          class="text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5rem] font-extrabold tracking-tight text-white mb-8 leading-[1.1] break-keep xl:whitespace-nowrap"
+        >
+          기술로 그려내는<br /> 더 나은 세상의 가능성
         </h1>
-        <p class="text-xl md:text-2xl text-white/90 font-medium max-w-2xl mx-auto leading-relaxed break-keep">
-          단순한 구현을 넘어 인간 중심의 경험과 시스템의 안정성을 고민합니다.
+        <p
+          class="text-[1.3rem] md:text-2xl text-white/90 font-medium max-w-4xl mx-auto leading-relaxed break-keep"
+        >
+          깊이 있는 통찰로 세상에 꼭 필요한 해답을 건네는 개발자가 되겠습니다.
         </p>
       </div>
       <!-- Scroll Indicator -->
@@ -27,82 +51,355 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="bg-apple-background dark:bg-apple-darkBackground pt-24 transition-colors">
       <!-- Essay Content -->
       <section class="max-w-[700px] mx-auto px-6 mb-32">
-        <div class="space-y-8 text-lg leading-relaxed text-apple-textMuted dark:text-apple-darkTextMuted">
-          <p class="reveal-up first-letter:text-7xl first-letter:font-bold first-letter:mr-3 first-letter:float-left first-letter:text-apple-text dark:first-letter:text-apple-darkText">
-            소프트웨어는 단순한 명령어의 나열이 아닙니다. 그것은 설계자의 의도가 만나는 디지털 캔버스이자 훌륭한 표현 수단이라고 생각합니다. 저의 여정은 단순히 키보드를 두드리는 것에서 시작하지 않았습니다. 여러 조각들이 어떻게 맞아떨어져 하나의 응집력 있는 전체를 만들어내는지에 대한 순수한 호기심에서 출발했습니다.
-          </p>
-          <p class="reveal-up stagger-1">
-            지난 몇 년 동안 저는 간단한 웹사이트 구축부터 복잡한 분산 시스템 아키텍처 설계에 이르기까지 다양한 기술적 전환기를 겪어왔습니다. 하지만 제 철학은 언제나 변함이 없었습니다. '화려함보다는 명확성(Clarity above cleverness)'. 제대로 작성된 코드 블록은 한 편의 잘 짜인 산문처럼 이어져야 하며, 예측 가능하고 우아하며 목적이 뚜렷해야 합니다.
+        <div
+          class="space-y-8 text-lg leading-relaxed text-apple-textMuted dark:text-apple-darkTextMuted"
+        >
+          <p
+            class="reveal-up first-letter:text-7xl first-letter:font-bold first-letter:mr-3 first-letter:float-left first-letter:text-apple-text dark:first-letter:text-apple-darkText"
+          >
+            단순한 기능 구현을 넘어, '지금 우리에게 가장 필요한 선택이 무엇인지' 고민합니다. 문제를
+            구조적으로 이해하고 상황에 맞는 최선의 해결책을 찾아내는 개발자가 되는 것이 저의
+            지향점입니다.
           </p>
           <div class="pt-6 reveal-up stagger-2">
-            <h3 class="text-2xl font-semibold text-apple-text dark:text-apple-darkText mb-4">단순함(Simplicity)을 향한 여정</h3>
+            <h3 class="text-2xl font-semibold text-apple-text dark:text-apple-darkText mb-4">
+              함께 나아가는 여정
+            </h3>
             <p>
-              때때로 무의미한 복잡성을 치켜세우는 IT 업계 속에서, 저는 "조용한(Quiet)" 인터페이스에 끌립니다. 시선을 강탈하지 않으면서도 온전히 가치를 전달하는 것들 말이죠. 이 개발 블로그는 고도의 효율성을 추구하는 엔지니어링과 인간 중심적 디자인의 따뜻함이 만나는 교차점에 대한 저만의 큐레이션 공간입니다.
+              저에게 개발이란 동료들과 머리를 맞대고 정답을 찾아가는 즐거운 여정입니다. 서로의
+              생각을 나누며 크고 작은 난관을 극복할 때 비로소 더 큰 성장이 가능하다고 생각합니다.
+              언제나 배우는 마음을 잃지 않고, 주변 동료들과 함께 사회에 선한 영향력을 전하는
+              개발자로 나아가겠습니다.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- Tech Stack Grid (Restored Original Clean Format) -->
-      <section class="max-w-screen-xl mx-auto px-6 md:px-12 mb-40">
-        <div class="text-center mb-16 reveal-up">
-          <span class="text-[0.75rem] tracking-[0.08em] font-medium uppercase text-apple-textMuted dark:text-apple-darkTextMuted mb-2 block">Toolbox</span>
-          <h2 class="text-3xl font-bold tracking-tight text-apple-text dark:text-apple-darkText">Modern Architectures</h2>
+      <!-- Capabilities & Milestones (Bento Box) -->
+      <section class="max-w-[900px] mx-auto px-6 mb-32">
+        <div class="mb-10 reveal-up">
+          <span
+            class="text-[0.75rem] tracking-[0.08em] font-medium uppercase text-apple-textMuted dark:text-apple-darkTextMuted mb-2 block"
+            >Capabilities</span
+          >
+          <h2 class="text-3xl font-bold tracking-tight text-apple-text dark:text-apple-darkText">
+            역량 및 자격
+          </h2>
         </div>
-        <div class="reveal-up stagger-1 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-px bg-apple-border/40 dark:bg-apple-darkBorder/40 rounded-xl overflow-hidden border border-apple-border/40 dark:border-apple-darkBorder/40">
-          <div class="bg-apple-surface dark:bg-apple-darkSurface p-8 flex flex-col items-center justify-center gap-4 hover:bg-apple-background dark:hover:bg-black transition-colors duration-300">
-            <span class="material-symbols-outlined text-3xl opacity-60 text-apple-text dark:text-apple-darkText">code</span>
-            <span class="text-[0.75rem] font-medium tracking-widest uppercase text-apple-text dark:text-apple-darkText">TypeScript</span>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-[minmax(180px,auto)]">
+          <!-- Backend Foundation (Span 2) -->
+          <div
+            class="md:col-span-2 bg-apple-surface dark:bg-[#1a1a1a] p-8 rounded-[2rem] border border-apple-border/50 dark:border-apple-darkBorder reveal-up transition-shadow hover:shadow-lg dark:hover:shadow-white/5 flex flex-col justify-between group"
+          >
+            <div class="mb-6">
+              <span
+                class="text-apple-textMuted dark:text-apple-darkTextMuted text-xs font-semibold tracking-wider uppercase mb-1 block"
+                >Core</span
+              >
+              <h3 class="text-2xl font-bold text-apple-text dark:text-apple-darkText">
+                Backend Foundation
+              </h3>
+            </div>
+            <div class="flex flex-wrap gap-3">
+              <!-- Java -->
+              <div
+                class="flex items-center gap-2.5 bg-white/50 dark:bg-white/5 px-4 py-2.5 rounded-full border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.05] hover:bg-white dark:hover:bg-white/10 hover:shadow-md hover:shadow-[#E76F00]/10 group/tech cursor-default"
+              >
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg"
+                  alt="Java"
+                  class="w-6 h-6 object-contain transition-transform duration-300 group-hover/tech:-translate-y-0.5"
+                />
+                <span
+                  class="font-semibold text-[0.85rem] text-apple-text dark:text-apple-darkText transition-colors duration-300 group-hover/tech:text-[#E76F00]"
+                  >Java</span
+                >
+              </div>
+              <!-- Python -->
+              <div
+                class="flex items-center gap-2.5 bg-white/50 dark:bg-white/5 px-4 py-2.5 rounded-full border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.05] hover:bg-white dark:hover:bg-white/10 hover:shadow-md hover:shadow-[#3776AB]/10 group/tech cursor-default"
+              >
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
+                  alt="Python"
+                  class="w-6 h-6 object-contain transition-transform duration-300 group-hover/tech:-translate-y-0.5"
+                />
+                <span
+                  class="font-semibold text-[0.85rem] text-apple-text dark:text-apple-darkText transition-colors duration-300 group-hover/tech:text-[#3776AB]"
+                  >Python</span
+                >
+              </div>
+              <!-- Spring -->
+              <div
+                class="flex items-center gap-2.5 bg-white/50 dark:bg-white/5 px-4 py-2.5 rounded-full border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.05] hover:bg-white dark:hover:bg-white/10 hover:shadow-md hover:shadow-[#6DB33F]/10 group/tech cursor-default"
+              >
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg"
+                  alt="Spring"
+                  class="w-6 h-6 object-contain transition-transform duration-300 group-hover/tech:-translate-y-0.5"
+                />
+                <span
+                  class="font-semibold text-[0.85rem] text-apple-text dark:text-apple-darkText transition-colors duration-300 group-hover/tech:text-[#6DB33F]"
+                  >Spring</span
+                >
+              </div>
+            </div>
           </div>
-          <div class="bg-apple-surface dark:bg-apple-darkSurface p-8 flex flex-col items-center justify-center gap-4 hover:bg-apple-background dark:hover:bg-black transition-colors duration-300">
-            <span class="material-symbols-outlined text-3xl opacity-60 text-apple-text dark:text-apple-darkText">layers</span>
-            <span class="text-[0.75rem] font-medium tracking-widest uppercase text-apple-text dark:text-apple-darkText">React</span>
+
+          <!-- Acquisitions / Certifications (Span 1, Row Span 2) -->
+          <div
+            class="md:col-span-1 md:row-span-2 bg-apple-surface dark:bg-[#1a1a1a] p-8 rounded-[2rem] border border-apple-border/50 dark:border-apple-darkBorder reveal-up stagger-1 transition-shadow hover:shadow-lg dark:hover:shadow-white/5 flex flex-col group relative overflow-hidden"
+          >
+            <div class="mb-8 relative z-10">
+              <span
+                class="text-apple-textMuted dark:text-apple-darkTextMuted text-xs font-semibold tracking-wider uppercase mb-1 block"
+                >Milestones</span
+              >
+              <h3 class="text-2xl font-bold text-apple-text dark:text-apple-darkText">
+                Certifications
+              </h3>
+            </div>
+            <div class="space-y-4 relative z-10 flex-1 flex flex-col justify-center">
+              <!-- 정보처리기사 -->
+              <div
+                class="flex items-center gap-4 bg-white/80 dark:bg-white/5 p-4 rounded-2xl border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:bg-white/10 group/cert cursor-default"
+              >
+                <div
+                  class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-500/20 flex flex-shrink-0 items-center justify-center text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover/cert:bg-blue-500 group-hover/cert:text-white"
+                >
+                  <span
+                    class="material-symbols-outlined text-2xl transition-transform duration-300 group-hover/cert:scale-125 group-hover/cert:rotate-12"
+                    >workspace_premium</span
+                  >
+                </div>
+                <div>
+                  <h4
+                    class="font-bold text-sm text-apple-text dark:text-apple-darkText transition-colors duration-300 group-hover/cert:text-blue-500"
+                  >
+                    정보처리기사
+                  </h4>
+                  <span
+                    class="text-[0.7rem] font-medium text-apple-textMuted dark:text-apple-darkTextMuted"
+                    >2025.09.12 취득</span
+                  >
+                </div>
+              </div>
+              <!-- SQLD -->
+              <div
+                class="flex items-center gap-4 bg-white/80 dark:bg-white/5 p-4 rounded-2xl border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:bg-white/10 group/cert cursor-default"
+              >
+                <div
+                  class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-500/20 flex flex-shrink-0 items-center justify-center text-emerald-600 dark:text-emerald-400 transition-colors duration-300 group-hover/cert:bg-emerald-500 group-hover/cert:text-white"
+                >
+                  <span
+                    class="material-symbols-outlined text-2xl transition-transform duration-300 group-hover/cert:scale-125 group-hover/cert:-rotate-12"
+                    >database</span
+                  >
+                </div>
+                <div>
+                  <h4
+                    class="font-bold text-sm text-apple-text dark:text-apple-darkText transition-colors duration-300 group-hover/cert:text-emerald-500"
+                  >
+                    SQLD
+                  </h4>
+                  <span
+                    class="text-[0.7rem] font-medium text-apple-textMuted dark:text-apple-darkTextMuted"
+                    >2025.06.27 취득</span
+                  >
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="bg-apple-surface dark:bg-apple-darkSurface p-8 flex flex-col items-center justify-center gap-4 hover:bg-apple-background dark:hover:bg-black transition-colors duration-300">
-            <span class="material-symbols-outlined text-3xl opacity-60 text-apple-text dark:text-apple-darkText">database</span>
-            <span class="text-[0.75rem] font-medium tracking-widest uppercase text-apple-text dark:text-apple-darkText">PostgreSQL</span>
+
+          <!-- Data Stores (Span 1) -->
+          <div
+            class="md:col-span-1 bg-apple-surface dark:bg-[#1a1a1a] p-8 rounded-[2rem] border border-apple-border/50 dark:border-apple-darkBorder reveal-up stagger-2 transition-shadow hover:shadow-lg dark:hover:shadow-white/5 flex flex-col justify-between group"
+          >
+            <div class="mb-6">
+              <span
+                class="text-apple-textMuted dark:text-apple-darkTextMuted text-xs font-semibold tracking-wider uppercase mb-1 block"
+                >Storage</span
+              >
+              <h3 class="text-xl font-bold text-apple-text dark:text-apple-darkText">
+                Data Stores
+              </h3>
+            </div>
+            <div class="flex flex-wrap gap-3">
+              <!-- MySQL -->
+              <div
+                class="flex items-center gap-2.5 bg-white/50 dark:bg-white/5 px-4 py-2.5 rounded-full border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.05] hover:bg-white dark:hover:bg-white/10 hover:shadow-md hover:shadow-[#4479A1]/10 group/tech cursor-default"
+              >
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg"
+                  alt="MySQL"
+                  class="w-6 h-6 object-contain transition-transform duration-300 group-hover/tech:-translate-y-0.5"
+                />
+                <span
+                  class="font-semibold text-[0.85rem] text-apple-text dark:text-apple-darkText transition-colors duration-300 group-hover/tech:text-[#4479A1]"
+                  >MySQL</span
+                >
+              </div>
+              <!-- PostgreSQL -->
+              <div
+                class="flex items-center gap-2.5 bg-white/50 dark:bg-white/5 px-4 py-2.5 rounded-full border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.05] hover:bg-white dark:hover:bg-white/10 hover:shadow-md hover:shadow-[#336791]/10 group/tech cursor-default"
+              >
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg"
+                  alt="PostgreSQL"
+                  class="w-6 h-6 object-contain transition-transform duration-300 group-hover/tech:-translate-y-0.5"
+                />
+                <span
+                  class="font-semibold text-[0.85rem] text-apple-text dark:text-apple-darkText transition-colors duration-300 group-hover/tech:text-[#336791]"
+                  >PostgreSQL</span
+                >
+              </div>
+              <!-- Redis -->
+              <div
+                class="flex items-center gap-2.5 bg-white/50 dark:bg-white/5 px-4 py-2.5 rounded-full border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.05] hover:bg-white dark:hover:bg-white/10 hover:shadow-md hover:shadow-[#DC382D]/10 group/tech cursor-default"
+              >
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg"
+                  alt="Redis"
+                  class="w-6 h-6 object-contain transition-transform duration-300 group-hover/tech:-translate-y-0.5"
+                />
+                <span
+                  class="font-semibold text-[0.85rem] text-apple-text dark:text-apple-darkText transition-colors duration-300 group-hover/tech:text-[#DC382D]"
+                  >Redis</span
+                >
+              </div>
+            </div>
           </div>
-          <div class="bg-apple-surface dark:bg-apple-darkSurface p-8 flex flex-col items-center justify-center gap-4 hover:bg-apple-background dark:hover:bg-black transition-colors duration-300">
-            <span class="material-symbols-outlined text-3xl opacity-60 text-apple-text dark:text-apple-darkText">terminal</span>
-            <span class="text-[0.75rem] font-medium tracking-widest uppercase text-apple-text dark:text-apple-darkText">Node.js</span>
-          </div>
-          <div class="bg-apple-surface dark:bg-apple-darkSurface p-8 flex flex-col items-center justify-center gap-4 hover:bg-apple-background dark:hover:bg-black transition-colors duration-300">
-            <span class="material-symbols-outlined text-3xl opacity-60 text-apple-text dark:text-apple-darkText">cloud</span>
-            <span class="text-[0.75rem] font-medium tracking-widest uppercase text-apple-text dark:text-apple-darkText">AWS</span>
-          </div>
-          <div class="bg-apple-surface dark:bg-apple-darkSurface p-8 flex flex-col items-center justify-center gap-4 hover:bg-apple-background dark:hover:bg-black transition-colors duration-300">
-            <span class="material-symbols-outlined text-3xl opacity-60 text-apple-text dark:text-apple-darkText">brush</span>
-            <span class="text-[0.75rem] font-medium tracking-widest uppercase text-apple-text dark:text-apple-darkText">Tailwind</span>
+
+          <!-- Infrastructure (Span 1) -->
+          <div
+            class="md:col-span-1 bg-apple-surface dark:bg-[#1a1a1a] p-8 rounded-[2rem] border border-apple-border/50 dark:border-apple-darkBorder reveal-up stagger-3 transition-shadow hover:shadow-lg dark:hover:shadow-white/5 flex flex-col justify-between group"
+          >
+            <div class="mb-6">
+              <span
+                class="text-apple-textMuted dark:text-apple-darkTextMuted text-xs font-semibold tracking-wider uppercase mb-1 block"
+                >Cloud & DevOps</span
+              >
+              <h3 class="text-xl font-bold text-apple-text dark:text-apple-darkText">
+                Infrastructure
+              </h3>
+            </div>
+            <div class="flex flex-wrap gap-3">
+              <!-- Docker -->
+              <div
+                class="flex items-center gap-2.5 bg-white/50 dark:bg-white/5 px-4 py-2.5 rounded-full border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.05] hover:bg-white dark:hover:bg-white/10 hover:shadow-md hover:shadow-[#2496ED]/10 group/tech cursor-default"
+              >
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg"
+                  alt="Docker"
+                  class="w-6 h-6 object-contain transition-transform duration-300 group-hover/tech:-translate-y-0.5"
+                />
+                <span
+                  class="font-semibold text-[0.85rem] text-apple-text dark:text-apple-darkText transition-colors duration-300 group-hover/tech:text-[#2496ED]"
+                  >Docker</span
+                >
+              </div>
+              <!-- AWS -->
+              <div
+                class="flex items-center gap-2.5 bg-white/50 dark:bg-white/5 px-4 py-2.5 rounded-full border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.05] hover:bg-white dark:hover:bg-white/10 hover:shadow-md hover:shadow-[#FF9900]/10 group/tech cursor-default"
+              >
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"
+                  alt="AWS"
+                  class="w-8 h-8 object-contain transition-transform duration-300 group-hover/tech:-translate-y-0.5"
+                />
+                <span
+                  class="font-semibold text-[0.85rem] text-apple-text dark:text-apple-darkText transition-colors duration-300 group-hover/tech:text-[#FF9900]"
+                  >AWS</span
+                >
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- Timeline Section (Restored Original Clean Format) -->
-      <section class="max-w-[700px] mx-auto px-6 pb-32">
-        <div class="mb-16 reveal-up">
-          <span class="text-[0.75rem] tracking-[0.08em] font-medium uppercase text-apple-textMuted dark:text-apple-darkTextMuted mb-2 block">The Timeline</span>
-          <h2 class="text-3xl font-bold tracking-tight text-apple-text dark:text-apple-darkText">주요 여정</h2>
+      <!-- Timeline Section -->
+      <section class="max-w-[700px] mx-auto px-6 pb-24">
+        <div class="mb-12 reveal-up">
+          <span
+            class="text-[0.75rem] tracking-[0.08em] font-medium uppercase text-apple-textMuted dark:text-apple-darkTextMuted mb-2 block"
+            >The Timeline</span
+          >
+          <h2 class="text-3xl font-bold tracking-tight text-apple-text dark:text-apple-darkText">
+            주요 여정
+          </h2>
         </div>
-        
+
         <div class="space-y-16 relative">
           <!-- Vertical Line -->
-          <div class="absolute left-[3px] top-2 bottom-2 w-[1px] bg-apple-border dark:bg-apple-darkBorder"></div>
-          
+          <div
+            class="absolute left-[3px] top-4 bottom-0 w-[1px] bg-apple-border/70 dark:bg-apple-darkBorder/70"
+          >
+          </div>
+
           <div class="relative pl-10 reveal-up stagger-1">
-            <div class="absolute left-0 top-2.5 w-2 h-2 rounded-full bg-apple-text dark:bg-apple-darkText ring-4 ring-apple-background dark:ring-apple-darkBackground"></div>
+            <div
+              class="absolute left-[-1px] top-4 w-[8px] h-[8px] rounded-full bg-apple-text dark:bg-apple-darkText ring-4 ring-apple-background dark:ring-apple-darkBackground z-10"
+            >
+            </div>
             <div>
-              <span class="text-[0.75rem] font-bold text-apple-text dark:text-apple-darkText mb-1 block">2026 ~ 현재</span>
-              <h4 class="text-xl font-semibold text-apple-text dark:text-apple-darkText mb-2">SSAFY 15기 이수</h4>
-              <p class="text-apple-textMuted dark:text-apple-darkTextMuted leading-relaxed break-keep">급성장하는 핀테크 스타트업에서 코어 경험(Core Experience) 팀을 리드하며 성능 최적화와 디자인 시스템 구축에 집중하고 있습니다.</p>
+              <div class="flex items-center gap-4 mb-3">
+                <div
+                  class="w-12 h-12 flex-shrink-0 rounded-[12px] bg-white flex items-center justify-center p-2 border border-black/5 dark:border-white/5 shadow-sm"
+                >
+                  <Image src={ssafyLogo} alt="SSAFY Logo" class="w-full h-full object-contain" />
+                </div>
+                <div>
+                  <span
+                    class="text-[0.75rem] font-bold text-apple-text dark:text-apple-darkText mb-0.5 block"
+                    >2026.03 ~ 현재</span
+                  >
+                  <h4 class="text-xl font-semibold text-apple-text dark:text-apple-darkText">
+                    SSAFY 과정 이수
+                  </h4>
+                </div>
+              </div>
+              <p
+                class="text-apple-textMuted dark:text-apple-darkTextMuted leading-relaxed break-keep"
+              >
+                삼성청년SW아카데미(SSAFY)에서 몰입형 소프트웨어 교육 과정을 이수하며, 실무 중심의 웹
+                개발 역량과 알고리즘 문제 해결 능력을 키우고 있습니다.
+              </p>
             </div>
           </div>
-          
+
           <div class="relative pl-10 reveal-up stagger-2">
-            <div class="absolute left-0 top-2.5 w-2 h-2 rounded-full bg-apple-textMuted dark:bg-apple-darkTextMuted ring-4 ring-apple-background dark:ring-apple-darkBackground"></div>
+            <div
+              class="absolute left-[-1px] top-4 w-[8px] h-[8px] rounded-full bg-apple-textMuted dark:bg-apple-darkTextMuted ring-4 ring-apple-background dark:ring-apple-darkBackground z-10"
+            >
+            </div>
             <div>
-              <span class="text-[0.75rem] font-bold text-apple-textMuted dark:text-apple-darkTextMuted mb-1 block">2024 ~ 2026</span>
-              <h4 class="text-xl font-semibold text-apple-text dark:text-apple-darkText mb-2">국립한밭대학교 졸업</h4>
-              <p class="text-apple-textMuted dark:text-apple-darkTextMuted leading-relaxed break-keep">인터랙션 디자인과 프론트엔드 엔지니어링의 교차점에 집중하며 인터랙티브 에이전시 소속으로 AWWWARDS 등에서 개발 성과를 다수 수상했습니다.</p>
+              <div class="flex items-center gap-4 mb-3">
+                <div
+                  class="w-12 h-12 flex-shrink-0 rounded-[12px] bg-white flex items-center justify-center p-2 border border-black/5 dark:border-white/5 shadow-sm"
+                >
+                  <Image
+                    src={hanbatLogo}
+                    alt="Hanbat University Logo"
+                    class="w-full h-full object-contain"
+                  />
+                </div>
+                <div>
+                  <span
+                    class="text-[0.75rem] font-bold text-apple-textMuted dark:text-apple-darkTextMuted mb-0.5 block"
+                    >~ 2026.03</span
+                  >
+                  <h4 class="text-xl font-semibold text-apple-text dark:text-apple-darkText">
+                    국립한밭대학교 컴퓨터공학과 학사 졸업
+                  </h4>
+                </div>
+              </div>
+              <p
+                class="text-apple-textMuted dark:text-apple-darkTextMuted leading-relaxed break-keep"
+              >
+                컴퓨터공학 전공 지식을 바탕으로 프로그래밍 기초, 자료구조, 알고리즘 등 소프트웨어
+                엔지니어링의 핵심 원리를 탄탄하게 학습했습니다.
+              </p>
             </div>
           </div>
         </div>
@@ -111,18 +408,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </main>
 
   <script>
-    document.addEventListener('astro:page-load', () => {
+    document.addEventListener("astro:page-load", () => {
       // 1. Immersive Parallax Hero
       const heroBg = document.getElementById("hero-bg");
       const heroText = document.getElementById("hero-text");
-      
+
       const onScrollHero = () => {
         const scrolled = window.scrollY;
-        
+
         if (scrolled < window.innerHeight && heroBg && heroText) {
           heroBg.style.transform = `translateY(${scrolled * 0.4}px)`;
           heroText.style.transform = `translateY(${scrolled * 0.15}px)`;
-          heroText.style.opacity = (1 - (scrolled / (window.innerHeight * 0.6))).toString();
+          heroText.style.opacity = (1 - scrolled / (window.innerHeight * 0.6)).toString();
         }
       };
 
@@ -131,12 +428,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       // 2. Smooth Intersection Observer for Scroll Reveals
       const revealOptions = {
         root: null,
-        rootMargin: '0px 0px -50px 0px',
-        threshold: 0.1
+        rootMargin: "0px 0px -50px 0px",
+        threshold: 0.1,
       };
 
       const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("active");
             observer.unobserve(entry.target);
@@ -144,7 +441,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         });
       }, revealOptions);
 
-      document.querySelectorAll(".reveal-up").forEach(el => {
+      document.querySelectorAll(".reveal-up").forEach((el) => {
         revealObserver.observe(el);
       });
     });
