@@ -13,50 +13,54 @@ const latestArticles = sortedArticles.slice(0, 6);
   <main class="pt-24 pb-20">
     
     <!-- Greeting -->
-    <section class="max-w-6xl mx-auto px-6 pt-12 pb-20">
+    <section class="max-w-[1200px] mx-auto px-6 pt-12 pb-20 fade-in-up">
       <div class="max-w-3xl">
-        <span class="text-[10px] tracking-[0.25em] font-bold text-zinc-400 dark:text-zinc-600 uppercase mb-6 block">Developer Blog</span>
-        <h1 class="text-5xl md:text-7xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 leading-[1.1] mb-8 break-keep">
-          생각하고, 설계하고,<br/>기록합니다.
+        <span class="text-[11px] tracking-[0.25em] font-bold text-apple-textMuted dark:text-apple-darkTextMuted uppercase mb-6 block">Developer Blog</span>
+        <h1 class="text-[4rem] md:text-[5.5rem] font-bold tracking-tighter text-apple-text dark:text-apple-darkText leading-[1.05] mb-8 break-keep">
+          의도를 설계로,<br/>순간을 기록으로.
         </h1>
-        <p class="text-xl text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-2xl break-keep">
-          소프트웨어 아키텍처, 프론트엔드 엔지니어링, 그리고 개발자로서의 성장 여정을 기록하는 개인 블로그입니다.
+        <p class="text-[19px] text-apple-textMuted dark:text-apple-darkTextMuted leading-[1.6] max-w-[650px] break-keep font-medium">
+          소프트웨어 아키텍처, 프론트엔드 엔지니어링, 그리고 개발자로서의 성장 여정을 나누는 공간입니다. 나중을 위해 홈 화면은 다양하게 꾸밀 수 있도록 깔끔히 구축해 두었습니다.
         </p>
       </div>
     </section>
     
     <!-- Featured Post -->
     {featured && (
-      <section class="max-w-6xl mx-auto px-6 mb-24">
-        <span class="text-[10px] tracking-[0.25em] font-bold text-zinc-400 dark:text-zinc-600 uppercase mb-6 block">Featured</span>
-        <a href={`/articles/${featured.id}`} class="group block relative overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900 aspect-[21/9] border border-zinc-200/50 dark:border-zinc-800/50 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all">
-          {featured.data.imageUrl && (
-            <img alt={featured.data.title} class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" src={featured.data.imageUrl} />
-          )}
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-          <div class="absolute bottom-0 left-0 right-0 p-8 md:p-12">
-            <div class="mb-4">
-              <span class="bg-white/10 backdrop-blur-lg text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] border border-white/20">{featured.data.category}</span>
+      <section class="max-w-[1200px] mx-auto px-6 mb-32 reveal-up stagger-1">
+        <span class="text-[11px] tracking-[0.25em] font-bold text-apple-textMuted dark:text-apple-darkTextMuted uppercase mb-4 block">Featured Journal</span>
+        <a href={`/articles/${featured.id}`} class="group block relative overflow-hidden rounded-[2rem] bg-black/5 dark:bg-white/5 aspect-[16/10] md:aspect-[21/9] border border-apple-border/50 dark:border-apple-darkBorder/50 shadow-[0_8px_32px_rgba(0,0,0,0.06)]">
+          {featured.data.imageUrl ? (
+            <img alt={featured.data.title} class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]" src={featured.data.imageUrl} loading="lazy" />
+          ) : (
+            <div class="absolute inset-0 w-full h-full bg-apple-surface dark:bg-apple-darkSurface flex items-center justify-center">
+              <span class="material-symbols-outlined text-[60px] text-apple-border dark:text-apple-darkBorder">history</span>
             </div>
-            <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-white mb-4 leading-[1.1] max-w-3xl break-keep">
+          )}
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-8 md:p-12 z-10 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-[-4px]">
+            <div class="mb-4">
+              <span class="bg-white/20 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-sm border border-white/20">{featured.data.category}</span>
+            </div>
+            <h2 class="text-[2.2rem] md:text-[3.5rem] font-bold tracking-tighter text-white mb-4 leading-[1.1] max-w-3xl break-keep group-hover:text-orange -300 transition-colors">
               {featured.data.title}
             </h2>
-            <p class="text-white/70 text-sm md:text-base max-w-2xl break-keep line-clamp-2">{featured.data.description}</p>
+            <p class="text-white/80 text-[15px] md:text-[17px] font-medium max-w-2xl break-keep line-clamp-2">{featured.data.description}</p>
           </div>
         </a>
       </section>
     )}
     
-    <!-- Latest Articles -->
-    <section class="max-w-6xl mx-auto px-6">
-      <div class="flex justify-between items-end mb-12 border-b border-zinc-200 dark:border-zinc-800 pb-6">
+    <!-- Latest Articles Grid -->
+    <section class="max-w-[1200px] mx-auto px-6 reveal-up stagger-2">
+      <div class="flex justify-between items-end mb-12 border-b border-apple-border dark:border-apple-darkBorder pb-6">
         <div>
-          <span class="text-[10px] uppercase tracking-[0.25em] font-bold text-zinc-400 dark:text-zinc-600 block mb-2">Latest</span>
-          <h2 class="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">최근 포스트</h2>
+          <span class="text-[11px] uppercase tracking-[0.25em] font-bold text-apple-textMuted dark:text-apple-darkTextMuted block mb-2">Latest Insights</span>
+          <h2 class="text-[2rem] font-bold tracking-tighter text-apple-text dark:text-apple-darkText">최근 포스트</h2>
         </div>
-        <a href="/articles" class="text-sm font-semibold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors flex items-center gap-1.5 group">
-          전체 보기
-          <span class="material-symbols-outlined text-sm group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+        <a href="/articles" class="btn-premium group">
+          아티클 전체 보기
+          <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
         </a>
       </div>
       
@@ -74,4 +78,24 @@ const latestArticles = sortedArticles.slice(0, 6);
       </div>
     </section>
   </main>
+
+  <script>
+    document.addEventListener('astro:page-load', () => {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active", "translate-y-0", "opacity-100");
+            entry.target.classList.remove("translate-y-8", "opacity-0");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { root: null, rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
+
+      const els = document.querySelectorAll(".reveal-up, .fade-in-up");
+      els.forEach(el => {
+        el.classList.add("transition-all", "duration-1000", "ease-[cubic-bezier(0.16,1,0.3,1)]", "opacity-0", "translate-y-8");
+        revealObserver.observe(el);
+      });
+    });
+  </script>
 </BaseLayout>

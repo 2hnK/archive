@@ -1,10 +1,15 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
 
 const allArticles = await getCollection('articles');
 const sortedArticles = allArticles.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const renderedArticles = await Promise.all(sortedArticles.map(async (entry) => {
+  const { Content } = await render(entry);
+  return { entry, Content };
+}));
 
 const categoryCount: Record<string, number> = {};
 sortedArticles.forEach(a => {
@@ -12,150 +17,323 @@ sortedArticles.forEach(a => {
   categoryCount[cat] = (categoryCount[cat] || 0) + 1;
 });
 const categories = Object.keys(categoryCount);
+
+const LIQUID_GLASS_TOKEN = "custom-glass-highlight border border-white/20 dark:border-white/10";
+const BTN_INACTIVE = 'outline-none focus:outline-none border-none ring-0 appearance-none bg-transparent text-apple-textMuted dark:text-apple-darkTextMuted transition-colors duration-300 hover:text-apple-text dark:hover:text-apple-darkText';
+const BTN_ACTIVE = 'active-item outline-none focus:outline-none border-none ring-0 appearance-none bg-transparent text-apple-text dark:text-apple-darkText font-bold transition-colors duration-300';
 ---
 
 <BaseLayout title="Articles | DevArchive" description="모든 아티클 및 저널 목록입니다.">
-  <main class="pt-32 pb-20 max-w-7xl mx-auto px-6 min-h-[70vh] flex flex-col lg:flex-row gap-12 relative">
+  
+  <div class="mx-auto w-full max-w-[1700px] grid grid-cols-1 lg:grid-cols-[260px_1fr] xl:grid-cols-[1fr_minmax(auto,1000px)_1fr] gap-8 lg:gap-14 px-4 sm:px-6 md:px-8 pt-24 pb-20 relative" style="padding-top: 160px;">
     
-    <div class="flex-grow w-full max-w-4xl">
-      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-12 border-b border-zinc-200 dark:border-zinc-800 pb-6 gap-6">
-        <div>
-          <h1 class="text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 mb-4">아티클 보관소</h1>
-          <p class="text-zinc-500 dark:text-zinc-400 max-w-2xl text-lg break-keep">시스템 설계, 기술 리더십, 그리고 미니멀 프로그래밍에 대한 치열한 탐구.</p>
-        </div>
+    <!-- LEFT COLUMN: SIDEBAR (Floats to the right side of this column on xl) -->
+    <div class="w-full lg:w-auto order-2 lg:order-1 mt-12 lg:mt-0">
+      <aside class="w-full lg:w-[260px] xl:w-[280px] xl:ml-auto flex flex-col lg:sticky lg:top-32 h-fit max-h-[calc(100vh-8rem)] flex-shrink-0 z-20 overflow-y-auto hide-scrollbar transition-all duration-500">
         
-        <!-- Apple-style Rounded Toggle -->
-        <div class="hidden sm:flex items-center">
-          <div class="relative bg-zinc-200/60 dark:bg-zinc-800 p-[3px] rounded-full flex items-center w-[72px] h-[34px] cursor-pointer select-none" id="view-toggle" role="switch" aria-label="뷰 전환">
-            <div id="toggle-thumb" class="absolute w-[28px] h-[28px] bg-white dark:bg-zinc-600 rounded-full shadow-md transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] left-[3px] flex items-center justify-center">
-              <span id="toggle-icon" class="material-symbols-outlined text-[14px] text-zinc-700 dark:text-zinc-200 leading-none">grid_view</span>
-            </div>
+        <!-- SIDEBAR: UNIFIED GRID/CATEGORY MENU -->
+        <div id="sidebar-category-menu" class="w-full h-auto flex flex-col bg-apple-surface dark:bg-apple-darkSurface border border-apple-border/40 dark:border-apple-darkBorder/40 rounded-[2rem] p-6 shadow-sm reveal-up stagger-1" style="margin-top: 170px;">
+          <div class="flex items-center justify-between mb-6 px-1">
+            <h2 class="text-[12px] font-bold tracking-[0.2em] uppercase text-apple-text dark:text-apple-darkText">Categories</h2>
+            <span class="w-full h-[1px] bg-apple-border/50 dark:bg-apple-darkBorder/50 ml-4"></span>
           </div>
-        </div>
-      </div>
+          
+          <div class="relative flex flex-col gap-1.5 pb-2" id="cat-list-container">
+            <div id="grid-highlight" class={`absolute top-0 left-0 w-full rounded-[1.2rem] transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] z-0 pointer-events-none opacity-0 ${LIQUID_GLASS_TOKEN}`}></div>
 
-      <div id="article-container" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 transition-all duration-500 ease-in-out">
-        {sortedArticles.map(article => (
-          <div class="article-item transition-all duration-500 ease-in-out" data-category={article.data.category}>
-            <ArticleCard 
-              title={article.data.title}
-              description={article.data.description}
-              category={article.data.category}
-              date={article.data.date.toLocaleDateString('ko-KR')}
-              href={`/articles/${article.id}`}
-              imageUrl={article.data.imageUrl}
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <!-- 사이드바 -->
-    <aside class="w-full lg:w-48 flex-shrink-0 lg:sticky lg:top-32 self-start hidden lg:block">
-      <div class="py-2">
-        <h3 class="text-[0.65rem] font-bold tracking-[0.2em] uppercase text-zinc-400 dark:text-zinc-500 mb-6 px-3">카테고리</h3>
-        <ul class="flex flex-col gap-1.5">
-          <li>
-            <button data-filter="all" class="cat-filter active-cat group w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm text-zinc-900 dark:text-zinc-100 font-bold bg-zinc-100/50 dark:bg-zinc-800/50 transition-all border border-zinc-200/50 dark:border-zinc-700/50 cursor-pointer text-left">
-              <span class="flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-zinc-900 dark:bg-zinc-100"></span>
+            <button data-filter="all" class={`cat-filter relative z-10 w-full flex items-center justify-between px-5 py-4 rounded-[1.2rem] cursor-pointer ${BTN_ACTIVE}`}>
+              <span class="flex items-center gap-2 text-[14px]">
+                <span class="material-symbols-outlined text-[18px]">all_inbox</span>
                 전체보기
               </span>
-              <span class="text-[10px] text-zinc-500 dark:text-zinc-400 font-mono tracking-widest">{sortedArticles.length}</span>
+              <span class="text-[12px] font-mono tracking-widest opacity-80">{sortedArticles.length}</span>
             </button>
-          </li>
-          {categories.map(cat => (
-            <li>
-              <button data-filter={cat} class="cat-filter group w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-900/40 transition-all cursor-pointer text-left">
-                <span class="flex items-center gap-2 relative">
-                  <span class="absolute -left-3 w-1 h-1 rounded-full bg-zinc-300 dark:bg-zinc-600 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                  <span class="font-medium">{cat}</span>
+            {categories.map(cat => (
+              <button data-filter={cat} class={`cat-filter relative z-10 w-full flex items-center justify-between px-5 py-4 rounded-[1.2rem] cursor-pointer ${BTN_INACTIVE}`}>
+                <span class="flex items-center gap-2 text-[14px]">
+                  <span class="material-symbols-outlined text-[18px] transition-colors">folder</span>
+                  <span class="group-hover:translate-x-1 transition-transform">{cat}</span>
                 </span>
-                <span class="text-[10px] text-zinc-300 dark:text-zinc-600 font-mono tracking-widest group-hover:text-zinc-400 transition-colors">{categoryCount[cat]}</span>
+                <span class="text-[12px] font-mono tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">{categoryCount[cat]}</span>
               </button>
-            </li>
-          ))}
-        </ul>
+            ))}
+          </div>
+        </div>
+
+      </aside>
+    </div>
+
+    <!-- CENTER COLUMN: MAIN CONTENT (Perfectly Centered on XL) -->
+    <main class="w-full min-w-0 transition-opacity duration-500 relative min-h-[70vh] order-1 lg:order-2">
+
+      <!-- Top Bar: Title & View Toggle -->
+      <div class="w-full flex flex-col sm:flex-row sm:justify-between sm:items-end mb-10 border-b border-apple-border dark:border-apple-darkBorder pb-6 gap-6">
+        <div>
+          <h1 class="text-[2.5rem] md:text-5xl font-bold tracking-tighter text-apple-text dark:text-apple-darkText mb-3">저널 보관소</h1>
+          <p class="text-apple-textMuted dark:text-apple-darkTextMuted max-w-2xl text-[17px] md:text-[19px] tracking-tight font-medium break-keep">시스템 설계, 기술 리더십, 그리고 미니멀 프로그래밍에 대한 치열한 탐구.</p>
+        </div>
+        
+        <!-- Liquid Glass Segmented Control Toggle -->
+        <div class="hidden sm:flex items-center bg-black/[0.04] dark:bg-white/[0.06] p-1.5 rounded-[1.2rem] ring-1 ring-black/5 dark:ring-white/10 shadow-[inset_0_1px_4px_rgba(0,0,0,0.05)] select-none">
+          <div class="relative flex items-center">
+            <div id="toggle-bg" class={`absolute w-[44px] h-[36px] rounded-[1rem] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] left-0 z-0 ${LIQUID_GLASS_TOKEN}`}></div>
+            
+            <button id="btn-feed" class="relative z-10 w-[44px] h-[36px] flex justify-center items-center rounded-xl text-apple-text dark:text-apple-darkText transition-colors duration-300" aria-label="Feed View">
+              <span class="material-symbols-outlined text-[18px]">splitscreen</span>
+            </button>
+            <button id="btn-grid" class="relative z-10 w-[44px] h-[36px] flex justify-center items-center rounded-xl text-apple-textMuted dark:text-apple-darkTextMuted transition-colors duration-300" aria-label="Grid View">
+              <span class="material-symbols-outlined text-[18px]">grid_view</span>
+            </button>
+          </div>
+        </div>
       </div>
-    </aside>
-  </main>
+      
+      <div class="h-4"></div>
+      
+      <!-- VIEW 1: FEED DETAILS (Vertical Scroll Layout) -->
+      <div id="view-feed" class="w-full flex flex-col transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+        <div class="relative w-full h-full" id="feed-details-container">
+          {renderedArticles.map(({ entry, Content }, index) => (
+            <div 
+              data-category={entry.data.category}
+              class="post-detail relative block w-full flex-col bg-apple-surface dark:bg-apple-darkSurface rounded-[2.5rem] p-8 md:p-14 mb-[4rem] border border-apple-border/40 dark:border-apple-darkBorder/40 shadow-[0_8px_32px_rgba(0,0,0,0.04)] reveal-up transition-all duration-500"
+            >
+              <div class="mb-10">
+                <div class="flex items-center gap-2 mb-4 text-apple-textMuted dark:text-apple-darkTextMuted text-[13px] font-bold uppercase tracking-widest">
+                  <span class="text-[#a34455] dark:text-[#ff92a6]">{entry.data.category}</span>
+                  <span class="w-1 h-1 rounded-full bg-apple-border dark:bg-apple-darkBorder"></span>
+                  <time>{entry.data.date.toLocaleDateString('ko-KR')}</time>
+                </div>
+                <h2 class="text-[2.2rem] md:text-[3.2rem] font-bold tracking-tighter text-apple-text dark:text-apple-darkText leading-[1.1] mb-6 break-keep hover:text-blue-500 transition-colors">
+                  <a href={`/articles/${entry.id}`}>{entry.data.title}</a>
+                </h2>
+                {entry.data.imageUrl && (
+                  <div class="w-full aspect-[21/9] md:aspect-[16/9] rounded-[1.5rem] overflow-hidden bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 mb-10 shadow-sm relative group cursor-pointer" onclick={`window.location.href='/articles/${entry.id}'`}>
+                    <img src={entry.data.imageUrl} alt={entry.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" loading="lazy" />
+                  </div>
+                )}
+              </div>
+              
+              <!-- line-clamp-[12] limits height and adds '...' to the end -->
+              <div class="prose max-w-none prose-zinc dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-a:text-apple-text dark:prose-a:text-apple-darkText text-[17px] leading-[1.75] tracking-tight break-keep line-clamp-[12]">
+                <Content />
+              </div>
+              
+              <div class="mt-16 pt-8 border-t border-apple-border/40 dark:border-apple-darkBorder/40 flex justify-end items-center">
+                <a href={`/articles/${entry.id}`} class="btn-premium">
+                  전체 화면으로 읽기
+                  <span class="material-symbols-outlined text-[16px] leading-none">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- VIEW 2: GRID ARTICLES -->
+      <div id="view-grid" class="hidden opacity-0 translate-y-8 flex-col relative w-full h-0 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pb-20">
+        <div id="article-grid-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-x-8 gap-y-12 h-auto w-full">
+          {sortedArticles.map(article => (
+            <div class="article-grid-item h-full flex flex-col reveal-up transition-all duration-500" data-category={article.data.category}>
+              <ArticleCard 
+                title={article.data.title}
+                description={article.data.description}
+                category={article.data.category}
+                date={article.data.date.toLocaleDateString('ko-KR')}
+                href={`/articles/${article.id}`}
+                imageUrl={article.data.imageUrl}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </main>
+
+    <!-- RIGHT COLUMN: SPACER (For perfect centering on XL) -->
+    <div class="hidden xl:block order-3"></div>
+
+  </div><!-- /page container -->
 
   <script>
     document.addEventListener('astro:page-load', () => {
-      const toggle = document.getElementById('view-toggle');
-      const thumb = document.getElementById('toggle-thumb');
-      const icon = document.getElementById('toggle-icon');
-      const container = document.getElementById('article-container');
-      const items = document.querySelectorAll('.article-item');
-      const catBtns = document.querySelectorAll('.cat-filter');
+      // Reveal Animation Observer
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { root: null, rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
+      document.querySelectorAll(".reveal-up").forEach(el => revealObserver.observe(el));
+
+      // View Toggle Logic
+      const btnFeed = document.getElementById('btn-feed');
+      const btnGrid = document.getElementById('btn-grid');
+      const toggleBg = document.getElementById('toggle-bg');
       
-      if(!toggle || !thumb || !icon || !container) return;
-      
-      let isGrid = (localStorage.getItem('article-view') || 'grid') === 'grid';
+      const viewFeed = document.getElementById('view-feed');
+      const viewGrid = document.getElementById('view-grid');
 
-      const applyView = () => {
-        if (isGrid) {
-          thumb.style.left = '3px';
-          icon.textContent = 'grid_view';
-          container.classList.remove('flex', 'flex-col', 'gap-6');
-          container.classList.add('grid', 'grid-cols-1', 'md:grid-cols-2', 'gap-x-8', 'gap-y-16');
-          items.forEach(item => {
-            const article = item.querySelector('article');
-            const imgWrap = item.querySelector('article > a');
-            if(article && imgWrap) {
-              article.classList.remove('md:flex-row', 'items-center', 'gap-8');
-              imgWrap.classList.remove('md:w-64', 'md:h-40', 'md:mb-0', 'shrink-0');
-              imgWrap.classList.add('w-full', 'aspect-[16/10]', 'mb-6');
-            }
-          });
-        } else {
-          thumb.style.left = '41px';
-          icon.textContent = 'view_list';
-          container.classList.remove('grid', 'grid-cols-1', 'md:grid-cols-2', 'gap-x-8', 'gap-y-16');
-          container.classList.add('flex', 'flex-col', 'gap-6');
-          items.forEach(item => {
-            const article = item.querySelector('article');
-            const imgWrap = item.querySelector('article > a');
-            if(article && imgWrap) {
-              article.classList.add('md:flex-row', 'items-center', 'gap-8');
-              imgWrap.classList.add('md:w-64', 'md:h-40', 'md:mb-0', 'shrink-0');
-              imgWrap.classList.remove('w-full', 'aspect-[16/10]', 'mb-6');
-            }
-          });
-        }
-        localStorage.setItem('article-view', isGrid ? 'grid' : 'list');
-      };
+      if(btnFeed && btnGrid && toggleBg && viewFeed && viewGrid) {
+        let isFeed = (localStorage.getItem('article-view') || 'feed') === 'feed';
 
-      applyView();
-
-      toggle.addEventListener('click', () => {
-        isGrid = !isGrid;
+        const applyView = () => {
+          if (isFeed) {
+            toggleBg.style.transform = 'translateX(0)';
+            btnFeed.classList.replace('text-apple-textMuted', 'text-apple-text');
+            btnFeed.classList.replace('dark:text-apple-darkTextMuted', 'dark:text-apple-darkText');
+            btnGrid.classList.replace('text-apple-text', 'text-apple-textMuted');
+            btnGrid.classList.replace('dark:text-apple-darkText', 'dark:text-apple-darkTextMuted');
+            
+            viewGrid.classList.add('hidden', 'opacity-0', 'translate-y-8', 'pointer-events-none');
+            viewGrid.classList.remove('flex', 'h-auto');
+            viewGrid.style.height = '0';
+            
+            viewFeed.classList.remove('hidden', 'opacity-0', 'translate-y-8', 'pointer-events-none');
+            viewFeed.classList.add('flex', 'opacity-100', 'translate-y-0');
+          } else {
+            toggleBg.style.transform = 'translateX(44px)';
+            btnGrid.classList.replace('text-apple-textMuted', 'text-apple-text');
+            btnGrid.classList.replace('dark:text-apple-darkTextMuted', 'dark:text-apple-darkText');
+            btnFeed.classList.replace('text-apple-text', 'text-apple-textMuted');
+            btnFeed.classList.replace('dark:text-apple-darkText', 'dark:text-apple-darkTextMuted');
+            
+            viewFeed.classList.add('hidden', 'opacity-0', 'translate-y-8', 'pointer-events-none');
+            viewFeed.classList.remove('flex', 'opacity-100', 'translate-y-0');
+            
+            viewGrid.classList.remove('hidden', 'pointer-events-none');
+            viewGrid.style.height = 'auto';
+            void viewGrid.offsetWidth; // force reflow
+            viewGrid.classList.add('flex', 'opacity-100');
+            viewGrid.classList.remove('translate-y-8');
+          }
+          localStorage.setItem('article-view', isFeed ? 'feed' : 'grid');
+          
+          setTimeout(() => window.dispatchEvent(new Event('resize')), 50); // recalculate highlights
+        };
         applyView();
-      });
+        btnFeed.addEventListener('click', () => { if (!isFeed) { isFeed = true; applyView(); } });
+        btnGrid.addEventListener('click', () => { if (isFeed) { isFeed = false; applyView(); } });
+      }
 
-      // Category filtering
+      // Unified Category Filter Logic
+      const btnActiveClasses = 'active-item text-apple-text dark:text-apple-darkText font-bold'.split(' ').filter(Boolean);
+      const btnInactiveClasses = 'text-apple-textMuted dark:text-apple-darkTextMuted hover:text-apple-text dark:hover:text-apple-darkText'.split(' ').filter(Boolean);
+
+      const catBtns = document.querySelectorAll('.cat-filter');
+      const gridItems = document.querySelectorAll('.article-grid-item');
+      const feedItems = document.querySelectorAll('.post-detail');
+      
       catBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           const filter = (btn as HTMLElement).dataset.filter;
           catBtns.forEach(b => {
-            b.classList.remove('active-cat', 'bg-zinc-100/50', 'dark:bg-zinc-800/50', 'text-zinc-900', 'dark:text-zinc-100', 'font-bold', 'border', 'border-zinc-200/50', 'dark:border-zinc-700/50');
-            b.classList.add('text-zinc-500', 'dark:text-zinc-400');
+             b.classList.remove(...btnActiveClasses);
+             b.classList.add(...btnInactiveClasses);
+             const ic = b.querySelector('.material-symbols-outlined');
+             if(ic) ic.textContent = 'folder';
           });
-          btn.classList.add('active-cat', 'bg-zinc-100/50', 'dark:bg-zinc-800/50', 'text-zinc-900', 'dark:text-zinc-100', 'font-bold', 'border', 'border-zinc-200/50', 'dark:border-zinc-700/50');
-          btn.classList.remove('text-zinc-500', 'dark:text-zinc-400');
-          items.forEach(item => {
+          
+          btn.classList.add(...btnActiveClasses);
+          btn.classList.remove(...btnInactiveClasses);
+          
+          const activeIc = btn.querySelector('.material-symbols-outlined');
+          if(activeIc) activeIc.textContent = filter === 'all' ? 'all_inbox' : 'folder_open';
+
+          // Filter Grid View
+          gridItems.forEach(item => {
             const el = item as HTMLElement;
             if (filter === 'all' || el.dataset.category === filter) {
               el.style.display = '';
-              el.style.opacity = '1';
-              el.style.transform = 'translateY(0)';
+              setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'translateY(0) scale(1)'; }, 50);
             } else {
               el.style.opacity = '0';
-              el.style.transform = 'translateY(8px)';
-              setTimeout(() => { el.style.display = 'none'; }, 300);
+              el.style.transform = 'translateY(10px) scale(0.98)';
+              setTimeout(() => { el.style.display = 'none'; }, 400);
             }
           });
+
+          // Filter Feed View
+          feedItems.forEach(item => {
+            const el = item as HTMLElement;
+            if (filter === 'all' || el.dataset.category === filter) {
+              el.style.display = '';
+              setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'translateY(0) scale(1)'; }, 50);
+            } else {
+              el.style.opacity = '0';
+              el.style.transform = 'translateY(10px) scale(0.98)';
+              setTimeout(() => { el.style.display = 'none'; }, 400);
+            }
+          });
+
+          // Dispatch update event for sliding highlight recalculation
+          document.dispatchEvent(new Event('update-sliders'));
         });
+      });
+
+      // Shared Sliding Highlight
+      const setupSlidingHighlight = (containerId, highlightId, itemSelector) => {
+        const container = document.getElementById(containerId);
+        const highlight = document.getElementById(highlightId);
+        if (!container || !highlight) return;
+        
+        let activeItem = container.querySelector(`${itemSelector}.active-item`) || container.querySelector(itemSelector);
+
+        const move = (el) => {
+          highlight.style.height = `${el.offsetHeight}px`;
+          highlight.style.transform = `translateY(${el.offsetTop}px)`;
+          highlight.style.opacity = '1';
+        };
+
+        if (activeItem) setTimeout(() => move(activeItem), 50);
+
+        const items = container.querySelectorAll(itemSelector);
+        items.forEach(item => {
+          item.addEventListener('mouseenter', () => move(item));
+          item.addEventListener('click', () => {
+            activeItem = item;
+            move(item);
+          });
+        });
+
+        container.addEventListener('mouseleave', () => {
+          if (activeItem) {
+            move(activeItem);
+          } else {
+            highlight.style.opacity = '0';
+          }
+        });
+        
+        window.addEventListener('resize', () => {
+          if (activeItem && container.offsetParent !== null) move(activeItem);
+        });
+        document.addEventListener('update-sliders', () => {
+          if (activeItem && container.offsetParent !== null) move(activeItem);
+        });
+      };
+
+      setupSlidingHighlight('cat-list-container', 'grid-highlight', '.cat-filter');
+
+      // Code Block Copy Animation
+      const preTags = document.querySelectorAll('.prose pre');
+      preTags.forEach((pre) => {
+        if (pre.parentNode?.classList.contains('code-block-wrapper')) return;
+        const wrapper = document.createElement('div');
+        wrapper.className = 'code-block-wrapper relative mt-6 mb-6 group';
+        pre.parentNode?.insertBefore(wrapper, pre);
+        wrapper.appendChild(pre);
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'copy-btn absolute top-2 right-2 px-3 py-1 bg-white/10 hover:bg-white/20 text-white/50 hover:text-white text-[11px] font-mono rounded backdrop-blur-md transition-all opacity-0 group-hover:opacity-100 cursor-pointer border border-white/10';
+        copyBtn.textContent = 'Copy';
+        copyBtn.addEventListener('click', async () => {
+          const codeText = pre.textContent || '';
+          await navigator.clipboard.writeText(codeText);
+          copyBtn.textContent = 'Copied!';
+          setTimeout(() => copyBtn.textContent = 'Copy', 2000);
+        });
+        wrapper.appendChild(copyBtn);
       });
     });
   </script>

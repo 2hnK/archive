@@ -7,47 +7,53 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-on-surface: #1a1a1a;
-  --color-on-error: #fff7f7;
-  --color-secondary-container: #f4f4f5;
-  --color-inverse-primary: #ffffff;
-  --color-tertiary-container: #f8f9fa;
-  --color-on-tertiary: #1a1a1a;
-  --color-inverse-surface: #000000;
-  --color-outline-variant: #e4e4e7;
-  --color-on-background: #1a1a1a;
-  --color-surface-bright: #ffffff;
-  --color-secondary-fixed: #f4f4f5;
-  --color-primary-container: #f4f4f5;
-  --color-secondary-dim: #71717a;
-  --color-on-primary-container: #18181b;
-  --color-error-container: #fee2e2;
-  --color-on-secondary-container: #18181b;
-  --color-primary: #000000;
-  --color-on-error-container: #991b1b;
-  --color-surface-container-highest: #f4f4f5;
-  --color-surface-container: #fafafa;
-  --color-secondary: #71717a;
-  --color-on-surface-variant: #52525b;
-  --color-primary-dim: #27272a;
-  --color-surface-container-lowest: #ffffff;
-  --color-error: #ef4444;
-  --color-primary-fixed: #f4f4f5;
-  --color-background: #ffffff;
-  --color-surface-container-high: #f4f4f5;
-  --color-surface-dim: #e4e4e7;
-  --color-outline: #d4d4d8;
-  --color-on-secondary: #ffffff;
-  --color-on-primary: #ffffff;
-  --color-surface-tint: #000000;
-  --color-surface-variant: #f4f4f5;
-  --color-surface-container-low: #ffffff;
-  --color-surface: #ffffff;
+  /* Apple Colors */
+  --color-apple-background: #f5f5f7;
+  --color-apple-surface: #ffffff;
+  --color-apple-text: #1d1d1f;
+  --color-apple-textMuted: #86868b;
+  --color-apple-border: #d2d2d7;
+  --color-apple-darkBackground: #000000;
+  --color-apple-darkSurface: #1c1c1e;
+  --color-apple-darkText: #f5f5f7;
+  --color-apple-darkTextMuted: #86868b;
+  --color-apple-darkBorder: #424245;
 
-  --font-family-headline: "Inter", sans-serif;
-  --font-family-body: "Inter", sans-serif;
-  --font-family-label: "Inter", sans-serif;
-  --font-family-mono: "Fira Code", "JetBrains Mono", monospace;
+  /* Transition timings */
+  --transition-timing-function-apple: cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-bounce-subtle: bounce-subtle 2s infinite;
+
+  @keyframes bounce-subtle {
+
+    0%,
+    100% {
+      transform: translateY(-10%);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+
+    50% {
+      transform: translateY(0);
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+  
+  @keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(4vw, -6vh) scale(1.05); }
+    66% { transform: translate(-3vw, 4vh) scale(0.95); }
+    100% { transform: translate(0px, 0px) scale(1); }
+  }
+
+  /* Other vars from your old setup preserved */
+  --font-family-headline: "Inter",
+  sans-serif;
+  --font-family-body: "Inter",
+  sans-serif;
+  --font-family-label: "Inter",
+  sans-serif;
+  --font-family-mono: "Fira Code",
+  "JetBrains Mono",
+  monospace;
 
   --radius-DEFAULT: 0.5rem;
   --radius-lg: 0.75rem;
@@ -56,44 +62,69 @@
 }
 
 :root {
-  --bg-color: #ffffff;
-  --text-color: #1a1a1a;
-  --border-color: #f4f4f5;
+  --bg-color: #f5f5f7;
+  --text-color: #1d1d1f;
+  --border-color: #d2d2d7;
 }
+
 .dark {
-  --bg-color: #09090b;
-  --text-color: #fafafa;
-  --border-color: #27272a;
+  --bg-color: #000000;
+  --text-color: #f5f5f7;
+  --border-color: #424245;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", Helvetica, sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
 }
 
 .material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
 }
 
-.hide-scrollbar::-webkit-scrollbar { display: none; }
-.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
 
+.animate-blob {
+  animation: blob 25s infinite alternate ease-in-out;
+  will-change: transform;
+}
+.animation-delay-3000 {
+  animation-delay: 3s;
+}
+.animation-delay-6000 {
+  animation-delay: 6s;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
 /* Custom Typography overrides for Dark mode */
 .prose {
   color: var(--text-color);
 }
-.dark .prose h1, .dark .prose h2, .dark .prose h3, .dark .prose h4 {
+
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4 {
   color: #fafafa;
 }
+
 .dark .prose strong {
   color: #f4f4f5;
 }
+
 .dark .prose a {
   color: #a1a1aa;
 }
+
 .dark .prose pre {
   background-color: #18181b !important;
   border: 1px solid #27272a;
@@ -101,9 +132,59 @@ body {
   border-radius: 0.5rem;
   overflow-x: auto;
 }
+
 .dark .prose code {
   color: #e4e4e7;
   font-family: var(--font-family-mono);
+}
+
+/* Scroll animations */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+  transition: opacity 1s var(--transition-timing-function-apple), transform 1s var(--transition-timing-function-apple);
+  will-change: opacity, transform;
+}
+
+.reveal-up.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.stagger-1 {
+  transition-delay: 100ms;
+}
+
+.stagger-2 {
+  transition-delay: 200ms;
+}
+
+/* Parallax Image */
+.parallax-bg {
+  will-change: transform, opacity;
+}
+
+/* Bento Grid Hover Effects */
+.bento-card {
+  background-color: theme('colors.apple.surface');
+  border: 1px solid theme('colors.apple.border');
+  border-radius: 2rem;
+  transition: all 0.5s var(--transition-timing-function-apple);
+}
+
+.dark .bento-card {
+  background-color: theme('colors.apple.darkSurface');
+  border-color: theme('colors.apple.darkBorder');
+}
+
+.bento-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+}
+
+.dark .bento-card:hover {
+  box-shadow: 0 20px 40px -10px rgba(255, 255, 255, 0.05);
+  border-color: theme('colors.apple.darkTextMuted');
 }
 
 /* Code Copy Button Layout */
@@ -112,6 +193,7 @@ body {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
+
 .copy-btn {
   position: absolute;
   top: 0.5rem;
@@ -125,10 +207,51 @@ body {
   transition: opacity 0.2s;
   cursor: pointer;
 }
+
 .code-block-wrapper:hover .copy-btn {
   opacity: 1;
 }
+
 .copy-btn:hover {
   background-color: rgba(255, 255, 255, 0.2);
   color: #ffffff;
+}
+
+/* ========================================
+   Custom Shader Highlight
+   Based on SDF displacement map
+   ======================================== */
+.custom-glass-highlight {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: url(#liquid-glass-highlight-filter) blur(12px) brightness(1.2) saturate(1.2);
+  -webkit-backdrop-filter: url(#liquid-glass-highlight-filter) blur(12px) brightness(1.2) saturate(1.2);
+  will-change: transform, width, left;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.15),
+    inset 0 -10px 25px rgba(0, 0, 0, 0.05),
+    inset 0 -1px 4px 1px rgba(255, 255, 255, 0.6);
+}
+
+.dark .custom-glass-highlight {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: url(#liquid-glass-highlight-filter) blur(16px) brightness(1.15) saturate(1.2);
+  -webkit-backdrop-filter: url(#liquid-glass-highlight-filter) blur(16px) brightness(1.15) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    inset 0 -10px 25px rgba(0, 0, 0, 0.2),
+    inset 0 -1px 4px 1px rgba(255, 255, 255, 0.15);
+}
+
+/* Premium Button Styles */
+@layer components {
+  .btn-premium {
+    @apply inline-flex items-center justify-center gap-1.5 px-5 py-2.5 
+           rounded-full text-[13px] font-semibold transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]
+           bg-black/5 dark:bg-white/10 backdrop-blur-md shadow-sm 
+           border border-black/5 dark:border-white/10
+           text-apple-text dark:text-apple-darkText
+           hover:bg-black/10 dark:hover:bg-white/20 hover:-translate-y-[2px] hover:shadow-md cursor-pointer;
+  }
 }
