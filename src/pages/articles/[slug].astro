@@ -25,10 +25,10 @@ const formattedDate = entry.data.date.toLocaleDateString("ko-KR");
       <!-- 1. Left Spacer (for perfect centering on extra large screens) -->
       <div class="hidden xl:block"></div>
 
-      <!-- 2. Main Article Content (Centered) -->
-      <article class="w-full max-w-[900px] mx-auto min-w-0">
+      <!-- 2. Main Article Content (Centered inside a Card) -->
+      <article class="w-full max-w-[900px] mx-auto min-w-0 bg-apple-surface dark:bg-apple-darkSurface rounded-[2.5rem] p-8 md:p-14 border border-apple-border/40 dark:border-apple-darkBorder/40 shadow-[0_8px_48px_rgba(0,0,0,0.05)] reveal-up transition-all duration-500">
         <!-- Metadata -->
-        <div class="mb-8 flex flex-col gap-4 reveal-up">
+        <div class="mb-8 flex flex-col gap-4">
           <div class="flex items-center justify-between">
             <nav
               class="flex items-center gap-2 text-[10px] uppercase tracking-[0.08em] font-medium text-apple-textMuted dark:text-apple-darkTextMuted"
@@ -99,7 +99,7 @@ const formattedDate = entry.data.date.toLocaleDateString("ko-KR");
 
         <!-- Body Content -->
         <div
-          class="prose max-w-none prose-zinc dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-a:text-apple-text dark:prose-a:text-apple-darkText text-[17px] leading-[1.7] tracking-tight reveal-up stagger-2"
+          class="prose max-w-none prose-zinc dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-a:text-apple-text dark:prose-a:text-apple-darkText text-[17px] leading-[1.7] tracking-tight"
         >
           <Content />
         </div>
