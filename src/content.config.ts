@@ -7,6 +7,7 @@ const articlesCollection = defineCollection({
     title: z.string(),
     description: z.string(),
     category: z.string(),
+    subcategory: z.string().optional(),
     date: z.date(),
     imageUrl: z.string().optional(),
     isFeatured: z.boolean().optional().default(false),

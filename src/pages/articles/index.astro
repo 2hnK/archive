@@ -11,21 +11,25 @@ const renderedArticles = await Promise.all(sortedArticles.map(async (entry) => {
   return { entry, Content };
 }));
 
-const categoryCount: Record<string, number> = {};
+const categoryTree: Record<string, string[]> = {};
 sortedArticles.forEach(a => {
   const cat = a.data.category;
-  categoryCount[cat] = (categoryCount[cat] || 0) + 1;
+  const sub = a.data.subcategory;
+  if (!categoryTree[cat]) categoryTree[cat] = [];
+  if (sub && !categoryTree[cat].includes(sub)) {
+    categoryTree[cat].push(sub);
+  }
 });
-const categories = Object.keys(categoryCount);
+const categories = Object.keys(categoryTree).sort();
 
-const LIQUID_GLASS_TOKEN = "custom-glass-highlight border border-white/20 dark:border-white/10";
+const LIQUID_GLASS_TOKEN = "liquid-glass-highlight border border-white/20 dark:border-white/10";
 const BTN_INACTIVE = 'outline-none focus:outline-none border-none ring-0 appearance-none bg-transparent text-apple-textMuted dark:text-apple-darkTextMuted transition-colors duration-300 font-medium group';
 const BTN_ACTIVE = 'active-item outline-none focus:outline-none border-none ring-0 appearance-none bg-transparent text-blue-600 dark:text-blue-400 font-bold transition-colors duration-300 group';
 ---
 
 <BaseLayout title="Articles | DevArchive" description="모든 아티클 및 저널 목록입니다.">
   
-  <div class="mx-auto w-full max-w-[1700px] grid grid-cols-1 lg:grid-cols-[260px_1fr] xl:grid-cols-[1fr_minmax(auto,1000px)_1fr] gap-8 lg:gap-14 px-4 sm:px-6 md:px-8 pt-24 pb-20 relative" style="padding-top: 160px;">
+  <div class="mx-auto w-full max-w-[1700px] grid grid-cols-1 lg:grid-cols-[260px_1fr] xl:grid-cols-[1fr_minmax(auto,900px)_1fr] gap-8 lg:gap-14 px-4 sm:px-6 md:px-8 pt-24 pb-20 relative" style="padding-top: 160px;">
     
     <!-- LEFT COLUMN: SIDEBAR (Floats to the right side of this column on xl) -->
     <div class="w-full lg:w-auto order-2 lg:order-1 mt-12 lg:mt-0">
@@ -40,21 +44,33 @@ const BTN_ACTIVE = 'active-item outline-none focus:outline-none border-none ring
             <div class="absolute right-0 top-3 bottom-0 w-[1px] bg-black/10 dark:bg-white/10 pointer-events-none z-0"></div>
 
             <!-- The glassmorphism highlight pill encompassing text and dot (Narrower Width) -->
-            <div id="grid-highlight" class="absolute left-[12px] w-[calc(100%-5px)] rounded-[1rem] custom-glass-highlight border border-black/5 dark:border-white/10 shadow-sm transition-all duration-400 ease-[cubic-bezier(0.25,1,0.5,1)] z-20 pointer-events-none opacity-0 flex items-center justify-end pr-[4px]">
+            <div id="grid-highlight" class="absolute -right-[2px] w-[calc(100%-12px)] rounded-[1.2rem] liquid-glass-highlight border border-black/5 dark:border-white/10 shadow-sm transition-all duration-400 ease-[cubic-bezier(0.25,1,0.5,1)] z-20 pointer-events-none opacity-0 flex items-center justify-end pr-0">
                <!-- The active blue dot sits on the line inside the pill, sliding OVER the gray dots -->
-               <div class="w-[6px] h-[6px] rounded-full bg-blue-600 dark:bg-blue-400 flex-shrink-0 shadow-[0_0_8px_rgba(59,130,246,0.6)]"></div>
+               <div class="w-[5px] h-[5px] rounded-full bg-blue-600 dark:bg-blue-400 flex-shrink-0 shadow-[0_0_8px_rgba(59,130,246,0.6)]"></div>
             </div>
 
-            <button data-filter="all" class={`cat-filter relative z-10 w-full flex items-center justify-end pr-[24px] py-3 cursor-pointer ${BTN_ACTIVE}`}>
+            <button data-filter="all" class={`cat-filter relative z-10 w-full flex items-center justify-end pr-[24px] py-2.5 cursor-pointer ${BTN_ACTIVE}`}>
               <span class="text-[14.5px] text-right">All</span>
-              <!-- Gray dot is permanently visible, blue dot slides over it -->
-              <span class="inactive-dot absolute right-[-1.5px] top-1/2 -translate-y-1/2 w-[4px] h-[4px] rounded-full bg-black/20 dark:bg-white/20 transition-all duration-300"></span>
+              <span class="inactive-dot absolute right-[-2.5px] top-1/2 -translate-y-1/2 w-[5px] h-[5px] rounded-full bg-black/20 dark:bg-white/20 transition-all duration-300 z-10"></span>
             </button>
+            
             {categories.map(cat => (
-              <button data-filter={cat} class={`cat-filter relative z-10 w-full flex items-center justify-end pr-[24px] py-3 cursor-pointer ${BTN_INACTIVE}`}>
-                <span class="text-[14.5px] text-right">{cat}</span>
-                <span class="inactive-dot absolute right-[-1.5px] top-1/2 -translate-y-1/2 w-[4px] h-[4px] rounded-full bg-black/20 dark:bg-white/20 transition-all duration-300 group-hover:bg-black/40 dark:group-hover:bg-white/40"></span>
-              </button>
+              <div class="category-group flex flex-col gap-1 w-full" data-group-cat={cat}>
+                <button data-filter-cat={cat} class={`cat-filter relative z-10 w-full flex items-center justify-end pr-[24px] py-2.5 cursor-pointer ${BTN_INACTIVE}`}>
+                  <span class="text-[15px] text-right">{cat}</span>
+                  <span class="inactive-dot absolute right-[-2.5px] top-1/2 -translate-y-1/2 w-[5px] h-[5px] rounded-full bg-black/20 dark:bg-white/20 transition-all duration-300 group-hover:bg-black/40 dark:group-hover:bg-white/40 z-10"></span>
+                </button>
+                {categoryTree[cat].length > 0 && (
+                  <div class="sub-list hidden overflow-hidden flex flex-col gap-1 pr-1 border-r border-black/5 dark:border-white/5 mr-[-0.5px]">
+                    {categoryTree[cat].map(sub => (
+                      <button data-filter-cat={cat} data-filter-sub={sub} class={`cat-filter relative z-10 w-full flex items-center justify-end pr-[24px] py-1.5 cursor-pointer pl-6 ${BTN_INACTIVE}`}>
+                        <span class="text-[12px] text-right opacity-80">{sub}</span>
+                        <span class="inactive-dot absolute right-[-6px] top-1/2 -translate-y-1/2 w-[5px] h-[5px] rounded-full bg-black/20 dark:bg-white/20 transition-all duration-300 group-hover:bg-black/40 dark:group-hover:bg-white/40 z-10"></span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </div>
@@ -68,7 +84,7 @@ const BTN_ACTIVE = 'active-item outline-none focus:outline-none border-none ring
       <!-- Top Bar: Title & View Toggle -->
       <div class="w-full flex flex-col sm:flex-row sm:justify-between sm:items-end mb-10 border-b border-apple-border dark:border-apple-darkBorder pb-6 gap-6">
         <div>
-          <h1 class="text-[2.5rem] md:text-5xl font-bold tracking-tighter text-apple-text dark:text-apple-darkText mb-3">Article</h1>
+          <h1 class="text-[2.5rem] md:text-5xl font-bold tracking-tighter text-apple-text dark:text-apple-darkText mb-3">Articles</h1>
           <p class="text-apple-textMuted dark:text-apple-darkTextMuted max-w-2xl text-[17px] md:text-[19px] tracking-tight font-medium break-keep">지식 저장소</p>
         </div>
         
@@ -95,7 +111,8 @@ const BTN_ACTIVE = 'active-item outline-none focus:outline-none border-none ring
           {renderedArticles.map(({ entry, Content }, index) => (
             <div 
               data-category={entry.data.category}
-              class="post-detail relative block w-full flex-col bg-apple-surface dark:bg-apple-darkSurface rounded-[2.5rem] p-8 md:p-14 mb-[4rem] border border-apple-border/40 dark:border-apple-darkBorder/40 shadow-[0_8px_32px_rgba(0,0,0,0.04)] reveal-up transition-all duration-500"
+              data-subcategory={entry.data.subcategory}
+              class="post-detail relative block w-full flex-col bg-apple-surface dark:bg-apple-darkSurface rounded-[2.5rem] p-8 md:p-14 mb-10 border border-apple-border/40 dark:border-apple-darkBorder/40 shadow-[0_8px_32px_rgba(0,0,0,0.04)] reveal-up transition-all duration-500"
             >
               <div class="mb-10">
                 <div class="flex items-center gap-2 mb-4 text-apple-textMuted dark:text-apple-darkTextMuted text-[13px] font-bold uppercase tracking-widest">
@@ -133,14 +150,14 @@ const BTN_ACTIVE = 'active-item outline-none focus:outline-none border-none ring
       <div id="view-grid" class="hidden opacity-0 translate-y-8 flex-col relative w-full h-0 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pb-20">
         <div id="article-grid-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-x-8 gap-y-12 h-auto w-full">
           {sortedArticles.map(article => (
-            <div class="article-grid-item h-full flex flex-col reveal-up transition-all duration-500" data-category={article.data.category}>
+            <div class="article-grid-item h-full flex flex-col reveal-up transition-all duration-500" data-category={article.data.category} data-subcategory={article.data.subcategory}>
               <ArticleCard 
                 title={article.data.title}
                 description={article.data.description}
                 category={article.data.category}
                 date={article.data.date.toLocaleDateString('ko-KR')}
                 href={`/articles/${article.id}`}
-                imageUrl={article.data.imageUrl}
+                imageUrl={article.data.imageUrl || ""}
               />
             </div>
           ))}
@@ -179,7 +196,7 @@ const BTN_ACTIVE = 'active-item outline-none focus:outline-none border-none ring
         let isFeed = (localStorage.getItem('article-view') || 'feed') === 'feed';
         
         const toggleContainer = toggleBg.parentElement;
-        const moveToggle = (btn) => {
+        const moveToggle = (btn: HTMLElement) => {
           toggleBg.style.transform = btn === btnFeed ? 'translateX(0)' : 'translateX(44px)';
           [btnFeed, btnGrid].forEach(b => {
              b.classList.remove('text-blue-600', 'dark:text-blue-400');
@@ -217,15 +234,7 @@ const BTN_ACTIVE = 'active-item outline-none focus:outline-none border-none ring
         btnFeed.addEventListener('click', () => { if (!isFeed) { isFeed = true; applyView(); } });
         btnGrid.addEventListener('click', () => { if (isFeed) { isFeed = false; applyView(); } });
         
-        // Sliding hover effect
-        if (toggleContainer) {
-          [btnFeed, btnGrid].forEach(btn => {
-             btn.addEventListener('mouseenter', () => moveToggle(btn));
-          });
-          toggleContainer.addEventListener('mouseleave', () => {
-             moveToggle(isFeed ? btnFeed : btnGrid);
-          });
-        }
+        // Removed sliding hover effect for view toggle
       }
 
       // Unified Category Filter Logic
@@ -239,36 +248,43 @@ const BTN_ACTIVE = 'active-item outline-none focus:outline-none border-none ring
       catBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           const filter = (btn as HTMLElement).dataset.filter;
+          const filterCat = (btn as HTMLElement).dataset.filterCat;
+          const filterSub = (btn as HTMLElement).dataset.filterSub;
+
           catBtns.forEach(b => {
              b.classList.remove(...btnActiveClasses);
              b.classList.add(...btnInactiveClasses);
-             const ic = b.querySelector('.material-symbols-outlined');
-             if(ic) ic.textContent = 'folder';
           });
           
           btn.classList.add(...btnActiveClasses);
           btn.classList.remove(...btnInactiveClasses);
-          
-          const activeIc = btn.querySelector('.material-symbols-outlined');
-          if(activeIc) activeIc.textContent = filter === 'all' ? 'all_inbox' : 'folder_open';
 
-          // Filter Grid View
-          gridItems.forEach(item => {
-            const el = item as HTMLElement;
-            if (filter === 'all' || el.dataset.category === filter) {
-              el.style.display = '';
-              setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'translateY(0) scale(1)'; }, 50);
-            } else {
-              el.style.opacity = '0';
-              el.style.transform = 'translateY(10px) scale(0.98)';
-              setTimeout(() => { el.style.display = 'none'; }, 400);
-            }
+          // Sub-list toggle logic
+          document.querySelectorAll('.sub-list').forEach(list => {
+            list.classList.add('hidden');
           });
+          
+          if (filterCat) {
+             const group = document.querySelector(`.category-group[data-group-cat="${filterCat}"]`);
+             if (group) {
+                const subList = group.querySelector('.sub-list');
+                if (subList) subList.classList.remove('hidden');
+             }
+          }
 
-          // Filter Feed View
-          feedItems.forEach(item => {
+          const matches = (el: HTMLElement) => {
+            if (filter === 'all') return true;
+            if (filterSub) {
+              return el.dataset.category === filterCat && el.dataset.subcategory === filterSub;
+            }
+            return el.dataset.category === filterCat;
+          };
+
+          // Filter Grid & Feed Views (Simplified merge)
+          const allItems = [...gridItems, ...feedItems];
+          allItems.forEach(item => {
             const el = item as HTMLElement;
-            if (filter === 'all' || el.dataset.category === filter) {
+            if (matches(el)) {
               el.style.display = '';
               setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'translateY(0) scale(1)'; }, 50);
             } else {
@@ -279,44 +295,47 @@ const BTN_ACTIVE = 'active-item outline-none focus:outline-none border-none ring
           });
 
           // Dispatch update event for sliding highlight recalculation
-          document.dispatchEvent(new Event('update-sliders'));
+          // Needs a brief delay for sub-list expansion to finish layout
+          setTimeout(() => {
+            document.dispatchEvent(new Event('update-sliders'));
+          }, 10);
         });
       });
 
       // Shared Sliding Highlight
-      const setupSlidingHighlight = (containerId, highlightId, itemSelector) => {
+      const setupSlidingHighlight = (containerId: string, highlightId: string, itemSelector: string) => {
         const container = document.getElementById(containerId);
         const highlight = document.getElementById(highlightId);
         if (!container || !highlight) return;
         
-        let activeItem = container.querySelector(`${itemSelector}.active-item`) || container.querySelector(itemSelector);
+        let activeItem = container.querySelector(`${itemSelector}.active-item`) as HTMLElement | null || container.querySelector(itemSelector) as HTMLElement | null;
 
-        const removeBlueText = (el) => {
+        const removeBlueText = (el: HTMLElement) => {
            el.classList.remove('text-blue-600', 'dark:text-blue-400', 'font-bold');
            el.classList.add('text-apple-textMuted', 'dark:text-apple-darkTextMuted', 'font-medium');
         };
-        const addBlueText = (el) => {
+        const addBlueText = (el: HTMLElement) => {
            el.classList.remove('text-apple-textMuted', 'dark:text-apple-darkTextMuted', 'font-medium');
            el.classList.add('text-blue-600', 'dark:text-blue-400', 'font-bold');
         };
 
-        const move = (el) => {
+        const move = (el: HTMLElement) => {
           highlight.style.height = `${el.offsetHeight}px`;
           highlight.style.transform = `translateY(${el.offsetTop}px)`;
           highlight.style.opacity = '1';
           
-          container.querySelectorAll(itemSelector).forEach(btn => removeBlueText(btn));
+          container.querySelectorAll(itemSelector).forEach(btn => removeBlueText(btn as HTMLElement));
           addBlueText(el);
         };
 
-        if (activeItem) setTimeout(() => move(activeItem), 50);
+        if (activeItem) move(activeItem);
 
         const items = container.querySelectorAll(itemSelector);
         items.forEach(item => {
-          item.addEventListener('mouseenter', () => move(item));
+          item.addEventListener('mouseenter', () => move(item as HTMLElement));
           item.addEventListener('click', () => {
-            activeItem = item;
-            move(item);
+            activeItem = item as HTMLElement;
+            move(item as HTMLElement);
           });
         });
 
@@ -342,10 +361,11 @@ const BTN_ACTIVE = 'active-item outline-none focus:outline-none border-none ring
       // Code Block Copy Animation
       const preTags = document.querySelectorAll('.prose pre');
       preTags.forEach((pre) => {
-        if (pre.parentNode?.classList.contains('code-block-wrapper')) return;
+        const parent = pre.parentNode as HTMLElement;
+        if (!parent || parent.classList.contains('code-block-wrapper')) return;
         const wrapper = document.createElement('div');
         wrapper.className = 'code-block-wrapper relative mt-6 mb-6 group';
-        pre.parentNode?.insertBefore(wrapper, pre);
+        parent.insertBefore(wrapper, pre);
         wrapper.appendChild(pre);
         const copyBtn = document.createElement('button');
         copyBtn.className = 'copy-btn absolute top-2 right-2 px-3 py-1 bg-white/10 hover:bg-white/20 text-white/50 hover:text-white text-[11px] font-mono rounded backdrop-blur-md transition-all opacity-0 group-hover:opacity-100 cursor-pointer border border-white/10';

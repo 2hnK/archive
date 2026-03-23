@@ -3,69 +3,132 @@
 const currentPath = Astro.url.pathname;
 
 const navLinks = [
-  { name: 'Home', href: '/' },
-  { name: 'Articles', href: '/articles' },
-  { name: 'Project', href: '/project' },
-  { name: 'About', href: '/about' }
+  { name: "Home", href: "/" },
+  { name: "Articles", href: "/articles" },
+  { name: "Project", href: "/project" },
+  { name: "About", href: "/about" },
 ];
 ---
-<header id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] md:mt-4 mx-auto w-full md:max-w-4xl lg:max-w-5xl border-b border-white/10 md:border md:border-apple-border/20 dark:md:border-apple-darkBorder/20 md:rounded-full bg-apple-surface/80 dark:bg-apple-darkSurface/80 backdrop-blur-[2px]">
+
+<header
+  id="main-nav"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] md:mt-4 mx-auto w-full md:max-w-4xl lg:max-w-5xl xl:max-w-[1000px] border-b border-white/10 md:border md:border-apple-border/20 dark:md:border-apple-darkBorder/20 md:rounded-full bg-apple-surface/80 dark:bg-apple-darkSurface/80 backdrop-blur-[2px]"
+>
   <div class="flex justify-between items-center h-14 px-4 md:px-6 w-full">
     <div class="text-[17px] font-bold tracking-tight text-black dark:text-white">
       <a href="/">DevArchive</a>
     </div>
     <div class="hidden md:flex items-center gap-1 relative" id="nav-links-container">
       <!-- Highlight Indicator (Will use Custom Liquid Shader) -->
-      <div id="nav-highlight" class="absolute custom-glass-highlight rounded-full transition-all duration-400 ease-[cubic-bezier(0.25,1,0.5,1)] pointer-events-none opacity-0 z-0 scale-95 border border-white/20 dark:border-white/10"></div>
+      <div
+        id="nav-highlight"
+        class="absolute custom-glass-highlight rounded-full transition-all duration-400 ease-[cubic-bezier(0.25,1,0.5,1)] pointer-events-none opacity-0 z-0 scale-95 border border-white/20 dark:border-white/10"
+      >
+      </div>
 
-      {navLinks.map((link) => {
-        const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
-        return (
-          <a
-            class={`nav-link relative z-10 px-4 py-1.5 rounded-full text-[14px] font-medium tracking-tight transition-colors duration-300 ${
-              isActive
-                ? 'text-black dark:text-white active-link font-semibold'
-                : 'text-apple-textMuted dark:text-apple-darkTextMuted hover:text-black dark:hover:text-white'
-            }`}
-            href={link.href}
-            data-active={isActive.toString()}
-          >
-            {link.name}
-          </a>
-        );
-      })}
+      {
+        navLinks.map((link) => {
+          const isActive =
+            currentPath === link.href || (link.href !== "/" && currentPath.startsWith(link.href));
+          return (
+            <a
+              class={`nav-link relative z-10 px-4 py-1.5 rounded-full text-[14px] font-medium tracking-tight transition-colors duration-300 ${
+                isActive
+                  ? "text-black dark:text-white active-link font-semibold"
+                  : "text-apple-textMuted dark:text-apple-darkTextMuted hover:text-black dark:hover:text-white"
+              }`}
+              href={link.href}
+              data-active={isActive.toString()}
+            >
+              {link.name}
+            </a>
+          );
+        })
+      }
     </div>
     <div class="flex items-center gap-1">
       <!-- Icon Links -->
-      <a href="https://www.instagram.com/__kimjihun/" target="_blank" rel="noopener noreferrer" class="group w-8 h-8 flex items-center justify-center rounded-full text-black dark:text-white hover:bg-pink-500/10 dark:hover:bg-pink-400/10 hover:text-pink-600 dark:hover:text-pink-400 transition-all duration-300" aria-label="Instagram">
-        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:scale-110"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+      <a
+        href="https://www.instagram.com/__kimjihun/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group w-8 h-8 flex items-center justify-center rounded-full text-black dark:text-white hover:bg-pink-500/10 dark:hover:bg-pink-400/10 hover:text-pink-600 dark:hover:text-pink-400 transition-all duration-300"
+        aria-label="Instagram"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="17"
+          height="17"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="transition-transform duration-300 group-hover:scale-110"
+          ><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path
+            d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line
+            x1="17.5"
+            x2="17.51"
+            y1="6.5"
+            y2="6.5"></line></svg
+        >
       </a>
-      <a href="https://github.com/2hnK" target="_blank" rel="noopener noreferrer" class="group w-8 h-8 flex items-center justify-center rounded-full text-black dark:text-white hover:bg-purple-500/10 dark:hover:bg-purple-400/10 hover:text-purple-600 dark:hover:text-purple-400 transition-all duration-300" aria-label="GitHub">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="transition-transform duration-300 group-hover:scale-110"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+      <a
+        href="https://github.com/2hnK"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group w-8 h-8 flex items-center justify-center rounded-full text-black dark:text-white hover:bg-purple-500/10 dark:hover:bg-purple-400/10 hover:text-purple-600 dark:hover:text-purple-400 transition-all duration-300"
+        aria-label="GitHub"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="transition-transform duration-300 group-hover:scale-110"
+          ><path
+            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+          ></path></svg
+        >
       </a>
-      <a href="/write" class="group w-8 h-8 flex items-center justify-center rounded-full text-black dark:text-white hover:bg-blue-500/10 dark:hover:bg-blue-400/10 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300" aria-label="Write">
-        <span class="material-symbols-outlined text-[20px] leading-none transition-transform duration-300 group-hover:scale-110">edit_note</span>
+      <a
+        href="/write"
+        class="group w-8 h-8 flex items-center justify-center rounded-full text-black dark:text-white hover:bg-blue-500/10 dark:hover:bg-blue-400/10 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300"
+        aria-label="Write"
+      >
+        <span
+          class="material-symbols-outlined text-[20px] leading-none transition-transform duration-300 group-hover:scale-110"
+          >edit_note</span
+        >
       </a>
-      
+
       <div class="w-px h-4 bg-black/20 dark:bg-white/20 mx-1"></div>
-      
-      <button id="theme-toggle" class="group w-8 h-8 flex items-center justify-center rounded-full text-black dark:text-white hover:bg-amber-500/10 dark:hover:bg-amber-400/10 hover:text-amber-600 dark:hover:text-amber-400 transition-all duration-300">
-        <span class="material-symbols-outlined text-[20px] leading-none transition-transform duration-300 group-hover:rotate-[30deg]" id="theme-icon">light_mode</span>
+
+      <button
+        id="theme-toggle"
+        class="group w-8 h-8 flex items-center justify-center rounded-full text-black dark:text-white hover:bg-amber-500/10 dark:hover:bg-amber-400/10 hover:text-amber-600 dark:hover:text-amber-400 transition-all duration-300"
+      >
+        <span
+          class="material-symbols-outlined text-[20px] leading-none transition-transform duration-300 group-hover:rotate-[30deg]"
+          id="theme-icon">light_mode</span
+        >
       </button>
     </div>
   </div>
 </header>
 
 <script>
-  document.addEventListener('astro:page-load', () => {
+  document.addEventListener("astro:page-load", () => {
     // 0. Sliding Menu Highlight
-    const container = document.getElementById('nav-links-container');
-    const highlight = document.getElementById('nav-highlight');
-    const navLinks = document.querySelectorAll('.nav-link');
-    
+    const container = document.getElementById("nav-links-container");
+    const highlight = document.getElementById("nav-highlight");
+    const navLinks = document.querySelectorAll(".nav-link");
+
     if (container && highlight && navLinks.length > 0) {
-      let activeLink = document.querySelector('.nav-link.active-link');
-      
+      let activeLink = document.querySelector(".nav-link.active-link");
+
       const moveHighlight = (el) => {
         const parentRect = container.getBoundingClientRect();
         const elRect = el.getBoundingClientRect();
@@ -73,8 +136,8 @@ const navLinks = [
         highlight.style.height = `${elRect.height}px`;
         highlight.style.left = `${elRect.left - parentRect.left}px`;
         highlight.style.top = `${elRect.top - parentRect.top}px`;
-        highlight.style.opacity = '1';
-        highlight.style.transform = 'scale(1)';
+        highlight.style.opacity = "1";
+        highlight.style.transform = "scale(1)";
       };
 
       // Initial position on load
@@ -85,33 +148,33 @@ const navLinks = [
         }, 50);
       }
 
-      navLinks.forEach(link => {
-        link.addEventListener('mouseenter', () => moveHighlight(link));
+      navLinks.forEach((link) => {
+        link.addEventListener("mouseenter", () => moveHighlight(link));
       });
 
-      container.addEventListener('mouseleave', () => {
+      container.addEventListener("mouseleave", () => {
         if (activeLink) {
           moveHighlight(activeLink);
         } else {
-          highlight.style.opacity = '0';
-          highlight.style.transform = 'scale(0.95)';
+          highlight.style.opacity = "0";
+          highlight.style.transform = "scale(0.95)";
         }
       });
 
-      window.addEventListener('resize', () => {
+      window.addEventListener("resize", () => {
         if (activeLink) moveHighlight(activeLink);
       });
-      
+
       // Listen to click and update the active link status immediately before page transitions
-      navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
+      navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
           // Reassign active link for immediate slide feedback
-          navLinks.forEach(l => {
-              l.classList.remove('active-link', 'text-black', 'dark:text-white', 'font-semibold');
-              l.classList.add('text-apple-textMuted', 'dark:text-apple-darkTextMuted');
+          navLinks.forEach((l) => {
+            l.classList.remove("active-link", "text-black", "dark:text-white", "font-semibold");
+            l.classList.add("text-apple-textMuted", "dark:text-apple-darkTextMuted");
           });
-          link.classList.remove('text-apple-textMuted', 'dark:text-apple-darkTextMuted');
-          link.classList.add('active-link', 'text-black', 'dark:text-white', 'font-semibold');
+          link.classList.remove("text-apple-textMuted", "dark:text-apple-darkTextMuted");
+          link.classList.add("active-link", "text-black", "dark:text-white", "font-semibold");
           activeLink = link;
           moveHighlight(link);
         });
@@ -119,12 +182,12 @@ const navLinks = [
     }
 
     // 1. Theme toggle
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    
+    const themeToggleBtn = document.getElementById("theme-toggle");
+    const themeIcon = document.getElementById("theme-icon");
+
     // 2. Dynamic Scroll Nav
-    const nav = document.getElementById('main-nav');
-    
+    const nav = document.getElementById("main-nav");
+
     if (nav) {
       const onScroll = () => {
         if (window.scrollY > 40) {
@@ -136,22 +199,22 @@ const navLinks = [
         }
       };
       // Attach to scroll with passive listener
-      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener("scroll", onScroll, { passive: true });
       // Trigger once on load
       onScroll();
     }
 
     if (!themeIcon) return;
-    
-    const isDark = document.documentElement.classList.contains('dark');
-    themeIcon.textContent = isDark ? 'dark_mode' : 'light_mode';
 
-    themeToggleBtn?.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.contains("dark");
+    themeIcon.textContent = isDark ? "dark_mode" : "light_mode";
+
+    themeToggleBtn?.addEventListener("click", () => {
       const element = document.documentElement;
-      element.classList.toggle('dark');
-      const darkNow = element.classList.contains('dark');
-      localStorage.setItem('theme', darkNow ? 'dark' : 'light');
-      themeIcon.textContent = darkNow ? 'dark_mode' : 'light_mode';
+      element.classList.toggle("dark");
+      const darkNow = element.classList.contains("dark");
+      localStorage.setItem("theme", darkNow ? "dark" : "light");
+      themeIcon.textContent = darkNow ? "dark_mode" : "light_mode";
     });
   });
 </script>
