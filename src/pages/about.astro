@@ -4,6 +4,8 @@ import { Image } from "astro:assets";
 import hanbatLogo from "../assets/hanbat_logo.svg";
 import ssafyLogo from "../assets/ssafy_logo.svg";
 import kicsLogo from "../assets/kics_logo.jpg";
+import engineerLogo from "../assets/engineer_information_processing_logo.png";
+import sqldLogo from "../assets/sqld_logo.png";
 ---
 
 <BaseLayout
@@ -166,12 +168,13 @@ import kicsLogo from "../assets/kics_logo.jpg";
                 class="flex items-center gap-4 bg-white/80 dark:bg-white/5 p-4 rounded-2xl border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:bg-white/10 group/cert cursor-default"
               >
                 <div
-                  class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-500/20 flex flex-shrink-0 items-center justify-center text-blue-600 dark:text-blue-400 transition-colors duration-300 group-hover/cert:bg-blue-500 group-hover/cert:text-white"
+                  class="w-12 h-12 rounded-xl bg-white dark:bg-white/10 flex flex-shrink-0 items-center justify-center border border-black/5 dark:border-white/10 transition-colors duration-300 overflow-hidden"
                 >
-                  <span
-                    class="material-symbols-outlined text-2xl transition-transform duration-300 group-hover/cert:scale-125 group-hover/cert:rotate-12"
-                    >workspace_premium</span
-                  >
+                  <Image
+                    src={engineerLogo}
+                    alt="정보처리기사 로고"
+                    class="w-full h-full object-contain p-1.5 transition-transform duration-300 group-hover/cert:scale-110 transform-gpu backface-hidden will-change-transform"
+                  />
                 </div>
                 <div>
                   <h4
@@ -190,12 +193,13 @@ import kicsLogo from "../assets/kics_logo.jpg";
                 class="flex items-center gap-4 bg-white/80 dark:bg-white/5 p-4 rounded-2xl border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:shadow-lg dark:hover:bg-white/10 group/cert cursor-default"
               >
                 <div
-                  class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-500/20 flex flex-shrink-0 items-center justify-center text-emerald-600 dark:text-emerald-400 transition-colors duration-300 group-hover/cert:bg-emerald-500 group-hover/cert:text-white"
+                  class="w-12 h-12 rounded-xl bg-white dark:bg-white/10 flex flex-shrink-0 items-center justify-center border border-black/5 dark:border-white/10 transition-colors duration-300 overflow-hidden"
                 >
-                  <span
-                    class="material-symbols-outlined text-2xl transition-transform duration-300 group-hover/cert:scale-125 group-hover/cert:-rotate-12"
-                    >database</span
-                  >
+                  <Image
+                    src={sqldLogo}
+                    alt="SQLD 로고"
+                    class="w-full h-full object-contain p-1.5 transition-transform duration-300 group-hover/cert:scale-110 transform-gpu backface-hidden will-change-transform"
+                  />
                 </div>
                 <div>
                   <h4
