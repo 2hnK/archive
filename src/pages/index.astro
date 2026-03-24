@@ -5,8 +5,29 @@ import { getCollection } from "astro:content";
 
 const allArticles = await getCollection("articles");
 const sortedArticles = allArticles.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const featured = sortedArticles.find((a) => a.data.isFeatured) || sortedArticles[0];
 const latestArticles = sortedArticles.slice(0, 6);
+
+// 블로그 통계 계산
+const totalPosts = allArticles.length;
+const categorySet = new Set(allArticles.map((a) => a.data.category));
+const totalCategories = categorySet.size;
+const latestDate =
+  sortedArticles[0]?.data.date.toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }) || "—";
+const seriesSet = new Set(
+  allArticles.filter((a) => a.data.subcategory).map((a) => a.data.subcategory),
+);
+const totalSeries = seriesSet.size;
+
+// 카테고리별 게시물 수
+const categoryCounts: Record<string, number> = {};
+allArticles.forEach((a) => {
+  categoryCounts[a.data.category] = (categoryCounts[a.data.category] || 0) + 1;
+});
+const categoryNames = Object.keys(categoryCounts).sort();
 ---
 
 <BaseLayout title="DevArchive" description="모던하고 미니멀한 개발자 커리어 로그">
@@ -45,49 +66,92 @@ const latestArticles = sortedArticles.slice(0, 6);
       </div>
     </section>
 
-    <!-- Featured Post -->
-    {
-      featured && (
-        <section class="max-w-[1200px] mx-auto px-6 mb-32 reveal-up stagger-1">
-          <span class="text-[11px] tracking-[0.25em] font-bold text-apple-textMuted dark:text-apple-darkTextMuted uppercase mb-4 block">
-            Featured Journal
-          </span>
-          <a
-            href={`/articles/${featured.id}`}
-            class="group block relative overflow-hidden rounded-[2rem] bg-black/5 dark:bg-white/5 aspect-[16/10] md:aspect-[21/9] border border-apple-border/50 dark:border-apple-darkBorder/50 shadow-[0_8px_32px_rgba(0,0,0,0.06)]"
-          >
-            {featured.data.imageUrl ? (
-              <img
-                alt={featured.data.title}
-                class="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]"
-                src={featured.data.imageUrl}
-                loading="lazy"
-              />
-            ) : (
-              <div class="absolute inset-0 w-full h-full bg-apple-surface dark:bg-apple-darkSurface flex items-center justify-center">
-                <span class="material-symbols-outlined text-[60px] text-apple-border dark:text-apple-darkBorder">
-                  history
-                </span>
+    <!-- Blog Stats Bento Grid -->
+    <section class="max-w-[1200px] mx-auto px-6 mb-20 reveal-up stagger-1">
+      <div class="grid grid-cols-2 md:grid-cols-6 gap-5 auto-rows-[160px]">
+        <!-- 총 포스트 (Large Card) -->
+        <div class="md:col-span-3 md:row-span-2 group relative overflow-hidden bg-white/[0.03] dark:bg-white/[0.02] backdrop-blur-xl p-8 rounded-[2.5rem] border border-black/[0.08] dark:border-white/[0.08] shadow-[0_8px_40px_rgba(0,0,0,0.04)] transition-all duration-700 hover:scale-[1.01] hover:border-blue-500/30">
+          <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+          <div class="relative z-10 h-full flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-blue-600 dark:text-blue-400">article</span>
               </div>
-            )}
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            <div class="absolute bottom-0 left-0 right-0 p-8 md:p-12 z-10 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-[-4px]">
-              <div class="mb-4">
-                <span class="bg-white/20 backdrop-blur-md text-white px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-sm border border-white/20">
-                  {featured.data.category}
-                </span>
-              </div>
-              <h2 class="text-[2.2rem] md:text-[3.5rem] font-bold tracking-tighter text-white mb-4 leading-[1.1] max-w-3xl break-keep group-hover:text-orange -300 transition-colors">
-                {featured.data.title}
-              </h2>
-              <p class="text-white/80 text-[15px] md:text-[17px] font-medium max-w-2xl break-keep line-clamp-2">
-                {featured.data.description}
+              <h3 class="text-[14px] font-bold tracking-[0.1em] uppercase text-apple-textMuted dark:text-apple-darkTextMuted mb-2">Total Insights</h3>
+              <p class="text-[17px] font-medium text-apple-textMuted dark:text-apple-darkTextMuted leading-relaxed break-keep">
+                지금까지 기록된 <span class="text-apple-text dark:text-apple-darkText font-bold">{totalPosts}개</span>의 기술 아티클이 지식의 밑거름이 되고 있습니다.
               </p>
             </div>
-          </a>
-        </section>
-      )
-    }
+            <p class="text-[4.5rem] md:text-[5.5rem] font-bold tracking-tighter text-apple-text dark:text-apple-darkText leading-none mt-4">{totalPosts}</p>
+          </div>
+        </div>
+
+        <!-- 최근 업데이트 (Wide Card) -->
+        <div class="md:col-span-3 md:row-span-1 group relative overflow-hidden bg-white/[0.03] dark:bg-white/[0.02] backdrop-blur-xl p-8 rounded-[2.5rem] border border-black/[0.08] dark:border-white/[0.08] shadow-[0_8px_40px_rgba(0,0,0,0.04)] transition-all duration-700 hover:scale-[1.01] hover:border-amber-500/30">
+          <div class="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+          <div class="relative z-10 flex items-center justify-between h-full">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center mb-4">
+                <span class="material-symbols-outlined text-amber-600 dark:text-amber-400">update</span>
+              </div>
+              <h3 class="text-[13px] font-bold tracking-[0.1em] uppercase text-apple-textMuted dark:text-apple-darkTextMuted">Latest Update</h3>
+              <p class="text-[20px] md:text-[24px] font-bold text-apple-text dark:text-apple-darkText tracking-tight">{latestDate}</p>
+            </div>
+            <div class="hidden md:block">
+              <span class="material-symbols-outlined text-[60px] text-amber-500/10 rotate-12">history</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 카테고리 (Square Card) -->
+        <div class="md:col-span-1 md:row-span-1 group relative overflow-hidden bg-white/[0.03] dark:bg-white/[0.02] backdrop-blur-xl p-6 rounded-[2.5rem] border border-black/[0.08] dark:border-white/[0.08] shadow-[0_8px_40px_rgba(0,0,0,0.04)] transition-all duration-700 hover:scale-[1.01] hover:border-emerald-500/30 text-center">
+            <div class="relative z-10 h-full flex flex-col items-center justify-center">
+                <span class="material-symbols-outlined text-[32px] text-emerald-600 dark:text-emerald-400 mb-2">category</span>
+                <p class="text-[2.5rem] font-bold text-apple-text dark:text-apple-darkText leading-none">{totalCategories}</p>
+                <h3 class="text-[11px] font-bold tracking-[0.1em] uppercase text-apple-textMuted dark:text-apple-darkTextMuted mt-1">Categories</h3>
+            </div>
+        </div>
+
+        <!-- 시리즈 (Square Card) -->
+        <div class="md:col-span-2 md:row-span-1 group relative overflow-hidden bg-white/[0.03] dark:bg-white/[0.02] backdrop-blur-xl p-6 rounded-[2.5rem] border border-black/[0.08] dark:border-white/[0.08] shadow-[0_8px_40px_rgba(0,0,0,0.04)] transition-all duration-700 hover:scale-[1.01] hover:border-violet-500/30">
+            <div class="relative z-10 h-full flex items-center gap-6 px-4">
+                <div class="w-12 h-12 rounded-2xl bg-violet-500/10 flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-violet-600 dark:text-violet-400">library_books</span>
+                </div>
+                <div>
+                    <h3 class="text-[11px] font-bold tracking-[0.1em] uppercase text-apple-textMuted dark:text-apple-darkTextMuted mb-0.5">Series</h3>
+                    <p class="text-[2rem] font-bold text-apple-text dark:text-apple-darkText leading-none">{totalSeries}</p>
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Enhanced Category Chips -->
+    <section class="max-w-[1200px] mx-auto px-6 mb-32 reveal-up stagger-2">
+      <div class="flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
+        <div class="shrink-0">
+            <h2 class="text-[12px] font-bold tracking-[0.2em] uppercase text-apple-textMuted dark:text-apple-darkTextMuted mb-1">Explore Topics</h2>
+            <div class="w-8 h-1 bg-blue-500/40 rounded-full"></div>
+        </div>
+        <div class="flex flex-wrap items-center gap-3">
+            {
+            categoryNames.map((cat) => (
+                <a
+                href="/articles"
+                class="group relative inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-white/[0.03] dark:bg-white/[0.02] border border-black/[0.05] dark:border-white/[0.05] text-[14px] font-semibold text-apple-text dark:text-apple-darkText transition-all duration-500 hover:scale-[1.05] hover:shadow-xl hover:border-blue-500/20 overflow-hidden"
+                >
+                <div class="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <span class="relative z-10">{cat}</span>
+                <span class="relative z-10 text-[11px] font-bold text-blue-600 dark:text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-lg min-w-[22px] text-center leading-none">
+                    {categoryCounts[cat]}
+                </span>
+                </a>
+            ))
+            }
+        </div>
+      </div>
+    </section>
 
     <!-- Latest Articles Grid -->
     <section class="max-w-[1200px] mx-auto px-6 reveal-up stagger-2">
@@ -97,7 +161,7 @@ const latestArticles = sortedArticles.slice(0, 6);
         <div>
           <span
             class="text-[11px] uppercase tracking-[0.25em] font-bold text-apple-textMuted dark:text-apple-darkTextMuted block mb-2"
-            >Latest Insights</span
+            >Latest Articles</span
           >
           <h2
             class="text-[2rem] font-bold tracking-tighter text-apple-text dark:text-apple-darkText"

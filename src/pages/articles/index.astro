@@ -12,15 +12,20 @@ const renderedArticles = await Promise.all(sortedArticles.map(async (entry) => {
 }));
 
 const categoryTree: Record<string, string[]> = {};
+const catCounts: Record<string, number> = {};
+const subCounts: Record<string, Record<string, number>> = {};
 sortedArticles.forEach(a => {
   const cat = a.data.category;
   const sub = a.data.subcategory;
-  if (!categoryTree[cat]) categoryTree[cat] = [];
-  if (sub && !categoryTree[cat].includes(sub)) {
-    categoryTree[cat].push(sub);
+  if (!categoryTree[cat]) { categoryTree[cat] = []; catCounts[cat] = 0; subCounts[cat] = {}; }
+  catCounts[cat]++;
+  if (sub) {
+    if (!categoryTree[cat].includes(sub)) categoryTree[cat].push(sub);
+    subCounts[cat][sub] = (subCounts[cat][sub] || 0) + 1;
   }
 });
 const categories = Object.keys(categoryTree).sort();
+const totalArticleCount = sortedArticles.length;
 
 const LIQUID_GLASS_TOKEN = "liquid-glass-highlight border border-white/20 dark:border-white/10";
 const BTN_INACTIVE = 'outline-none focus:outline-none border-none ring-0 appearance-none bg-transparent text-apple-textMuted dark:text-apple-darkTextMuted transition-colors duration-300 font-medium group';
@@ -50,21 +55,21 @@ const BTN_ACTIVE = 'active-item outline-none focus:outline-none border-none ring
             </div>
 
             <button data-filter="all" class={`cat-filter relative z-10 w-full flex items-center justify-end pr-[24px] py-2.5 cursor-pointer ${BTN_ACTIVE}`}>
-              <span class="text-[14.5px] text-right">All</span>
+              <span class="text-[14.5px] text-right flex items-center gap-1.5">All <span class="text-[11px] font-bold opacity-60">{totalArticleCount}</span></span>
               <span class="inactive-dot absolute right-[-2.5px] top-1/2 -translate-y-1/2 w-[5px] h-[5px] rounded-full bg-black/20 dark:bg-white/20 transition-all duration-300 z-10"></span>
             </button>
             
             {categories.map(cat => (
               <div class="category-group flex flex-col gap-1 w-full" data-group-cat={cat}>
                 <button data-filter-cat={cat} class={`cat-filter relative z-10 w-full flex items-center justify-end pr-[24px] py-2.5 cursor-pointer ${BTN_INACTIVE}`}>
-                  <span class="text-[15px] text-right">{cat}</span>
+                  <span class="text-[15px] text-right flex items-center gap-1.5">{cat} <span class="text-[11px] font-bold opacity-60">{catCounts[cat]}</span></span>
                   <span class="inactive-dot absolute right-[-2.5px] top-1/2 -translate-y-1/2 w-[5px] h-[5px] rounded-full bg-black/20 dark:bg-white/20 transition-all duration-300 group-hover:bg-black/40 dark:group-hover:bg-white/40 z-10"></span>
                 </button>
                 {categoryTree[cat].length > 0 && (
                   <div class="sub-list hidden flex flex-col gap-1">
                     {categoryTree[cat].map(sub => (
                       <button data-filter-cat={cat} data-filter-sub={sub} class={`cat-filter relative z-10 w-full flex items-center justify-end pr-[24px] py-1.5 cursor-pointer pl-6 ${BTN_INACTIVE}`}>
-                        <span class="text-[12px] text-right opacity-80">{sub}</span>
+                        <span class="text-[12px] text-right opacity-80 flex items-center gap-1.5">{sub} <span class="text-[10px] font-bold opacity-60">{subCounts[cat][sub]}</span></span>
                         <span class="inactive-dot absolute right-[-2.5px] top-1/2 -translate-y-1/2 w-[5px] h-[5px] rounded-full bg-black/20 dark:bg-white/20 transition-all duration-300 group-hover:bg-black/40 dark:group-hover:bg-white/40 z-10"></span>
                       </button>
                     ))}
