@@ -1,0 +1,202 @@
+---
+// src/components/TimeProgress.astro
+---
+
+<div
+  class="time-progress-container font-mono bg-[#1a1a1a] dark:bg-[#121212] text-gray-200 p-8 rounded-2xl shadow-lg border border-black/10 dark:border-white/5 my-8 relative overflow-hidden"
+  style="margin-top: 0px"
+>
+  <div class="text-center mb-10">
+    <p class="text-[14px] text-gray-400 mb-6">The current date and time is:</p>
+    <p id="current-time-display" class="text-[20px] md:text-[24px] font-bold tracking-widest"></p>
+  </div>
+
+  <div class="space-y-6 max-w-2xl mx-auto">
+    <!-- Year -->
+    <div class="progress-item">
+      <div class="flex justify-between mb-2">
+        <span class="text-[14px] font-medium text-gray-300">Year</span>
+      </div>
+      <div class="h-4 w-full bg-[#333333] rounded-full overflow-hidden">
+        <div
+          id="progress-year"
+          class="h-full bg-blue-500 rounded-full transition-all duration-75 ease-linear w-0"
+        >
+        </div>
+      </div>
+      <div class="text-right mt-1">
+        <span id="percent-year" class="text-[13px] text-gray-400">0.0%</span>
+      </div>
+    </div>
+
+    <!-- Month -->
+    <div class="progress-item">
+      <div class="flex justify-between mb-2">
+        <span class="text-[14px] font-medium text-gray-300">Month</span>
+      </div>
+      <div class="h-4 w-full bg-[#333333] rounded-full overflow-hidden">
+        <div
+          id="progress-month"
+          class="h-full bg-blue-500 rounded-full transition-all duration-75 ease-linear w-0"
+        >
+        </div>
+      </div>
+      <div class="text-right mt-1">
+        <span id="percent-month" class="text-[13px] text-gray-400">0.0%</span>
+      </div>
+    </div>
+
+    <!-- Day -->
+    <div class="progress-item">
+      <div class="flex justify-between mb-2">
+        <span class="text-[14px] font-medium text-gray-300">Day</span>
+      </div>
+      <div class="h-4 w-full bg-[#333333] rounded-full overflow-hidden">
+        <div
+          id="progress-day"
+          class="h-full bg-blue-500 rounded-full transition-all duration-75 ease-linear w-0"
+        >
+        </div>
+      </div>
+      <div class="text-right mt-1">
+        <span id="percent-day" class="text-[13px] text-gray-400">0.0%</span>
+      </div>
+    </div>
+
+    <!-- Hour -->
+    <div class="progress-item">
+      <div class="flex justify-between mb-2">
+        <span class="text-[14px] font-medium text-gray-300">Hour</span>
+      </div>
+      <div class="h-4 w-full bg-[#333333] rounded-full overflow-hidden">
+        <div
+          id="progress-hour"
+          class="h-full bg-blue-500 rounded-full transition-all duration-75 ease-linear w-0"
+        >
+        </div>
+      </div>
+      <div class="text-right mt-1">
+        <span id="percent-hour" class="text-[13px] text-gray-400">0.0%</span>
+      </div>
+    </div>
+
+    <!-- Minute -->
+    <div class="progress-item">
+      <div class="flex justify-between mb-2">
+        <span class="text-[14px] font-medium text-gray-300">Minute</span>
+      </div>
+      <div class="h-4 w-full bg-[#333333] rounded-full overflow-hidden">
+        <div
+          id="progress-minute"
+          class="h-full bg-blue-500 rounded-full transition-all duration-75 ease-linear w-0"
+        >
+        </div>
+      </div>
+      <div class="text-right mt-1">
+        <span id="percent-minute" class="text-[13px] text-gray-400">0.0%</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function isLeapYear(year: number) {
+    return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+  }
+
+  function getDaysInMonth(year: number, month: number) {
+    return new Date(year, month + 1, 0).getDate();
+  }
+
+  function getDaysInYear(year: number) {
+    return isLeapYear(year) ? 366 : 365;
+  }
+
+  function formatNumber(num: number, pad: number = 2) {
+    return num.toString().padStart(pad, "0");
+  }
+
+  const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+  function updateProgress() {
+    const now = new Date();
+
+    const year = now.getFullYear();
+    const month = now.getMonth(); // 0-11
+    const day = now.getDate(); // 1-31
+    const hour = now.getHours(); // 0-23
+    const minute = now.getMinutes(); // 0-59
+    const second = now.getSeconds(); // 0-59
+    const ms = now.getMilliseconds(); // 0-999
+
+    // --- Update Date Text ---
+    const dateStr = `${year}/${formatNumber(month + 1)}/${formatNumber(day)} ${formatNumber(hour)}:${formatNumber(minute)}:${formatNumber(second)}.${formatNumber(Math.floor(ms / 10), 2)}`;
+    const dayStr = `(${daysOfWeek[now.getDay()]})`;
+
+    const displayEl = document.getElementById("current-time-display");
+    if (displayEl) {
+      displayEl.textContent = `${dateStr}  ${dayStr}`;
+    }
+
+    // --- Calculate Percentages ---
+
+    // 1. Minute Progress (0 to 60 seconds)
+    const currentMsInMinute = second * 1000 + ms;
+    const totalMsInMinute = 60 * 1000;
+    const pctMinute = (currentMsInMinute / totalMsInMinute) * 100;
+
+    // 2. Hour Progress (0 to 60 minutes)
+    const currentMsInHour = minute * totalMsInMinute + currentMsInMinute;
+    const totalMsInHour = 60 * totalMsInMinute;
+    const pctHour = (currentMsInHour / totalMsInHour) * 100;
+
+    // 3. Day Progress (0 to 24 hours)
+    const currentMsInDay = hour * totalMsInHour + currentMsInHour;
+    const totalMsInDay = 24 * totalMsInHour;
+    const pctDay = (currentMsInDay / totalMsInDay) * 100;
+
+    // 4. Month Progress
+    const daysInMonth = getDaysInMonth(year, month);
+    const msInMonth = daysInMonth * totalMsInDay;
+    const currentMsInMonth = (day - 1) * totalMsInDay + currentMsInDay;
+    const pctMonth = (currentMsInMonth / msInMonth) * 100;
+
+    // 5. Year Progress
+    const startOfYearMs = new Date(year, 0, 1).getTime();
+    const endOfYearMs = new Date(year + 1, 0, 1).getTime();
+    const msInYear = endOfYearMs - startOfYearMs;
+    const currentMsOutYear = now.getTime() - startOfYearMs;
+    const pctYear = (currentMsOutYear / msInYear) * 100;
+
+    // --- Update DOM Elements ---
+    const updateElement = (id: string, pct: number) => {
+      const bar = document.getElementById(`progress-${id}`);
+      const text = document.getElementById(`percent-${id}`);
+      if (bar && text) {
+        bar.style.width = `${pct}%`;
+        text.textContent = `${pct.toFixed(1)}%`;
+      }
+    };
+
+    updateElement("year", pctYear);
+    updateElement("month", pctMonth);
+    updateElement("day", pctDay);
+    updateElement("hour", pctHour);
+    updateElement("minute", pctMinute);
+
+    requestAnimationFrame(updateProgress);
+  }
+
+  // Initialize loop when Astro loads or view transitions
+  document.addEventListener("astro:page-load", () => {
+    // start loop only if current-time-display exists
+    if (document.getElementById("current-time-display")) {
+      requestAnimationFrame(updateProgress);
+    }
+  });
+
+  // Since Astro component scripts might run once on first load:
+  if (document.getElementById("current-time-display")) {
+    requestAnimationFrame(updateProgress);
+  }
+</script>

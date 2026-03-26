@@ -1,25 +1,18 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ArticleCard from "../components/ArticleCard.astro";
+import TimeProgress from "../components/TimeProgress.astro";
 import { getCollection } from "astro:content";
 
 const allArticles = await getCollection("articles");
 const sortedArticles = allArticles.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const latestArticles = sortedArticles.slice(0, 6);
-
-// 카테고리별 게시물 수 계산
-
-const categoryCounts: Record<string, number> = {};
-allArticles.forEach((a) => {
-  categoryCounts[a.data.category] = (categoryCounts[a.data.category] || 0) + 1;
-});
-const categoryNames = Object.keys(categoryCounts).sort();
 ---
 
 <BaseLayout title="DevArchive" description="모던하고 미니멀한 개발자 커리어 로그">
   <main class="pt-24 pb-20">
     <!-- Greeting -->
-    <section class="max-w-[1200px] mx-auto px-6 pt-12 pb-20 fade-in-up">
+    <section class="max-w-[1200px] mx-auto px-6 pt-12 pb-4 fade-in-up">
       <div class="max-w-3xl">
         <span
           class="text-[11px] tracking-[0.25em] font-bold text-apple-textMuted dark:text-apple-darkTextMuted uppercase mb-2 block"
@@ -54,24 +47,11 @@ const categoryNames = Object.keys(categoryCounts).sort();
 
     <!-- Explore Topics + Latest Articles -->
     <section class="max-w-[1200px] mx-auto px-6 reveal-up stagger-1">
-      <div class="flex flex-wrap items-center gap-3 mb-16">
-        <span class="text-[11px] tracking-[0.25em] font-bold text-apple-textMuted dark:text-apple-darkTextMuted uppercase mr-1">Topics</span>
-        {
-          categoryNames.map((cat) => (
-            <a
-              href="/articles"
-              class="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/[0.03] dark:bg-white/[0.04] border border-black/[0.06] dark:border-white/[0.08] text-[13px] font-semibold text-apple-text dark:text-apple-darkText hover:bg-black/[0.06] dark:hover:bg-white/[0.08] hover:border-black/10 dark:hover:border-white/15 transition-all duration-300 hover:scale-[1.04] hover:shadow-sm"
-            >
-              <span>{cat}</span>
-              <span class="text-[11px] font-bold text-blue-600 dark:text-blue-400 bg-blue-500/10 px-1.5 py-0.5 rounded-md min-w-[20px] text-center leading-none">
-                {categoryCounts[cat]}
-              </span>
-            </a>
-          ))
-        }
+      <div class="mb-16">
+        <TimeProgress />
       </div>
 
-    <!-- Latest Articles Grid -->
+      <!-- Latest Articles Grid -->
       <div
         class="flex justify-between items-end mb-12 border-b border-apple-border dark:border-apple-darkBorder pb-6"
       >
@@ -110,38 +90,37 @@ const categoryNames = Object.keys(categoryCounts).sort();
         }
       </div>
     </section>
-    </section>
   </main>
-
-  <script>
-    document.addEventListener("astro:page-load", () => {
-      const revealObserver = new IntersectionObserver(
-        (entries, observer) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("active", "translate-y-0", "opacity-100");
-              entry.target.classList.remove("translate-y-8", "opacity-0");
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { root: null, rootMargin: "0px 0px 100px 0px", threshold: 0 },
-      );
-
-      const els = document.querySelectorAll(".reveal-up, .fade-in-up");
-      els.forEach((el) => {
-        // Only hide if not already marked active (prevent double-hide on route change)
-        if (!el.classList.contains("active")) {
-          el.classList.add(
-            "transition-all",
-            "duration-1000",
-            "ease-[cubic-bezier(0.16,1,0.3,1)]",
-            "opacity-0",
-            "translate-y-8",
-          );
-        }
-        revealObserver.observe(el);
-      });
-    });
-  </script>
 </BaseLayout>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active", "translate-y-0", "opacity-100");
+            entry.target.classList.remove("translate-y-8", "opacity-0");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { root: null, rootMargin: "0px 0px 100px 0px", threshold: 0 },
+    );
+
+    const els = document.querySelectorAll(".reveal-up, .fade-in-up");
+    els.forEach((el) => {
+      // Only hide if not already marked active (prevent double-hide on route change)
+      if (!el.classList.contains("active")) {
+        el.classList.add(
+          "transition-all",
+          "duration-1000",
+          "ease-[cubic-bezier(0.16,1,0.3,1)]",
+          "opacity-0",
+          "translate-y-8",
+        );
+      }
+      revealObserver.observe(el);
+    });
+  });
+</script>
