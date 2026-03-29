@@ -3,25 +3,38 @@
 ---
 
 <div
-  class="time-progress-container font-mono bg-[#1a1a1a] dark:bg-[#121212] text-gray-200 p-8 rounded-2xl shadow-lg border border-black/10 dark:border-white/5 my-8 relative overflow-hidden"
+  class="time-progress-container bg-white/50 dark:bg-white/5 backdrop-blur-md text-[#4c4f69] dark:text-[#cdd6f4] p-8 rounded-3xl shadow-2xl border border-black/5 dark:border-white/5 my-8 relative overflow-hidden"
   style="margin-top: 0px"
 >
   <div class="text-center mb-10">
-    <p class="text-[14px] text-gray-400 mb-6">The current date and time is:</p>
-    <p id="current-time-display" class="text-[20px] md:text-[24px] font-bold tracking-widest"></p>
+    <p
+      class="text-[13px] text-[#5c5f77] dark:text-[#a6adc8] mb-6 font-bold flex items-center justify-center gap-2 tracking-[0.2em] uppercase"
+    >
+      <span class="material-symbols-outlined text-[15px]">local_cafe</span>
+      Brewing Progress
+    </p>
+    <p
+      id="current-time-display"
+      class="text-[20px] md:text-[24px] font-bold tracking-wider font-sans tabular-nums"
+    >
+    </p>
   </div>
 
   <div class="space-y-6 max-w-2xl mx-auto">
     <!-- Year -->
     <div class="progress-item">
       <div class="flex justify-between mb-2">
-        <span class="text-[14px] font-medium text-gray-300">Year</span>
+        <span class="text-[14px] font-medium text-[#40a02b] dark:text-[#a6e3a1] flex items-center gap-1.5"
+          ><span class="material-symbols-outlined text-[16px]">eco</span>Year</span
+        >
       </div>
-      <div class="h-4 w-full bg-[#333333] rounded-full overflow-hidden">
+      <div class="h-5 w-full bg-black/5 dark:bg-black/40 rounded-full overflow-hidden shadow-inner">
         <div
           id="progress-year"
-          class="h-full bg-blue-500 rounded-full transition-all duration-75 ease-linear w-0"
+          class="h-full bg-gradient-to-r from-[#40a02b] to-[#a6e3a1] rounded-full transition-all duration-75 ease-linear w-0 relative"
         >
+          <div class="absolute inset-0 bg-white/10 opacity-0 hover:opacity-100 transition-opacity">
+          </div>
         </div>
       </div>
       <div class="text-right mt-1">
@@ -32,13 +45,17 @@
     <!-- Month -->
     <div class="progress-item">
       <div class="flex justify-between mb-2">
-        <span class="text-[14px] font-medium text-gray-300">Month</span>
+        <span class="text-[14px] font-medium text-[#179299] dark:text-[#94e2d5] flex items-center gap-1.5"
+          ><span class="material-symbols-outlined text-[16px]">coffee_maker</span>Month</span
+        >
       </div>
-      <div class="h-4 w-full bg-[#333333] rounded-full overflow-hidden">
+      <div class="h-5 w-full bg-black/5 dark:bg-black/40 rounded-full overflow-hidden shadow-inner">
         <div
           id="progress-month"
-          class="h-full bg-blue-500 rounded-full transition-all duration-75 ease-linear w-0"
+          class="h-full bg-gradient-to-r from-[#179299] to-[#94e2d5] rounded-full transition-all duration-75 ease-linear w-0 relative"
         >
+          <div class="absolute inset-0 bg-white/10 opacity-0 hover:opacity-100 transition-opacity">
+          </div>
         </div>
       </div>
       <div class="text-right mt-1">
@@ -49,13 +66,17 @@
     <!-- Day -->
     <div class="progress-item">
       <div class="flex justify-between mb-2">
-        <span class="text-[14px] font-medium text-gray-300">Day</span>
+        <span class="text-[14px] font-medium text-[#209fb5] dark:text-[#74c7ec] flex items-center gap-1.5"
+          ><span class="material-symbols-outlined text-[16px]">local_cafe</span>Day</span
+        >
       </div>
-      <div class="h-4 w-full bg-[#333333] rounded-full overflow-hidden">
+      <div class="h-5 w-full bg-black/5 dark:bg-black/40 rounded-full overflow-hidden shadow-inner">
         <div
           id="progress-day"
-          class="h-full bg-blue-500 rounded-full transition-all duration-75 ease-linear w-0"
+          class="h-full bg-gradient-to-r from-[#209fb5] to-[#74c7ec] rounded-full transition-all duration-75 ease-linear w-0 relative"
         >
+          <div class="absolute inset-0 bg-white/10 opacity-0 hover:opacity-100 transition-opacity">
+          </div>
         </div>
       </div>
       <div class="text-right mt-1">
@@ -66,13 +87,17 @@
     <!-- Hour -->
     <div class="progress-item">
       <div class="flex justify-between mb-2">
-        <span class="text-[14px] font-medium text-gray-300">Hour</span>
+        <span class="text-[14px] font-medium text-[#04a5e5] dark:text-[#89dceb] flex items-center gap-1.5"
+          ><span class="material-symbols-outlined text-[16px]">keyboard</span>Hour</span
+        >
       </div>
-      <div class="h-4 w-full bg-[#333333] rounded-full overflow-hidden">
+      <div class="h-5 w-full bg-black/5 dark:bg-black/40 rounded-full overflow-hidden shadow-inner">
         <div
           id="progress-hour"
-          class="h-full bg-blue-500 rounded-full transition-all duration-75 ease-linear w-0"
+          class="h-full bg-gradient-to-r from-[#04a5e5] to-[#89dceb] rounded-full transition-all duration-75 ease-linear w-0 relative"
         >
+          <div class="absolute inset-0 bg-white/10 opacity-0 hover:opacity-100 transition-opacity">
+          </div>
         </div>
       </div>
       <div class="text-right mt-1">
@@ -83,13 +108,19 @@
     <!-- Minute -->
     <div class="progress-item">
       <div class="flex justify-between mb-2">
-        <span class="text-[14px] font-medium text-gray-300">Minute</span>
+        <span class="text-[14px] font-medium text-[#7287fd] dark:text-[#b4befe] flex items-center gap-1.5"
+          ><span class="material-symbols-outlined text-[16px]">terminal</span>Minute</span
+        >
       </div>
-      <div class="h-4 w-full bg-[#333333] rounded-full overflow-hidden">
+      <div class="h-5 w-full bg-black/5 dark:bg-black/40 rounded-full overflow-hidden shadow-inner relative">
         <div
           id="progress-minute"
-          class="h-full bg-blue-500 rounded-full transition-all duration-75 ease-linear w-0"
+          class="h-full bg-gradient-to-r from-[#7287fd] to-[#b4befe] rounded-full transition-all duration-75 ease-linear w-0 relative"
         >
+          <div
+            class="absolute inset-y-0 right-0 w-20 bg-gradient-to-r from-transparent to-white/30 rounded-full animate-pulse"
+          >
+          </div>
         </div>
       </div>
       <div class="text-right mt-1">
@@ -130,7 +161,7 @@
     const ms = now.getMilliseconds(); // 0-999
 
     // --- Update Date Text ---
-    const dateStr = `${year}/${formatNumber(month + 1)}/${formatNumber(day)} ${formatNumber(hour)}:${formatNumber(minute)}:${formatNumber(second)}.${formatNumber(Math.floor(ms / 10), 2)}`;
+    const dateStr = `${year}/${formatNumber(month + 1)}/${formatNumber(day)} ${formatNumber(hour)}:${formatNumber(minute)}:${formatNumber(second)}`;
     const dayStr = `(${daysOfWeek[now.getDay()]})`;
 
     const displayEl = document.getElementById("current-time-display");
