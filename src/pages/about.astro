@@ -6,6 +6,39 @@ import ssafyLogo from "../assets/ssafy_logo.svg";
 import kicsLogo from "../assets/kics_logo.jpg";
 import engineerLogo from "../assets/engineer_information_processing_logo.png";
 import sqldLogo from "../assets/sqld_logo.png";
+
+const projects = [
+  {
+    title: "AI Canvas Writer",
+    description:
+      "로직 노드 기반의 시각적 AI 프롬프트 에디터 도구입니다. 복잡한 시스템 프롬프팅 아키텍처를 시각화하여 사용성을 극대화했습니다.",
+    tags: ["React", "Zustand", "TailwindCSS"],
+    url: "#",
+    year: "2026",
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuD6TjGTWs53bAhDdSkfxKbZdM2TzdQI_ZJtmDiDK-bbOzPxxSssBUA9FGmSjTtwcgK7txfWRF9vt7TvbvgbPq1PuassGBT7NETRH7F8x-cNetH-9yuMvSaiweyZStMjrtnCbvCfhkcgQ8Kyf4uE9HpJkV3GYFlP7w4aCH8Yn3tshg_UDfWDNBnT5BEM4cw804ZWp6CEeh2apzFDSwCCB2W7VEJcZe43KkAhavwv3opq_ebTxM_VC5EKdLBDvyn4K0p49vYkMzWJkVnJ",
+  },
+  {
+    title: "DevJournal CLI",
+    description:
+      "터미널에서 직접 마크다운 포스트를 작성하고 Vercel 환경으로 자동 배포하는 서버리스 데스크탑 관리 시스템입니다.",
+    tags: ["Rust", "CLI", "Astro", "Vercel"],
+    url: "#",
+    year: "2025",
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuC5AEbqrNzQ1-SvYIJIWt1EuApIbBHl_HBblfMw96fDdkS7EzKHu6Zew16nnCG6WbwvC3aqDeHI0EFJeqB14NjzgjVvsEn67XJU_OV4uJscdG7XFLkIoYOclpv1m1ZPOgQLmeus5zT3nsjuPlZHEPgM298MUI-3mJiEwc_byTMWwtC93z0TzmIsh5nzbS8zndKZ_aGWJls6nfuWluG_lw7BqYVGhrj0lt521kef-xRmkyI83OhraLasbTeVB6f6BhrrLNwvuj8SjvMu",
+  },
+  {
+    title: "Minimal Design System",
+    description:
+      "디자이너와 개발자 사이의 간극을 완전히 좁히기 위한 Tailwind CSS 기반 사내 공통 디자인 시스템 컴포넌트 프레임워크입니다.",
+    tags: ["Storybook", "Figma", "Design", "CSS"],
+    url: "#",
+    year: "2024",
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuC4eQMIkMBmHMy3whVOgSHFkBGYJ9Bcspd0PMXpnMrd2KLWPfT10Pbd5wWQ3W_-bRtrli8_P0ppaeAg_NZqzjWFAxixxlsgUYzpY98m81uCXn5c7sIAikTX7ioocJTKj9q0XPdEpQMU482kUmXh5zaDUW5GWUUcaHRsucLRWdzAepOgcw57JITm-UG49TI_cYso5dZR_hdhjWj2vogjS1-mnyOqLOu4elVXDrOKtj7gj6NU_eN_ykKRC-CtszyDvnJfT3zZqynw0Pst",
+  },
+];
 ---
 
 <BaseLayout
@@ -13,266 +46,213 @@ import sqldLogo from "../assets/sqld_logo.png";
   description="시스템 설계와 인간 중심의 의도에 대해 고민합니다."
 >
   <main>
-    <!-- Immersive Hero Section -->
+    <!-- Minimal Hero Section -->
     <section
-      class="relative h-[60vh] min-h-[450px] w-full flex items-center justify-center overflow-hidden bg-black"
+      class="max-w-[900px] mx-auto px-6 pt-20 pb-12 fade-in-up md:pt-24 mt-4 md:mt-0 flex flex-col sm:flex-row sm:items-center gap-6 md:gap-16"
+      style="padding-top: 140px;margin-left: 330px;"
     >
-      <div class="absolute inset-0 z-0">
-        <img
-          id="hero-bg"
-          class="parallax-bg w-full h-[120%] object-cover object-center opacity-50 scale-105"
-          style="transition: transform 0.1s ease-out;"
-          alt="Warm desk workspace"
-          src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?q=80&w=2670&auto=format&fit=crop"
-        />
-        <div
-          class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/70 to-apple-background dark:to-apple-darkBackground"
-        >
-        </div>
-      </div>
+      <!-- Profile Image Container -->
       <div
-        id="hero-text"
-        class="relative z-10 w-full max-w-[1400px] mx-auto text-center px-4 md:px-8 transition-transform duration-75"
+        class="w-24 h-24 sm:w-[120px] sm:h-[120px] rounded-[1.8rem] bg-gradient-to-br from-black/5 to-black/10 dark:from-white/5 dark:to-white/10 border border-black/5 dark:border-white/5 shadow-sm overflow-hidden flex-shrink-0 relative group flex items-center justify-center cursor-default"
       >
+        <!-- Placeholder Icon. TODO: 교체할 실제 프로필 이미지가 있다면 이 위치에 <img> 태그나 <Image> 컴포넌트를 사용하세요. -->
         <span
-          class="text-[0.75rem] md:text-[0.85rem] tracking-[0.3em] font-semibold uppercase text-white/70 mb-5 block"
-          >The Vision</span
+          class="material-symbols-outlined text-[2.5rem] opacity-40 text-apple-text dark:text-apple-darkText transition-transform duration-500 group-hover:scale-110"
         >
+          person
+        </span>
+      </div>
+
+      <!-- Hero Text -->
+      <div class="flex-1">
         <h1
-          class="text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5rem] font-extrabold tracking-tight text-white mb-8 leading-[1.1] break-keep xl:whitespace-nowrap"
+          class="text-2xl sm:text-xl font-bold tracking-tight text-apple-text dark:text-apple-darkText mb-1 leading-snug break-keep"
         >
-          기술로 그려내는<br /> 더 나은 세상의 가능성
+          안녕하세요.
+          <!-- <span class="text-apple-textMuted dark:text-apple-darkTextMuted"
+            >소프트웨어 개발자입니다.</span
+          > -->
         </h1>
         <p
-          class="text-[1.3rem] md:text-2xl text-white/90 font-medium max-w-4xl mx-auto leading-relaxed break-keep"
+          class="text-[14px] md:text-[15px] text-apple-textMuted dark:text-apple-darkTextMuted font-medium leading-relaxed max-w-xl break-keep"
         >
-          깊이 있는 통찰로 세상에 꼭 필요한 해답을 건네는 개발자가 되겠습니다.
+          겉으로 보이는 결과보다 과정과 본질적인 것이 더 중요하다고 생각하여,<br />
+          조금은 느리더라도 최대한 작은 문제 하나하나를 놓치지 않으려고 합니다.
         </p>
-      </div>
-      <!-- Scroll Indicator -->
-      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 animate-bounce-subtle">
-        <span class="material-symbols-outlined text-white/60 text-3xl">keyboard_arrow_down</span>
       </div>
     </section>
 
-    <div class="bg-apple-background dark:bg-apple-darkBackground pt-24 transition-colors">
-      <!-- Essay Content -->
-      <section class="max-w-[900px] mx-auto px-6 mb-32">
-        <div
-          class="space-y-8 text-lg leading-relaxed text-apple-textMuted dark:text-apple-darkTextMuted"
-        >
-          <p
-            class="reveal-up first-letter:text-6xl first-letter:font-bold first-letter:mr-3 first-letter:float-left first-letter:text-apple-text dark:first-letter:text-apple-darkText"
-          >
-            단순한 기능 구현을 넘어 가장 최적의 선택이 무엇인지 고민하기 위해, 문제를 구조적으로
-            이해하고 상황에 맞는 최선의 해결책을 찾아내는 개발자가 되는 것이 저의 지향점입니다.
-          </p>
-          <div class="pt-6 reveal-up stagger-2">
-            <h3 class="text-2xl font-semibold text-apple-text dark:text-apple-darkText mb-4">
-              함께 나아가는 여정
-            </h3>
-            <p>
-              저에게 개발이란 동료들과 머리를 맞대고 정답을 찾아가는 즐거운 여정입니다. 서로의
-              생각을 나누며 크고 작은 난관을 극복할 때 비로소 더 큰 성장이 가능하다고 생각합니다.
-              언제나 배우는 마음을 잃지 않고, 주변 동료들과 함께 사회에 선한 영향력을 전하는
-              개발자로 나아가겠습니다.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Capabilities & Milestones (Bento Box) -->
-      <section class="max-w-[900px] mx-auto px-6 mb-32">
-        <div class="mb-10 reveal-up">
+    <div class="bg-apple-background dark:bg-apple-darkBackground transition-colors pt-4 pb-12">
+      <section class="max-w-[1000px] mx-auto px-6 mb-16 md:flex md:items-start md:gap-x-12">
+        <div class="mb-4 md:mb-0 reveal-up shrink-0 md:w-[150px]">
           <span
-            class="text-[0.75rem] tracking-[0.08em] font-medium uppercase text-apple-textMuted dark:text-apple-darkTextMuted mb-2 block"
+            class="text-[9px] tracking-[0.15em] font-bold uppercase text-apple-textMuted dark:text-apple-darkTextMuted mb-1 block"
             >Capabilities</span
           >
-          <h2 class="text-3xl font-bold tracking-tight text-apple-text dark:text-apple-darkText">
+          <h2
+            class="text-xl md:text-2xl font-bold tracking-tight text-apple-text dark:text-apple-darkText md:leading-[1.15] break-keep"
+          >
             역량 및 자격
           </h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 auto-rows-[minmax(180px,auto)]">
-          <!-- Backend Foundation (Span 2) -->
-          <div
-            class="md:col-span-2 bg-apple-surface dark:bg-[#1a1a1a] p-8 rounded-[2rem] border border-apple-border/50 dark:border-apple-darkBorder reveal-up flex flex-col justify-between"
-          >
-            <div class="mb-6">
+        <div
+          class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 auto-rows-[minmax(140px,auto)] w-full"
+        >
+          <!-- Core Stack (Span 1) -->
+          <div class="sm:col-span-1 glass-panel p-6 reveal-up flex flex-col justify-between">
+            <div class="mb-4">
               <span
-                class="text-apple-textMuted dark:text-apple-darkTextMuted text-xs font-semibold tracking-wider uppercase mb-1 block"
-                >Core</span
+                class="text-apple-textMuted dark:text-apple-darkTextMuted text-[10px] font-bold tracking-wider uppercase mb-1 block"
+                >Foundations</span
               >
-              <h3 class="text-2xl font-bold text-apple-text dark:text-apple-darkText">
-                Backend Foundation
+              <h3 class="text-[17px] font-bold text-apple-text dark:text-apple-darkText">
+                Core Stack
               </h3>
             </div>
-            <div class="flex flex-wrap gap-3">
+            <div class="flex flex-wrap gap-2.5">
               <!-- Java -->
               <div
-                class="flex items-center gap-2.5 bg-white/50 dark:bg-white/5 px-4 py-2.5 rounded-full border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.05] hover:bg-white dark:hover:bg-white/20 hover:shadow-lg hover:shadow-[#E76F00]/10 group/tech cursor-default"
+                class="flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(228,78,0,0.2)] dark:hover:shadow-[0_8px_20px_rgba(228,78,0,0.3)] ring-1 ring-transparent hover:ring-[#E44E00]/20 cursor-default transition-all duration-300"
               >
                 <img
                   src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg"
                   alt="Java"
-                  class="w-6 h-6 object-contain transition-transform duration-300 group-hover/tech:-translate-y-0.5"
+                  class="w-[24px] h-[24px] object-contain"
                 />
-                <span
-                  class="font-semibold text-[0.85rem] text-apple-text dark:text-apple-darkText transition-colors duration-300 group-hover/tech:text-[#E76F00]"
+                <span class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText"
                   >Java</span
                 >
               </div>
               <!-- Python -->
               <div
-                class="flex items-center gap-2.5 bg-white/50 dark:bg-white/5 px-4 py-2.5 rounded-full border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.05] hover:bg-white dark:hover:bg-white/20 hover:shadow-lg hover:shadow-[#3776AB]/10 group/tech cursor-default"
+                class="flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(55,118,171,0.2)] dark:hover:shadow-[0_8px_20px_rgba(55,118,171,0.3)] ring-1 ring-transparent hover:ring-[#3776AB]/20 cursor-default transition-all duration-300"
               >
                 <img
                   src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
                   alt="Python"
-                  class="w-6 h-6 object-contain transition-transform duration-300 group-hover/tech:-translate-y-0.5"
+                  class="w-[24px] h-[24px] object-contain"
                 />
-                <span
-                  class="font-semibold text-[0.85rem] text-apple-text dark:text-apple-darkText transition-colors duration-300 group-hover/tech:text-[#3776AB]"
+                <span class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText"
                   >Python</span
                 >
               </div>
               <!-- Spring -->
               <div
-                class="flex items-center gap-2.5 bg-white/50 dark:bg-white/5 px-4 py-2.5 rounded-full border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.05] hover:bg-white dark:hover:bg-white/20 hover:shadow-lg hover:shadow-[#6DB33F]/10 group/tech cursor-default"
+                class="flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(109,179,63,0.2)] dark:hover:shadow-[0_8px_20px_rgba(109,179,63,0.3)] ring-1 ring-transparent hover:ring-[#6DB33F]/20 cursor-default transition-all duration-300"
               >
                 <img
                   src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg"
                   alt="Spring"
-                  class="w-6 h-6 object-contain transition-transform duration-300 group-hover/tech:-translate-y-0.5"
+                  class="w-[24px] h-[24px] object-contain"
                 />
-                <span
-                  class="font-semibold text-[0.85rem] text-apple-text dark:text-apple-darkText transition-colors duration-300 group-hover/tech:text-[#6DB33F]"
+                <span class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText"
                   >Spring</span
                 >
               </div>
             </div>
           </div>
 
-          <!-- Acquisitions / Certifications (Span 1, Row Span 2) -->
+          <!-- AI Ecosystem (Span 1) -->
           <div
-            class="md:col-span-1 md:row-span-2 bg-apple-surface dark:bg-[#1a1a1a] p-8 rounded-[2rem] border border-apple-border/50 dark:border-apple-darkBorder reveal-up stagger-1 flex flex-col relative overflow-hidden"
+            class="sm:col-span-1 glass-panel p-6 reveal-up stagger-1 flex flex-col justify-between"
           >
-            <div class="mb-8 relative z-10">
+            <div class="mb-4">
               <span
-                class="text-apple-textMuted dark:text-apple-darkTextMuted text-xs font-semibold tracking-wider uppercase mb-1 block"
-                >Milestones</span
+                class="text-apple-textMuted dark:text-apple-darkTextMuted text-[10px] font-bold tracking-wider uppercase mb-1 block"
+                >Learning</span
               >
-              <h3 class="text-2xl font-bold text-apple-text dark:text-apple-darkText">
-                Certifications
+              <h3 class="text-[17px] font-bold text-apple-text dark:text-apple-darkText">
+                AI Ecosystem
               </h3>
             </div>
-            <div class="space-y-4 relative z-10 flex-1 flex flex-col justify-center">
-              <!-- 정보처리기사 -->
+            <div class="flex flex-wrap gap-2.5">
+              <!-- Spring AI -->
               <div
-                class="flex items-center gap-4 bg-white/80 dark:bg-white/5 p-4 rounded-2xl border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-blue-500/20 dark:hover:bg-white/10 group/cert cursor-default"
+                class="flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(109,179,63,0.2)] dark:hover:shadow-[0_8px_20px_rgba(109,179,63,0.3)] ring-1 ring-transparent hover:ring-[#6DB33F]/20 cursor-default transition-all duration-300 opacity-80"
               >
-                <div
-                  class="w-12 h-12 rounded-xl bg-white dark:bg-white/10 flex flex-shrink-0 items-center justify-center border border-black/5 dark:border-white/10 transition-colors duration-300 overflow-hidden"
+                <img
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg"
+                  alt="Spring AI"
+                  class="w-[24px] h-[24px] object-contain"
+                />
+                <span class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText"
+                  >Spring AI</span
                 >
-                  <Image
-                    src={engineerLogo}
-                    alt="정보처리기사 로고"
-                    class="w-full h-full object-contain p-1.5 transition-transform duration-300 group-hover/cert:scale-110 transform-gpu backface-hidden will-change-transform"
-                  />
-                </div>
-                <div>
-                  <h4
-                    class="font-bold text-sm text-apple-text dark:text-apple-darkText transition-colors duration-300 group-hover/cert:text-blue-500"
-                  >
-                    정보처리기사
-                  </h4>
-                  <span
-                    class="text-[0.7rem] font-medium text-apple-textMuted dark:text-apple-darkTextMuted"
-                    >2025.09.12 취득</span
-                  >
-                </div>
               </div>
-              <!-- SQLD -->
+              <!-- LangChain -->
               <div
-                class="flex items-center gap-4 bg-white/80 dark:bg-white/5 p-4 rounded-2xl border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-emerald-500/20 dark:hover:bg-white/10 group/cert cursor-default"
+                class="flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(30,130,76,0.2)] dark:hover:shadow-[0_8px_20px_rgba(30,130,76,0.3)] ring-1 ring-transparent hover:ring-[#1E824C]/20 cursor-default transition-all duration-300 opacity-80"
               >
-                <div
-                  class="w-12 h-12 rounded-xl bg-white dark:bg-white/10 flex flex-shrink-0 items-center justify-center border border-black/5 dark:border-white/10 transition-colors duration-300 overflow-hidden"
+                <svg
+                  fill="currentColor"
+                  role="img"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-[24px] h-[24px]"
                 >
-                  <Image
-                    src={sqldLogo}
-                    alt="SQLD 로고"
-                    class="w-full h-full object-contain p-1.5 transition-transform duration-300 group-hover/cert:scale-110 transform-gpu backface-hidden will-change-transform"
-                  />
-                </div>
-                <div>
-                  <h4
-                    class="font-bold text-sm text-apple-text dark:text-apple-darkText transition-colors duration-300 group-hover/cert:text-emerald-500"
-                  >
-                    SQLD
-                  </h4>
-                  <span
-                    class="text-[0.7rem] font-medium text-apple-textMuted dark:text-apple-darkTextMuted"
-                    >2025.06.27 취득</span
-                  >
-                </div>
+                  <title>LangChain</title>
+                  <path
+                    d="M6.0988 5.9175C2.7359 5.9175 0 8.6462 0 12s2.736 6.0825 6.0988 6.0825h11.8024C21.2641 18.0825 24 15.3538 24 12s-2.736-6.0825-6.0988-6.0825ZM5.9774 7.851c.493.0124 1.02.2496 1.273.6228.3673.4592.4778 1.0668.8944 1.4932.5604.6118 1.199 1.1505 1.7161 1.802.4892.5954.8386 1.2937 1.1436 1.9975.1244.2335.1257.5202.31.7197.0908.1204.5346.4483.4383.5645.0555.1204.4702.286.3263.4027-.1944.04-.4129.0476-.5616-.1074-.0549.126-.183.0596-.2819.0432a4 4 0 0 0-.025.0736c-.3288.0219-.5754-.3126-.732-.565-.3111-.168-.6642-.2702-.982-.446-.0182.2895.0452.6485-.231.8353-.014.5565.8436.0656.9222.4804-.061.0067-.1286-.0095-.1774.0373-.2239.2172-.4805-.1645-.7385-.007-.3464.174-.3808.3161-.8096.352-.0237-.0359-.0143-.0592.0059-.0811.1207-.1399.1295-.3046.3356-.3643-.2122-.0334-.3899.0833-.5686.1757-.2323.095-.2304-.2141-.5878.0164-.0396-.0322-.0208-.0615.0018-.0864.0908-.1107.2102-.127.345-.1208-.663-.3686-.9751.4507-1.2813.0432-.092.0243-.1265.1068-.1845.1652-.05-.0548-.0123-.1212-.0099-.1857-.0598-.028-.1356-.041-.1179-.1366-.1171-.0395-.1988.0295-.286.0952-.0787-.0608.0532-.1492.0776-.2125.0702-.1216.23-.025.3111-.1126.2306-.1308.552.0814.8155.0455.203.0255.4544-.1825.3526-.39-.2171-.2767-.179-.6386-.1839-.9695-.0268-.1929-.491-.4382-.6252-.6462-.1659-.1873-.295-.4047-.4243-.6182-.4666-.9008-.3198-2.0584-.9077-2.8947-.266.1466-.6125.0774-.8418-.119-.1238.1125-.1292.2598-.139.4161-.297-.2962-.2593-.8559-.022-1.1855.0969-.1302.2127-.2373.342-.3316.0292-.0213.0391-.0419.0385-.0747.1174-.5267.5764-.7391 1.0694-.7267m12.4071.46c.5575 0 1.0806.2159 1.474.6082s.61.9145.61 1.4704c0 .556-.2167 1.078-.61 1.4698v.0006l-.902.8995a2.08 2.08 0 0 1-.8597.5166l-.0164.0047-.0058.0164a2.05 2.05 0 0 1-.474.7308l-.9018.8995c-.3934.3924-.917.6083-1.4745.6083s-1.0806-.216-1.474-.6083c-.813-.8107-.813-2.1294 0-2.9402l.9019-.8995a2.056 2.056 0 0 1 .858-.5143l.017-.0053.0058-.0158a2.07 2.07 0 0 1 .4752-.7337l.9018-.8995c.3934-.3924.9171-.6083 1.4745-.6083zm0 .8965a1.18 1.18 0 0 0-.8388.3462l-.9018.8995a1.181 1.181 0 0 0-.3427.9252l.0053.0572c.0323.2652.149.5044.3374.6917.13.1296.2733.2114.4471.2686a.9.9 0 0 1 .014.1582.884.884 0 0 1-.2609.6304l-.0554.0554c-.3013-.1028-.5525-.253-.7794-.4792a2.06 2.06 0 0 1-.5761-1.0968l-.0099-.0578-.0461.0368a1.1 1.1 0 0 0-.0876.0794l-.9024.8995c-.4623.461-.4623 1.212 0 1.673.2311.2305.535.346.8394.3461.3043 0 .6077-.1156.8388-.3462l.9019-.8995c.4623-.461.4623-1.2113 0-1.673a1.17 1.17 0 0 0-.4367-.2749 1 1 0 0 1-.014-.1611c0-.2591.1023-.505.2901-.6923.3019.1028.57.2694.7962.495.3007.2999.4994.679.5756 1.0968l.0105.0578.0455-.0373a1.1 1.1 0 0 0 .0887-.0794l.902-.8996c.4622-.461.4628-1.2124 0-1.6735a1.18 1.18 0 0 0-.8395-.3462Zm-9.973 5.1567-.0006.0006c-.0793.3078-.1048.8318-.506.847-.033.1776.1228.2445.2655.1874.141-.0645.2081.0508.2557.1657.2177.0317.5394-.0725.5516-.3298-.325-.1867-.4253-.5418-.5662-.8709"
+                  ></path>
+                </svg>
+                <span class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText"
+                  >LangChain</span
+                >
               </div>
             </div>
           </div>
 
           <!-- Data Stores (Span 1) -->
           <div
-            class="md:col-span-1 bg-apple-surface dark:bg-[#1a1a1a] p-8 rounded-[2rem] border border-apple-border/50 dark:border-apple-darkBorder reveal-up stagger-2 flex flex-col justify-between"
+            class="sm:col-span-1 glass-panel p-6 reveal-up stagger-2 flex flex-col justify-between"
           >
-            <div class="mb-6">
+            <div class="mb-4">
               <span
-                class="text-apple-textMuted dark:text-apple-darkTextMuted text-xs font-semibold tracking-wider uppercase mb-1 block"
+                class="text-apple-textMuted dark:text-apple-darkTextMuted text-[10px] font-bold tracking-wider uppercase mb-1 block"
                 >Storage</span
               >
-              <h3 class="text-xl font-bold text-apple-text dark:text-apple-darkText">
+              <h3 class="text-[17px] font-bold text-apple-text dark:text-apple-darkText">
                 Data Stores
               </h3>
             </div>
-            <div class="flex flex-wrap gap-3">
+            <div class="flex flex-wrap gap-2.5">
               <!-- MySQL -->
               <div
-                class="flex items-center gap-2.5 bg-white/50 dark:bg-white/5 px-4 py-2.5 rounded-full border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.05] hover:bg-white dark:hover:bg-white/20 hover:shadow-lg hover:shadow-[#4479A1]/10 group/tech cursor-default"
+                class="flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,117,143,0.2)] dark:hover:shadow-[0_8px_20px_rgba(0,117,143,0.3)] ring-1 ring-transparent hover:ring-[#00758F]/20 cursor-default transition-all duration-300"
               >
                 <img
                   src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg"
                   alt="MySQL"
-                  class="w-6 h-6 object-contain transition-transform duration-300 group-hover/tech:-translate-y-0.5"
+                  class="w-[24px] h-[24px] object-contain"
                 />
-                <span
-                  class="font-semibold text-[0.85rem] text-apple-text dark:text-apple-darkText transition-colors duration-300 group-hover/tech:text-[#4479A1]"
+                <span class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText"
                   >MySQL</span
                 >
               </div>
               <!-- PostgreSQL -->
               <div
-                class="flex items-center gap-2.5 bg-white/50 dark:bg-white/5 px-4 py-2.5 rounded-full border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.05] hover:bg-white dark:hover:bg-white/20 hover:shadow-lg hover:shadow-[#336791]/10 group/tech cursor-default"
+                class="flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(51,103,145,0.2)] dark:hover:shadow-[0_8px_20px_rgba(51,103,145,0.3)] ring-1 ring-transparent hover:ring-[#336791]/20 cursor-default transition-all duration-300"
               >
                 <img
                   src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg"
                   alt="PostgreSQL"
-                  class="w-6 h-6 object-contain transition-transform duration-300 group-hover/tech:-translate-y-0.5"
+                  class="w-[24px] h-[24px] object-contain"
                 />
-                <span
-                  class="font-semibold text-[0.85rem] text-apple-text dark:text-apple-darkText transition-colors duration-300 group-hover/tech:text-[#336791]"
+                <span class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText"
                   >PostgreSQL</span
                 >
               </div>
               <!-- Redis -->
               <div
-                class="flex items-center gap-2.5 bg-white/50 dark:bg-white/5 px-4 py-2.5 rounded-full border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.05] hover:bg-white dark:hover:bg-white/20 hover:shadow-lg hover:shadow-[#DC382D]/10 group/tech cursor-default"
+                class="flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(220,59,34,0.2)] dark:hover:shadow-[0_8px_20px_rgba(220,59,34,0.3)] ring-1 ring-transparent hover:ring-[#DC3B22]/20 cursor-default transition-all duration-300"
               >
                 <img
                   src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg"
                   alt="Redis"
-                  class="w-6 h-6 object-contain transition-transform duration-300 group-hover/tech:-translate-y-0.5"
+                  class="w-[24px] h-[24px] object-contain"
                 />
-                <span
-                  class="font-semibold text-[0.85rem] text-apple-text dark:text-apple-darkText transition-colors duration-300 group-hover/tech:text-[#DC382D]"
+                <span class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText"
                   >Redis</span
                 >
               </div>
@@ -281,45 +261,115 @@ import sqldLogo from "../assets/sqld_logo.png";
 
           <!-- Infrastructure (Span 1) -->
           <div
-            class="md:col-span-1 bg-apple-surface dark:bg-[#1a1a1a] p-8 rounded-[2rem] border border-apple-border/50 dark:border-apple-darkBorder reveal-up stagger-3 flex flex-col justify-between"
+            class="sm:col-span-1 glass-panel p-6 reveal-up stagger-3 flex flex-col justify-between"
           >
-            <div class="mb-6">
+            <div class="mb-4">
               <span
-                class="text-apple-textMuted dark:text-apple-darkTextMuted text-xs font-semibold tracking-wider uppercase mb-1 block"
+                class="text-apple-textMuted dark:text-apple-darkTextMuted text-[10px] font-bold tracking-wider uppercase mb-1 block"
                 >Cloud & DevOps</span
               >
-              <h3 class="text-xl font-bold text-apple-text dark:text-apple-darkText">
+              <h3 class="text-[17px] font-bold text-apple-text dark:text-apple-darkText">
                 Infrastructure
               </h3>
             </div>
-            <div class="flex flex-wrap gap-3">
+            <div class="flex flex-wrap gap-2.5">
               <!-- Docker -->
               <div
-                class="flex items-center gap-2.5 bg-white/50 dark:bg-white/5 px-4 py-2.5 rounded-full border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.05] hover:bg-white dark:hover:bg-white/20 hover:shadow-lg hover:shadow-[#2496ED]/10 group/tech cursor-default"
+                class="flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(36,150,237,0.2)] dark:hover:shadow-[0_8px_20px_rgba(36,150,237,0.3)] ring-1 ring-transparent hover:ring-[#2496ED]/20 cursor-default transition-all duration-300"
               >
                 <img
                   src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg"
                   alt="Docker"
-                  class="w-6 h-6 object-contain transition-transform duration-300 group-hover/tech:-translate-y-0.5"
+                  class="w-[24px] h-[24px] object-contain"
                 />
-                <span
-                  class="font-semibold text-[0.85rem] text-apple-text dark:text-apple-darkText transition-colors duration-300 group-hover/tech:text-[#2496ED]"
+                <span class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText"
                   >Docker</span
                 >
               </div>
               <!-- AWS -->
               <div
-                class="flex items-center gap-2.5 bg-white/50 dark:bg-white/5 px-4 py-2.5 rounded-full border border-black/5 dark:border-white/5 backdrop-blur-md transition-all duration-300 hover:scale-[1.05] hover:bg-white dark:hover:bg-white/20 hover:shadow-lg hover:shadow-[#FF9900]/10 group/tech cursor-default"
+                class="flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(255,153,0,0.2)] dark:hover:shadow-[0_8px_20px_rgba(255,153,0,0.3)] ring-1 ring-transparent hover:ring-[#FF9900]/20 cursor-default transition-all duration-300"
               >
                 <img
                   src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"
                   alt="AWS"
-                  class="w-8 h-8 object-contain transition-transform duration-300 group-hover/tech:-translate-y-0.5"
+                  class="w-[28px] h-[28px] object-contain"
                 />
-                <span
-                  class="font-semibold text-[0.85rem] text-apple-text dark:text-apple-darkText transition-colors duration-300 group-hover/tech:text-[#FF9900]"
+                <span class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText"
                   >AWS</span
                 >
+              </div>
+            </div>
+          </div>
+
+          <!-- Acquisitions / Certifications (Span 2) -->
+          <div
+            class="sm:col-span-2 glass-panel px-6 py-5 reveal-up flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6"
+            style="height: 100px;"
+          >
+            <div class="flex-shrink-0">
+              <span
+                class="text-apple-textMuted dark:text-apple-darkTextMuted text-[10px] font-bold tracking-wider uppercase mb-1 block"
+                >Milestones</span
+              >
+              <h3
+                class="text-[17px] font-bold text-apple-text dark:text-apple-darkText leading-none"
+              >
+                Certifications
+              </h3>
+            </div>
+            <div
+              class="flex flex-col sm:flex-row gap-4 items-center sm:items-end justify-start sm:justify-end w-full"
+            >
+              <!-- 정보처리기사 -->
+              <div
+                class="flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(59,130,246,0.15)] dark:hover:shadow-[0_8px_20px_rgba(59,130,246,0.25)] ring-1 ring-transparent hover:ring-blue-500/20 cursor-default transition-all duration-300"
+              >
+                <div
+                  class="w-[30px] h-[30px] rounded-full bg-white dark:bg-apple-darkSurface flex flex-shrink-0 items-center justify-center border border-black/5 dark:border-white/10 overflow-hidden shadow-sm p-[3px] transition-shadow duration-300"
+                >
+                  <Image
+                    src={engineerLogo}
+                    alt="정보처리기사 로고"
+                    class="w-full h-full object-contain rounded-full transition-transform duration-300"
+                  />
+                </div>
+                <div class="flex flex-col justify-center leading-tight pt-0.5">
+                  <h4
+                    class="font-bold text-[13px] text-apple-text dark:text-apple-darkText hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  >
+                    정보처리기사
+                  </h4>
+                  <span
+                    class="text-[9px] font-medium text-apple-textMuted dark:text-apple-darkTextMuted block mt-0.5"
+                    >2025.09.12</span
+                  >
+                </div>
+              </div>
+              <!-- SQLD -->
+              <div
+                class="flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(16,185,129,0.15)] dark:hover:shadow-[0_8px_20px_rgba(16,185,129,0.25)] ring-1 ring-transparent hover:ring-emerald-500/20 cursor-default transition-all duration-300"
+              >
+                <div
+                  class="w-[30px] h-[30px] rounded-full bg-white dark:bg-apple-darkSurface flex flex-shrink-0 items-center justify-center border border-black/5 dark:border-white/10 overflow-hidden shadow-sm p-[3px] transition-shadow duration-300"
+                >
+                  <Image
+                    src={sqldLogo}
+                    alt="SQLD 로고"
+                    class="w-full h-full object-contain rounded-full transition-transform duration-300"
+                  />
+                </div>
+                <div class="flex flex-col justify-center leading-tight pt-0.5">
+                  <h4
+                    class="font-bold text-[13px] text-apple-text dark:text-apple-darkText hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                  >
+                    SQLD
+                  </h4>
+                  <span
+                    class="text-[9px] font-medium text-apple-textMuted dark:text-apple-darkTextMuted block mt-0.5"
+                    >2025.06.27</span
+                  >
+                </div>
               </div>
             </div>
           </div>
@@ -327,64 +377,66 @@ import sqldLogo from "../assets/sqld_logo.png";
       </section>
 
       <!-- Timeline Section -->
-      <section class="max-w-[900px] mx-auto px-6 pb-24">
-        <div class="mb-12 reveal-up">
+      <section class="max-w-[1000px] mx-auto px-6 pb-20 md:flex md:items-start md:gap-x-12">
+        <div class="mb-4 md:mb-0 reveal-up shrink-0 md:w-[150px]">
           <span
-            class="text-[0.75rem] tracking-[0.08em] font-medium uppercase text-apple-textMuted dark:text-apple-darkTextMuted mb-2 block"
+            class="text-[9px] tracking-[0.15em] font-bold uppercase text-apple-textMuted dark:text-apple-darkTextMuted mb-1 block"
             >The Timeline</span
           >
-          <h2 class="text-3xl font-bold tracking-tight text-apple-text dark:text-apple-darkText">
+          <h2
+            class="text-xl md:text-2xl font-bold tracking-tight text-apple-text dark:text-apple-darkText md:leading-[1.15] break-keep"
+          >
             타임라인
           </h2>
         </div>
 
-        <div class="relative">
+        <div class="flex-1 relative w-full">
           <!-- Vertical Line -->
           <div
             class="absolute left-[3px] top-4 bottom-0 w-[1px] bg-apple-border/70 dark:bg-apple-darkBorder/70"
           >
           </div>
 
-          <div class="relative pl-10 reveal-up stagger-1">
+          <div class="relative pl-8 reveal-up stagger-1">
             <div
-              class="absolute left-[-1px] top-4 w-[8px] h-[8px] rounded-full bg-apple-text dark:bg-apple-darkText ring-4 ring-apple-background dark:ring-apple-darkBackground z-10"
+              class="absolute left-[-1.5px] top-4 w-[6px] h-[6px] rounded-full bg-apple-text dark:bg-apple-darkText ring-4 ring-apple-background dark:ring-apple-darkBackground z-10"
             >
             </div>
             <div>
-              <div class="flex items-center gap-4 mb-3">
+              <div class="flex items-center gap-3 mb-2">
                 <div
-                  class="w-12 h-12 flex-shrink-0 rounded-[12px] bg-white flex items-center justify-center p-2 border border-black/5 dark:border-white/5 shadow-sm"
+                  class="w-10 h-10 flex-shrink-0 rounded-[10px] bg-white flex items-center justify-center p-1.5 border border-black/5 dark:border-white/5 shadow-sm"
                 >
                   <Image src={ssafyLogo} alt="SSAFY Logo" class="w-full h-full object-contain" />
                 </div>
                 <div>
                   <span
-                    class="text-[0.75rem] font-bold text-apple-text dark:text-apple-darkText mb-0.5 block"
+                    class="text-[0.65rem] font-bold text-apple-text dark:text-apple-darkText mb-0.5 block"
                     >2026.01 ~ 현재</span
                   >
-                  <h4 class="text-xl font-semibold text-apple-text dark:text-apple-darkText">
+                  <h4 class="text-lg font-bold text-apple-text dark:text-apple-darkText">
                     삼성청년SW/AI아카데미(SSAFY)
                   </h4>
                 </div>
               </div>
               <p
-                class="text-apple-textMuted dark:text-apple-darkTextMuted leading-relaxed break-keep"
+                class="text-[14px] text-apple-textMuted dark:text-apple-darkTextMuted leading-relaxed break-keep"
               >
-                실무 중심의 AI 활용 능력과 웹 개발 역량을 강화하고 있으며, 몰입형 교육을 통해 복잡한
-                로직을 해결하는 알고리즘 문제 해결 능력을 키우고 있습니다.
+                체계적인 실무 중심의 교육을 통해 웹 개발 및 AI 활용 능력 역량을 강화하였으며,<br />
+                복잡한 로직을 해결하는 알고리즘 문제 해결 능력을 향상시켰습니다.
               </p>
             </div>
           </div>
 
-          <div class="relative pl-10 reveal-up stagger-2 mt-16">
+          <div class="relative pl-8 reveal-up stagger-2 mt-10">
             <div
-              class="absolute left-[-1px] top-4 w-[8px] h-[8px] rounded-full bg-apple-textMuted dark:bg-apple-darkTextMuted ring-4 ring-apple-background dark:ring-apple-darkBackground z-10"
+              class="absolute left-[-1.5px] top-4 w-[6px] h-[6px] rounded-full bg-apple-textMuted dark:bg-apple-darkTextMuted ring-4 ring-apple-background dark:ring-apple-darkBackground z-10"
             >
             </div>
             <div>
-              <div class="flex items-center gap-4 mb-3">
+              <div class="flex items-center gap-3 mb-2">
                 <div
-                  class="w-12 h-12 flex-shrink-0 rounded-[12px] bg-white flex items-center justify-center p-2 border border-black/5 dark:border-white/5 shadow-sm"
+                  class="w-10 h-10 flex-shrink-0 rounded-[10px] bg-white flex items-center justify-center p-1.5 border border-black/5 dark:border-white/5 shadow-sm"
                 >
                   <Image
                     src={hanbatLogo}
@@ -394,48 +446,48 @@ import sqldLogo from "../assets/sqld_logo.png";
                 </div>
                 <div>
                   <span
-                    class="text-[0.75rem] font-bold text-apple-textMuted dark:text-apple-darkTextMuted mb-0.5 block"
+                    class="text-[0.65rem] font-bold text-apple-textMuted dark:text-apple-darkTextMuted mb-0.5 block"
                     >~ 2026.02</span
                   >
-                  <h4 class="text-xl font-semibold text-apple-text dark:text-apple-darkText">
-                    국립한밭대학교 컴퓨터공학과 학사 졸업
+                  <h4 class="text-lg font-bold text-apple-text dark:text-apple-darkText">
+                    국립한밭대학교 학사 졸업
                   </h4>
                 </div>
               </div>
               <p
-                class="text-apple-textMuted dark:text-apple-darkTextMuted leading-relaxed break-keep"
+                class="text-[14px] text-apple-textMuted dark:text-apple-darkTextMuted leading-relaxed break-keep"
               >
-                컴퓨터공학 전공 과정을 통해 자료구조, 알고리즘 등 소프트웨어 엔지니어링의 핵심
-                원리와 프로그래밍 기초 지식을 체계적으로 습득했습니다.
+                컴퓨터공학 전공 과정을 통해 자료구조, 알고리즘 등 소프트웨어 엔지니어링의 기본
+                소양을 체계적으로 갖추었습니다.
               </p>
             </div>
           </div>
 
           <!-- 논문 투고 서브 브랜치 -->
-          <div class="relative pl-10 reveal-up stagger-3 mt-6">
+          <div class="relative pl-8 reveal-up stagger-3 flex items-center mt-4">
             <!-- 가로 브랜치 라인 -->
             <div
-              class="absolute left-[3px] top-[23px] w-[30px] h-[1px] bg-apple-border/70 dark:bg-apple-darkBorder/70"
+              class="absolute left-[3px] top-1/2 -translate-y-1/2 w-[24px] h-[1px] bg-apple-border/70 dark:bg-apple-darkBorder/70"
             >
             </div>
 
             <!-- 글래스모피즘 서브 카드 -->
             <div
-              class="relative bg-white/60 dark:bg-white/[0.04] backdrop-blur-xl p-5 rounded-2xl border border-white/80 dark:border-white/10 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_24px_-4px_rgba(0,0,0,0.3)] cursor-default"
+              class="relative bg-white/60 dark:bg-white/[0.04] backdrop-blur-xl p-4 rounded-xl border border-white/80 dark:border-white/10 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_24px_-4px_rgba(0,0,0,0.3)] cursor-default ml-2"
             >
-              <div class="flex items-center gap-4">
+              <div class="flex items-center gap-3">
                 <div
-                  class="w-11 h-11 flex-shrink-0 rounded-xl bg-white dark:bg-white/10 flex items-center justify-center p-1.5 border border-black/5 dark:border-white/10 shadow-sm overflow-hidden"
+                  class="w-8 h-8 flex-shrink-0 rounded-lg bg-white dark:bg-white/10 flex items-center justify-center p-1 border border-black/5 dark:border-white/10 shadow-sm overflow-hidden"
                 >
                   <Image
                     src={kicsLogo}
                     alt="KICS Logo"
-                    class="w-full h-full object-contain rounded-lg"
+                    class="w-full h-full object-contain rounded-md"
                   />
                 </div>
                 <div class="min-w-0 flex-1">
                   <h5
-                    class="font-bold text-[0.82rem] text-apple-text dark:text-apple-darkText leading-snug break-keep"
+                    class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText leading-snug break-keep"
                   >
                     비용효율적인 지능형 AICC를 위한 자가진화형 4계층 정규화 게이트
                   </h5>
@@ -457,27 +509,68 @@ import sqldLogo from "../assets/sqld_logo.png";
           </div>
         </div>
       </section>
+
+      <!-- Selected Projects Section -->
+      <section class="max-w-[1000px] mx-auto px-6 pb-20 md:flex md:items-start md:gap-x-12">
+        <div class="mb-4 md:mb-0 reveal-up shrink-0 md:w-[150px]">
+          <span
+            class="text-[9px] tracking-[0.15em] font-bold uppercase text-apple-textMuted dark:text-apple-darkTextMuted mb-1 block"
+            >Selected Work</span
+          >
+          <h2
+            class="text-xl md:text-2xl font-bold tracking-tight text-apple-text dark:text-apple-darkText md:leading-[1.15] break-keep"
+          >
+            프로젝트
+          </h2>
+        </div>
+
+        <div
+          class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 auto-rows-[220px] reveal-up w-full"
+        >
+          {
+            projects.map((proj, i) => (
+              <a
+                href={proj.url}
+                class={`group block relative rounded-[2rem] overflow-hidden bg-black border border-apple-border/50 dark:border-white/10 hover:border-black/20 dark:hover:border-white/30 transition-all duration-700 ${i === 0 ? "md:col-span-2 lg:col-span-2" : ""} ${i === 2 ? "md:col-span-2 lg:col-span-2 md:aspect-auto" : ""}`}
+              >
+                <img
+                  src={proj.image}
+                  alt={proj.title}
+                  class="absolute inset-0 w-full h-full object-cover transition-all duration-1000 group-hover:scale-105 opacity-60 mix-blend-luminosity group-hover:mix-blend-normal group-hover:opacity-80 saturate-50 group-hover:saturate-100"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
+                <div class="absolute inset-0 p-6 flex flex-col justify-between z-10">
+                  <div class="flex justify-end">
+                    <span class="px-3 py-1 bg-white/10 backdrop-blur-xl rounded-full text-[10px] font-bold tracking-widest uppercase text-white shadow-lg border border-white/20">
+                      {proj.year}
+                    </span>
+                  </div>
+                  <div class="transform translate-y-3 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                    <div class="flex flex-wrap gap-1 mb-3 opacity-70 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                      {proj.tags.map((tag) => (
+                        <span class="text-[9px] font-semibold tracking-widest uppercase text-white px-2 py-0.5 border border-white/20 rounded-md bg-white/5 backdrop-blur-sm">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <h2 class="text-2xl font-bold text-white tracking-tight leading-tight mb-2">
+                      {proj.title}
+                    </h2>
+                    <p class="text-zinc-300 text-[13px] leading-relaxed max-w-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150 line-clamp-2 break-keep">
+                      {proj.description}
+                    </p>
+                  </div>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </section>
     </div>
   </main>
 
   <script>
     document.addEventListener("astro:page-load", () => {
-      // 1. Immersive Parallax Hero
-      const heroBg = document.getElementById("hero-bg");
-      const heroText = document.getElementById("hero-text");
-
-      const onScrollHero = () => {
-        const scrolled = window.scrollY;
-
-        if (scrolled < window.innerHeight && heroBg && heroText) {
-          heroBg.style.transform = `translateY(${scrolled * 0.4}px)`;
-          heroText.style.transform = `translateY(${scrolled * 0.15}px)`;
-          heroText.style.opacity = (1 - scrolled / (window.innerHeight * 0.6)).toString();
-        }
-      };
-
-      window.addEventListener("scroll", onScrollHero, { passive: true });
-
       // 2. Smooth Intersection Observer for Scroll Reveals
       const revealOptions = {
         root: null,

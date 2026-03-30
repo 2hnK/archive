@@ -1,94 +1,106 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ArticleCard from "../components/ArticleCard.astro";
 import TimeProgress from "../components/TimeProgress.astro";
 import { getCollection } from "astro:content";
 
 const allArticles = await getCollection("articles");
 const sortedArticles = allArticles.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const latestArticles = sortedArticles.slice(0, 6);
+const latestArticles = sortedArticles.slice(0, 15); // Show more articles in the board
+
+const categories = Array.from(new Set(allArticles.map((a) => a.data.category))).sort();
 ---
 
 <BaseLayout title="DevArchive" description="개발 아카이브">
-  <main class="pt-24 pb-20">
-    <!-- Greeting -->
-    <section class="max-w-[1200px] mx-auto px-6 pt-12 pb-4 fade-in-up">
-      <div class="max-w-3xl">
-        <span
-          class="text-[11px] tracking-[0.25em] font-bold text-apple-textMuted dark:text-apple-darkTextMuted uppercase mb-2 block"
-          >Developer Blog</span
-        >
-        <h1
-          class="text-[4rem] md:text-[5.5rem] font-bold tracking-tighter text-apple-text dark:text-apple-darkText leading-[1.05] mb-4 break-keep"
-        >
-          Brewing Code
-        </h1>
-        <p
-          class="text-[19px] text-apple-textMuted dark:text-apple-darkTextMuted leading-[1.6] max-w-[650px] break-keep font-medium flex items-center gap-2"
-        >
-          커피를 코드로 변환하는 중...
+  <main class="pb-24" style="padding-top: 140px;">
+    <section class="max-w-[1100px] mx-auto px-6 reveal-up md:flex md:items-start md:gap-x-16">
+      <!-- Left Sidebar -->
+      <div class="mb-16 md:mb-0 w-full md:w-[240px] flex-shrink-0 md:sticky md:top-32">
+        <div class="mb-12">
           <span
-            class="flex items-center gap-1 ml-1 bg-black/[0.03] dark:bg-white/[0.05] px-2 py-0.5 rounded-full ring-1 ring-black/5 dark:ring-white/10"
+            class="text-[10px] uppercase tracking-[0.25em] font-bold text-apple-textMuted dark:text-apple-darkTextMuted block mb-4"
           >
-            <span
-              class="material-symbols-outlined text-[18px] text-amber-700/80 dark:text-amber-500/80"
-              >local_cafe</span
-            >
-            <span class="material-symbols-outlined text-[14px] text-gray-600 dark:text-gray-400"
-              >trending_flat</span
-            >
-            <span class="material-symbols-outlined text-[18px] text-blue-600 dark:text-blue-400"
-              >terminal</span
-            >
+            Explore Topics
           </span>
-        </p>
-      </div>
-    </section>
-
-    <!-- Explore Topics + Latest Articles -->
-    <section class="max-w-[1200px] mx-auto px-6 reveal-up stagger-1">
-      <div class="mb-16">
-        <TimeProgress />
-      </div>
-
-      <!-- Latest Articles Grid -->
-      <div
-        class="flex justify-between items-end mb-12 border-b border-apple-border dark:border-apple-darkBorder pb-6"
-      >
-        <div>
-          <span
-            class="text-[11px] uppercase tracking-[0.25em] font-bold text-apple-textMuted dark:text-apple-darkTextMuted block mb-2"
-            >Latest Articles</span
-          >
-          <h2
-            class="text-[2rem] font-bold tracking-tighter text-apple-text dark:text-apple-darkText"
-          >
-            최근 포스트
-          </h2>
+          <div class="flex flex-wrap gap-2">
+            {
+              categories.map((cat) => (
+                <a
+                  href={`/articles`}
+                  class="glass-pill px-4 py-1.5 text-[11px] font-bold tracking-widest text-apple-text dark:text-apple-darkText hover:text-[#1e66f5] dark:hover:text-[#89b4fa] hover:bg-white dark:hover:bg-white/10 transition-all duration-300 transform hover:scale-[1.05] uppercase border-black/5 dark:border-white/10 shadow-md"
+                >
+                  {cat}
+                </a>
+              ))
+            }
+          </div>
         </div>
-        <a href="/articles" class="btn-premium group">
-          아티클 전체 보기
-          <span
-            class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform"
-            >arrow_forward</span
-          >
-        </a>
+
+        <div>
+          <TimeProgress mini={true} />
+        </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
-        {
-          latestArticles.map((article) => (
-            <ArticleCard
-              title={article.data.title}
-              description={article.data.description}
-              category={article.data.category}
-              date={article.data.date.toLocaleDateString("ko-KR")}
-              href={`/articles/${article.id}`}
-              imageUrl={article.data.imageUrl || ""}
-            />
-          ))
-        }
+      <!-- Main Column: Board View Articles -->
+      <div class="flex-1 w-full relative">
+        <div
+          class="flex justify-between items-end mb-8 border-b border-apple-border dark:border-apple-darkBorder pb-4"
+          style="padding-bottom: 8px;"
+        >
+          <div>
+            <span
+              class="text-[10px] uppercase tracking-[0.25em] font-bold text-apple-textMuted dark:text-apple-darkTextMuted block mb-2"
+              >Latest Articles</span
+            >
+            <h2 class="text-2xl font-bold tracking-tight text-apple-text dark:text-apple-darkText">
+              최근 포스트
+            </h2>
+          </div>
+          <a href="/articles" class="btn-premium group text-[12px] px-3.5 py-2">
+            아티클 전체 보기
+            <span
+              class="material-symbols-outlined text-[15px] group-hover:translate-x-1 transition-transform"
+              >arrow_forward</span
+            >
+          </a>
+        </div>
+
+        <div class="flex flex-col gap-1">
+          {
+            latestArticles.map((article) => (
+              <a
+                href={`/articles/${article.id}`}
+                class="group flex flex-col sm:flex-row sm:items-center justify-between py-3 px-3 sm:px-4 rounded-2xl border border-transparent transition-all duration-300 hover:bg-white/70 dark:hover:bg-white/[0.05] hover:backdrop-blur-xl hover:shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-black/5 dark:hover:border-white/5"
+              >
+                <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
+                  <span class="text-[9.5px] font-bold uppercase tracking-[0.15em] text-[#1e66f5] dark:text-[#89b4fa] w-[110px] shrink-0 sm:text-right mt-1 sm:mt-0">
+                    {article.data.category}
+                  </span>
+                  <h3 class="text-[13px] xl:text-[14px] font-semibold text-apple-text dark:text-apple-darkText group-hover:translate-x-1 transition-transform duration-300 leading-snug break-keep">
+                    {article.data.title}
+                  </h3>
+                </div>
+                <div class="flex items-center gap-4 mt-2 sm:mt-0">
+                  <span class="text-[11px] font-medium text-apple-textMuted dark:text-apple-darkTextMuted tabular-nums">
+                    {article.data.date
+                      .toLocaleDateString("ko-KR", {
+                        year: "numeric",
+                        month: "2-digit",
+                        day: "2-digit",
+                      })
+                      .replace(/\./g, "-")
+                      .replace(/ /g, "")
+                      .slice(0, -1)}
+                  </span>
+                  <span class="material-symbols-outlined text-[15px] text-[#1e66f5] dark:text-[#89b4fa] opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                    arrow_forward
+                  </span>
+                </div>
+              </a>
+            ))
+          }
+        </div>
       </div>
+      <!-- End of Main Column -->
     </section>
   </main>
 </BaseLayout>

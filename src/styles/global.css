@@ -69,6 +69,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-y: scroll;
 }
 
 .dark {
@@ -226,11 +227,11 @@ body {
    Based on SDF displacement map
    ======================================== */
 .custom-glass-highlight {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(4px) brightness(1.1) saturate(1.1);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px) brightness(1.05) saturate(1.2);
   -webkit-backdrop-filter: blur(4px) brightness(1.1) saturate(1.1);
   will-change: transform, width, left;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(167, 167, 167, 0.4);
   box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.08),
     inset 0 0 0 1px rgba(255, 255, 255, 0.2);
@@ -249,10 +250,10 @@ body {
 }
 
 .dark .custom-glass-highlight {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(12px) brightness(1.05) saturate(1.1);
   -webkit-backdrop-filter: blur(12px) brightness(1.05) saturate(1.1);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(167, 167, 167, 0.4);
   box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.25),
     inset 0 0 0 1px rgba(255, 255, 255, 0.05);
@@ -279,4 +280,70 @@ body {
            text-apple-text dark:text-apple-darkText
            hover:bg-black/10 dark:hover:bg-white/20 hover:-translate-y-[2px] hover:shadow-md cursor-pointer;
   }
+}
+
+/* Premium Glassmorphism Effect */
+.glass-panel {
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 1.5rem;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.03),
+    0 16px 40px rgba(0, 0, 0, 0.02),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+.dark .glass-panel {
+  background-color: rgba(26, 26, 28, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.3),
+    0 16px 40px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.06);
+}
+
+
+.glass-pill {
+  background-color: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px) saturate(1.2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 9999px;
+  box-shadow: 
+    0 2px 10px rgba(0, 0, 0, 0.03),
+    inset 0 1px 1px rgba(255, 255, 255, 0.7);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .glass-pill {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 2px 10px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Bento Grid Unified Hover Effect */
+.bento-glass-panel {
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bento-glass-panel:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 12px 30px rgba(30, 102, 245, 0.15),
+    0 24px 60px rgba(30, 102, 245, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9);
+}
+
+.dark .bento-glass-panel:hover {
+  box-shadow: 
+    0 12px 30px rgba(137, 180, 250, 0.2),
+    0 24px 60px rgba(137, 180, 250, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(137, 180, 250, 0.3);
 }
