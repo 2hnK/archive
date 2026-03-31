@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import TopicsSidebar from "../../components/TopicsSidebar.astro";
 
 export async function getStaticPaths() {
   const articles = await getCollection("articles");
@@ -16,112 +17,61 @@ const { Content, headings } = await render(entry);
 // Format date
 const formattedDate = entry.data.date.toLocaleDateString("ko-KR");
 
-const allArticles = await getCollection("articles");
-const categoryTree: Record<string, string[]> = {};
-const catCounts: Record<string, number> = {};
-const subCounts: Record<string, Record<string, number>> = {};
-allArticles.forEach(a => {
-  const cat = a.data.category;
-  const sub = a.data.subcategory;
-  if (!categoryTree[cat]) { categoryTree[cat] = []; catCounts[cat] = 0; subCounts[cat] = {}; }
-  catCounts[cat]++;
-  if (sub) {
-    if (!categoryTree[cat].includes(sub)) categoryTree[cat].push(sub);
-    subCounts[cat][sub] = (subCounts[cat][sub] || 0) + 1;
-  }
-});
-const categories = Object.keys(categoryTree).sort();
-const totalArticleCount = allArticles.length;
 const currentCat = entry.data.category;
 const currentSub = entry.data.subcategory;
 ---
 
 <BaseLayout title={`${entry.data.title} | DevArchive`} description={entry.data.description}>
-  <main class="pt-32 pb-24 px-6 md:px-0">
-    <div
-      class="max-w-[1700px] mx-auto grid grid-cols-1 xl:grid-cols-[1fr_minmax(auto,900px)_1fr] gap-x-8 gap-y-16 relative"
-    >
-      <!-- 1. LEFT COLUMN: SIDEBAR -->
-      <div class="hidden xl:block w-full lg:w-[260px] xl:w-[280px] xl:ml-auto mt-12 lg:mt-0">
-        <aside class="w-full flex flex-col sticky top-32 h-fit max-h-[calc(100vh-8rem)] flex-shrink-0 z-20 overflow-y-auto hide-scrollbar transition-all duration-500">
-          <div class="w-full h-auto flex flex-col pl-4 reveal-up stagger-1" style="padding-right: 16px;">
-            <h2 class="text-[10px] font-bold tracking-[0.15em] uppercase text-apple-textMuted dark:text-apple-darkTextMuted mb-8 text-right pr-2">TOPICS</h2>
-            <div class="relative flex flex-col gap-1 pb-2 pr-[2px]" id="cat-list-container">
-              <div class="absolute right-0 top-3 bottom-0 w-[1px] bg-black/10 dark:bg-white/10 pointer-events-none z-0"></div>
-              
-              <div
-                id="grid-highlight"
-                class="absolute -right-[3.5px] w-[calc(100%-12px)] rounded-[1.2rem] custom-glass-highlight border border-white/20 dark:border-white/10 shadow-sm transition-all duration-400 ease-[cubic-bezier(0.25,1,0.5,1)] z-20 pointer-events-none opacity-0 flex items-center justify-end pr-0"
-              >
-                <!-- The active blue dot sits on the line inside the pill, sliding OVER the gray dots -->
-                <div class="w-[8px] h-[8px] rounded-full bg-blue-600 dark:bg-blue-400 flex-shrink-0 shadow-[0_0_8px_rgba(59,130,246,0.6)]"></div>
-              </div>
+  <main class="pt-32 pb-24">
+    <!-- Top Bar: Title & Metadata (Moved outside grid to align sidebars with card) -->
+    <div class="max-w-[900px] mx-auto w-full px-4 sm:px-6 md:px-8 mb-10 border-b border-apple-border dark:border-apple-darkBorder pb-6">
+      <div class="flex items-center gap-2 mb-2">
+        <a href="/articles" class="flex items-center justify-center w-6 h-6 rounded-full bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 transition-colors text-apple-text dark:text-apple-darkText" title="목록으로 돌아가기">
+          <span class="material-symbols-outlined text-[14px]">arrow_back</span>
+        </a>
+        <span class="text-[10px] uppercase tracking-[0.25em] font-bold text-apple-textMuted dark:text-apple-darkTextMuted">
+          ARTICLES
+        </span>
+      </div>
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 w-full">
+        <h1 class="text-2xl font-bold tracking-tight text-apple-text dark:text-apple-darkText break-keep leading-[1.3]">
+          {entry.data.title}
+        </h1>
+        
+        <div class="flex items-center justify-end gap-2 text-apple-textMuted dark:text-apple-darkTextMuted text-[12px] font-medium shrink-0 mb-1 lg:mb-0">
+          <span class="font-semibold text-apple-text dark:text-apple-darkText">DevArchive</span>
+          <span class="w-[3px] h-[3px] rounded-full bg-apple-border dark:bg-apple-darkBorder"></span>
+          <time datetime={entry.data.date.toISOString()} class="tabular-nums">
+            {entry.data.date
+              .toLocaleDateString("ko-KR", {
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+              })
+              .replace(/\./g, "-")
+              .replace(/ /g, "")
+              .slice(0, -1)}
+          </time>
+          <span class="w-[3px] h-[3px] rounded-full bg-apple-border dark:bg-apple-darkBorder"></span>
+          <span class="uppercase tracking-[0.08em] font-bold text-[#1e66f5] dark:text-[#89b4fa]">
+            {entry.data.category}
+          </span>
+        </div>
+      </div>
+    </div>
 
-              <a href="/articles" class={`cat-filter relative z-10 w-full flex items-center justify-end pr-[24px] py-2.5 cursor-pointer transition-colors duration-300 group ${!currentCat ? 'active-item text-blue-600 dark:text-blue-400 font-bold' : 'text-apple-textMuted dark:text-apple-darkTextMuted font-medium'}`}>
-                <span class="text-[13px] text-right flex items-center gap-1.5 leading-none">All <span class="text-[10px] font-bold opacity-60">{totalArticleCount}</span></span>
-                <span class="inactive-dot absolute right-[-3.5px] top-1/2 -translate-y-1/2 w-[8px] h-[8px] rounded-full bg-black/20 dark:bg-white/20 group-hover:bg-black/40 dark:group-hover:bg-white/40 transition-all duration-300 z-10"></span>
-              </a>
-              
-              {categories.map(cat => (
-                <div class="flex flex-col gap-1 w-full category-group" data-group-cat={cat}>
-                  <a href={`/articles`} class={`cat-filter relative z-10 w-full flex items-center justify-end pr-[24px] py-2.5 cursor-pointer transition-colors duration-300 group ${cat === currentCat && !currentSub ? 'active-item text-blue-600 dark:text-blue-400 font-bold' : 'text-apple-textMuted dark:text-apple-darkTextMuted font-medium'}`}>
-                    <span class="text-[13px] text-right flex items-center gap-1.5 leading-none">{cat} <span class="text-[10px] font-bold opacity-60">{catCounts[cat]}</span></span>
-                    <span class="inactive-dot absolute right-[-3.5px] top-1/2 -translate-y-1/2 w-[8px] h-[8px] rounded-full bg-black/20 dark:bg-white/20 group-hover:bg-black/40 dark:group-hover:bg-white/40 transition-all duration-300 z-10"></span>
-                  </a>
-                  {categoryTree[cat].length > 0 && (
-                    <div class={`sub-list flex flex-col gap-1 ${cat !== currentCat ? 'hidden' : ''}`}>
-                      {categoryTree[cat].map(sub => (
-                        <a href={`/articles`} class={`cat-filter relative z-10 w-full flex items-center justify-end pr-[24px] py-1.5 cursor-pointer pl-6 transition-colors duration-300 group ${sub === currentSub ? 'active-item text-blue-600 dark:text-blue-400 font-bold' : 'text-apple-textMuted dark:text-apple-darkTextMuted font-medium'}`}>
-                          <span class="text-[11px] text-right opacity-80 flex items-center gap-1.5 leading-none">{sub} <span class="text-[9px] font-bold opacity-60">{subCounts[cat][sub]}</span></span>
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
+    <div class="mx-auto w-full max-w-[1700px] grid grid-cols-1 xl:grid-cols-[1fr_minmax(auto,900px)_1fr] gap-x-8 gap-y-16 relative px-4 sm:px-6 md:px-8">
+      <!-- 1. LEFT COLUMN: SIDEBAR -->
+      <div class="hidden xl:block w-full lg:w-[260px] xl:w-[280px] xl:ml-auto lg:mt-0 relative">
+        <aside class="w-full flex flex-col sticky top-32 h-fit max-h-[calc(100vh-8rem)] flex-shrink-0 z-20 overflow-y-auto hide-scrollbar transition-all duration-500">
+          <TopicsSidebar currentCat={currentCat} currentSub={currentSub} />
         </aside>
       </div>
 
       <!-- 2. Main Article Content (Centered inside a Card) -->
-      <article class="w-full max-w-[900px] mx-auto min-w-0 bg-white/70 dark:bg-[#1a1b26]/50 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-14 border border-black/5 dark:border-white/5 shadow-[0_8px_48px_rgba(0,0,0,0.04)] reveal-up transition-all duration-500">
-        <!-- Metadata -->
-        <div class="mb-10 flex flex-col gap-6">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-4">
-              <a href="/articles" class="flex items-center justify-center w-8 h-8 rounded-full bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 transition-colors text-apple-text dark:text-apple-darkText" title="목록으로 돌아가기">
-                <span class="material-symbols-outlined text-[18px]">arrow_back</span>
-              </a>
-              <nav class="flex items-center gap-2 text-[11px] uppercase tracking-[0.08em] font-medium text-apple-textMuted dark:text-apple-darkTextMuted">
-                <a class="hover:text-apple-text dark:hover:text-apple-darkText transition-colors font-bold" href="/articles">아티클</a>
-                <span class="material-symbols-outlined text-[14px]">chevron_right</span>
-                <span class="text-apple-text dark:text-apple-darkText font-bold">{entry.data.category}</span>
-              </nav>
-            </div>
-          </div>
-
-          <h1
-            class="text-3xl md:text-4xl leading-[1.2] font-bold tracking-tight text-apple-text dark:text-apple-darkText mb-6 break-keep"
-          >
-            {entry.data.title}
-          </h1>
-
-          <div
-            class="flex items-center gap-4 text-apple-textMuted dark:text-apple-darkTextMuted text-sm font-medium"
-          >
-            <div class="flex items-center gap-2">
-              <span class="font-semibold text-apple-text dark:text-apple-darkText">DevArchive</span>
-            </div>
-            <span class="w-1 h-1 rounded-full bg-apple-border dark:bg-apple-darkBorder"></span>
-            <time datetime={entry.data.date.toISOString()}>{formattedDate}</time>
-            <span class="w-1 h-1 rounded-full bg-apple-border dark:bg-apple-darkBorder"></span>
-            <span class="uppercase tracking-widest text-[#9e3f4e] dark:text-[#ff8b9a] font-bold"
-              >{entry.data.category}</span
-            >
-          </div>
-        </div>
-
+      <div class="w-full max-w-[900px] mx-auto min-w-0 transition-opacity duration-500 relative min-h-[70vh]">
+        <article class="w-full bg-white/70 dark:bg-[#1a1b26]/50 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-14 border border-black/5 dark:border-white/5 shadow-[0_8px_48px_rgba(0,0,0,0.04)] reveal-up transition-all duration-500">
         <!-- Hero Image -->
         {
           entry.data.imageUrl && (
@@ -142,10 +92,11 @@ const currentSub = entry.data.subcategory;
           <Content />
         </div>
       </article>
+      </div>
 
       <!-- 3. Right Sidebar (Apple Glassmorphic Side Bar) -->
-      <div class="hidden xl:block w-full">
-        <aside class="w-[260px] sticky top-32 self-start reveal-up stagger-2">
+      <div class="hidden xl:block w-full relative h-full">
+        <aside class="w-[260px] sticky top-32 h-fit max-h-[calc(100vh-8rem)] overflow-y-auto hide-scrollbar reveal-up stagger-2">
           <div class="flex flex-col pl-4 gap-2">
             <h3
               class="text-[11px] font-bold tracking-[0.2em] uppercase text-apple-textMuted dark:text-apple-darkTextMuted mb-2"
@@ -154,15 +105,15 @@ const currentSub = entry.data.subcategory;
             </h3>
             <div class="relative flex flex-col gap-0 pb-2" id="toc-container">
               <!-- Sliding Background Pill (No Dots) -->
-              <div id="toc-highlight" class="absolute left-0 w-full rounded-[0.5rem] custom-glass-highlight border border-white/20 dark:border-white/10 shadow-sm transition-all duration-400 ease-[cubic-bezier(0.25,1,0.5,1)] z-20 pointer-events-none opacity-0"></div>
+              <div id="toc-highlight" class="absolute left-0 w-full rounded-[1.2rem] custom-glass-highlight border border-white/20 dark:border-white/10 shadow-sm transition-all duration-400 ease-[cubic-bezier(0.25,1,0.5,1)] z-20 pointer-events-none opacity-0"></div>
             
               {headings.length > 0 ? (
                 headings
                   .filter((heading) => heading.depth <= 3)
                   .map((heading) => (
-                    <a 
-                      href={`#${heading.slug}`} 
-                      class="toc-item relative z-10 w-full flex items-center py-[4.5px] pr-2 cursor-pointer text-apple-textMuted dark:text-apple-darkTextMuted font-medium transition-colors duration-300 hover:text-apple-text dark:hover:text-apple-darkText"
+                    <a
+                      href={`#${heading.slug}`}
+                      class="toc-item relative z-10 w-full flex items-center py-[4.5px] pr-2 cursor-pointer text-apple-textMuted dark:text-apple-darkTextMuted font-medium transition-colors duration-300"
                       data-slug={heading.slug}
                     >
                       <span class="text-[12.5px] line-clamp-1" style={`padding-left: ${(heading.depth - 1) * 14 + 8}px`}>{heading.text}</span>
@@ -197,67 +148,6 @@ const currentSub = entry.data.subcategory;
 
       document.querySelectorAll(".reveal-up").forEach((el) => revealObserver.observe(el));
 
-      // TOPICS / TOC Sliding Highlight Logic
-      const setupSlidingHighlight = (
-        containerId: string,
-        highlightId: string,
-        itemSelector: string,
-      ) => {
-        const container = document.getElementById(containerId);
-        const highlight = document.getElementById(highlightId);
-        if (!container || !highlight) return;
-
-        let activeItem =
-          (container.querySelector(`${itemSelector}.active-item`) as HTMLElement | null) ||
-          (container.querySelector(itemSelector) as HTMLElement | null);
-
-        const removeBlueText = (el: HTMLElement) => {
-          el.classList.remove("text-blue-600", "dark:text-blue-400", "font-bold");
-          el.classList.add("text-apple-textMuted", "dark:text-apple-darkTextMuted", "font-medium");
-        };
-        const addBlueText = (el: HTMLElement) => {
-          el.classList.remove(
-            "text-apple-textMuted",
-            "dark:text-apple-darkTextMuted",
-            "font-medium"
-          );
-          el.classList.add("text-blue-600", "dark:text-blue-400", "font-bold");
-        };
-
-        const move = (el: HTMLElement) => {
-          highlight.style.height = `${el.offsetHeight}px`;
-          highlight.style.transform = `translateY(${el.offsetTop}px)`;
-          highlight.style.opacity = "1";
-
-          container
-            .querySelectorAll(itemSelector)
-            .forEach((btn) => removeBlueText(btn as HTMLElement));
-          addBlueText(el);
-        };
-
-        if (activeItem) move(activeItem);
-
-        const items = container.querySelectorAll(itemSelector);
-        items.forEach((item) => {
-          item.addEventListener("mouseenter", () => move(item as HTMLElement));
-        });
-
-        container.addEventListener("mouseleave", () => {
-          if (activeItem) {
-            move(activeItem);
-          } else {
-            highlight.style.opacity = "0";
-          }
-        });
-
-        window.addEventListener("resize", () => {
-          if (activeItem && container.offsetParent !== null) move(activeItem);
-        });
-      };
-
-      // INIT TOPICS HIGHLIGHT
-      setupSlidingHighlight("cat-list-container", "grid-highlight", ".cat-filter");
-
       // TOC Sliding Highlight & ScrollSpy
       const tocContainer = document.getElementById('toc-container');
       const tocHighlight = document.getElementById('toc-highlight');
@@ -265,10 +155,13 @@ const currentSub = entry.data.subcategory;
 
       if (tocContainer && tocHighlight && tocItems.length > 0) {
         let activeTocItem: Element | null = null;
+        let isHovering = false;
+        const targetTocHeight = 32; // Fixed height
 
         const moveToc = (el: HTMLElement) => {
-          tocHighlight.style.height = `${el.offsetHeight}px`;
-          tocHighlight.style.transform = `translateY(${el.offsetTop}px)`;
+          const topOffset = el.offsetTop + (el.offsetHeight - targetTocHeight) / 2;
+          tocHighlight.style.height = `${targetTocHeight}px`;
+          tocHighlight.style.transform = `translateY(${topOffset}px)`;
           tocHighlight.style.opacity = '1';
 
           tocItems.forEach(item => {
@@ -279,6 +172,23 @@ const currentSub = entry.data.subcategory;
           el.classList.remove('text-apple-textMuted', 'dark:text-apple-darkTextMuted', 'font-medium');
           el.classList.add('text-blue-600', 'dark:text-blue-400', 'font-bold');
         };
+
+        // Hover Effect
+        tocItems.forEach(item => {
+          item.addEventListener('mouseenter', () => {
+            isHovering = true;
+            moveToc(item as HTMLElement);
+          });
+        });
+
+        tocContainer.addEventListener('mouseleave', () => {
+          isHovering = false;
+          if (activeTocItem) {
+            moveToc(activeTocItem as HTMLElement);
+          } else {
+            tocHighlight.style.opacity = '0';
+          }
+        });
 
         // Click & Scrolling Highlights
         tocItems.forEach(item => {
@@ -334,14 +244,14 @@ const currentSub = entry.data.subcategory;
             const activeEl = document.querySelector(`.toc-item[data-slug="${currentId}"]`);
             if (activeEl && activeEl !== activeTocItem) {
               activeTocItem = activeEl;
-              moveToc(activeEl as HTMLElement);
+              if (!isHovering) moveToc(activeEl as HTMLElement);
             }
           } else {
             // If we are above any heading (at the top), highlight the first one
             const firstEl = tocItems[0];
             if (firstEl && firstEl !== activeTocItem) {
               activeTocItem = firstEl;
-              moveToc(firstEl as HTMLElement);
+              if (!isHovering) moveToc(firstEl as HTMLElement);
             }
           }
         };
