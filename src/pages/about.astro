@@ -569,7 +569,7 @@ const projects = [
   </main>
 
   <script>
-    let revealObserver;
+    let revealObserver: IntersectionObserver | undefined;
     
     document.addEventListener("astro:page-load", () => {
       if (revealObserver) revealObserver.disconnect();
@@ -580,17 +580,19 @@ const projects = [
         threshold: 0.1,
       };
 
-      revealObserver = new IntersectionObserver((entries, observer) => {
+      const observer = new IntersectionObserver((entries, observerInstance) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("active");
-            observer.unobserve(entry.target);
+            observerInstance.unobserve(entry.target);
           }
         });
       }, revealOptions);
 
+      revealObserver = observer;
+
       document.querySelectorAll(".reveal-up").forEach((el) => {
-        revealObserver.observe(el);
+        observer.observe(el);
       });
     });
   </script>
