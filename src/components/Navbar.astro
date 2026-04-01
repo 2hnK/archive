@@ -51,7 +51,7 @@ const navLinks = [
         href="https://www.instagram.com/__kimjihun/"
         target="_blank"
         rel="noopener noreferrer"
-        class="w-8 h-8 flex items-center justify-center rounded-full text-apple-textMuted dark:text-apple-darkTextMuted hover:bg-black/5 dark:hover:bg-white/10 hover:text-pink-500 dark:hover:text-pink-400 transition-all duration-300"
+        class="hidden sm:flex w-8 h-8 items-center justify-center rounded-full text-apple-textMuted dark:text-apple-darkTextMuted hover:bg-black/5 dark:hover:bg-white/10 hover:text-pink-500 dark:hover:text-pink-400 transition-all duration-300"
         aria-label="Instagram"
       >
         <svg
@@ -77,7 +77,7 @@ const navLinks = [
         href="https://github.com/2hnK"
         target="_blank"
         rel="noopener noreferrer"
-        class="w-8 h-8 flex items-center justify-center rounded-full text-apple-textMuted dark:text-apple-darkTextMuted hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:hover:text-white transition-all duration-300"
+        class="hidden sm:flex w-8 h-8 items-center justify-center rounded-full text-apple-textMuted dark:text-apple-darkTextMuted hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:hover:text-white transition-all duration-300"
         aria-label="GitHub"
       >
         <svg
@@ -114,6 +114,42 @@ const navLinks = [
           id="theme-icon">light_mode</span
         >
       </button>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-toggle"
+        class="md:hidden w-8 h-8 ml-1 flex items-center justify-center rounded-full text-apple-textMuted dark:text-apple-darkTextMuted hover:bg-black/5 dark:hover:bg-white/10 hover:text-black dark:hover:text-white transition-all duration-300"
+        aria-label="Toggle Menu"
+      >
+        <span class="material-symbols-outlined text-[24px] leading-none" id="mobile-menu-icon">menu</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Drawer (Inside Header to overlap layout properly below nav bar height) -->
+  <div
+    id="mobile-menu"
+    class="absolute top-[100%] left-0 w-full bg-apple-surface/95 dark:bg-apple-darkSurface/95 backdrop-blur-xl border-b border-black/5 dark:border-white/10 overflow-hidden flex flex-col transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] opacity-0 pointer-events-none scale-y-95 origin-top md:hidden h-0"
+  >
+    <div class="flex flex-col px-4 py-4 gap-2 border-t border-black/5 dark:border-white/5">
+      {
+        navLinks.map((link) => {
+          const isActive =
+            currentPath === link.href || (link.href !== "/" && currentPath.startsWith(link.href));
+          return (
+            <a
+              href={link.href}
+              class={`nav-link-mobile px-4 py-3 rounded-2xl text-[16px] font-semibold tracking-tight transition-colors duration-300 ${
+                isActive
+                  ? "bg-black/5 dark:bg-white/10 text-black dark:text-white"
+                  : "text-apple-textMuted dark:text-apple-darkTextMuted hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white"
+              }`}
+            >
+              {link.name}
+            </a>
+          );
+        })
+      }
     </div>
   </div>
 </header>
@@ -199,5 +235,42 @@ const navLinks = [
       localStorage.setItem("theme", darkNow ? "dark" : "light");
       themeIcon.textContent = darkNow ? "dark_mode" : "light_mode";
     });
+
+    // 3. Mobile Menu Toggle
+    const mobileBtn = document.getElementById("mobile-menu-toggle");
+    const mobileIcon = document.getElementById("mobile-menu-icon");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const header = document.getElementById("main-nav");
+
+    if (mobileBtn && mobileMenu && mobileIcon && header) {
+      let isMenuOpen = false;
+
+      mobileBtn.addEventListener("click", () => {
+        isMenuOpen = !isMenuOpen;
+        
+        if (isMenuOpen) {
+          mobileIcon.textContent = "close";
+          mobileMenu.classList.remove("opacity-0", "pointer-events-none", "scale-y-95", "h-0");
+          mobileMenu.classList.add("opacity-100", "pointer-events-auto", "scale-y-100");
+          mobileMenu.style.height = "auto";
+          header.classList.add("bg-apple-surface/95", "dark:bg-apple-darkSurface/95");
+          header.classList.remove("bg-apple-surface/80", "dark:bg-apple-darkSurface/80");
+        } else {
+          mobileIcon.textContent = "menu";
+          mobileMenu.classList.add("opacity-0", "pointer-events-none", "scale-y-95", "h-0");
+          mobileMenu.classList.remove("opacity-100", "pointer-events-auto", "scale-y-100");
+          mobileMenu.style.height = "0";
+          header.classList.remove("bg-apple-surface/95", "dark:bg-apple-darkSurface/95");
+          header.classList.add("bg-apple-surface/80", "dark:bg-apple-darkSurface/80");
+        }
+      });
+      
+      // Close menu on link click
+      document.querySelectorAll(".nav-link-mobile").forEach(link => {
+        link.addEventListener("click", () => {
+          if (isMenuOpen) mobileBtn.click();
+        });
+      });
+    }
   });
 </script>

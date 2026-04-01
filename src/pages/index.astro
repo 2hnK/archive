@@ -14,7 +14,7 @@ const categories = Array.from(new Set(allArticles.map((a) => a.data.category))).
   <main class="pb-24" style="padding-top: 140px;">
     <section class="max-w-[1100px] mx-auto px-6 reveal-up md:flex md:items-start md:gap-x-16">
       <!-- Left Sidebar -->
-      <div class="mb-16 md:mb-0 w-full md:w-[240px] flex-shrink-0 md:sticky md:top-32">
+      <div class="mb-16 md:mb-0 w-full md:w-[260px] flex-shrink-0 md:sticky md:top-32">
         <div class="mb-12">
           <span
             class="text-[10px] uppercase tracking-[0.25em] font-bold text-apple-textMuted dark:text-apple-darkTextMuted block mb-4"
@@ -25,8 +25,8 @@ const categories = Array.from(new Set(allArticles.map((a) => a.data.category))).
             {
               categories.map((cat) => (
                 <a
-                  href={`/articles`}
-                  class="glass-pill px-4 py-1.5 text-[11px] font-bold tracking-widest text-apple-text dark:text-apple-darkText hover:text-[#1e66f5] dark:hover:text-[#89b4fa] hover:bg-white dark:hover:bg-white/10 transition-all duration-300 transform hover:scale-[1.05] uppercase border-black/5 dark:border-white/10 shadow-md"
+                  href={`/articles?cat=${encodeURIComponent(cat)}`}
+                  class="glass-pill px-4 py-1.5 text-[12px] font-semibold tracking-wide text-apple-text dark:text-apple-darkText hover:text-[#1e66f5] dark:hover:text-[#89b4fa] hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300 transform hover:scale-[1.05] border border-black/5 dark:border-white/10 shadow-sm"
                 >
                   {cat}
                 </a>
@@ -41,10 +41,9 @@ const categories = Array.from(new Set(allArticles.map((a) => a.data.category))).
       </div>
 
       <!-- Main Column: Board View Articles -->
-      <div class="flex-1 w-full relative">
+      <div class="flex-1 w-full relative max-w-[800px]">
         <div
-          class="flex justify-between items-end mb-8 border-b border-apple-border dark:border-apple-darkBorder pb-4"
-          style="padding-bottom: 8px;"
+          class="flex justify-between items-end mb-8 border-b border-black/10 dark:border-white/10 pb-6"
         >
           <div>
             <span
@@ -52,10 +51,10 @@ const categories = Array.from(new Set(allArticles.map((a) => a.data.category))).
               >Latest Articles</span
             >
             <h2 class="text-2xl font-bold tracking-tight text-apple-text dark:text-apple-darkText">
-              최근 포스트
+              최근 게시물
             </h2>
           </div>
-          <a href="/articles" class="btn-premium group text-[12px] px-3.5 py-2">
+          <a href="/articles" class="btn-premium group text-[12px] px-4 py-2 font-bold mb-1">
             아티클 전체 보기
             <span
               class="material-symbols-outlined text-[15px] group-hover:translate-x-1 transition-transform"
@@ -64,23 +63,23 @@ const categories = Array.from(new Set(allArticles.map((a) => a.data.category))).
           </a>
         </div>
 
-        <div class="flex flex-col gap-1">
+        <div class="flex flex-col gap-3">
           {
             latestArticles.map((article) => (
               <a
                 href={`/articles/${article.id}`}
-                class="group flex flex-col sm:flex-row sm:items-center justify-between py-3 px-3 sm:px-4 rounded-2xl border border-transparent transition-all duration-300 hover:bg-white/70 dark:hover:bg-white/[0.05] hover:backdrop-blur-xl hover:shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-black/5 dark:hover:border-white/5"
+                class="group flex items-center justify-between p-4 md:p-5 rounded-2xl bg-white/40 dark:bg-apple-darkSurface/40 backdrop-blur-xl border border-black/5 dark:border-white/5 hover:bg-white/80 dark:hover:bg-white/[0.08] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-black/10 dark:hover:border-white/10 transition-all duration-300"
               >
-                <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-                  <span class="text-[9.5px] font-bold uppercase tracking-[0.15em] text-[#1e66f5] dark:text-[#89b4fa] w-[110px] shrink-0 sm:text-right mt-1 sm:mt-0">
+                <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 min-w-0">
+                  <span class="text-[11px] font-bold uppercase tracking-[0.15em] text-[#1e66f5] dark:text-[#89b4fa] w-[100px] shrink-0 md:text-right mt-0.5 md:mt-0">
                     {article.data.category}
                   </span>
-                  <h3 class="text-[13px] xl:text-[14px] font-semibold text-apple-text dark:text-apple-darkText group-hover:translate-x-1 transition-transform duration-300 leading-snug break-keep">
+                  <h3 class="text-[15px] md:text-[16px] font-bold text-apple-text dark:text-apple-darkText group-hover:text-[#1e66f5] dark:group-hover:text-[#89b4fa] truncate md:break-keep md:whitespace-normal md:line-clamp-2 transition-colors duration-300 leading-snug max-w-[400px]">
                     {article.data.title}
                   </h3>
                 </div>
-                <div class="flex items-center gap-4 mt-2 sm:mt-0">
-                  <span class="text-[11px] font-medium text-apple-textMuted dark:text-apple-darkTextMuted tabular-nums">
+                <div class="flex items-center gap-4 shrink-0 pl-2">
+                  <span class="text-[12px] font-medium text-apple-textMuted dark:text-apple-darkTextMuted tabular-nums">
                     {article.data.date
                       .toLocaleDateString("ko-KR", {
                         year: "numeric",
@@ -91,7 +90,7 @@ const categories = Array.from(new Set(allArticles.map((a) => a.data.category))).
                       .replace(/ /g, "")
                       .slice(0, -1)}
                   </span>
-                  <span class="material-symbols-outlined text-[15px] text-[#1e66f5] dark:text-[#89b4fa] opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                  <span class="material-symbols-outlined text-[18px] text-[#1e66f5] dark:text-[#89b4fa] opacity-0 -translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 hidden md:block">
                     arrow_forward
                   </span>
                 </div>
