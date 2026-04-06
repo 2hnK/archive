@@ -228,31 +228,19 @@ body {
    ======================================== */
 .custom-glass-highlight {
   background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px) brightness(1.05) saturate(1.2);
-  -webkit-backdrop-filter: blur(4px) brightness(1.1) saturate(1.1);
+  backdrop-filter: blur(12px) saturate(1.2) brightness(1.0);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2) brightness(1.0);
   will-change: transform, width, left;
   border: 1px solid rgba(167, 167, 167, 0.4);
   box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.08),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
-}
-
-.liquid-glass-highlight {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: url(#liquid-glass-highlight-filter) blur(10px) brightness(1.1) saturate(1.1);
-  -webkit-backdrop-filter: url(#liquid-glass-highlight-filter) blur(10px) brightness(1.1) saturate(1.1);
-  will-change: transform, width, left;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.1),
-    inset 0 -10px 25px rgba(0, 0, 0, 0.05),
-    inset 0 -1px 4px 1px rgba(255, 255, 255, 0.4);
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .dark .custom-glass-highlight {
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px) brightness(1.05) saturate(1.1);
-  -webkit-backdrop-filter: blur(12px) brightness(1.05) saturate(1.1);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px) saturate(1.1);
+  -webkit-backdrop-filter: blur(16px) saturate(1.1);
   border: 1px solid rgba(167, 167, 167, 0.4);
   box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.25),
