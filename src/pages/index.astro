@@ -68,18 +68,18 @@ const categories = Array.from(new Set(allArticles.map((a) => a.data.category))).
             latestArticles.map((article) => (
               <a
                 href={`/articles/${article.id}`}
-                class="group flex items-center justify-between p-4 md:p-5 rounded-2xl bg-white/40 dark:bg-apple-darkSurface/40 backdrop-blur-xl border border-black/5 dark:border-white/5 hover:bg-white/80 dark:hover:bg-white/[0.08] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-black/10 dark:hover:border-white/10 transition-all duration-300"
+                class="group flex items-center justify-between p-4 md:px-5 md:py-4 rounded-2xl bg-white/40 dark:bg-apple-darkSurface/40 backdrop-blur-xl border border-black/5 dark:border-white/5 hover:bg-white/80 dark:hover:bg-white/[0.08] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-black/10 dark:hover:border-white/10 transition-all duration-300 h-[72px] md:h-[64px]"
               >
-                <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6 min-w-0">
-                  <span class="text-[11px] font-bold uppercase tracking-[0.15em] text-[#1e66f5] dark:text-[#89b4fa] w-[100px] shrink-0 md:text-right mt-0.5 md:mt-0">
+                <div class="flex flex-col md:flex-row md:items-center justify-start gap-1.5 md:gap-6 min-w-0 flex-1">
+                  <span class="text-[10px] md:text-[11x] font-bold uppercase tracking-[0.15em] text-[#1e66f5] dark:text-[#89b4fa] md:w-[120px] shrink-0 text-left truncate">
                     {article.data.category}
                   </span>
-                  <h3 class="text-[12px] md:text-[14px] font-bold text-apple-text dark:text-apple-darkText group-hover:text-[#1e66f5] dark:group-hover:text-[#89b4fa] truncate md:break-keep md:whitespace-normal md:line-clamp-2 transition-colors duration-300 leading-snug max-w-[400px]">
+                  <h3 class="text-[13px] md:text-[14px] font-bold text-apple-text dark:text-apple-darkText group-hover:text-[#1e66f5] dark:group-hover:text-[#89b4fa] truncate text-left transition-colors duration-300">
                     {article.data.title}
                   </h3>
                 </div>
-                <div class="flex items-center gap-4 shrink-0 pl-2">
-                  <span class="text-[12px] font-medium text-apple-textMuted dark:text-apple-darkTextMuted tabular-nums">
+                <div class="flex items-center gap-4 shrink-0 pl-4">
+                  <span class="text-[10px] font-medium text-apple-textMuted dark:text-apple-darkTextMuted tabular-nums">
                     {article.data.date
                       .toLocaleDateString("ko-KR", {
                         year: "numeric",

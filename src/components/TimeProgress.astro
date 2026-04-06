@@ -14,7 +14,7 @@ const { mini = false } = Astro.props;
   <div class={`text-center flex flex-col items-center ${mini ? "mb-4" : "mb-6"}`}>
     <p
       id="current-time-display"
-      class={`${mini ? "text-[13px]" : "text-[18px] md:text-[20px]"} font-bold tracking-tight font-sans ${mini ? "mb-2" : "mb-3"}`}
+      class={`${mini ? "text-[12px]" : "text-[16px] md:text-[18px]"} font-bold tracking-tight font-mono tabular-nums ${mini ? "mb-2" : "mb-3"}`}
     >
     </p>
     <div
@@ -53,7 +53,7 @@ const { mini = false } = Astro.props;
         <div class="text-right mt-0.5">
           <span
             id="percent-year"
-            class={`${mini ? "text-[9px]" : "text-[12px]"} text-gray-400 font-bold tracking-wider`}>0.0%</span
+            class={`${mini ? "text-[9px]" : "text-[12px]"} text-[#5c5f77] dark:text-[#a6adc8] font-mono font-bold tracking-wider tabular-nums`}>0.0%</span
           >
         </div>
       </div>
@@ -84,7 +84,7 @@ const { mini = false } = Astro.props;
         <div class="text-right mt-0.5">
           <span
             id="percent-month"
-            class={`${mini ? "text-[9px]" : "text-[12px]"} text-gray-400 font-bold tracking-wider`}>0.0%</span
+            class={`${mini ? "text-[9px]" : "text-[12px]"} text-[#5c5f77] dark:text-[#a6adc8] font-mono font-bold tracking-wider tabular-nums`}>0.0%</span
           >
         </div>
       </div>
@@ -115,7 +115,7 @@ const { mini = false } = Astro.props;
         <div class="text-right mt-0.5">
           <span
             id="percent-day"
-            class={`${mini ? "text-[9px]" : "text-[12px]"} text-gray-400 font-bold tracking-wider`}>0.0%</span
+            class={`${mini ? "text-[9px]" : "text-[12px]"} text-[#5c5f77] dark:text-[#a6adc8] font-mono font-bold tracking-wider tabular-nums`}>0.0%</span
           >
         </div>
       </div>
@@ -146,7 +146,7 @@ const { mini = false } = Astro.props;
         <div class="text-right mt-0.5">
           <span
             id="percent-hour"
-            class={`${mini ? "text-[9px]" : "text-[12px]"} text-gray-400 font-bold tracking-wider`}>0.0%</span
+            class={`${mini ? "text-[9px]" : "text-[12px]"} text-[#5c5f77] dark:text-[#a6adc8] font-mono font-bold tracking-wider tabular-nums`}>0.0%</span
           >
         </div>
       </div>
@@ -177,7 +177,7 @@ const { mini = false } = Astro.props;
         <div class="text-right mt-0.5">
           <span
             id="percent-minute"
-            class={`${mini ? "text-[9px]" : "text-[12px]"} text-gray-400 font-bold tracking-wider`}>0.0%</span
+            class={`${mini ? "text-[9px]" : "text-[12px]"} text-[#5c5f77] dark:text-[#a6adc8] font-mono font-bold tracking-wider tabular-nums`}>0.0%</span
           >
         </div>
       </div>

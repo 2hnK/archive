@@ -346,25 +346,7 @@ body {
   box-shadow: var(--pill-glow), var(--pill-inset);
 }
 
-/* SHIMMER EFFECT */
-.glass-pill::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  pointer-events: none;
-  background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.1) 20%, rgba(255, 255, 255, 0.85) 50%, rgba(255, 255, 255, 0.1) 80%, transparent 100%);
-  transform: translateX(-150%);
-  transition: transform 0s;
-  z-index: 10;
-}
 
-.glass-pill:hover::after {
-  transform: translateX(150%);
-  transition: transform 0.65s ease-in-out;
-}
 
 /* Bento Grid Unified Hover Effect */
 .bento-glass-panel {
