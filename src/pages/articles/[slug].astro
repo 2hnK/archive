@@ -63,15 +63,7 @@ const currentSub = entry.data.subcategory;
 
     <div class="mx-auto w-full max-w-[1700px] grid grid-cols-1 xl:grid-cols-[1fr_minmax(0,900px)_1fr] gap-x-8 gap-y-16 relative px-4 sm:px-6 md:px-8 xl:px-4">
       
-      <!-- MOBILE BACK TO LIST (Hidden on XL) -->
-      <div class="xl:hidden w-full flex items-center justify-between pb-2 border-b border-black/5 dark:border-white/5 -mt-6 mb-2">
-        <div class="flex items-center gap-1.5 text-apple-textMuted dark:text-apple-darkTextMuted hover:text-black dark:hover:text-white transition-colors">
-          <a href="/articles" class="flex items-center gap-1 text-[13px] font-bold">
-            <span class="material-symbols-outlined text-[16px]">arrow_back</span>
-            목록으로
-          </a>
-        </div>
-      </div>
+
 
       <!-- 1. LEFT COLUMN: SIDEBAR -->
       <div class="hidden xl:block w-full min-w-0 xl:ml-auto lg:mt-0 relative">
@@ -168,7 +160,7 @@ const currentSub = entry.data.subcategory;
   </main>
 
   <script>
-    let slugRevealObserver;
+    let slugRevealObserver: IntersectionObserver;
 
     document.addEventListener("astro:page-load", () => {
       // Intersection Observer Reveal
