@@ -313,18 +313,57 @@ body {
   -webkit-backdrop-filter: blur(16px) saturate(1.2);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 9999px;
+  
+  --brand-color: #ffffff; /* Fallback brand color */
+  --pill-inset: inset 0 1px 1px rgba(255, 255, 255, 0.7);
+  --pill-glow: 0 8px 20px color-mix(in srgb, var(--brand-color) 30%, transparent);
+  
   box-shadow: 
     0 2px 10px rgba(0, 0, 0, 0.03),
-    inset 0 1px 1px rgba(255, 255, 255, 0.7);
+    var(--pill-inset);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-pill:hover {
+  --pill-inset: inset 0 1px 1px rgba(255, 255, 255, 1);
+  box-shadow: var(--pill-glow), var(--pill-inset);
 }
 
 .dark .glass-pill {
   background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.3);
+  --pill-inset: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  --pill-glow: 0 8px 20px color-mix(in srgb, var(--brand-color) 40%, transparent);
   box-shadow: 
     0 2px 10px rgba(0, 0, 0, 0.2),
-    inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    var(--pill-inset);
+}
+
+.dark .glass-pill:hover {
+  --pill-inset: inset 0 1px 1px rgba(255, 255, 255, 0.35);
+  box-shadow: var(--pill-glow), var(--pill-inset);
+}
+
+/* SHIMMER EFFECT */
+.glass-pill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+  background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.1) 20%, rgba(255, 255, 255, 0.85) 50%, rgba(255, 255, 255, 0.1) 80%, transparent 100%);
+  transform: translateX(-150%);
+  transition: transform 0s;
+  z-index: 10;
+}
+
+.glass-pill:hover::after {
+  transform: translateX(150%);
+  transition: transform 0.65s ease-in-out;
 }
 
 /* Bento Grid Unified Hover Effect */
