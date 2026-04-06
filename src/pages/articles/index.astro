@@ -371,100 +371,110 @@ const BTN_ACTIVE =
             .split(" ")
             .filter(Boolean);
 
-        const mobileActiveClasses = "bg-black/10 dark:bg-white/10 text-[#1e66f5] dark:text-[#89b4fa] border-black/10".split(" ").filter(Boolean);
-        const mobileInactiveClasses = "text-apple-text dark:text-apple-darkText border-black/5 hover:text-[#1e66f5] dark:hover:text-[#89b4fa] hover:bg-black/5 dark:hover:bg-white/10".split(" ").filter(Boolean);
+        const mobileActiveClasses =
+          "bg-black/10 dark:bg-white/10 text-[#1e66f5] dark:text-[#89b4fa] border-black/10"
+            .split(" ")
+            .filter(Boolean);
+        const mobileInactiveClasses =
+          "text-apple-text dark:text-apple-darkText border-black/5 hover:text-[#1e66f5] dark:hover:text-[#89b4fa] hover:bg-black/5 dark:hover:bg-white/10"
+            .split(" ")
+            .filter(Boolean);
 
         const catBtns = document.querySelectorAll(".cat-filter");
         const mobileCatBtns = document.querySelectorAll(".mobile-cat-filter");
         const gridItems = document.querySelectorAll(".article-grid-item");
         const feedItems = document.querySelectorAll(".post-detail");
 
-        const executeFilter = (filter: string | undefined, filterCat: string | undefined, filterSub: string | undefined) => {
-            // Update Desktop Sidebar UI State
-            catBtns.forEach((b) => {
-              const bFilter = (b as HTMLElement).dataset.filter;
-              const bCat = (b as HTMLElement).dataset.filterCat;
-              const bSub = (b as HTMLElement).dataset.filterSub;
-              
-              const isMatch = (filter === "all" && bFilter === "all") ||
-                              (filterCat && !filterSub && bCat === filterCat && !bSub) ||
-                              (filterCat && filterSub && bCat === filterCat && bSub === filterSub);
+        const executeFilter = (
+          filter: string | undefined,
+          filterCat: string | undefined,
+          filterSub: string | undefined,
+        ) => {
+          // Update Desktop Sidebar UI State
+          catBtns.forEach((b) => {
+            const bFilter = (b as HTMLElement).dataset.filter;
+            const bCat = (b as HTMLElement).dataset.filterCat;
+            const bSub = (b as HTMLElement).dataset.filterSub;
 
-              if (isMatch) {
-                b.classList.remove(...btnInactiveClasses);
-                b.classList.add(...btnActiveClasses);
-              } else {
-                b.classList.remove(...btnActiveClasses);
-                b.classList.add(...btnInactiveClasses);
-              }
-            });
+            const isMatch =
+              (filter === "all" && bFilter === "all") ||
+              (filterCat && !filterSub && bCat === filterCat && !bSub) ||
+              (filterCat && filterSub && bCat === filterCat && bSub === filterSub);
 
-            // Update Mobile Chips UI State
-            mobileCatBtns.forEach((b) => {
-              const bFilter = (b as HTMLElement).dataset.filter;
-              const bCat = (b as HTMLElement).dataset.filterCat;
-              const isMatch = (filter === "all" && bFilter === "all") || (filterCat && bCat === filterCat);
+            if (isMatch) {
+              b.classList.remove(...btnInactiveClasses);
+              b.classList.add(...btnActiveClasses);
+            } else {
+              b.classList.remove(...btnActiveClasses);
+              b.classList.add(...btnInactiveClasses);
+            }
+          });
 
-              if (isMatch) {
-                b.classList.remove(...mobileInactiveClasses);
-                b.classList.add(...mobileActiveClasses);
-              } else {
-                b.classList.remove(...mobileActiveClasses);
-                b.classList.add(...mobileInactiveClasses);
-              }
-            });
+          // Update Mobile Chips UI State
+          mobileCatBtns.forEach((b) => {
+            const bFilter = (b as HTMLElement).dataset.filter;
+            const bCat = (b as HTMLElement).dataset.filterCat;
+            const isMatch =
+              (filter === "all" && bFilter === "all") || (filterCat && bCat === filterCat);
 
-            // Sub-list toggle logic
-            document.querySelectorAll(".sub-list").forEach((list) => {
-              list.classList.add("hidden");
-              list.classList.remove("flex");
-            });
+            if (isMatch) {
+              b.classList.remove(...mobileInactiveClasses);
+              b.classList.add(...mobileActiveClasses);
+            } else {
+              b.classList.remove(...mobileActiveClasses);
+              b.classList.add(...mobileInactiveClasses);
+            }
+          });
 
-            if (filterCat) {
-              const group = document.querySelector(
-                `.category-group[data-group-cat="${filterCat}"]`,
-              );
-              if (group) {
-                const subList = group.querySelector(".sub-list");
-                if (subList) {
-                  subList.classList.remove("hidden");
-                  subList.classList.add("flex");
-                }
+          // Sub-list toggle logic
+          document.querySelectorAll(".sub-list").forEach((list) => {
+            list.classList.add("hidden");
+            list.classList.remove("flex");
+          });
+
+          if (filterCat) {
+            const group = document.querySelector(`.category-group[data-group-cat="${filterCat}"]`);
+            if (group) {
+              const subList = group.querySelector(".sub-list");
+              if (subList) {
+                subList.classList.remove("hidden");
+                subList.classList.add("flex");
               }
             }
+          }
 
-            const matches = (el: HTMLElement) => {
-              if (filter === "all") return true;
-              if (filterSub) {
-                return el.dataset.category === filterCat && el.dataset.subcategory === filterSub;
-              }
-              return el.dataset.category === filterCat;
-            };
+          const matches = (el: HTMLElement) => {
+            if (filter === "all") return true;
+            if (filterSub) {
+              return el.dataset.category === filterCat && el.dataset.subcategory === filterSub;
+            }
+            return el.dataset.category === filterCat;
+          };
 
-            // Filter Grid & Feed Views (Simplified merge)
-            const allItems = [...gridItems, ...feedItems];
-            allItems.forEach((item) => {
-              const el = item as HTMLElement;
-              if (matches(el)) {
-                el.style.display = "";
-                setTimeout(() => {
-                  el.style.opacity = "1";
-                  el.style.transform = "translateY(0) scale(1)";
-                }, 50);
-              } else {
-                el.style.opacity = "0";
-                el.style.transform = "translateY(10px) scale(0.98)";
-                setTimeout(() => {
-                  el.style.display = "none";
-                }, 400);
-              }
-            });
+          // Filter Grid & Feed Views (Simplified merge)
+          const allItems = [...gridItems, ...feedItems];
+          allItems.forEach((item) => {
+            const el = item as HTMLElement;
+            if (matches(el)) {
+              el.style.display = "";
+              setTimeout(() => {
+                el.style.opacity = "1";
+                el.style.transform = "translateY(0) scale(1)";
+              }, 50);
+            } else {
+              el.style.opacity = "0";
+              el.style.transform = "translateY(10px) scale(0.98)";
+              setTimeout(() => {
+                el.style.display = "none";
+              }, 400);
+            }
+          });
 
-            // Dispatch update event for sliding highlight recalculation
-            // Needs a brief delay for sub-list expansion to finish layout
-            setTimeout(() => {
-              document.dispatchEvent(new Event("update-sliders"));
-            }, 10);
+          // Dispatch update event for sliding highlight recalculation
+          // Needs a brief delay for sub-list expansion to finish layout
+          setTimeout(() => {
+            document.dispatchEvent(new Event("update-sliders"));
+          }, 10);
         };
 
         const allButtons = [...Array.from(catBtns), ...Array.from(mobileCatBtns)];
@@ -472,7 +482,11 @@ const BTN_ACTIVE =
           btn.addEventListener("click", (e) => {
             e.preventDefault();
             const targetBtn = e.currentTarget as HTMLElement;
-            executeFilter(targetBtn.dataset.filter, targetBtn.dataset.filterCat, targetBtn.dataset.filterSub);
+            executeFilter(
+              targetBtn.dataset.filter,
+              targetBtn.dataset.filterCat,
+              targetBtn.dataset.filterSub,
+            );
           });
         });
 
