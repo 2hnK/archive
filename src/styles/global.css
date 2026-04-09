@@ -69,6 +69,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
   overflow-y: scroll;
 }
 
@@ -83,7 +84,16 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   transition: background-color 0.4s ease, color 0.4s ease;
-  overflow-x: hidden;
+}
+
+/* 사이드바 sticky 포지셔닝 - Tailwind 우선순위 문제 방지 */
+.sidebar-sticky {
+  position: sticky !important;
+  top: 8rem !important;
+  height: fit-content;
+  max-height: calc(100vh - 8rem);
+  overflow-y: auto;
+  flex-shrink: 0;
 }
 
 .material-symbols-outlined {
@@ -228,12 +238,12 @@ body {
    ======================================== */
 .custom-glass-highlight {
   background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(12px) saturate(1.2) brightness(1.0);
-  -webkit-backdrop-filter: blur(12px) saturate(1.2) brightness(1.0);
+  backdrop-filter: blur(4px) saturate(1.2) brightness(1.0);
+  -webkit-backdrop-filter: blur(4px) saturate(1.2) brightness(1.0);
   will-change: transform, width, left;
   border: 1px solid rgba(167, 167, 167, 0.4);
   box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.15),
+    0 2px 4px rgba(0, 0, 0, 0.15),
     inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 

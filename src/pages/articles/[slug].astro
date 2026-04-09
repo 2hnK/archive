@@ -66,8 +66,8 @@ const currentSub = entry.data.subcategory;
 
 
       <!-- 1. LEFT COLUMN: SIDEBAR -->
-      <div class="hidden xl:block w-full min-w-0 xl:ml-auto lg:mt-0 relative">
-        <aside class="w-full max-w-[280px] ml-auto flex flex-col sticky top-32 h-fit max-h-[calc(100vh-8rem)] flex-shrink-0 z-20 overflow-y-auto hide-scrollbar transition-all duration-500">
+      <div class="hidden xl:block w-full min-w-0 xl:ml-auto lg:mt-0">
+        <aside class="sidebar-sticky w-full max-w-[280px] ml-auto flex flex-col z-20 hide-scrollbar transition-all duration-500">
           <TopicsSidebar currentCat={currentCat} currentSub={currentSub} />
         </aside>
       </div>
@@ -123,8 +123,8 @@ const currentSub = entry.data.subcategory;
       </div>
 
       <!-- 3. Right Sidebar (Apple Glassmorphic Side Bar) -->
-      <div class="hidden xl:block w-full min-w-0 relative h-full">
-        <aside class="w-full max-w-[280px] mr-auto sticky top-32 h-fit max-h-[calc(100vh-8rem)] overflow-y-auto hide-scrollbar reveal-up stagger-2">
+      <div class="hidden xl:block w-full min-w-0">
+        <aside class="sidebar-sticky w-full max-w-[280px] mr-auto hide-scrollbar reveal-up stagger-2">
           <div class="flex flex-col pl-4 gap-2">
             <h3
               class="text-[11px] font-bold tracking-[0.2em] uppercase text-apple-textMuted dark:text-apple-darkTextMuted mb-2"
