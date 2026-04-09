@@ -1,3 +1,10 @@
+---
+title: "Wireshark Lab: DNS"
+description: "로컬 DNS 서버, DNS 캐싱, DNS 레코드 등 사전 지식부터 Wireshark를 이용한 DNS 패킷 분석 실습까지 다루는 문서입니다."
+category: "Network"
+date: 2026-04-10
+---
+
 # Wireshark Lab: DNS
 
 Status: 시작 전
