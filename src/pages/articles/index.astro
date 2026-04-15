@@ -56,9 +56,9 @@ const BTN_ACTIVE =
 
 <BaseLayout title="Articles | DevArchive" description="모든 아티클 및 저널 목록입니다.">
   <div class="mx-auto w-full pt-24 pb-20" style="padding-top: 140px;">
-    <!-- Top Bar: Title & View Toggle (Moved outside grid to match slug layout) -->
+    <!-- Top Bar: Title & View Toggle -->
     <div
-      class="mx-auto w-full max-w-[900px] px-4 sm:px-6 md:px-8 flex flex-col sm:flex-row sm:justify-between sm:items-end mb-10 border-b border-apple-border dark:border-apple-darkBorder pb-6 gap-6"
+      class="mx-auto w-full max-w-[900px] px-4 sm:px-6 md:px-8 flex flex-col sm:flex-row sm:justify-between sm:items-end mb-10 border-b border-border-color pb-6 gap-6"
       style="
     padding-bottom: 12px;  "
     >
@@ -72,27 +72,25 @@ const BTN_ACTIVE =
         </h1>
       </div>
 
-      <!-- Liquid Glass Segmented Control Toggle -->
-      <div
-        class="hidden sm:flex items-center bg-black/[0.04] dark:bg-white/[0.06] p-1.5 rounded-[1.2rem] ring-1 ring-black/5 dark:ring-white/10 shadow-[inset_0_1px_4px_rgba(0,0,0,0.05)] select-none"
-      >
+      <!-- Theme Consistent View Toggle -->
+      <div class="hidden sm:flex items-center glass-pill p-1 select-none">
         <div class="relative flex items-center">
           <div
             id="toggle-bg"
-            class={`absolute w-[44px] h-[36px] rounded-[1.5rem] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] right-9 z-0 ${LIQUID_GLASS_TOKEN}`}
+            class="absolute w-[38px] h-[32px] custom-glass-highlight rounded-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] left-0 z-0 border border-text-color/10"
           >
           </div>
 
           <button
             id="btn-feed"
-            class="relative z-10 w-[38px] h-[32px] flex justify-center items-center rounded-xl text-blue-600 dark:text-blue-400 transition-colors duration-300"
+            class="relative z-10 w-[38px] h-[32px] flex justify-center items-center rounded-full text-[#1e66f5] dark:text-[#89b4fa] font-bold transition-colors duration-300"
             aria-label="Feed View"
           >
             <span class="material-symbols-outlined text-[16px]">splitscreen</span>
           </button>
           <button
             id="btn-grid"
-            class="relative z-10 w-[38px] h-[32px] flex justify-center items-center rounded-xl text-apple-textMuted dark:text-apple-darkTextMuted transition-colors duration-300"
+            class="relative z-10 w-[38px] h-[32px] flex justify-center items-center rounded-full text-text-color opacity-50 hover:opacity-100 font-medium transition-opacity duration-300"
             aria-label="Grid View"
           >
             <span class="material-symbols-outlined text-[16px]">grid_view</span>
@@ -166,9 +164,9 @@ const BTN_ACTIVE =
                   class="post-detail relative w-full flex-col bg-white/70 dark:bg-[#1a1b26]/50 backdrop-blur-md rounded-[2.5rem] p-6 md:p-10 mb-12 shadow-[0_8px_48px_rgba(0,0,0,0.04)] border border-black/5 dark:border-white/5 reveal-up transition-all duration-500"
                 >
                   <div class="mb-8">
-                    <div class="flex items-center gap-2 mb-4 text-apple-textMuted dark:text-apple-darkTextMuted text-[12px] font-bold uppercase tracking-[0.2em]">
-                      <span class="text-[#1e66f5] dark:text-[#89b4fa]">{entry.data.category}</span>
-                      <span class="w-[3px] h-[3px] rounded-full bg-apple-border dark:bg-apple-darkBorder" />
+                    <div class="flex items-center gap-2 mb-4 text-text-color opacity-60 text-[12px] font-bold uppercase tracking-widest font-sans">
+                      <span class="text-accent-color max-w-max">{entry.data.category}</span>
+                      <span class="w-[3px] h-[3px] rounded-full bg-border-color" />
                       <time class="tabular-nums">
                         {entry.data.date
                           .toLocaleDateString("ko-KR", {
@@ -181,7 +179,7 @@ const BTN_ACTIVE =
                           .slice(0, -1)}
                       </time>
                     </div>
-                    <h2 class="text-xl md:text-2xl font-bold tracking-tight text-apple-text dark:text-apple-darkText leading-[1.25] mb-5 break-keep hover:text-[#1e66f5] dark:hover:text-[#89b4fa] transition-colors">
+                    <h2 class="text-3xl md:text-5xl font-serif font-bold tracking-tighter text-text-color leading-[1.2] mb-5 break-keep hover:text-accent-color transition-colors">
                       <a href={`/articles/${entry.id}`}>{entry.data.title}</a>
                     </h2>
                     {entry.data.imageUrl && (
@@ -200,11 +198,11 @@ const BTN_ACTIVE =
                   </div>
 
                   <div class="mb-6 space-y-4">
-                    <h3 class="text-[17px] font-semibold text-apple-text dark:text-apple-darkText leading-[1.65] tracking-tight break-keep">
+                    <h3 class="text-lg md:text-xl font-sans font-medium text-text-color leading-[1.65] tracking-tight break-keep opacity-90">
                       {entry.data.description}
                     </h3>
                     <div class="relative">
-                      <p class="text-apple-textMuted dark:text-apple-darkTextMuted text-[15px] leading-[1.8] tracking-tight break-keep line-clamp-4 font-medium opacity-85">
+                      <p class="text-text-color text-sm leading-[1.8] tracking-tight break-keep line-clamp-4 font-sans opacity-70">
                         {entry.body ? getSnippet(entry.body) : ""}
                       </p>
                     </div>
@@ -297,11 +295,11 @@ const BTN_ACTIVE =
           const moveToggle = (btn: HTMLElement) => {
             toggleBg.style.transform = btn === btnFeed ? "translateX(0)" : "translateX(38px)";
             [btnFeed, btnGrid].forEach((b) => {
-              b.classList.remove("text-blue-600", "dark:text-blue-400");
-              b.classList.add("text-apple-textMuted", "dark:text-apple-darkTextMuted");
+              b.classList.remove("text-[#1e66f5]", "dark:text-[#89b4fa]", "font-bold", "opacity-100");
+              b.classList.add("text-text-color", "font-medium", "opacity-50");
             });
-            btn.classList.remove("text-apple-textMuted", "dark:text-apple-darkTextMuted");
-            btn.classList.add("text-blue-600", "dark:text-blue-400");
+            btn.classList.remove("text-text-color", "font-medium", "opacity-50");
+            btn.classList.add("text-[#1e66f5]", "dark:text-[#89b4fa]", "font-bold", "opacity-100");
           };
 
           const applyView = () => {

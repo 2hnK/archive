@@ -1,105 +1,110 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import TimeProgress from "../components/TimeProgress.astro";
 import { getCollection } from "astro:content";
 
 const allArticles = await getCollection("articles");
 const sortedArticles = allArticles.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const latestArticles = sortedArticles.slice(0, 15); // Show more articles in the board
+const latestArticles = sortedArticles.slice(0, 5); // Just a few for the home page
 
-const categories = Array.from(new Set(allArticles.map((a) => a.data.category))).sort();
+const projects = [
+  { title: "AI Canvas Writer", desc: "시각적 AI 프롬프트 에디터", date: "2026", slug: "ai-canvas-writer" },
+  { title: "DevJournal CLI", desc: "마크다운 포스트 자동 배포", date: "2025", slug: "devjournal-cli" },
+  { title: "Minimal System", desc: "공통 디자인 시스템 프레임워크", date: "2024", slug: "minimal-system" }
+];
 ---
 
-<BaseLayout title="DevArchive" description="개발 아카이브">
-  <main class="pb-24" style="padding-top: 140px;">
-    <section class="max-w-[1100px] mx-auto px-6 reveal-up md:flex md:items-start md:gap-x-16">
-      <!-- Left Sidebar -->
-      <div class="mb-16 md:mb-0 w-full md:w-[260px] flex-shrink-0 md:sticky md:top-32">
-        <div class="mb-12">
-          <span
-            class="text-[10px] uppercase tracking-[0.25em] font-bold text-apple-textMuted dark:text-apple-darkTextMuted block mb-4"
-          >
-            Explore Topics
-          </span>
-          <div class="flex flex-wrap gap-2">
-            {
-              categories.map((cat) => (
-                <a
-                  href={`/articles?cat=${encodeURIComponent(cat)}`}
-                  class="glass-pill px-4 py-1.5 text-[12px] font-semibold tracking-wide text-apple-text dark:text-apple-darkText hover:text-[#1e66f5] dark:hover:text-[#89b4fa] hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300 transform hover:scale-[1.05] border border-black/5 dark:border-white/10 shadow-sm"
-                >
-                  {cat}
-                </a>
-              ))
-            }
-          </div>
+<BaseLayout title="Min Archive" description="Artistic Dev Blog">
+  <main class="w-full min-h-screen pt-[20vh] pb-32 px-6 md:px-12 lg:px-24">
+    
+    <!-- Hero Typography Section -->
+    <section class="max-w-7xl mx-auto mb-32 md:mb-48 reveal-up">
+      <div class="flex flex-col gap-2 md:gap-0">
+        <h1 class="text-[12vw] md:text-[8vw] font-serif font-black leading-[0.8] tracking-tighter uppercase text-transparent !bg-clip-text bg-gradient-to-r from-neutral-900 to-neutral-500 dark:from-neutral-100 dark:to-neutral-500">
+          CRAFTING
+        </h1>
+        <div class="flex items-center gap-4 md:gap-12 ml-[10vw]">
+          <span class="block w-12 md:w-32 h-[2px] bg-accent-color md:mt-4"></span>
+          <h1 class="text-[12vw] md:text-[8vw] font-serif font-black leading-[0.8] tracking-tighter uppercase">
+            CODE & 
+          </h1>
         </div>
+        <h1 class="text-[12vw] md:text-[8vw] font-serif font-black leading-[0.8] tracking-tighter uppercase text-right mr-[5vw] italic">
+          EXPERIENCE.
+        </h1>
+      </div>
+      
+      <div class="mt-16 md:mt-24 max-w-xl ml-auto border-l border-accent-color pl-6 reveal-up stagger-1">
+        <p class="text-lg md:text-xl font-sans font-medium opacity-80 leading-relaxed">
+          I build digital spaces that merge extreme functionality with uncompromising aesthetic principles. Welcome to my creative archive.
+        </p>
+      </div>
+    </section>
 
-        <div>
-          <TimeProgress mini={true} />
+
+    <!-- Content Split Layout -->
+    <section class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-24">
+      
+      <!-- Latest Articles -->
+      <div class="reveal-up">
+        <div class="flex justify-between items-end mb-12">
+          <h2 class="text-4xl font-serif font-bold tracking-tight">Journal</h2>
+          <a href="/articles" class="artistic-link uppercase tracking-widest text-xs font-bold font-sans">View All</a>
+        </div>
+        
+        <div class="flex flex-col gap-4">
+          {latestArticles.map((article) => (
+            <a href={`/articles/${article.id}`} class="glass-panel p-6 rounded-2xl group flex flex-col gap-2 hover:-translate-y-1 transition-all duration-300 reveal-up stagger-1">
+              <div class="flex justify-between items-start gap-4">
+                <h3 class="text-2xl font-serif font-semibold group-hover:text-accent-color transition-colors duration-300">
+                  {article.data.title}
+                </h3>
+                <span class="material-symbols-outlined text-2xl opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1">
+                  arrow_forward
+                </span>
+              </div>
+              <div class="flex items-center gap-4 text-xs tracking-widest font-sans uppercase font-bold opacity-60">
+                <span class="text-accent-color glass-pill px-2 py-0.5">{article.data.category}</span>
+                <span>/</span>
+                <span>
+                  {article.data.date.toLocaleDateString("ko-KR", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                  }).replace(/\./g, "-").replace(/ /g, "").slice(0, -1)}
+                </span>
+              </div>
+            </a>
+          ))}
         </div>
       </div>
 
-      <!-- Main Column: Board View Articles -->
-      <div class="flex-1 w-full relative max-w-[800px]">
-        <div
-          class="flex justify-between items-end mb-8 border-b border-black/10 dark:border-white/10 pb-6"
-        >
-          <div>
-            <span
-              class="text-[10px] uppercase tracking-[0.25em] font-bold text-apple-textMuted dark:text-apple-darkTextMuted block mb-2"
-              >Latest Articles</span
-            >
-            <h2 class="text-2xl font-bold tracking-tight text-apple-text dark:text-apple-darkText">
-              최근 게시물
-            </h2>
-          </div>
-          <a href="/articles" class="btn-premium group text-[12px] px-4 py-2 font-bold mb-1">
-            아티클 전체 보기
-            <span
-              class="material-symbols-outlined text-[15px] group-hover:translate-x-1 transition-transform"
-              >arrow_forward</span
-            >
-          </a>
+      <!-- Featured Projects (Editorial List Style) -->
+      <div class="reveal-up stagger-1 md:mt-32">
+        <div class="flex justify-between items-end mb-12">
+          <h2 class="text-4xl font-serif font-bold tracking-tight">Works</h2>
+          <a href="/project" class="artistic-link uppercase tracking-widest text-xs font-bold font-sans">View All</a>
         </div>
-
-        <div class="flex flex-col gap-3">
-          {
-            latestArticles.map((article) => (
-              <a
-                href={`/articles/${article.id}`}
-                class="group flex items-center justify-between p-4 md:px-5 md:py-4 rounded-2xl bg-white/40 dark:bg-apple-darkSurface/40 backdrop-blur-xl border border-black/5 dark:border-white/5 hover:bg-white/80 dark:hover:bg-white/[0.08] hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:border-black/10 dark:hover:border-white/10 transition-all duration-300 h-[72px] md:h-[64px]"
-              >
-                <div class="flex flex-col md:flex-row md:items-center justify-start gap-1.5 md:gap-6 min-w-0 flex-1">
-                  <span class="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.15em] text-[#1e66f5] dark:text-[#89b4fa] md:w-[120px] shrink-0 text-left truncate">
-                    {article.data.category}
-                  </span>
-                  <h3 class="text-[13px] md:text-[14px] font-bold text-apple-text dark:text-apple-darkText group-hover:text-[#1e66f5] dark:group-hover:text-[#89b4fa] truncate text-left transition-colors duration-300">
-                    {article.data.title}
+        
+        <div class="editorial-list">
+          {projects.map((proj, idx) => (
+            <a href={`/project/${proj.slug}`} class="editorial-list-item group block py-8 px-4 cursor-pointer reveal-up stagger-2">
+              <div class="flex justify-between items-center gap-4">
+                <div class="flex flex-col gap-1.5">
+                  <h3 class="text-3xl font-serif font-bold tracking-tighter group-hover:text-inherit transition-colors duration-300">
+                    {proj.title}
                   </h3>
+                  <span class="text-sm font-sans opacity-60">{proj.desc}</span>
                 </div>
-                <div class="flex items-center gap-4 shrink-0 pl-4">
-                  <span class="text-[10px] font-medium text-apple-textMuted dark:text-apple-darkTextMuted tabular-nums">
-                    {article.data.date
-                      .toLocaleDateString("ko-KR", {
-                        year: "numeric",
-                        month: "2-digit",
-                        day: "2-digit",
-                      })
-                      .replace(/\./g, "-")
-                      .replace(/ /g, "")
-                      .slice(0, -1)}
-                  </span>
-                  <span class="material-symbols-outlined text-[18px] text-[#1e66f5] dark:text-[#89b4fa] opacity-0 -translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 hidden md:block">
-                    arrow_forward
-                  </span>
+                <div class="flex items-center gap-4 shrink-0">
+                  <span class="text-xs font-sans font-bold uppercase tracking-widest opacity-40">{proj.date}</span>
+                  <span class="material-symbols-outlined text-xl editorial-list-arrow">arrow_forward</span>
                 </div>
-              </a>
-            ))
-          }
+              </div>
+            </a>
+          ))}
         </div>
       </div>
-      <!-- End of Main Column -->
+      
     </section>
   </main>
 </BaseLayout>
@@ -110,27 +115,16 @@ const categories = Array.from(new Set(allArticles.map((a) => a.data.category))).
       (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("active", "translate-y-0", "opacity-100");
-            entry.target.classList.remove("translate-y-8", "opacity-0");
+            entry.target.classList.add("active");
             observer.unobserve(entry.target);
           }
         });
       },
-      { root: null, rootMargin: "0px 0px 100px 0px", threshold: 0 },
+      { root: null, rootMargin: "0px 0px -50px 0px", threshold: 0.1 },
     );
 
-    const els = document.querySelectorAll(".reveal-up, .fade-in-up");
+    const els = document.querySelectorAll(".reveal-up");
     els.forEach((el) => {
-      // Only hide if not already marked active (prevent double-hide on route change)
-      if (!el.classList.contains("active")) {
-        el.classList.add(
-          "transition-all",
-          "duration-1000",
-          "ease-[cubic-bezier(0.16,1,0.3,1)]",
-          "opacity-0",
-          "translate-y-8",
-        );
-      }
       revealObserver.observe(el);
     });
   });

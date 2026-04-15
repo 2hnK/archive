@@ -1,604 +1,168 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { Image } from "astro:assets";
-import hanbatLogo from "../assets/hanbat_logo.svg";
-import ssafyLogo from "../assets/ssafy_logo.svg";
-import kicsLogo from "../assets/kics_logo.jpg";
-import engineerLogo from "../assets/engineer_information_processing_logo.png";
-import sqldLogo from "../assets/sqld_logo.png";
-import langchainLogo from "../assets/langchain-color.svg";
 
-const projects = [
+import ssafyLogo from "../assets/ssafy_logo.svg";
+import hanbatLogo from "../assets/hanbat_logo.svg";
+import kicsLogo from "../assets/kics_logo.jpg";
+import sqldLogo from "../assets/sqld_logo.png";
+import eipLogo from "../assets/engineer_information_processing_logo.png";
+
+const timeline = [
   {
-    title: "AI Canvas Writer",
-    description:
-      "로직 노드 기반의 시각적 AI 프롬프트 에디터 도구입니다. 복잡한 시스템 프롬프팅 아키텍처를 시각화하여 사용성을 극대화했습니다.",
-    tags: ["React", "Zustand", "TailwindCSS"],
-    url: "#",
     year: "2026",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuD6TjGTWs53bAhDdSkfxKbZdM2TzdQI_ZJtmDiDK-bbOzPxxSssBUA9FGmSjTtwcgK7txfWRF9vt7TvbvgbPq1PuassGBT7NETRH7F8x-cNetH-9yuMvSaiweyZStMjrtnCbvCfhkcgQ8Kyf4uE9HpJkV3GYFlP7w4aCH8Yn3tshg_UDfWDNBnT5BEM4cw804ZWp6CEeh2apzFDSwCCB2W7VEJcZe43KkAhavwv3opq_ebTxM_VC5EKdLBDvyn4K0p49vYkMzWJkVnJ",
+    desc: "삼성청년SW/AI아카데미(SSAFY)",
+    detail: "웹 개발 및 AI 활용 능력 심화",
+    logo: ssafyLogo,
   },
   {
-    title: "DevJournal CLI",
-    description:
-      "터미널에서 직접 마크다운 포스트를 작성하고 Vercel 환경으로 자동 배포하는 서버리스 데스크탑 관리 시스템입니다.",
-    tags: ["Rust", "CLI", "Astro", "Vercel"],
-    url: "#",
-    year: "2025",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuC5AEbqrNzQ1-SvYIJIWt1EuApIbBHl_HBblfMw96fDdkS7EzKHu6Zew16nnCG6WbwvC3aqDeHI0EFJeqB14NjzgjVvsEn67XJU_OV4uJscdG7XFLkIoYOclpv1m1ZPOgQLmeus5zT3nsjuPlZHEPgM298MUI-3mJiEwc_byTMWwtC93z0TzmIsh5nzbS8zndKZ_aGWJls6nfuWluG_lw7BqYVGhrj0lt521kef-xRmkyI83OhraLasbTeVB6f6BhrrLNwvuj8SjvMu",
+    year: "2026",
+    desc: "국립한밭대학교 컴퓨터공학 학사",
+    detail: "소프트웨어 엔지니어링 펀더멘탈 확립",
+    logo: hanbatLogo,
   },
   {
-    title: "Minimal Design System",
-    description:
-      "디자이너와 개발자 사이의 간극을 완전히 좁히기 위한 Tailwind CSS 기반 사내 공통 디자인 시스템 컴포넌트 프레임워크입니다.",
-    tags: ["Storybook", "Figma", "Design", "CSS"],
-    url: "#",
-    year: "2024",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuC4eQMIkMBmHMy3whVOgSHFkBGYJ9Bcspd0PMXpnMrd2KLWPfT10Pbd5wWQ3W_-bRtrli8_P0ppaeAg_NZqzjWFAxixxlsgUYzpY98m81uCXn5c7sIAikTX7ioocJTKj9q0XPdEpQMU482kUmXh5zaDUW5GWUUcaHRsucLRWdzAepOgcw57JITm-UG49TI_cYso5dZR_hdhjWj2vogjS1-mnyOqLOu4elVXDrOKtj7gj6NU_eN_ykKRC-CtszyDvnJfT3zZqynw0Pst",
+    year: "2026",
+    desc: "KICS 동계종합학술발표회",
+    detail: "비용효율적인 지능형 AICC 연구 논문 투고 - 장려상",
+    logo: kicsLogo,
   },
+];
+
+const certifications = [
+  { item: "정보처리기사", date: "2025.09", logo: eipLogo },
+  { item: "SQLD", date: "2025.06", logo: sqldLogo },
+];
+
+const skills = [
+  { name: "Java", icon: "https://cdn.simpleicons.org/openjdk" },
+  { name: "Python", icon: "https://cdn.simpleicons.org/python" },
+  { name: "Spring", icon: "https://cdn.simpleicons.org/spring" },
+  { name: "Spring AI", icon: "https://cdn.simpleicons.org/spring" },
+  { name: "LangChain", icon: "https://cdn.simpleicons.org/langchain" },
+  { name: "MySQL", icon: "https://cdn.simpleicons.org/mysql" },
+  { name: "PostgreSQL", icon: "https://cdn.simpleicons.org/postgresql" },
+  { name: "Redis", icon: "https://cdn.simpleicons.org/redis" },
+  { name: "Docker", icon: "https://cdn.simpleicons.org/docker" },
+  { name: "AWS", icon: "https://cdn.simpleicons.org/amazonwebservices" },
 ];
 ---
 
-<BaseLayout
-  title="소개 | DevArchive"
-  description="시스템 설계와 인간 중심의 의도에 대해 고민합니다."
->
-  <main>
-    <div class="transition-colors pb-12">
-    <!-- Minimal Hero Section -->
-    <section
-      class="max-w-[900px] mx-auto px-0 pt-20 pb-10 fade-in-up md:pt-30 mt-4 md:mt-0 flex flex-col sm:flex-row sm:items-center gap-6 md:gap-16"
-    >
-      <!-- Profile Image Container -->
-      <div
-        class="w-24 h-24 sm:w-[120px] sm:h-[120px] rounded-[1.8rem] bg-gradient-to-br from-black/5 to-black/10 dark:from-white/5 dark:to-white/10 border border-black/5 dark:border-white/5 shadow-sm overflow-hidden flex-shrink-0 relative group flex items-center justify-center cursor-default"
-      >
-        <!-- Placeholder Icon. TODO: 교체할 실제 프로필 이미지가 있다면 이 위치에 <img> 태그나 <Image> 컴포넌트를 사용하세요. -->
-        <span
-          class="material-symbols-outlined text-[2.5rem] opacity-40 text-apple-text dark:text-apple-darkText transition-transform duration-500 group-hover:scale-110"
-        >
-          person
-        </span>
-      </div>
-
-      <!-- Hero Text -->
-      <div class="flex-1">
-        <h1
-          class="text-2xl sm:text-xl font-bold tracking-tight text-apple-text dark:text-apple-darkText mb-1 leading-snug break-keep"
-        >
-          안녕하세요.
-          <!-- <span class="text-apple-textMuted dark:text-apple-darkTextMuted"
-            >소프트웨어 개발자입니다.</span
-          > -->
-        </h1>
-        <p
-          class="text-[14px] md:text-[15px] text-apple-textMuted dark:text-apple-darkTextMuted font-medium leading-relaxed max-w-xl break-keep"
-        >
-          겉으로 보이는 결과보다 과정과 본질적인 것이 더 중요하다고 생각합니다.<br />
-          조금은 느리더라도 문제의 본질을 놓치지 않는 개발자가 되겠습니다.
+<BaseLayout title="About | Min Archive" description="Minimalist About Page">
+  <main class="w-full min-h-screen pt-[20vh] pb-32 px-6 md:px-12 lg:px-24 max-w-4xl mx-auto">
+    <div class="mb-32 reveal-up">
+      <h1 class="text-6xl md:text-8xl font-serif font-black tracking-tighter mb-12">
+        I am a <br /> Developer.
+      </h1>
+      <div class="prose max-w-none text-xl md:text-2xl font-serif leading-relaxed opacity-90">
+        <p>
+          겉으로 보이는 결과보다 과정과 본질적인 것이 더 중요하다고 믿습니다. 조금은 느리더라도
+          문제의 본질을 놓치지 않는 개발자가 되기 위해 끊임없이 탐구합니다.
+        </p>
+        <p class="mt-8">
+          저는 시스템의 구조적 안정을 추구하며, 디지털 캔버스 위에 기능적 아름다움을 코드로
+          설계합니다.
         </p>
       </div>
-    </section>
-      <section class="max-w-[1000px] mx-auto px-6 mb-16 md:flex md:items-start md:gap-x-12">
-        <div class="mb-4 md:mb-0 reveal-up shrink-0 md:w-[150px]">
-          <span
-            class="text-[9px] tracking-[0.15em] font-bold uppercase text-apple-textMuted dark:text-apple-darkTextMuted mb-1 block"
-            >Capabilities</span
-          >
-          <h2
-            class="text-xl md:text-2xl font-bold tracking-tight text-apple-text dark:text-apple-darkText md:leading-[1.15] break-keep"
-          >
-            역량 및 자격
-          </h2>
-        </div>
+    </div>
 
-        <div
-          class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 auto-rows-[minmax(140px,auto)] w-full"
+    <!-- Timeline & Capabilities (Split) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-24 mt-24">
+      <!-- Timeline -->
+      <div class="reveal-up stagger-1">
+        <h3
+          class="text-sm font-sans font-bold uppercase tracking-widest text-accent-color mb-8 border-b border-border-color pb-4 flex items-center gap-2"
         >
-          <!-- Core Stack (Span 1) -->
-          <div class="sm:col-span-1 glass-panel p-6 reveal-up flex flex-col justify-between">
-            <div class="mb-4">
-              <span
-                class="text-apple-textMuted dark:text-apple-darkTextMuted text-[10px] font-bold tracking-wider uppercase mb-1 block"
-                >Foundations</span
-              >
-              <h3 class="text-[17px] font-bold text-apple-text dark:text-apple-darkText">
-                Core Stack
-              </h3>
-            </div>
-            <div class="flex flex-wrap gap-2.5">
-              <!-- Java -->
-              <div
-                class="group flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 cursor-default transition-all duration-300"
-                style="--brand-color: #E44E00"
-              >
-                <img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg"
-                  alt="Java"
-                  class="w-[24px] h-[24px] object-contain opacity-80 grayscale-[30%] group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
-                />
-                <span class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText"
-                  >Java</span
-                >
-              </div>
-              <!-- Python -->
-              <div
-                class="group flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 cursor-default transition-all duration-300"
-                style="--brand-color: #3776AB"
-              >
-                <img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
-                  alt="Python"
-                  class="w-[24px] h-[24px] object-contain opacity-80 grayscale-[30%] group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
-                />
-                <span class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText"
-                  >Python</span
-                >
-              </div>
-              <!-- Spring -->
-              <div
-                class="group flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 cursor-default transition-all duration-300"
-                style="--brand-color: #6DB33F"
-              >
-                <img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg"
-                  alt="Spring"
-                  class="w-[24px] h-[24px] object-contain opacity-80 grayscale-[30%] group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
-                />
-                <span class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText"
-                  >Spring</span
-                >
-              </div>
-            </div>
-          </div>
-
-          <!-- AI Ecosystem (Span 1) -->
-          <div
-            class="sm:col-span-1 glass-panel p-6 reveal-up stagger-1 flex flex-col justify-between"
-          >
-            <div class="mb-4">
-              <span
-                class="text-apple-textMuted dark:text-apple-darkTextMuted text-[10px] font-bold tracking-wider uppercase mb-1 block"
-                >Learning</span
-              >
-              <h3 class="text-[17px] font-bold text-apple-text dark:text-apple-darkText">
-                AI Ecosystem
-              </h3>
-            </div>
-            <div class="flex flex-wrap gap-2.5">
-              <!-- Spring AI -->
-              <div
-                class="group flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 cursor-default transition-all duration-300"
-                style="--brand-color: #6DB33F"
-              >
-                <img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg"
-                  alt="Spring AI"
-                  class="w-[24px] h-[24px] object-contain opacity-80 grayscale-[30%] group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
-                />
-                <span class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText"
-                  >Spring AI</span
-                >
-              </div>
-              <!-- LangChain -->
-              <div
-                class="group flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 cursor-default transition-all duration-300"
-                style="--brand-color: #1E824C"
-              >
-                <img
-                  src={langchainLogo.src}
-                  alt="LangChain"
-                  class="w-[24px] h-[24px] object-contain opacity-80 grayscale-[30%] group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
-                />
-                <span class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText"
-                  >LangChain</span
-                >
-              </div>
-            </div>
-          </div>
-
-          <!-- Data Stores (Span 1) -->
-          <div
-            class="sm:col-span-1 glass-panel p-6 reveal-up stagger-2 flex flex-col justify-between"
-          >
-            <div class="mb-4">
-              <span
-                class="text-apple-textMuted dark:text-apple-darkTextMuted text-[10px] font-bold tracking-wider uppercase mb-1 block"
-                >Storage</span
-              >
-              <h3 class="text-[17px] font-bold text-apple-text dark:text-apple-darkText">
-                Data Stores
-              </h3>
-            </div>
-            <div class="flex flex-wrap gap-2.5">
-              <!-- MySQL -->
-              <div
-                class="group flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 cursor-default transition-all duration-300"
-                style="--brand-color: #00758F"
-              >
-                <img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg"
-                  alt="MySQL"
-                  class="w-[24px] h-[24px] object-contain opacity-80 grayscale-[30%] group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
-                />
-                <span class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText"
-                  >MySQL</span
-                >
-              </div>
-              <!-- PostgreSQL -->
-              <div
-                class="group flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 cursor-default transition-all duration-300"
-                style="--brand-color: #336791"
-              >
-                <img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg"
-                  alt="PostgreSQL"
-                  class="w-[24px] h-[24px] object-contain opacity-80 grayscale-[30%] group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
-                />
-                <span class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText"
-                  >PostgreSQL</span
-                >
-              </div>
-              <!-- Redis -->
-              <div
-                class="group flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 cursor-default transition-all duration-300"
-                style="--brand-color: #DC3B22"
-              >
-                <img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg"
-                  alt="Redis"
-                  class="w-[24px] h-[24px] object-contain opacity-80 grayscale-[30%] group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
-                />
-                <span class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText"
-                  >Redis</span
-                >
-              </div>
-            </div>
-          </div>
-
-          <!-- Infrastructure (Span 1) -->
-          <div
-            class="sm:col-span-1 glass-panel p-6 reveal-up stagger-3 flex flex-col justify-between"
-          >
-            <div class="mb-4">
-              <span
-                class="text-apple-textMuted dark:text-apple-darkTextMuted text-[10px] font-bold tracking-wider uppercase mb-1 block"
-                >Cloud & DevOps</span
-              >
-              <h3 class="text-[17px] font-bold text-apple-text dark:text-apple-darkText">
-                Infrastructure
-              </h3>
-            </div>
-            <div class="flex flex-wrap gap-2.5">
-              <!-- Docker -->
-              <div
-                class="group flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 cursor-default transition-all duration-300"
-                style="--brand-color: #2496ED"
-              >
-                <img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg"
-                  alt="Docker"
-                  class="w-[24px] h-[24px] object-contain opacity-80 grayscale-[30%] group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
-                />
-                <span class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText"
-                  >Docker</span
-                >
-              </div>
-              <!-- AWS -->
-              <div
-                class="group flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 cursor-default transition-all duration-300"
-                style="--brand-color: #FF9900"
-              >
-                <img
-                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg"
-                  alt="AWS"
-                  class="w-[28px] h-[28px] object-contain opacity-80 grayscale-[30%] group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
-                />
-                <span class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText"
-                  >AWS</span
-                >
-              </div>
-            </div>
-          </div>
-
-          <!-- Acquisitions / Certifications (Span 2) -->
-          <div
-            class="sm:col-span-2 glass-panel px-6 py-5 reveal-up flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6"
-            style="height: 100px;"
-          >
-            <div class="flex-shrink-0">
-              <span
-                class="text-apple-textMuted dark:text-apple-darkTextMuted text-[10px] font-bold tracking-wider uppercase mb-1 block"
-                >Milestones</span
-              >
-              <h3
-                class="text-[17px] font-bold text-apple-text dark:text-apple-darkText leading-none"
-              >
-                Certifications
-              </h3>
-            </div>
-            <div
-              class="flex flex-col sm:flex-row gap-4 items-center sm:items-end justify-start sm:justify-end w-full"
-            >
-              <!-- 정보처리기사 -->
-              <div
-                class="group flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 cursor-default transition-all duration-300"
-                style="--brand-color: #3b82f6"
-              >
-                <div
-                  class="w-[30px] h-[30px] rounded-full bg-white dark:bg-apple-darkSurface flex flex-shrink-0 items-center justify-center border border-black/5 dark:border-white/10 overflow-hidden shadow-sm p-[3px] transition-all duration-300 opacity-80 grayscale-[30%] group-hover:opacity-100 group-hover:grayscale-0"
-                >
-                  <Image
-                    src={engineerLogo}
-                    alt="정보처리기사 로고"
-                    class="w-full h-full object-contain rounded-full transition-transform duration-300"
-                  />
-                </div>
-                <div class="flex flex-col justify-center leading-tight pt-0.5">
-                  <h4
-                    class="font-bold text-[13px] text-apple-text dark:text-apple-darkText transition-colors"
-                  >
-                    정보처리기사
-                  </h4>
-                  <span
-                    class="text-[9px] font-medium text-apple-textMuted dark:text-apple-darkTextMuted block mt-0.5"
-                    >2025.09.12</span
-                  >
-                </div>
-              </div>
-              <!-- SQLD -->
-              <div
-                class="group flex items-center gap-2.5 glass-pill px-4 py-2.5 hover:-translate-y-1 cursor-default transition-all duration-300"
-                style="--brand-color: #10b981"
-              >
-                <div
-                  class="w-[30px] h-[30px] rounded-full bg-white dark:bg-apple-darkSurface flex flex-shrink-0 items-center justify-center border border-black/5 dark:border-white/10 overflow-hidden shadow-sm p-[3px] transition-all duration-300 opacity-80 grayscale-[30%] group-hover:opacity-100 group-hover:grayscale-0"
-                >
-                  <Image
-                    src={sqldLogo}
-                    alt="SQLD 로고"
-                    class="w-full h-full object-contain rounded-full transition-transform duration-300"
-                  />
-                </div>
-                <div class="flex flex-col justify-center leading-tight pt-0.5">
-                  <h4
-                    class="font-bold text-[13px] text-apple-text dark:text-apple-darkText transition-colors"
-                  >
-                    SQLD
-                  </h4>
-                  <span
-                    class="text-[9px] font-medium text-apple-textMuted dark:text-apple-darkTextMuted block mt-0.5"
-                    >2025.06.27</span
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Timeline Section -->
-      <section class="max-w-[1000px] mx-auto px-6 pb-20 md:flex md:items-start md:gap-x-12">
-        <div class="mb-4 md:mb-0 reveal-up shrink-0 md:w-[150px]">
-          <span
-            class="text-[9px] tracking-[0.15em] font-bold uppercase text-apple-textMuted dark:text-apple-darkTextMuted mb-1 block"
-            >The Timeline</span
-          >
-          <h2
-            class="text-xl md:text-2xl font-bold tracking-tight text-apple-text dark:text-apple-darkText md:leading-[1.15] break-keep"
-          >
-            타임라인
-          </h2>
-        </div>
-
-        <div class="flex-1 relative w-full">
-          <!-- Vertical Line -->
-          <div
-            class="absolute left-[3px] top-4 bottom-0 w-[1px] bg-apple-border/70 dark:bg-apple-darkBorder/70"
-          >
-          </div>
-
-          <div class="relative pl-8 reveal-up stagger-1">
-            <div
-              class="absolute left-[-1.5px] top-4 w-[6px] h-[6px] rounded-full bg-apple-text dark:bg-apple-darkText ring-4 ring-apple-background dark:ring-apple-darkBackground z-10"
-            >
-            </div>
-            <div>
-              <div class="flex items-center gap-3 mb-2">
-                <div
-                  class="w-10 h-10 flex-shrink-0 rounded-[10px] bg-white flex items-center justify-center p-1.5 border border-black/5 dark:border-white/5 shadow-sm"
-                >
-                  <Image src={ssafyLogo} alt="SSAFY Logo" class="w-full h-full object-contain" />
-                </div>
-                <div>
-                  <span
-                    class="text-[0.65rem] font-bold text-apple-text dark:text-apple-darkText mb-0.5 block"
-                    >2026.01 ~ 현재</span
-                  >
-                  <h4 class="text-lg font-bold text-apple-text dark:text-apple-darkText">
-                    삼성청년SW/AI아카데미(SSAFY)
-                  </h4>
-                </div>
-              </div>
-              <p
-                class="text-[14px] text-apple-textMuted dark:text-apple-darkTextMuted leading-relaxed break-keep"
-              >
-                체계적인 실무 중심의 교육을 통해 웹 개발 및 AI 활용 능력 역량을 강화하였으며,<br />
-                복잡한 로직을 해결하는 알고리즘 문제 해결 능력을 향상시켰습니다.
-              </p>
-            </div>
-          </div>
-
-          <div class="relative pl-8 reveal-up stagger-2 mt-10">
-            <div
-              class="absolute left-[-1.5px] top-4 w-[6px] h-[6px] rounded-full bg-apple-textMuted dark:bg-apple-darkTextMuted ring-4 ring-apple-background dark:ring-apple-darkBackground z-10"
-            >
-            </div>
-            <div>
-              <div class="flex items-center gap-3 mb-2">
-                <div
-                  class="w-10 h-10 flex-shrink-0 rounded-[10px] bg-white flex items-center justify-center p-1.5 border border-black/5 dark:border-white/5 shadow-sm"
-                >
-                  <Image
-                    src={hanbatLogo}
-                    alt="Hanbat University Logo"
-                    class="w-full h-full object-contain"
-                  />
-                </div>
-                <div>
-                  <span
-                    class="text-[0.65rem] font-bold text-apple-textMuted dark:text-apple-darkTextMuted mb-0.5 block"
-                    >~ 2026.02</span
-                  >
-                  <h4 class="text-lg font-bold text-apple-text dark:text-apple-darkText">
-                    국립한밭대학교 학사 졸업
-                  </h4>
-                </div>
-              </div>
-              <p
-                class="text-[14px] text-apple-textMuted dark:text-apple-darkTextMuted leading-relaxed break-keep"
-              >
-                컴퓨터공학 전공 과정을 통해 자료구조, 알고리즘 등 소프트웨어 엔지니어링의 기본
-                소양을 체계적으로 갖추었습니다.
-              </p>
-            </div>
-          </div>
-
-          <!-- 논문 투고 서브 브랜치 -->
-          <div class="relative pl-8 reveal-up stagger-3 flex items-center mt-4">
-            <!-- 가로 브랜치 라인 -->
-            <div
-              class="absolute left-[3px] top-1/2 -translate-y-1/2 w-[24px] h-[1px] bg-apple-border/70 dark:bg-apple-darkBorder/70"
-            >
-            </div>
-
-            <!-- 글래스모피즘 서브 카드 -->
-            <div
-              class="relative bg-white/60 dark:bg-white/[0.04] backdrop-blur-xl p-4 rounded-xl border border-white/80 dark:border-white/10 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_24px_-4px_rgba(0,0,0,0.3)] cursor-default ml-2"
-            >
-              <div class="flex items-center gap-3">
-                <div
-                  class="w-8 h-8 flex-shrink-0 rounded-lg bg-white dark:bg-white/10 flex items-center justify-center p-1 border border-black/5 dark:border-white/10 shadow-sm overflow-hidden"
-                >
-                  <Image
-                    src={kicsLogo}
-                    alt="KICS Logo"
-                    class="w-full h-full object-contain rounded-md"
-                  />
-                </div>
-                <div class="min-w-0 flex-1">
-                  <h5
-                    class="font-semibold text-[13px] text-apple-text dark:text-apple-darkText leading-snug break-keep"
-                  >
-                    비용효율적인 지능형 AICC를 위한 자가진화형 4계층 정규화 게이트
-                  </h5>
-                  <div class="flex items-center gap-2 mt-0.5 flex-wrap">
-                    <span
-                      class="text-[0.7rem] font-medium text-apple-textMuted dark:text-apple-darkTextMuted"
-                      >KICS 한국통신학회 · 2026년도 동계종합학술발표회(KICS Winter Conference 2026)</span
-                    >
-                    <span
-                      class="inline-flex items-center gap-0.5 text-[0.7rem] font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/15 px-1 py-0 rounded-full border border-amber-200/60 dark:border-amber-500/20"
-                    >
-                      <span class="material-symbols-outlined text-[0.7em]">emoji_events</span>
-                      장려상
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Selected Projects Section -->
-      <section class="max-w-[1000px] mx-auto px-6 pb-20 md:flex md:items-start md:gap-x-12">
-        <div class="mb-4 md:mb-0 reveal-up shrink-0 md:w-[150px]">
-          <span
-            class="text-[9px] tracking-[0.15em] font-bold uppercase text-apple-textMuted dark:text-apple-darkTextMuted mb-1 block"
-            >Selected Work</span
-          >
-          <h2
-            class="text-xl md:text-2xl font-bold tracking-tight text-apple-text dark:text-apple-darkText md:leading-[1.15] break-keep"
-          >
-            프로젝트
-          </h2>
-        </div>
-
-        <div
-          class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 auto-rows-[220px] reveal-up w-full"
-        >
+          <span class="material-symbols-outlined text-[16px]">timeline</span>
+          Milestones
+        </h3>
+        <ul class="flex flex-col gap-6">
           {
-            projects.map((proj, i) => (
-              <a
-                href={proj.url}
-                class={`group block relative rounded-[2rem] overflow-hidden bg-black border border-apple-border/50 dark:border-white/10 hover:border-black/20 dark:hover:border-white/30 transition-all duration-700 ${i === 0 ? "md:col-span-2 lg:col-span-2" : ""} ${i === 2 ? "md:col-span-2 lg:col-span-2 md:aspect-auto" : ""}`}
-              >
+            timeline.map((t) => (
+              <li class="glass-panel p-5 rounded-3xl flex items-center gap-3 hover:-translate-y-1 transition-transform duration-300">
                 <img
-                  src={proj.image}
-                  alt={proj.title}
-                  class="absolute inset-0 w-full h-full object-cover transition-all duration-1000 group-hover:scale-105 opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-80"
+                  src={typeof t.logo === "string" ? t.logo : t.logo.src}
+                  alt={t.desc}
+                  class="w-6 h-6 object-contain rounded shrink-0"
                 />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
-                <div class="absolute inset-0 p-6 flex flex-col justify-between z-10">
-                  <div class="flex justify-end">
-                    <span class="px-3 py-1 bg-white/10 backdrop-blur-xl rounded-full text-[10px] font-bold tracking-widest uppercase text-white shadow-lg border border-white/20">
-                      {proj.year}
-                    </span>
-                  </div>
-                  <div class="transform translate-y-3 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                    <div class="flex flex-wrap gap-1 mb-3 opacity-70 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                      {proj.tags.map((tag) => (
-                        <span class="text-[9px] font-semibold tracking-widest uppercase text-white px-2 py-0.5 border border-white/20 rounded-md bg-white/5 backdrop-blur-sm">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <h2 class="text-2xl font-bold text-white tracking-tight leading-tight mb-2">
-                      {proj.title}
-                    </h2>
-                    <p class="text-zinc-300 text-[13px] leading-relaxed max-w-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150 line-clamp-2 break-keep">
-                      {proj.description}
-                    </p>
-                  </div>
+                <div class="flex flex-col">
+                  <span class="text-xs font-sans font-bold opacity-50 uppercase tracking-widest mb-0.5">
+                    {t.year}
+                  </span>
+                  <span class="text-base font-serif font-bold leading-snug">{t.desc}</span>
+                  <span class="text-xs font-sans opacity-60 uppercase tracking-wide mt-0.5">
+                    {t.detail}
+                  </span>
                 </div>
-              </a>
+              </li>
             ))
           }
+        </ul>
+      </div>
+
+      <!-- Skills & Certs -->
+      <div class="reveal-up stagger-2">
+        <h3
+          class="text-sm font-sans font-bold uppercase tracking-widest text-accent-color mb-8 border-b border-border-color pb-4 flex items-center gap-2"
+        >
+          <span class="material-symbols-outlined text-[16px]">code</span>
+          Technical Canvas
+        </h3>
+
+        <div class="glass-panel p-8 rounded-3xl mb-12 flex flex-col">
+          <ul class="flex flex-wrap gap-3 font-sans text-sm">
+            {
+              skills.map((s) => (
+                <li class="glass-pill px-3 py-1.5 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300 cursor-default flex items-center gap-2">
+                  <img src={s.icon} alt={s.name} class="w-4 h-4 object-contain" />
+                  {s.name}
+                </li>
+              ))
+            }
+          </ul>
         </div>
-      </section>
+
+        <h3
+          class="text-sm font-sans font-bold uppercase tracking-widest text-accent-color mb-8 border-b border-border-color pb-4 flex items-center gap-2"
+        >
+          <span class="material-symbols-outlined text-[16px]">military_tech</span>
+          Certifications
+        </h3>
+        <ul class="flex flex-col gap-4 font-serif text-base">
+          {
+            certifications.map((c) => (
+              <li class="glass-panel p-5 rounded-3xl flex justify-between items-center hover:-translate-y-1 transition-transform duration-300">
+                <div class="flex items-center gap-3">
+                  <img
+                    src={typeof c.logo === "string" ? c.logo : c.logo.src}
+                    alt={c.item}
+                    class="w-6 h-6 object-contain rounded"
+                  />
+                  <span>{c.item}</span>
+                </div>
+                <span class="text-xs font-sans opacity-60 glass-pill px-3 py-1">{c.date}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   </main>
 
   <script>
-    let revealObserver: IntersectionObserver | undefined;
-
     document.addEventListener("astro:page-load", () => {
-      if (revealObserver) revealObserver.disconnect();
+      const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { root: null, rootMargin: "0px 0px -50px 0px", threshold: 0.1 },
+      );
 
-      const revealOptions = {
-        root: null,
-        rootMargin: "0px 0px -50px 0px",
-        threshold: 0.1,
-      };
-
-      const observer = new IntersectionObserver((entries, observerInstance) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-            observerInstance.unobserve(entry.target);
-          }
-        });
-      }, revealOptions);
-
-      revealObserver = observer;
-
-      document.querySelectorAll(".reveal-up").forEach((el) => {
-        observer.observe(el);
-      });
+      document.querySelectorAll(".reveal-up").forEach((el) => revealObserver.observe(el));
     });
   </script>
 </BaseLayout>
