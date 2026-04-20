@@ -13,11 +13,15 @@ const categoryTree: Record<string, string[]> = {};
 const catCounts: Record<string, number> = {};
 const subCounts: Record<string, Record<string, number>> = {};
 
-allArticles.forEach(a => {
+allArticles.forEach((a) => {
   const cat = a.data.category;
   const sub = a.data.subcategory;
   if (!cat) return;
-  if (!categoryTree[cat]) { categoryTree[cat] = []; catCounts[cat] = 0; subCounts[cat] = {}; }
+  if (!categoryTree[cat]) {
+    categoryTree[cat] = [];
+    catCounts[cat] = 0;
+    subCounts[cat] = {};
+  }
   catCounts[cat]++;
   if (sub) {
     if (!categoryTree[cat].includes(sub)) categoryTree[cat].push(sub);
@@ -33,17 +37,25 @@ const getLink = (cat?: string, sub?: string) => {
   return `/articles`;
 };
 
-const BTN_INACTIVE = "outline-none focus:outline-none border-none ring-0 appearance-none bg-transparent text-text-color opacity-40 hover:opacity-100 transition-opacity duration-300 font-sans font-medium group/btn";
-const BTN_ACTIVE = "active-item outline-none focus:outline-none border-none ring-0 appearance-none bg-transparent text-[#1e66f5] dark:text-[#89b4fa] opacity-100 font-bold transition-colors duration-300 group/btn font-sans";
+const BTN_INACTIVE =
+  "outline-none focus:outline-none border-none ring-0 appearance-none bg-transparent text-text-color opacity-40 hover:opacity-100 transition-opacity duration-300 font-sans font-medium group/btn";
+const BTN_ACTIVE =
+  "active-item outline-none focus:outline-none border-none ring-0 appearance-none bg-transparent text-[#1e66f5] dark:text-[#89b4fa] opacity-100 font-bold transition-colors duration-300 group/btn font-sans";
 
-const getClasses = (isActive: boolean) => isActive ? BTN_ACTIVE : BTN_INACTIVE;
+const getClasses = (isActive: boolean) => (isActive ? BTN_ACTIVE : BTN_INACTIVE);
 ---
 
-<div class="w-full h-auto flex flex-col pl-4 reveal-up stagger-1" style="padding-right: 16px;">
-  <h2 class="text-[10px] font-bold tracking-[0.15em] uppercase text-text-color opacity-60 mb-8 text-right pr-2">TOPICS</h2>
+<div class="w-full h-auto flex flex-col pl-4 reveal-up stagger-1" style="padding-right: 8px;">
+  <h2
+    class="text-[12px] font-bold tracking-[0.15em] uppercase text-text-color opacity-60 mb-8 text-right pr-2"
+    style="margin-bottom: 16px;"
+  >
+    TOPICS
+  </h2>
   <div class="relative flex flex-col gap-1 pb-2 pr-[2px]" id="cat-list-container">
-    <div class="absolute right-0 top-3 bottom-0 w-[1px] bg-border-color/20 pointer-events-none z-0"></div>
-    
+    <div class="absolute right-0 top-3 bottom-0 w-[1px] bg-border-color/20 pointer-events-none z-0">
+    </div>
+
     <div
       id="grid-highlight"
       class="absolute -right-[3.5px] w-[calc(100%-12px)] rounded-[1.2rem] custom-glass-highlight z-20 pointer-events-none opacity-0 flex items-center justify-end pr-0 transition-all duration-400 ease-[cubic-bezier(0.25,1,0.5,1)]"
@@ -55,8 +67,12 @@ const getClasses = (isActive: boolean) => isActive ? BTN_ACTIVE : BTN_INACTIVE;
       data-filter="all"
       class={`cat-filter relative z-10 w-full flex items-center justify-end pr-[24px] py-2.5 cursor-pointer ${getClasses(!currentCat)}`}
     >
-      <span class="text-[13px] text-right flex items-center gap-1.5 leading-none">All <span class="text-[10px] font-bold opacity-60">{totalArticleCount}</span></span>
-      <span class="inactive-dot absolute right-[-3.5px] top-1/2 -translate-y-1/2 w-[8px] h-[8px] rounded-full bg-black/20 dark:bg-white/20 transition-all duration-300 group-hover/btn:bg-black/40 dark:group-hover/btn:bg-white/40 z-10"></span>
+      <span class="text-[13px] text-right flex items-center gap-1.5 leading-none"
+        >All <span class="text-[10px] font-bold opacity-60">{totalArticleCount}</span></span
+      >
+      <span
+        class="inactive-dot absolute right-[-3.5px] top-1/2 -translate-y-1/2 w-[8px] h-[8px] rounded-full bg-black/20 dark:bg-white/20 transition-all duration-300 group-hover/btn:bg-black/40 dark:group-hover/btn:bg-white/40 z-10"
+      ></span>
     </a>
 
     {
@@ -75,7 +91,9 @@ const getClasses = (isActive: boolean) => isActive ? BTN_ACTIVE : BTN_INACTIVE;
               <span class="inactive-dot absolute right-[-3.5px] top-1/2 -translate-y-1/2 w-[8px] h-[8px] rounded-full bg-black/20 dark:bg-white/20 transition-all duration-300 group-hover/btn:bg-black/40 dark:group-hover/btn:bg-white/40 z-10" />
             </a>
             {categoryTree[cat].length > 0 && (
-              <div class={`sub-list flex-col gap-1 ${isCatActive ? 'flex' : 'hidden'} group-hover/cat:flex`}>
+              <div
+                class={`sub-list flex-col gap-1 ${isCatActive ? "flex" : "hidden"} group-hover/cat:flex`}
+              >
                 {categoryTree[cat].map((sub) => {
                   const isSubActive = cat === currentCat && sub === currentSub;
                   return (
@@ -86,10 +104,8 @@ const getClasses = (isActive: boolean) => isActive ? BTN_ACTIVE : BTN_INACTIVE;
                       class={`cat-filter relative z-10 w-full flex items-center justify-end pr-[24px] py-1.5 cursor-pointer pl-6 ${getClasses(isSubActive)}`}
                     >
                       <span class="text-[11px] text-right opacity-80 flex items-center gap-1.5 leading-none">
-                        {sub} {" "}
-                        <span class="text-[9px] font-bold opacity-60">
-                          {subCounts[cat][sub]}
-                        </span>
+                        {sub}{" "}
+                        <span class="text-[9px] font-bold opacity-60">{subCounts[cat][sub]}</span>
                       </span>
                     </a>
                   );
@@ -122,11 +138,7 @@ const getClasses = (isActive: boolean) => isActive ? BTN_ACTIVE : BTN_INACTIVE;
       el.classList.add("text-text-color", "opacity-40", "font-medium");
     };
     const addActiveText = (el: HTMLElement) => {
-      el.classList.remove(
-        "text-text-color",
-        "opacity-40",
-        "font-medium",
-      );
+      el.classList.remove("text-text-color", "opacity-40", "font-medium");
       el.classList.add("text-[#1e66f5]", "dark:text-[#89b4fa]", "opacity-100", "font-bold");
     };
 
@@ -167,7 +179,7 @@ const getClasses = (isActive: boolean) => isActive ? BTN_ACTIVE : BTN_INACTIVE;
     window.addEventListener("resize", () => {
       if (activeItem && container.offsetParent !== null) move(activeItem);
     });
-    
+
     document.addEventListener("update-sliders", () => {
       if (activeItem && container.offsetParent !== null) move(activeItem);
     });
