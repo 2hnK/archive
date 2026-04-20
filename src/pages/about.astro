@@ -11,26 +11,27 @@ const timeline = [
   {
     year: "2026",
     desc: "삼성청년SW/AI아카데미(SSAFY)",
-    detail: "웹 개발 및 AI 활용 능력 심화",
+    detail: "체계적인 실무 중심의 교육을 통해 웹 개발 및 AI 활용 능력 역량 강화 및 알고리즘 문제 해결 능력 향상",
     logo: ssafyLogo,
   },
   {
     year: "2026",
-    desc: "국립한밭대학교 컴퓨터공학 학사",
-    detail: "소프트웨어 엔지니어링 펀더멘탈 확립",
+    desc: "국립한밭대학교 컴퓨터공학 학사 졸업",
+    detail: "자료구조, 알고리즘 등 컴퓨터공학 전공 과정을 통해 소프트웨어 엔지니어링의 기본 소양 확립",
     logo: hanbatLogo,
   },
   {
     year: "2026",
     desc: "KICS 동계종합학술발표회",
-    detail: "비용효율적인 지능형 AICC 연구 논문 투고 - 장려상",
+    detail: "KICS 한국통신학회 · 2026년도 동계종합학술발표회(KICS Winter Conference 2026) - 비용효율적인 지능형 AICC를 위한 자가진화형 4계층 정규화 게이트",
     logo: kicsLogo,
+    badge: "장려상",
   },
 ];
 
 const certifications = [
-  { item: "정보처리기사", date: "2025.09", logo: eipLogo },
-  { item: "SQLD", date: "2025.06", logo: sqldLogo },
+  { item: "정보처리기사", date: "2025.09", desc: "한국산업인력공단", logo: eipLogo },
+  { item: "SQLD", date: "2025.06", desc: "한국데이터산업진흥원", logo: sqldLogo },
 ];
 
 const skills = [
@@ -43,111 +44,145 @@ const skills = [
   { name: "PostgreSQL", icon: "https://cdn.simpleicons.org/postgresql" },
   { name: "Redis", icon: "https://cdn.simpleicons.org/redis" },
   { name: "Docker", icon: "https://cdn.simpleicons.org/docker" },
-  { name: "AWS", icon: "https://cdn.simpleicons.org/amazonwebservices" },
+  { name: "AWS", icon: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" },
 ];
 ---
 
-<BaseLayout title="About | Min Archive" description="Minimalist About Page">
-  <main class="w-full min-h-screen pt-[20vh] pb-32 px-6 md:px-12 lg:px-24 max-w-4xl mx-auto">
-    <div class="mb-32 reveal-up">
-      <h1 class="text-6xl md:text-8xl font-serif font-black tracking-tighter mb-12">
-        I am a <br /> Developer.
+<BaseLayout title="About | DEVARCHIVE" description="Dynamic Spatial About Page">
+  <main class="w-full min-h-screen pb-32">
+    
+    <!-- Aura Glow Hero Section -->
+    <section class="relative w-full min-h-[75vh] flex flex-col items-center justify-center text-center px-6 reveal-up overflow-hidden pt-12 md:pt-20">
+      <!-- Ambient Glow Elements -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] md:w-[45vw] md:h-[45vw] bg-accent-color/8 dark:bg-accent-color/15 rounded-full blur-[120px] pointer-events-none animate-pulse duration-1000"></div>
+      
+      <h1 class="text-[8vw] md:text-[5vw] font-sans font-light tracking-[0.2em] md:tracking-[0.3em] uppercase leading-[1.1] text-transparent !bg-clip-text bg-gradient-to-b from-neutral-900 to-neutral-400 dark:from-neutral-100 dark:to-neutral-600 relative z-10 mb-10 md:mb-12">
+        SOFTWARE <br/> ENGINEER
       </h1>
-      <div class="prose max-w-none text-xl md:text-2xl font-serif leading-relaxed opacity-90">
-        <p>
-          겉으로 보이는 결과보다 과정과 본질적인 것이 더 중요하다고 믿습니다. 조금은 느리더라도
-          문제의 본질을 놓치지 않는 개발자가 되기 위해 끊임없이 탐구합니다.
-        </p>
-        <p class="mt-8">
-          저는 시스템의 구조적 안정을 추구하며, 디지털 캔버스 위에 기능적 아름다움을 코드로
-          설계합니다.
+      
+      <div class="max-w-xl relative z-10 mx-auto w-full">
+        <!-- <p class="text-lg md:text-xl font-serif leading-relaxed opacity-90 mb-4 italic">
+          안녕하세요  김지훈입니다.
+        </p> -->
+        <p class="text-base md:text-lg font-serif leading-relaxed opacity-80 italic pb-8 border-b border-border-color/30 px-6 mt-2">
+          "조금은 느리더라도 문제의 본질을<br class="hidden md:block" /> 놓치지 않는 개발자가 되겠습니다."
         </p>
       </div>
-    </div>
 
-    <!-- Timeline & Capabilities (Split) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-24 mt-24">
-      <!-- Timeline -->
-      <div class="reveal-up stagger-1">
-        <h3
-          class="text-sm font-sans font-bold uppercase tracking-widest text-accent-color mb-8 border-b border-border-color pb-4 flex items-center gap-2"
-        >
-          <span class="material-symbols-outlined text-[16px]">timeline</span>
-          Milestones
-        </h3>
-        <ul class="flex flex-col gap-6">
-          {
-            timeline.map((t) => (
-              <li class="glass-panel p-5 rounded-3xl flex items-center gap-3 hover:-translate-y-1 transition-transform duration-300">
-                <img
-                  src={typeof t.logo === "string" ? t.logo : t.logo.src}
-                  alt={t.desc}
-                  class="w-6 h-6 object-contain rounded shrink-0"
-                />
-                <div class="flex flex-col">
-                  <span class="text-xs font-sans font-bold opacity-50 uppercase tracking-widest mb-0.5">
-                    {t.year}
-                  </span>
-                  <span class="text-base font-serif font-bold leading-snug">{t.desc}</span>
-                  <span class="text-xs font-sans opacity-60 uppercase tracking-wide mt-0.5">
-                    {t.detail}
-                  </span>
+      <div class="flex items-center gap-10 mt-8 relative z-10">
+        <a href="mailto:kimgh021@gmail.com" onclick="navigator.clipboard.writeText('kimgh021@gmail.com'); const el = this.querySelector('.email-text'); const orig = el.innerText; el.innerText = 'COPIED!'; setTimeout(() => el.innerText = orig, 1500);" class="flex flex-col items-center gap-3 opacity-50 hover:opacity-100 hover:text-accent-color hover:-translate-y-1 transition-all duration-300">
+          <span class="material-symbols-outlined text-[24px]">mail</span>
+          <span class="email-text text-[10px] font-sans font-bold tracking-widest uppercase w-12 text-center mt-[1px]">Email</span>
+        </a>
+        <a href="https://github.com/2hnk" target="_blank" class="flex flex-col items-center gap-3 opacity-50 hover:opacity-100 hover:text-accent-color hover:-translate-y-1 transition-all duration-300 pt-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+          <span class="text-[10px] font-sans font-bold tracking-widest uppercase mt-[1px]">Github</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Center-Line Milestones -->
+    <section class="w-full relative px-6 mt-16 md:mt-32 reveal-up max-w-[1400px] mx-auto">
+      <div class="text-center mb-16 md:mb-24">
+        <h2 class="text-3xl md:text-4xl font-sans font-semibold tracking-tight mb-3">Milestones</h2>
+        <p class="text-[10px] font-sans opacity-40 tracking-widest uppercase">Trajectory</p>
+      </div>
+
+      <div class="relative w-full max-w-4xl mx-auto py-8">
+        <!-- The Center Line -->
+        <div class="absolute left-6 md:left-1/2 -top-4 -bottom-4 w-[2px] bg-neutral-300 dark:bg-neutral-800 -translate-x-1/2 z-0"></div>
+        
+        <div class="flex flex-col gap-16 md:gap-24 relative z-10">
+          {timeline.map((t, idx) => (
+            <div class="relative flex flex-col md:flex-row items-center justify-between group md:even:flex-row-reverse w-full">
+              
+              <!-- Center Glow Dot & Logo -->
+              <div class="absolute left-6 md:left-1/2 top-0 md:top-1/2 -translate-x-1/2 md:-translate-y-1/2 flex items-center justify-center z-10 mt-6 md:mt-0">
+                <div class="w-12 h-12 md:w-16 md:h-16 rounded-full glass-panel flex items-center justify-center border border-transparent group-hover:border-accent-color/30 bg-[var(--bg-color)] group-hover:scale-110 transition-all duration-700 shadow-sm relative">
+                   <div class="absolute inset-0 rounded-full bg-accent-color/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                  <img src={typeof t.logo === "string" ? t.logo : t.logo.src} class="w-6 h-6 md:w-8 md:h-8 object-contain relative z-10" />
                 </div>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+              </div>
 
-      <!-- Skills & Certs -->
-      <div class="reveal-up stagger-2">
-        <h3
-          class="text-sm font-sans font-bold uppercase tracking-widest text-accent-color mb-8 border-b border-border-color pb-4 flex items-center gap-2"
-        >
-          <span class="material-symbols-outlined text-[16px]">code</span>
-          Technical Canvas
-        </h3>
-
-        <div class="glass-panel p-8 rounded-3xl mb-12 flex flex-col">
-          <ul class="flex flex-wrap gap-3 font-sans text-sm">
-            {
-              skills.map((s) => (
-                <li class="glass-pill px-3 py-1.5 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300 cursor-default flex items-center gap-2">
-                  <img src={s.icon} alt={s.name} class="w-4 h-4 object-contain" />
-                  {s.name}
-                </li>
-              ))
-            }
-          </ul>
+              <!-- Text Content Card -->
+              <div class="w-full md:w-[45%] pl-20 md:pl-0 mt-2 md:mt-0">
+                <div class="glass-panel p-8 rounded-3xl group-hover:-translate-y-2 transition-transform duration-700 border border-transparent group-hover:border-accent-color/10 relative overflow-hidden text-left">
+                  <div class="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-br from-accent-color/5 to-transparent transition-opacity duration-700 pointer-events-none"></div>
+                  
+                  <div class="flex items-center flex-wrap gap-2 mb-4">
+                    <span class="inline-block px-3 py-1 bg-accent-color/10 text-accent-color text-[10px] font-sans font-bold uppercase tracking-widest rounded-full">
+                      {t.year}
+                    </span>
+                  </div>
+                  
+                  <div class="flex items-center flex-wrap gap-3 mb-2">
+                    <h3 class="text-lg md:text-xl font-sans font-semibold tracking-tight group-hover:text-transparent group-hover:!bg-clip-text group-hover:bg-gradient-to-r group-hover:from-neutral-900 group-hover:to-neutral-500 dark:group-hover:from-neutral-100 dark:group-hover:to-neutral-500 transition-all duration-500 leading-snug">
+                      {t.desc}
+                    </h3>
+                    {t.badge && (
+                      <span class="inline-flex shrink-0 items-center justify-center gap-1 text-[10px] font-bold text-amber-600 dark:text-amber-500 bg-amber-500/10 px-2 py-[2px] leading-none rounded-full border border-amber-500/20 translate-y-[-1px]">
+                        <span class="material-symbols-outlined text-[12px] leading-none">emoji_events</span>
+                        {t.badge}
+                      </span>
+                    )}
+                  </div>
+                  
+                  <p class="text-[11px] md:text-xs font-sans opacity-60 leading-relaxed font-light">{t.detail}</p>
+                </div>
+              </div>
+              
+              <!-- Spacer for alternating flex -->
+              <div class="hidden md:block w-[45%]"></div>
+              
+            </div>
+          ))}
         </div>
-
-        <h3
-          class="text-sm font-sans font-bold uppercase tracking-widest text-accent-color mb-8 border-b border-border-color pb-4 flex items-center gap-2"
-        >
-          <span class="material-symbols-outlined text-[16px]">military_tech</span>
-          Certifications
-        </h3>
-        <ul class="flex flex-col gap-4 font-serif text-base">
-          {
-            certifications.map((c) => (
-              <li class="glass-panel p-5 rounded-3xl flex justify-between items-center hover:-translate-y-1 transition-transform duration-300">
-                <div class="flex items-center gap-3">
-                  <img
-                    src={typeof c.logo === "string" ? c.logo : c.logo.src}
-                    alt={c.item}
-                    class="w-6 h-6 object-contain rounded"
-                  />
-                  <span>{c.item}</span>
-                </div>
-                <span class="text-xs font-sans opacity-60 glass-pill px-3 py-1">{c.date}</span>
-              </li>
-            ))
-          }
-        </ul>
       </div>
-    </div>
-  </main>
+    </section>
 
+    <!-- Technical Specs (1px Hairline Grid) -->
+    <section class="max-w-4xl mx-auto px-6 mt-32 md:mt-40 reveal-up stagger-1">
+      <div class="text-center mb-16 md:mb-20">
+        <h2 class="text-3xl md:text-4xl font-sans font-semibold tracking-tight mb-3">Tech Specs</h2>
+        <p class="text-[10px] font-sans opacity-40 tracking-widest uppercase">Architecture & Canvas</p>
+      </div>
+
+      <!-- 1px Gap Grid Wrapper simulated by gap-px and background color -->
+      <div class="grid grid-cols-2 lg:grid-cols-5 gap-[1px] bg-border-color/50 border border-border-color/50 rounded-3xl overflow-hidden glass-panel p-[1px] shadow-sm">
+        {skills.map((s) => (
+          <div class="bg-[var(--bg-color)] p-8 flex flex-col items-center justify-center gap-4 group hover:bg-neutral-500/5 dark:hover:bg-neutral-100/5 transition-colors duration-500 lg:min-h-[140px]">
+            <img src={s.icon} alt={s.name} class="w-8 h-8 object-contain opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
+            <span class="text-xs font-mono font-bold opacity-80 text-center tracking-wide">{s.name}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Certifications List (Sleek Glass Grid) -->
+    <section class="max-w-4xl mx-auto px-6 mt-24 md:mt-32 mb-32 md:mb-40 reveal-up stagger-2">
+      <div class="text-center mb-12 md:mb-16">
+        <h2 class="text-3xl md:text-4xl font-sans font-semibold tracking-tight mb-3">Certifications</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
+        {certifications.map((c) => (
+          <div class="flex items-center gap-5 group cursor-default border-b border-border-color/30 pb-4 hover:border-accent-color/50 transition-colors duration-300">
+            <!-- Logo (Left aligned, no box backgrounds) -->
+            <div class="w-8 h-8 flex items-center justify-center shrink-0">
+               <img src={typeof c.logo === "string" ? c.logo : c.logo.src} alt={c.item} class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300 rounded-sm" />
+            </div>
+            <!-- Text Content -->
+            <div class="flex flex-col gap-0.5 flex-1 pl-1">
+               <span class="text-sm md:text-base font-sans font-semibold opacity-90 tracking-tight">{c.item}</span>
+               <span class="font-sans text-[11px] md:text-xs font-light opacity-60 tracking-wide">{c.desc} • {c.date}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+  </main>
+  
   <script>
     document.addEventListener("astro:page-load", () => {
       const revealObserver = new IntersectionObserver(

@@ -7,74 +7,111 @@ const sortedArticles = allArticles.sort((a, b) => b.data.date.valueOf() - a.data
 const latestArticles = sortedArticles.slice(0, 5); // Just a few for the home page
 
 const projects = [
-  { title: "AI Canvas Writer", desc: "시각적 AI 프롬프트 에디터", date: "2026", slug: "ai-canvas-writer" },
-  { title: "DevJournal CLI", desc: "마크다운 포스트 자동 배포", date: "2025", slug: "devjournal-cli" },
-  { title: "Minimal System", desc: "공통 디자인 시스템 프레임워크", date: "2024", slug: "minimal-system" }
+  {
+    title: "AI Canvas Writer",
+    desc: "시각적 AI 프롬프트 에디터",
+    date: "2026",
+    slug: "ai-canvas-writer",
+  },
+  {
+    title: "DevJournal CLI",
+    desc: "마크다운 포스트 자동 배포",
+    date: "2025",
+    slug: "devjournal-cli",
+  },
+  {
+    title: "Minimal System",
+    desc: "공통 디자인 시스템 프레임워크",
+    date: "2024",
+    slug: "minimal-system",
+  },
 ];
 ---
 
-<BaseLayout title="Min Archive" description="Artistic Dev Blog">
+<BaseLayout title="DEVARCHIVE" description="Artistic Dev Blog">
   <main class="w-full min-h-screen pt-[20vh] pb-32 px-6 md:px-12 lg:px-24">
-    
     <!-- Hero Typography Section -->
     <section class="max-w-7xl mx-auto mb-32 md:mb-48 reveal-up">
       <div class="flex flex-col gap-2 md:gap-0">
-        <h1 class="text-[12vw] md:text-[8vw] font-serif font-black leading-[0.8] tracking-tighter uppercase text-transparent !bg-clip-text bg-gradient-to-r from-neutral-900 to-neutral-500 dark:from-neutral-100 dark:to-neutral-500">
-          CRAFTING
+        <h1
+          class="text-[12vw] md:text-[8vw] font-serif font-black leading-[0.8] tracking-tighter uppercase text-transparent !bg-clip-text bg-gradient-to-r from-neutral-900 to-neutral-500 dark:from-neutral-100 dark:to-neutral-500"
+        >
+          ARCHIVING
         </h1>
         <div class="flex items-center gap-4 md:gap-12 ml-[10vw]">
           <span class="block w-12 md:w-32 h-[2px] bg-accent-color md:mt-4"></span>
-          <h1 class="text-[12vw] md:text-[8vw] font-serif font-black leading-[0.8] tracking-tighter uppercase">
-            CODE & 
+          <h1
+            class="text-[12vw] md:text-[8vw] font-serif font-black leading-[0.8] tracking-tighter uppercase"
+          >
+            CODE &
           </h1>
         </div>
-        <h1 class="text-[12vw] md:text-[8vw] font-serif font-black leading-[0.8] tracking-tighter uppercase text-right mr-[5vw] italic">
+        <h1
+          class="text-[12vw] md:text-[8vw] font-serif font-black leading-[0.8] tracking-tighter uppercase text-right mr-[5vw] italic"
+        >
           EXPERIENCE.
         </h1>
       </div>
-      
-      <div class="mt-16 md:mt-24 max-w-xl ml-auto border-l border-accent-color pl-6 reveal-up stagger-1">
+
+      <div
+        class="mt-16 md:mt-24 max-w-xl ml-auto border-l border-accent-color pl-6 reveal-up stagger-1"
+      >
         <p class="text-lg md:text-xl font-sans font-medium opacity-80 leading-relaxed">
-          I build digital spaces that merge extreme functionality with uncompromising aesthetic principles. Welcome to my creative archive.
+          An archive where code and thoughts are carefully organized and preserved.
         </p>
       </div>
     </section>
 
-
     <!-- Content Split Layout -->
     <section class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-24">
-      
       <!-- Latest Articles -->
       <div class="reveal-up">
         <div class="flex justify-between items-end mb-12">
-          <h2 class="text-4xl font-serif font-bold tracking-tight">Journal</h2>
-          <a href="/articles" class="artistic-link uppercase tracking-widest text-xs font-bold font-sans">View All</a>
+          <h2 class="text-4xl font-serif font-bold tracking-tight">Articles</h2>
+          <a
+            href="/articles"
+            class="artistic-link uppercase tracking-widest text-xs font-bold font-sans">View All</a
+          >
         </div>
-        
-        <div class="flex flex-col gap-4">
-          {latestArticles.map((article) => (
-            <a href={`/articles/${article.id}`} class="glass-panel p-6 rounded-2xl group flex flex-col gap-2 hover:-translate-y-1 transition-all duration-300 reveal-up stagger-1">
-              <div class="flex justify-between items-start gap-4">
-                <h3 class="text-2xl font-serif font-semibold group-hover:text-accent-color transition-colors duration-300">
-                  {article.data.title}
-                </h3>
-                <span class="material-symbols-outlined text-2xl opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-1">
-                  arrow_forward
-                </span>
-              </div>
-              <div class="flex items-center gap-4 text-xs tracking-widest font-sans uppercase font-bold opacity-60">
-                <span class="text-accent-color glass-pill px-2 py-0.5">{article.data.category}</span>
-                <span>/</span>
-                <span>
-                  {article.data.date.toLocaleDateString("ko-KR", {
-                    year: "numeric",
-                    month: "2-digit",
-                    day: "2-digit",
-                  }).replace(/\./g, "-").replace(/ /g, "").slice(0, -1)}
-                </span>
-              </div>
-            </a>
-          ))}
+
+        <div class="editorial-list">
+          {
+            latestArticles.map((article) => (
+              <a
+                href={`/articles/${article.id}`}
+                class="editorial-list-item group block py-8 px-4 cursor-pointer reveal-up stagger-1"
+              >
+                <div class="flex justify-between items-center gap-4">
+                  <div class="flex flex-col gap-1.5">
+                    <h3 class="text-3xl font-serif font-bold tracking-tighter group-hover:text-inherit transition-colors duration-300">
+                      {article.data.title}
+                    </h3>
+                    <div class="flex items-center gap-3 text-sm font-sans opacity-60">
+                      <span class="text-accent-color font-bold uppercase tracking-widest text-xs">
+                        {article.data.category}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-4 shrink-0">
+                    <span class="text-xs font-sans font-bold uppercase tracking-widest opacity-40">
+                      {article.data.date
+                        .toLocaleDateString("ko-KR", {
+                          year: "numeric",
+                          month: "2-digit",
+                          day: "2-digit",
+                        })
+                        .replace(/\./g, "-")
+                        .replace(/ /g, "")
+                        .slice(0, -1)}
+                    </span>
+                    <span class="material-symbols-outlined text-xl editorial-list-arrow">
+                      arrow_forward
+                    </span>
+                  </div>
+                </div>
+              </a>
+            ))
+          }
         </div>
       </div>
 
@@ -82,29 +119,40 @@ const projects = [
       <div class="reveal-up stagger-1 md:mt-32">
         <div class="flex justify-between items-end mb-12">
           <h2 class="text-4xl font-serif font-bold tracking-tight">Works</h2>
-          <a href="/project" class="artistic-link uppercase tracking-widest text-xs font-bold font-sans">View All</a>
+          <a
+            href="/project"
+            class="artistic-link uppercase tracking-widest text-xs font-bold font-sans">View All</a
+          >
         </div>
-        
+
         <div class="editorial-list">
-          {projects.map((proj, idx) => (
-            <a href={`/project/${proj.slug}`} class="editorial-list-item group block py-8 px-4 cursor-pointer reveal-up stagger-2">
-              <div class="flex justify-between items-center gap-4">
-                <div class="flex flex-col gap-1.5">
-                  <h3 class="text-3xl font-serif font-bold tracking-tighter group-hover:text-inherit transition-colors duration-300">
-                    {proj.title}
-                  </h3>
-                  <span class="text-sm font-sans opacity-60">{proj.desc}</span>
+          {
+            projects.map((proj, idx) => (
+              <a
+                href={`/project/${proj.slug}`}
+                class="editorial-list-item group block py-8 px-4 cursor-pointer reveal-up stagger-2"
+              >
+                <div class="flex justify-between items-center gap-4">
+                  <div class="flex flex-col gap-1.5">
+                    <h3 class="text-3xl font-serif font-bold tracking-tighter group-hover:text-inherit transition-colors duration-300">
+                      {proj.title}
+                    </h3>
+                    <span class="text-sm font-sans opacity-60">{proj.desc}</span>
+                  </div>
+                  <div class="flex items-center gap-4 shrink-0">
+                    <span class="text-xs font-sans font-bold uppercase tracking-widest opacity-40">
+                      {proj.date}
+                    </span>
+                    <span class="material-symbols-outlined text-xl editorial-list-arrow">
+                      arrow_forward
+                    </span>
+                  </div>
                 </div>
-                <div class="flex items-center gap-4 shrink-0">
-                  <span class="text-xs font-sans font-bold uppercase tracking-widest opacity-40">{proj.date}</span>
-                  <span class="material-symbols-outlined text-xl editorial-list-arrow">arrow_forward</span>
-                </div>
-              </div>
-            </a>
-          ))}
+              </a>
+            ))
+          }
         </div>
       </div>
-      
     </section>
   </main>
 </BaseLayout>

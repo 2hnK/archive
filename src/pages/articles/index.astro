@@ -54,7 +54,7 @@ const BTN_ACTIVE =
   "active-item outline-none focus:outline-none border-none ring-0 appearance-none bg-transparent text-blue-600 dark:text-blue-400 font-bold transition-colors duration-300 group";
 ---
 
-<BaseLayout title="Articles | DevArchive" description="모든 아티클 및 저널 목록입니다.">
+<BaseLayout title="Articles | DEVARCHIVE" description="모든 아티클 및 저널 목록입니다.">
   <div class="mx-auto w-full pt-24 pb-20" style="padding-top: 140px;">
     <!-- Top Bar: Title & View Toggle -->
     <div
@@ -161,7 +161,7 @@ const BTN_ACTIVE =
                 <div
                   data-category={entry.data.category}
                   data-subcategory={entry.data.subcategory}
-                  class="post-detail relative w-full flex-col bg-white/70 dark:bg-[#1a1b26]/50 backdrop-blur-md rounded-[2.5rem] p-6 md:p-10 mb-12 shadow-[0_8px_48px_rgba(0,0,0,0.04)] border border-black/5 dark:border-white/5 reveal-up transition-all duration-500"
+                  class="post-detail relative w-full flex-col glass-panel rounded-[2.5rem] p-6 md:p-10 mb-12 reveal-up transition-all duration-500"
                 >
                   <div class="mb-8">
                     <div class="flex items-center gap-2 mb-4 text-text-color opacity-60 text-[12px] font-bold uppercase tracking-widest font-sans">
@@ -208,10 +208,10 @@ const BTN_ACTIVE =
                     </div>
                   </div>
 
-                  <div class="mt-6 flex justify-end">
+                  <div class="mt-8 flex justify-end">
                     <a
                       href={`/articles/${entry.id}`}
-                      class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-black/5 dark:bg-white/5 hover:bg-[#1e66f5]/10 dark:hover:bg-[#89b4fa]/15 text-[12px] font-bold uppercase tracking-[0.15em] text-[#1e66f5] dark:text-[#89b4fa] transition-all group"
+                      class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-border-color/20 dark:border-white/20 bg-transparent hover:bg-text-color hover:text-bg-color hover:border-transparent text-[11px] font-sans font-bold uppercase tracking-[0.2em] text-text-color transition-colors duration-400 group"
                     >
                       Read Article
                       <span class="material-symbols-outlined text-[15px] group-hover:translate-x-1 transition-transform">
