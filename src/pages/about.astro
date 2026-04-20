@@ -48,154 +48,133 @@ const skills = [
 ];
 ---
 
-<BaseLayout title="About | DEVARCHIVE" description="Professional Narrative About Page">
-  <main class="w-full min-h-screen pb-40">
+<BaseLayout title="About | DEVARCHIVE" description="Dynamic Spatial About Page">
+  <main class="w-full min-h-screen pb-32">
     
-    <!-- Hero Narrative Canvas -->
-    <section class="relative w-full min-h-screen flex items-center px-6 md:px-12 lg:px-24 overflow-hidden pt-20">
-      <!-- Background Ambient Glow -->
-      <div class="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-accent-color/5 dark:bg-accent-color/10 rounded-full blur-[150px] pointer-events-none animate-pulse"></div>
+    <!-- Aura Glow Hero Section -->
+    <section class="relative w-full min-h-[75vh] flex flex-col items-center justify-center text-center px-6 reveal-up overflow-hidden pt-12 md:pt-20">
+      <!-- Ambient Glow Elements -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] md:w-[45vw] md:h-[45vw] bg-accent-color/8 dark:bg-accent-color/15 rounded-full blur-[120px] pointer-events-none animate-pulse duration-1000"></div>
       
-      <div class="max-w-[1700px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-        <!-- Left Side: Massive Vertical Identity -->
-        <div class="lg:col-span-5 relative z-10 reveal-up">
-          <div class="flex flex-col">
-            <span class="text-[10px] font-black uppercase tracking-[0.4em] opacity-30 mb-8 border-l-2 border-accent-color pl-4">Digital Architect</span>
-            <h1 class="text-7xl md:text-[8.5rem] font-serif font-black leading-[0.85] tracking-tighter uppercase text-text-color">
-              Software <br/> 
-              <span class="text-transparent !bg-clip-text bg-gradient-to-r from-text-color to-text-color/40">Engineer</span>
-            </h1>
-          </div>
-        </div>
+      <h1 class="text-[8vw] md:text-[5vw] font-sans font-light tracking-[0.2em] md:tracking-[0.3em] uppercase leading-[1.1] text-transparent !bg-clip-text bg-gradient-to-b from-neutral-900 to-neutral-400 dark:from-neutral-100 dark:to-neutral-600 relative z-10 mb-10 md:mb-12">
+        SOFTWARE <br/> ENGINEER
+      </h1>
+      
+      <div class="max-w-xl relative z-10 mx-auto w-full">
+        <!-- <p class="text-lg md:text-xl font-serif leading-relaxed opacity-90 mb-4 italic">
+          안녕하세요  김지훈입니다.
+        </p> -->
+        <p class="text-base md:text-lg font-serif leading-relaxed opacity-80 italic pb-8 border-b border-border-color/30 px-6 mt-2">
+          "조금은 느리더라도 문제의 본질을<br class="hidden md:block" /> 놓치지 않는 개발자가 되겠습니다."
+        </p>
+      </div>
 
-        <!-- Right Side: Personal Bio & Contact -->
-        <div class="lg:col-span-7 relative z-10 reveal-up stagger-1 mt-12 lg:mt-0">
-          <div class="max-w-xl">
-             <div class="mb-12">
-               <p class="text-xl md:text-3xl font-serif leading-tight opacity-90 italic mb-8 break-keep">
-                 "조금은 느리더라도 문제의 본질을 놓치지 않는 개발자가 되겠습니다."
-               </p>
-               <div class="h-[1px] w-24 bg-accent-color/40 mb-8"></div>
-               <p class="text-sm md:text-base font-sans leading-relaxed opacity-60 font-light break-keep">
-                 현실의 복잡한 문제를 단순하고 아름다운 코드로 풀어내는 과정에 매료되어 있습니다. 
-                 사용자 중심의 가치를 공학적 정밀함으로 구현하는 것을 목표로 합니다.
-               </p>
-             </div>
+      <div class="flex items-center gap-10 mt-8 relative z-10">
+        <a href="mailto:kimgh021@gmail.com" onclick="navigator.clipboard.writeText('kimgh021@gmail.com'); const el = this.querySelector('.email-text'); const orig = el.innerText; el.innerText = 'COPIED!'; setTimeout(() => el.innerText = orig, 1500);" class="flex flex-col items-center gap-3 opacity-50 hover:opacity-100 hover:text-accent-color hover:-translate-y-1 transition-all duration-300">
+          <span class="material-symbols-outlined text-[24px]">mail</span>
+          <span class="email-text text-[10px] font-sans font-bold tracking-widest uppercase w-12 text-center mt-[1px]">Email</span>
+        </a>
+        <a href="https://github.com/2hnk" target="_blank" class="flex flex-col items-center gap-3 opacity-50 hover:opacity-100 hover:text-accent-color hover:-translate-y-1 transition-all duration-300 pt-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+          <span class="text-[10px] font-sans font-bold tracking-widest uppercase mt-[1px]">Github</span>
+        </a>
+      </div>
+    </section>
 
-             <!-- Contact Cards -->
-             <div class="flex flex-wrap gap-4 mt-12">
-                <a href="mailto:kimgh921@gmail.com" class="glass-panel px-8 py-4 flex items-center gap-4 group hover:border-accent-color/30 transition-all">
-                   <span class="material-symbols-outlined text-[20px] opacity-40 group-hover:opacity-100 group-hover:text-accent-color transition-all">mail</span>
-                   <div class="flex flex-col">
-                      <span class="text-[9px] font-black uppercase tracking-widest opacity-30">Get in touch</span>
-                      <span class="text-xs font-bold font-sans">kimgh921@gmail.com</span>
-                   </div>
-                </a>
-                <a href="https://github.com/2hnk" target="_blank" class="glass-panel px-8 py-4 flex items-center gap-4 group hover:border-accent-color/30 transition-all">
-                  <svg class="opacity-40 group-hover:opacity-100 group-hover:text-accent-color transition-all" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
-                  <div class="flex flex-col">
-                     <span class="text-[9px] font-black uppercase tracking-widest opacity-30">Source</span>
-                     <span class="text-xs font-bold font-sans">github.com/2hnk</span>
+    <!-- Center-Line Milestones -->
+    <section class="w-full relative px-6 mt-16 md:mt-32 reveal-up max-w-[1400px] mx-auto">
+      <div class="text-center mb-16 md:mb-24">
+        <h2 class="text-3xl md:text-4xl font-sans font-semibold tracking-tight mb-3">Milestones</h2>
+        <p class="text-[10px] font-sans opacity-40 tracking-widest uppercase">Trajectory</p>
+      </div>
+
+      <div class="relative w-full max-w-4xl mx-auto py-8">
+        <!-- The Center Line -->
+        <div class="absolute left-6 md:left-1/2 -top-4 -bottom-4 w-[2px] bg-neutral-300 dark:bg-neutral-800 -translate-x-1/2 z-0"></div>
+        
+        <div class="flex flex-col gap-16 md:gap-24 relative z-10">
+          {timeline.map((t, idx) => (
+            <div class="relative flex flex-col md:flex-row items-center justify-between group md:even:flex-row-reverse w-full">
+              
+              <!-- Center Glow Dot & Logo -->
+              <div class="absolute left-6 md:left-1/2 top-0 md:top-1/2 -translate-x-1/2 md:-translate-y-1/2 flex items-center justify-center z-10 mt-6 md:mt-0">
+                <div class="w-12 h-12 md:w-16 md:h-16 rounded-full glass-panel flex items-center justify-center border border-transparent group-hover:border-accent-color/30 bg-[var(--bg-color)] group-hover:scale-110 transition-all duration-700 shadow-sm relative">
+                   <div class="absolute inset-0 rounded-full bg-accent-color/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                  <img src={typeof t.logo === "string" ? t.logo : t.logo.src} class="w-6 h-6 md:w-8 md:h-8 object-contain relative z-10" />
+                </div>
+              </div>
+
+              <!-- Text Content Card -->
+              <div class="w-full md:w-[45%] pl-20 md:pl-0 mt-2 md:mt-0">
+                <div class="glass-panel p-8 rounded-3xl group-hover:-translate-y-2 transition-transform duration-700 border border-transparent group-hover:border-accent-color/10 relative overflow-hidden text-left">
+                  <div class="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-br from-accent-color/5 to-transparent transition-opacity duration-700 pointer-events-none"></div>
+                  
+                  <div class="flex items-center flex-wrap gap-2 mb-4">
+                    <span class="inline-block px-3 py-1 bg-accent-color/10 text-accent-color text-[10px] font-sans font-bold uppercase tracking-widest rounded-full">
+                      {t.year}
+                    </span>
                   </div>
-                </a>
-             </div>
-          </div>
+                  
+                  <div class="flex items-center flex-wrap gap-3 mb-2">
+                    <h3 class="text-lg md:text-xl font-sans font-semibold tracking-tight group-hover:text-transparent group-hover:!bg-clip-text group-hover:bg-gradient-to-r group-hover:from-neutral-900 group-hover:to-neutral-500 dark:group-hover:from-neutral-100 dark:group-hover:to-neutral-500 transition-all duration-500 leading-snug">
+                      {t.desc}
+                    </h3>
+                    {t.badge && (
+                      <span class="inline-flex shrink-0 items-center justify-center gap-1 text-[10px] font-bold text-amber-600 dark:text-amber-500 bg-amber-500/10 px-2 py-[2px] leading-none rounded-full border border-amber-500/20 translate-y-[-1px]">
+                        <span class="material-symbols-outlined text-[12px] leading-none">emoji_events</span>
+                        {t.badge}
+                      </span>
+                    )}
+                  </div>
+                  
+                  <p class="text-[11px] md:text-xs font-sans opacity-60 leading-relaxed font-light">{t.detail}</p>
+                </div>
+              </div>
+              
+              <!-- Spacer for alternating flex -->
+              <div class="hidden md:block w-[45%]"></div>
+              
+            </div>
+          ))}
         </div>
       </div>
     </section>
 
-    <!-- Archival Milestones -->
-    <section class="w-full relative px-6 mt-32 md:mt-48 reveal-up max-w-[1400px] mx-auto">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20 md:mb-32">
-        <div class="lg:col-span-4 self-end">
-          <span class="text-[10px] font-black uppercase tracking-[0.4em] opacity-30 mb-4 block">Historical Log</span>
-          <h2 class="text-4xl md:text-6xl font-serif font-black tracking-tighter leading-none">Milestones</h2>
-        </div>
+    <!-- Technical Specs (1px Hairline Grid) -->
+    <section class="max-w-4xl mx-auto px-6 mt-32 md:mt-40 reveal-up stagger-1">
+      <div class="text-center mb-16 md:mb-20">
+        <h2 class="text-3xl md:text-4xl font-sans font-semibold tracking-tight mb-3">Tech Specs</h2>
+        <p class="text-[10px] font-sans opacity-40 tracking-widest uppercase">Architecture & Canvas</p>
       </div>
 
-      <div class="flex flex-col gap-24 md:gap-40">
-        {timeline.map((t, idx) => (
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center group relative">
-            <!-- Background Year Watermark -->
-            <div class="absolute -top-12 md:-top-20 left-0 text-[15vw] md:text-[12vw] font-black opacity-[-0.03] dark:opacity-[0.05] pointer-events-none select-none font-serif tracking-tighter italic">
-              {t.year}
-            </div>
-
-            <!-- Image & Logo Area -->
-            <div class="lg:col-span-5 relative z-10">
-               <div class="relative glass-panel aspect-[4/3] rounded-[2.5rem] p-8 flex items-center justify-center overflow-hidden transition-all duration-700 group-hover:shadow-[0_40px_100px_-20px_rgba(0,0,0,0.1)]">
-                  <div class="absolute inset-0 bg-gradient-to-br from-accent-color/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <img src={typeof t.logo === "string" ? t.logo : t.logo.src} class="w-32 h-32 md:w-48 md:h-48 object-contain relative z-10 transition-transform duration-700 group-hover:scale-110" />
-               </div>
-            </div>
-
-            <!-- Details Area -->
-            <div class="lg:col-span-7 lg:pl-12 reveal-up stagger-1">
-              <div class="flex flex-col gap-6">
-                <div class="flex items-center gap-4">
-                   <span class="text-xs font-black font-sans uppercase tracking-[0.3em] text-accent-color">{t.year} Phase</span>
-                   <div class="h-[1px] flex-1 bg-text-color/10"></div>
-                </div>
-                <h3 class="text-3xl md:text-5xl font-sans font-bold tracking-tight text-text-color break-keep">
-                  {t.desc}
-                  {t.badge && (
-                    <span class="inline-flex align-middle ml-4 items-center justify-center gap-1 text-[11px] font-bold text-amber-500 bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
-                      {t.badge}
-                    </span>
-                  )}
-                </h3>
-                <p class="text-base md:text-xl font-sans opacity-60 leading-relaxed font-light break-keep max-w-2xl">
-                  {t.detail}
-                </p>
-              </div>
-            </div>
+      <!-- 1px Gap Grid Wrapper simulated by gap-px and background color -->
+      <div class="grid grid-cols-2 lg:grid-cols-5 gap-[1px] bg-border-color/50 border border-border-color/50 rounded-3xl overflow-hidden glass-panel p-[1px] shadow-sm">
+        {skills.map((s) => (
+          <div class="bg-[var(--bg-color)] p-8 flex flex-col items-center justify-center gap-4 group hover:bg-neutral-500/5 dark:hover:bg-neutral-100/5 transition-colors duration-500 lg:min-h-[140px]">
+            <img src={s.icon} alt={s.name} class="w-8 h-8 object-contain opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500" />
+            <span class="text-xs font-mono font-bold opacity-80 text-center tracking-wide">{s.name}</span>
           </div>
         ))}
       </div>
     </section>
 
-    <!-- Technical Canvas -->
-    <section class="max-w-[1400px] mx-auto px-6 mt-40 md:mt-60 reveal-up">
-       <div class="mb-20 text-center">
-          <span class="text-[10px] font-black uppercase tracking-[0.4em] opacity-30 mb-4 block">Knowledge Stack</span>
-          <h2 class="text-4xl md:text-6xl font-serif font-black tracking-tighter leading-none mb-8">Technical Canvas</h2>
-          <div class="flex justify-center gap-2 text-[10px] uppercase font-bold opacity-40">
-             <span>Foundations</span> / <span>Architectures</span> / <span>AI & Data</span>
-          </div>
-       </div>
-
-       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 border border-text-color/5 rounded-[3rem] overflow-hidden glass-panel">
-         {skills.map((s) => (
-           <div class="relative bg-transparent p-12 flex flex-col items-center justify-center gap-6 group hover:bg-accent-color/5 transition-all duration-700 border-[0.5px] border-text-color/5">
-             <div class="absolute top-4 right-6 text-[8px] font-black opacity-10 group-hover:opacity-100 transition-opacity uppercase tracking-widest">Runtime</div>
-             <img src={s.icon} alt={s.name} class="w-10 h-10 object-contain grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" />
-             <span class="text-xs font-mono font-bold opacity-50 group-hover:opacity-100 text-center transition-all">{s.name}</span>
-           </div>
-         ))}
-       </div>
-    </section>
-
-    <!-- Certifications Sleek List -->
-    <section class="max-w-4xl mx-auto px-6 mt-32 md:mt-48 reveal-up stagger-2">
-      <div class="flex items-center gap-8 mb-16">
-        <h2 class="text-3xl md:text-5xl font-serif font-black tracking-tighter">Certifications</h2>
-        <div class="h-[1px] flex-1 bg-text-color/10"></div>
+    <!-- Certifications List (Sleek Glass Grid) -->
+    <section class="max-w-4xl mx-auto px-6 mt-24 md:mt-32 mb-32 md:mb-40 reveal-up stagger-2">
+      <div class="text-center mb-12 md:mb-16">
+        <h2 class="text-3xl md:text-4xl font-sans font-semibold tracking-tight mb-3">Certifications</h2>
       </div>
 
-      <div class="flex flex-col gap-2">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
         {certifications.map((c) => (
-          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 py-8 group border-b border-text-color/5 hover:bg-accent-color/5 px-6 transition-all rounded-2xl">
-            <div class="flex items-center gap-6">
-              <div class="w-10 h-10 flex items-center justify-center grayscale group-hover:grayscale-0 transition-all">
-                <img src={typeof c.logo === "string" ? c.logo : c.logo.src} alt={c.item} class="w-full h-full object-contain" />
-              </div>
-              <div class="flex flex-col">
-                <span class="text-lg font-sans font-bold tracking-tight opacity-90 group-hover:text-accent-color transition-colors">{c.item}</span>
-                <span class="text-xs opacity-50">{c.desc}</span>
-              </div>
+          <div class="flex items-center gap-5 group cursor-default border-b border-border-color/30 pb-4 hover:border-accent-color/50 transition-colors duration-300">
+            <!-- Logo (Left aligned, no box backgrounds) -->
+            <div class="w-8 h-8 flex items-center justify-center shrink-0">
+               <img src={typeof c.logo === "string" ? c.logo : c.logo.src} alt={c.item} class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300 rounded-sm" />
             </div>
-            <div class="text-[11px] font-bold font-sans uppercase tracking-[0.2em] opacity-30 group-hover:opacity-100 transition-all">
-               Issued {c.date}
+            <!-- Text Content -->
+            <div class="flex flex-col gap-0.5 flex-1 pl-1">
+               <span class="text-sm md:text-base font-sans font-semibold opacity-90 tracking-tight">{c.item}</span>
+               <span class="font-sans text-[11px] md:text-xs font-light opacity-60 tracking-wide">{c.desc} • {c.date}</span>
             </div>
           </div>
         ))}
