@@ -72,67 +72,70 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-serif);
 }
 
-/* Glassmorphism Utilities */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.55); /* 오프화이트 배경 대비 밝은 유리 */
-  backdrop-filter: blur(32px) saturate(200%);
-  -webkit-backdrop-filter: blur(32px) saturate(200%);
-  border: 1px solid rgba(255, 255, 255, 0.5); /* 빛을 받는 유리 모서리 */
-  border-bottom-color: rgba(0, 0, 0, 0.05); /* 어두운 하단 모서리 */
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.8); /* 내부 광택(이너 섀도우)과 부드러운 깊이감 */
-}
+@layer components {
+  /* Glassmorphism Utilities */
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(32px) saturate(200%);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-bottom-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
+  }
 
-.dark .glass-panel {
-  background: rgba(24, 24, 24, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-bottom-color: rgba(0, 0, 0, 0.3);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
-}
+  .dark .glass-panel {
+    background: rgba(24, 24, 24, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  }
 
-.glass-pill {
-  background: rgba(245, 245, 247, 0.8);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-bottom-color: rgba(0, 0, 0, 0.05);
-  border-radius: 9999px;
-  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
-}
+  .glass-pill {
+    background: rgba(245, 245, 247, 0.8);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-bottom-color: rgba(0, 0, 0, 0.05);
+    border-radius: 9999px;
+    box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
+  }
 
-.dark .glass-pill {
-  background: rgba(30, 30, 30, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-bottom-color: rgba(0, 0, 0, 0.4);
-  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
-}
+  .dark .glass-pill {
+    background: rgba(30, 30, 30, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+  }
 
-.custom-glass-highlight {
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(20px) saturate(150%);
-  -webkit-backdrop-filter: blur(20px) saturate(150%);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-}
+  .custom-glass-highlight {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
 
-.dark .custom-glass-highlight {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-}
+  .dark .custom-glass-highlight {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
 
-/* Navbar Header Glassmorphism (Adjusted Transparency) */
-.glass-header {
-  background: rgba(255, 255, 255, 0.75); /* 투명도를 낮춰 더 불투명하게 만듦 */
-  backdrop-filter: blur(32px) saturate(200%);
-  -webkit-backdrop-filter: blur(32px) saturate(200%);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
+  /* Navbar Header Glassmorphism (Values Maintained, Error Fixed) */
+  .glass-header {
+    background: rgba(255, 255, 255, 0.75) !important;
+    backdrop-filter: blur(32px) saturate(200%) !important;
+    -webkit-backdrop-filter: blur(32px) saturate(200%) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: background 0.5s ease, backdrop-filter 0.5s ease;
+  }
 
-.dark .glass-header {
-  background: rgba(24, 24, 24, 0.75);
-  backdrop-filter: blur(32px) saturate(200%);
-  -webkit-backdrop-filter: blur(32px) saturate(200%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  .dark .glass-header {
+    background: rgba(24, 24, 24, 0.75) !important;
+    backdrop-filter: blur(32px) saturate(200%) !important;
+    -webkit-backdrop-filter: blur(32px) saturate(200%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
 }
 
 /* Sidebar Sticky Behavior */
