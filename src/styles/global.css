@@ -120,6 +120,29 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
+/* Navbar Header Glassmorphism (Adjusted Transparency) */
+.glass-header {
+  background: rgba(255, 255, 255, 0.75); /* 투명도를 낮춰 더 불투명하게 만듦 */
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dark .glass-header {
+  background: rgba(24, 24, 24, 0.75);
+  backdrop-filter: blur(32px) saturate(200%);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Sidebar Sticky Behavior */
+.sidebar-sticky {
+  position: sticky;
+  top: 8rem;
+  max-height: calc(100vh - 10rem);
+  overflow-y: auto;
+}
+
 /* Navbar Icon Hover (Glassmorphism Circle) */
 .nav-icon-btn {
   position: relative;
@@ -188,6 +211,20 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1.5em; /* 단락 간격 확대 */
 }
 
+.prose strong, .prose b {
+  color: var(--text-color);
+  font-weight: 700;
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--text-color);
+  padding: 0.5rem 1.5rem;
+  font-style: normal;
+  color: var(--text-color);
+  opacity: 0.8;
+  margin: 2.5rem 0;
+}
+
 .prose h1, .prose h2, .prose h3, .prose h4 {
   font-family: var(--font-family-serif);
   font-weight: 700;
@@ -220,9 +257,14 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.9rem;
 }
 
-.prose code {
+.prose :not(pre) > code {
   color: var(--accent-color);
+  background-color: color-mix(in srgb, var(--accent-color), transparent 92%);
+  padding: 0.2em 0.4em;
+  border-radius: 6px;
   font-family: var(--font-family-mono);
+  font-size: 0.9em;
+  font-weight: 600;
 }
 
 .dark .prose pre {

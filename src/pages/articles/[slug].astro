@@ -24,34 +24,46 @@ const currentSub = entry.data.subcategory;
 <BaseLayout title={`${entry.data.title} | DEVARCHIVE`} description={entry.data.description}>
   <main class="pt-32 pb-24">
     <!-- Top Bar: Title & Metadata (Moved outside grid to align sidebars with card) -->
-    <div class="max-w-[900px] mx-auto w-full px-4 sm:px-6 md:px-8 mb-10 border-b border-border-color pb-6">
+    <div
+      class="max-w-[900px] mx-auto w-full px-4 sm:px-6 md:px-8 mb-10 border-b border-border-color pb-6"
+    >
       <div class="flex items-center gap-2 mb-2">
-        <a href="/articles" class="flex items-center justify-center w-6 h-6 rounded-full hover:bg-black/10 dark:hover:bg-white/20 transition-colors text-text-color" title="목록으로 돌아가기">
+        <a
+          href="/articles"
+          class="flex items-center justify-center w-6 h-6 rounded-full hover:bg-black/10 dark:hover:bg-white/20 transition-colors text-text-color"
+          title="목록으로 돌아가기"
+        >
           <span class="material-symbols-outlined text-[14px]">arrow_back</span>
         </a>
         <span class="text-[10px] uppercase tracking-[0.25em] font-bold text-text-color opacity-60">
           ARTICLES
         </span>
       </div>
-      
+
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 w-full">
-        <h1 class="text-4xl md:text-5xl font-serif font-bold tracking-tighter text-text-color break-keep leading-[1.2]">
+        <h1
+          class="text-4xl md:text-5xl font-serif font-bold tracking-tighter text-text-color break-keep leading-[1.2]"
+        >
           {entry.data.title}
         </h1>
-        
-        <div class="flex items-center justify-end gap-2 text-text-color opacity-70 text-[12px] font-sans shrink-0 mb-1 lg:mb-0 uppercase tracking-widest font-bold">
+
+        <div
+          class="flex items-center justify-end gap-2 text-text-color opacity-70 text-[12px] font-sans shrink-0 mb-1 lg:mb-0 uppercase tracking-widest font-bold"
+        >
           <span class="text-text-color">DevArchive</span>
           <span class="w-[3px] h-[3px] rounded-full bg-border-color"></span>
           <time datetime={entry.data.date.toISOString()} class="tabular-nums">
-            {entry.data.date
-              .toLocaleDateString("ko-KR", {
-                year: "numeric",
-                month: "2-digit",
-                day: "2-digit",
-              })
-              .replace(/\./g, "-")
-              .replace(/ /g, "")
-              .slice(0, -1)}
+            {
+              entry.data.date
+                .toLocaleDateString("ko-KR", {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                })
+                .replace(/\./g, "-")
+                .replace(/ /g, "")
+                .slice(0, -1)
+            }
           </time>
           <span class="w-[3px] h-[3px] rounded-full bg-border-color"></span>
           <span class="text-accent-color">
@@ -61,97 +73,125 @@ const currentSub = entry.data.subcategory;
       </div>
     </div>
 
-    <div class="mx-auto w-full max-w-[1700px] grid grid-cols-1 xl:grid-cols-[1fr_minmax(0,900px)_1fr] gap-x-8 gap-y-16 relative px-4 sm:px-6 md:px-8 xl:px-4">
-      
-
-
+    <div
+      class="mx-auto w-full max-w-[1700px] grid grid-cols-1 xl:grid-cols-[1fr_minmax(0,900px)_1fr] gap-x-8 gap-y-16 relative px-4 sm:px-6 md:px-8 xl:px-4"
+    >
       <!-- 1. LEFT COLUMN: SIDEBAR -->
       <div class="hidden xl:block w-full min-w-0 xl:ml-auto lg:mt-0">
-        <aside class="sidebar-sticky w-full max-w-[280px] ml-auto flex flex-col z-20 hide-scrollbar transition-all duration-500">
+        <aside
+          class="sidebar-sticky w-full max-w-[280px] ml-auto flex flex-col z-20 hide-scrollbar transition-all duration-500"
+        >
           <TopicsSidebar currentCat={currentCat} currentSub={currentSub} />
         </aside>
       </div>
 
       <!-- 2. Main Article Content (Centered inside a Card) -->
-      <div class="w-full max-w-[900px] mx-auto min-w-0 transition-opacity duration-500 relative min-h-[70vh]">
-        <article class="w-full glass-panel rounded-[2.5rem] p-6 md:p-14 reveal-up transition-all duration-500">
-        
-        <!-- Hero Image -->
-        {
-          entry.data.imageUrl && (
-            <div class="mb-10 md:mb-12 rounded-2xl overflow-hidden shadow-sm reveal-up stagger-1">
-              <img
-                class="w-full h-auto aspect-video object-cover"
-                alt={entry.data.title}
-                src={entry.data.imageUrl}
-              />
-            </div>
-          )
-        }
-
-        <!-- MOBILE TOC (Visible only below XL) -->
-        <div class="block xl:hidden mb-12 bg-black/5 dark:bg-white/5 p-5 md:p-6 rounded-2xl reveal-up stagger-1">
-          <h3 class="text-[12px] font-bold tracking-[0.2em] uppercase text-apple-textMuted dark:text-apple-darkTextMuted mb-4">
-            목차
-          </h3>
-          <div class="flex flex-col gap-2 relative">
-            {headings.length > 0 ? (
-              headings
-                .filter((heading) => heading.depth <= 3)
-                .map((heading) => (
-                  <a
-                    href={`#${heading.slug}`}
-                    class="toc-item-mobile text-apple-textMuted dark:text-apple-darkTextMuted font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
-                    data-slug={heading.slug}
-                  >
-                    <span class="text-[14px]" style={`padding-left: ${(heading.depth - 1) * 12}px`}>{heading.text}</span>
-                  </a>
-                ))
-            ) : (
-              <div class="text-[13px] text-apple-textMuted dark:text-apple-darkTextMuted opacity-60">목차가 없습니다.</div>
-            )}
-          </div>
-        </div>
-
-        <!-- Body Content -->
-        <div
-          class="prose max-w-none text-[17px] leading-[1.7] tracking-tight"
+      <div
+        class="w-full max-w-[900px] mx-auto min-w-0 transition-opacity duration-500 relative min-h-[70vh]"
+      >
+        <article
+          class="w-full glass-panel rounded-[2.5rem] p-6 md:p-14 reveal-up transition-all duration-500"
         >
-          <Content />
-        </div>
-      </article>
+          <!-- Hero Image -->
+          {
+            entry.data.imageUrl && (
+              <div class="mb-10 md:mb-12 rounded-2xl overflow-hidden shadow-sm reveal-up stagger-1">
+                <img
+                  class="w-full h-auto aspect-video object-cover"
+                  alt={entry.data.title}
+                  src={entry.data.imageUrl}
+                />
+              </div>
+            )
+          }
+
+          <!-- MOBILE TOC (Visible only below XL) -->
+          <div
+            class="block xl:hidden mb-12 bg-black/5 dark:bg-white/5 p-5 md:p-6 rounded-2xl reveal-up stagger-1"
+          >
+            <h3
+              class="text-[12px] font-bold tracking-[0.2em] uppercase text-apple-textMuted dark:text-apple-darkTextMuted mb-4"
+            >
+              INDEX
+            </h3>
+            <div class="flex flex-col gap-2 relative">
+              {
+                headings.length > 0 ? (
+                  headings
+                    .filter((heading) => 3 >= heading.depth)
+                    .map((heading) => (
+                      <a
+                        href={`#${heading.slug}`}
+                        class="toc-item-mobile text-apple-textMuted dark:text-apple-darkTextMuted font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
+                        data-slug={heading.slug}
+                      >
+                        <span
+                          class="text-[14px]"
+                          style={`padding-left: ${(heading.depth - 1) * 12}px`}
+                        >
+                          {heading.text}
+                        </span>
+                      </a>
+                    ))
+                ) : (
+                  <div class="text-[13px] text-apple-textMuted dark:text-apple-darkTextMuted opacity-60">
+                    There is no index.
+                  </div>
+                )
+              }
+            </div>
+          </div>
+
+          <!-- Body Content -->
+          <div class="prose max-w-none text-[17px] leading-[1.7] tracking-tight">
+            <Content />
+          </div>
+        </article>
       </div>
 
       <!-- 3. Right Sidebar (Apple Glassmorphic Side Bar) -->
       <div class="hidden xl:block w-full min-w-0">
-        <aside class="sidebar-sticky w-full max-w-[280px] mr-auto hide-scrollbar reveal-up stagger-2">
+        <aside
+          class="sidebar-sticky w-full max-w-[280px] mr-auto hide-scrollbar reveal-up stagger-2"
+        >
           <div class="flex flex-col pl-4 gap-2">
             <h3
-              class="text-[11px] font-bold tracking-[0.2em] uppercase text-text-color opacity-60 mb-2"
+              class="text-[12px] font-bold tracking-[0.2em] uppercase text-text-color opacity-60 mb-2"
             >
-              목차
+              INDEX
             </h3>
             <div class="relative flex flex-col gap-0 pb-2" id="toc-container">
               <!-- Sliding Background Pill (No Dots) -->
-              <div id="toc-highlight" class="absolute left-0 w-full rounded-[1.2rem] custom-glass-highlight z-20 pointer-events-none opacity-0 transition-all duration-400 ease-[cubic-bezier(0.25,1,0.5,1)]"></div>
-            
-              {headings.length > 0 ? (
-                headings
-                  .filter((heading) => heading.depth <= 3)
-                  .map((heading) => (
-                    <a
-                      href={`#${heading.slug}`}
-                      class="toc-item relative z-10 w-full flex items-center py-[4.5px] pr-2 cursor-pointer text-text-color opacity-70 font-sans transition-colors duration-300"
-                      data-slug={heading.slug}
-                    >
-                      <span class="text-[12.5px] line-clamp-1" style={`padding-left: ${(heading.depth - 1) * 14 + 8}px`}>{heading.text}</span>
-                    </a>
-                  ))
-              ) : (
-                <div class="py-2 text-[12px] font-medium text-text-color opacity-50">
-                  목차가 없습니다.
-                </div>
-              )}
+              <div
+                id="toc-highlight"
+                class="absolute left-0 w-full rounded-[1.2rem] custom-glass-highlight z-20 pointer-events-none opacity-0 transition-all duration-400 ease-[cubic-bezier(0.25,1,0.5,1)]"
+              >
+              </div>
+
+              {
+                headings.length > 0 ? (
+                  headings
+                    .filter((heading) => 3 >= heading.depth)
+                    .map((heading) => (
+                      <a
+                        href={`#${heading.slug}`}
+                        class="toc-item relative z-10 w-full flex items-center py-[4.5px] pr-2 cursor-pointer text-text-color opacity-70 font-sans transition-colors duration-300"
+                        data-slug={heading.slug}
+                      >
+                        <span
+                          class="text-[12.5px] line-clamp-1"
+                          style={`padding-left: ${(heading.depth - 1) * 14 + 8}px`}
+                        >
+                          {heading.text}
+                        </span>
+                      </a>
+                    ))
+                ) : (
+                  <div class="py-2 text-[12px] font-medium text-text-color opacity-50">
+                    There is no index.
+                  </div>
+                )
+              }
             </div>
           </div>
         </aside>
@@ -180,9 +220,9 @@ const currentSub = entry.data.subcategory;
       document.querySelectorAll(".reveal-up").forEach((el) => slugRevealObserver.observe(el));
 
       // TOC Sliding Highlight & ScrollSpy
-      const tocContainer = document.getElementById('toc-container');
-      const tocHighlight = document.getElementById('toc-highlight');
-      const tocItems = document.querySelectorAll('.toc-item');
+      const tocContainer = document.getElementById("toc-container");
+      const tocHighlight = document.getElementById("toc-highlight");
+      const tocItems = document.querySelectorAll(".toc-item");
 
       if (tocContainer && tocHighlight && tocItems.length > 0) {
         let activeTocItem: Element | null = null;
@@ -193,41 +233,49 @@ const currentSub = entry.data.subcategory;
           const topOffset = el.offsetTop + (el.offsetHeight - targetTocHeight) / 2;
           tocHighlight.style.height = `${targetTocHeight}px`;
           tocHighlight.style.transform = `translateY(${topOffset}px)`;
-          tocHighlight.style.opacity = '1';
+          tocHighlight.style.opacity = "1";
 
-          tocItems.forEach(item => {
-            item.classList.remove('text-blue-600', 'dark:text-blue-400', 'font-bold');
-            item.classList.add('text-apple-textMuted', 'dark:text-apple-darkTextMuted', 'font-medium');
+          tocItems.forEach((item) => {
+            item.classList.remove("text-blue-600", "dark:text-blue-400", "font-bold");
+            item.classList.add(
+              "text-apple-textMuted",
+              "dark:text-apple-darkTextMuted",
+              "font-medium",
+            );
           });
 
-          el.classList.remove('text-apple-textMuted', 'dark:text-apple-darkTextMuted', 'font-medium');
-          el.classList.add('text-blue-600', 'dark:text-blue-400', 'font-bold');
+          el.classList.remove(
+            "text-apple-textMuted",
+            "dark:text-apple-darkTextMuted",
+            "font-medium",
+          );
+          el.classList.add("text-blue-600", "dark:text-blue-400", "font-bold");
         };
 
         // Hover Effect
-        tocItems.forEach(item => {
-          item.addEventListener('mouseenter', () => {
+        tocItems.forEach((item) => {
+          item.addEventListener("mouseenter", () => {
             isHovering = true;
             moveToc(item as HTMLElement);
           });
         });
 
-        tocContainer.addEventListener('mouseleave', () => {
+        tocContainer.addEventListener("mouseleave", () => {
           isHovering = false;
           if (activeTocItem) {
             moveToc(activeTocItem as HTMLElement);
           } else {
-            tocHighlight.style.opacity = '0';
+            tocHighlight.style.opacity = "0";
           }
         });
 
         // Click & Scrolling Highlights
-        tocItems.forEach(item => {
-          item.addEventListener('click', (e) => {
+        tocItems.forEach((item) => {
+          item.addEventListener("click", (e) => {
             e.preventDefault();
-            const targetId = item.getAttribute('href')?.slice(1);
+            const targetId = item.getAttribute("href")?.slice(1);
             if (!targetId) return;
-            
+
             const targetEl = document.getElementById(targetId);
             if (targetEl) {
               const headerOffset = 100;
@@ -236,7 +284,7 @@ const currentSub = entry.data.subcategory;
 
               window.scrollTo({
                 top: offsetPosition,
-                behavior: 'smooth'
+                behavior: "smooth",
               });
             }
 
@@ -246,19 +294,19 @@ const currentSub = entry.data.subcategory;
         });
 
         // ScrollSpy
-        const headings = Array.from(document.querySelectorAll('.prose h1, .prose h2, .prose h3'));
-        let headingOffsets: { id: string, offsetTop: number }[] = [];
+        const headings = Array.from(document.querySelectorAll(".prose h1, .prose h2, .prose h3"));
+        let headingOffsets: { id: string; offsetTop: number }[] = [];
 
         // Calculate offsets on load and resize
         const calculateOffsets = () => {
-          headingOffsets = headings.map(h => ({
+          headingOffsets = headings.map((h) => ({
             id: h.id,
-            offsetTop: (h as HTMLElement).offsetTop
+            offsetTop: (h as HTMLElement).offsetTop,
           }));
         };
 
         calculateOffsets();
-        window.addEventListener('resize', calculateOffsets);
+        window.addEventListener("resize", calculateOffsets);
 
         const onScroll = () => {
           const scrollPos = window.scrollY + 120; // fixed header offset margin
@@ -287,7 +335,7 @@ const currentSub = entry.data.subcategory;
           }
         };
 
-        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener("scroll", onScroll, { passive: true });
         // Trigger once to set initial state
         setTimeout(onScroll, 100);
       }
