@@ -55,46 +55,47 @@ const BTN_ACTIVE =
 ---
 
 <BaseLayout title="Articles | DEVARCHIVE" description="모든 아티클 및 저널 목록입니다.">
-  <div class="mx-auto w-full pt-24 pb-20" style="padding-top: 140px;">
-    <!-- Top Bar: Title & View Toggle -->
-    <div
-      class="mx-auto w-full max-w-[900px] px-4 sm:px-6 md:px-8 flex flex-col sm:flex-row sm:justify-between sm:items-end mb-10 border-b border-border-color pb-6 gap-6"
-      style="
-    padding-bottom: 12px;  "
-    >
-      <div>
-        <span
-          class="text-[10px] uppercase tracking-[0.25em] font-bold text-apple-textMuted dark:text-apple-darkTextMuted block mb-2"
-          >ARTICLES</span
+  <div class="mx-auto w-full pt-[20vh] pb-32">
+    <!-- Editorial Header Section -->
+    <div class="mx-auto w-full max-w-[1700px] px-4 sm:px-6 md:px-8 mb-16 reveal-up">
+      <div class="mx-auto max-w-[900px] border-b border-border-color pb-10">
+        <h1
+          class="text-6xl md:text-8xl font-serif font-black tracking-tighter mb-4 uppercase text-text-color"
         >
-        <h1 class="text-2xl font-bold tracking-tight text-apple-text dark:text-apple-darkText mb-2">
-          아티클
+          Articles
         </h1>
-      </div>
-
-      <!-- Theme Consistent View Toggle -->
-      <div class="hidden sm:flex items-center glass-pill p-1 select-none">
-        <div class="relative flex items-center">
-          <div
-            id="toggle-bg"
-            class="absolute w-[38px] h-[32px] custom-glass-highlight rounded-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] left-0 z-0 border border-text-color/10"
+        <div class="flex justify-between items-end gap-8">
+          <p
+            class="text-[11px] md:text-[13px] font-sans opacity-60 tracking-[0.4em] uppercase text-text-color"
           >
+            ARCHIVING CODE & EXPERIENCE.
+          </p>
+
+          <!-- Theme Consistent View Toggle -->
+          <div class="hidden sm:flex items-center glass-pill p-1 select-none mb-0">
+            <div class="relative flex items-center">
+              <div
+                id="toggle-bg"
+                class="absolute w-[38px] h-[32px] custom-glass-highlight rounded-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] left-0 z-0 border border-text-color/10"
+              >
+              </div>
+
+              <button
+                id="btn-feed"
+                class="relative z-10 w-[38px] h-[32px] flex justify-center items-center rounded-full text-[#1e66f5] dark:text-[#89b4fa] font-bold transition-colors duration-300"
+                aria-label="Feed View"
+              >
+                <span class="material-symbols-outlined text-[16px]">splitscreen</span>
+              </button>
+              <button
+                id="btn-grid"
+                class="relative z-10 w-[38px] h-[32px] flex justify-center items-center rounded-full text-text-color opacity-50 hover:opacity-100 font-medium transition-opacity duration-300"
+                aria-label="Grid View"
+              >
+                <span class="material-symbols-outlined text-[16px]">grid_view</span>
+              </button>
+            </div>
           </div>
-
-          <button
-            id="btn-feed"
-            class="relative z-10 w-[38px] h-[32px] flex justify-center items-center rounded-full text-[#1e66f5] dark:text-[#89b4fa] font-bold transition-colors duration-300"
-            aria-label="Feed View"
-          >
-            <span class="material-symbols-outlined text-[16px]">splitscreen</span>
-          </button>
-          <button
-            id="btn-grid"
-            class="relative z-10 w-[38px] h-[32px] flex justify-center items-center rounded-full text-text-color opacity-50 hover:opacity-100 font-medium transition-opacity duration-300"
-            aria-label="Grid View"
-          >
-            <span class="material-symbols-outlined text-[16px]">grid_view</span>
-          </button>
         </div>
       </div>
     </div>
@@ -295,7 +296,12 @@ const BTN_ACTIVE =
           const moveToggle = (btn: HTMLElement) => {
             toggleBg.style.transform = btn === btnFeed ? "translateX(0)" : "translateX(38px)";
             [btnFeed, btnGrid].forEach((b) => {
-              b.classList.remove("text-[#1e66f5]", "dark:text-[#89b4fa]", "font-bold", "opacity-100");
+              b.classList.remove(
+                "text-[#1e66f5]",
+                "dark:text-[#89b4fa]",
+                "font-bold",
+                "opacity-100",
+              );
               b.classList.add("text-text-color", "font-medium", "opacity-50");
             });
             btn.classList.remove("text-text-color", "font-medium", "opacity-50");
