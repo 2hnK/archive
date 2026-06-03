@@ -8,22 +8,10 @@ const latestArticles = sortedArticles.slice(0, 5); // Just a few for the home pa
 
 const projects = [
   {
-    title: "AI Canvas Writer",
-    desc: "시각적 AI 프롬프트 에디터",
-    date: "2026",
-    slug: "ai-canvas-writer",
-  },
-  {
-    title: "DevJournal CLI",
-    desc: "마크다운 포스트 자동 배포",
+    title: "Dyslexia Kit",
+    desc: "학습 자료 PDF를 AI를 활용해 난독증을 겪는 학생들을 위한 교안으로 변환하고, TTS·어휘 분석·쓰기 연습을 제공하는 서비스",
     date: "2025",
-    slug: "devjournal-cli",
-  },
-  {
-    title: "Minimal System",
-    desc: "공통 디자인 시스템 프레임워크",
-    date: "2024",
-    slug: "minimal-system",
+    slug: "dyslexia-kit",
   },
 ];
 ---
@@ -57,7 +45,7 @@ const projects = [
         class="mt-16 md:mt-24 max-w-xl ml-auto border-l border-accent-color pl-6 reveal-up stagger-1"
       >
         <p class="text-lg md:text-xl font-sans font-medium opacity-80 leading-relaxed">
-          An archive where code and thoughts are carefully organized and preserved.
+          An archive of code, thoughts, experience and growth.
         </p>
       </div>
     </section>
@@ -87,9 +75,7 @@ const projects = [
                       {article.data.title}
                     </h3>
                     <div class="flex items-center gap-3 text-sm font-sans opacity-60">
-                      <span class="text-accent-color font-bold uppercase tracking-widest text-xs">
-                        {article.data.category}
-                      </span>
+                      <span>{article.data.description}</span>
                     </div>
                   </div>
                   <div class="flex items-center gap-4 shrink-0">

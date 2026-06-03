@@ -3,28 +3,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const projects = [
   {
-    title: "AI Canvas Writer",
-    description: "로직 노드 기반의 시각적 AI 프롬프트 에디터 도구입니다.",
-    tags: ["React", "Zustand", "TailwindCSS"],
-    url: "/project/ai-canvas-writer",
-    year: "2026",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuD6TjGTWs53bAhDdSkfxKbZdM2TzdQI_ZJtmDiDK-bbOzPxxSssBUA9FGmSjTtwcgK7txfWRF9vt7TvbvgbPq1PuassGBT7NETRH7F8x-cNetH-9yuMvSaiweyZStMjrtnCbvCfhkcgQ8Kyf4uE9HpJkV3GYFlP7w4aCH8Yn3tshg_UDfWDNBnT5BEM4cw804ZWp6CEeh2apzFDSwCCB2W7VEJcZe43KkAhavwv3opq_ebTxM_VC5EKdLBDvyn4K0p49vYkMzWJkVnJ",
-  },
-  {
-    title: "DevJournal CLI",
-    description: "마크다운 포스트 작성 및 Vercel 환경 배포 시스템.",
-    tags: ["Rust", "CLI", "Astro"],
-    url: "/project/devjournal-cli",
+    title: "Dyslexia Kit",
+    description: "학습 자료 PDF를 AI 활용해 난독증을 겪는 학생들을 위한 교안으로 변환하고, TTS·어휘 분석·쓰기 연습을 제공하는 서비스",
+    tags: ["Spring Boot", "React", "FastAPI", "LangChain", "PostgreSQL", "Redis", "AWS"],
+    url: "/project/dyslexia-kit",
     year: "2025",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuC5AEbqrNzQ1-SvYIJIWt1EuApIbBHl_HBblfMw96fDdkS7EzKHu6Zew16nnCG6WbwvC3aqDeHI0EFJeqB14NjzgjVvsEn67XJU_OV4uJscdG7XFLkIoYOclpv1m1ZPOgQLmeus5zT3nsjuPlZHEPgM298MUI-3mJiEwc_byTMWwtC93z0TzmIsh5nzbS8zndKZ_aGWJls6nfuWluG_lw7BqYVGhrj0lt521kef-xRmkyI83OhraLasbTeVB6f6BhrrLNwvuj8SjvMu",
-  },
-  {
-    title: "Minimal System",
-    description: "사내 공통 디자인 시스템 컴포넌트 프레임워크.",
-    tags: ["Storybook", "Figma", "CSS"],
-    url: "/project/minimal-system",
-    year: "2024",
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuC4eQMIkMBmHMy3whVOgSHFkBGYJ9Bcspd0PMXpnMrd2KLWPfT10Pbd5wWQ3W_-bRtrli8_P0ppaeAg_NZqzjWFAxixxlsgUYzpY98m81uCXn5c7sIAikTX7ioocJTKj9q0XPdEpQMU482kUmXh5zaDUW5GWUUcaHRsucLRWdzAepOgcw57JITm-UG49TI_cYso5dZR_hdhjWj2vogjS1-mnyOqLOu4elVXDrOKtj7gj6NU_eN_ykKRC-CtszyDvnJfT3zZqynw0Pst",
+    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
   },
 ];
 ---
@@ -76,7 +60,7 @@ const projects = [
                   </p>
                   <div class="flex flex-wrap gap-2">
                     {proj.tags.map(tag => (
-                      <span class="text-[9px] uppercase font-sans font-bold tracking-widest border border-text-color/20 px-3 py-1 glass-pill opacity-60 group-hover:opacity-100 group-hover:border-accent-color/30 transition-all">
+                      <span class="text-[9px] uppercase font-sans font-bold tracking-widest border border-text-color/30 px-3 py-1 glass-pill opacity-80 group-hover:opacity-100 group-hover:border-accent-color/50 shadow-sm shadow-black/5 dark:shadow-white/5 transition-all">
                         {tag}
                       </span>
                     ))}
