@@ -1,46 +1,31 @@
-# Astro Starter Kit: Basics
+# DevArchive
+
+DevArchive는 Astro 기반의 정적 개발 아카이브 사이트입니다. 아티클, 프로젝트, 소개 페이지를 에디토리얼 타이포그래피와 글래스모피즘 UI로 구성합니다.
+
+이 README는 긴 설명서가 아니라 프로젝트 문서의 진입점입니다. 상세한 개발 규칙, 구조 설명, 디자인 시스템은 `docs/` 하위 문서를 확인합니다.
+
+## Documents
+
+- [프로젝트 개요](docs/overview.md)
+- [프로젝트 구조](docs/project-structure.md)
+- [개발 가이드](docs/development-guide.md)
+- [디자인 시스템](docs/design/README.md)
+- [디자인 원칙](docs/design/design-principles.md)
+- [컴포넌트 규칙](docs/design/components.md)
+- [Do and Don't](docs/design/do-and-dont.md)
+- [설계 결정 기록](docs/decisions/001-design-direction.md)
+
+## Start Here
+
+개발자는 먼저 [docs/overview.md](docs/overview.md), [docs/project-structure.md](docs/project-structure.md), [docs/development-guide.md](docs/development-guide.md)를 읽습니다.
+
+AI 에이전트는 작업 전에 [AGENTS.md](AGENTS.md)를 먼저 확인하고, 그 안의 Required Reading 순서를 따릅니다.
+
+## Commands
 
 ```sh
-npm create astro@latest -- --template basics
+npm install
+npm run dev
+npm run build
+npm run preview
 ```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
