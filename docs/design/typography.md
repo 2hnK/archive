@@ -1,3 +1,11 @@
+---
+type: Design Reference
+title: Typography
+description: DevArchive의 폰트 패밀리, 제목, 본문, 메타 라벨, 코드 타이포그래피 기준.
+tags: ["design", "typography", "tokens"]
+timestamp: "2026-07-06T00:00:00+09:00"
+---
+
 # Typography
 
 ## Font Families
@@ -35,3 +43,5 @@
 ## Code
 
 인라인 코드는 `--accent-color`와 옅은 배경을 사용한다. 코드 블록은 텍스트/배경 반전 구조와 mono font를 유지한다.
+
+도구형 페이지의 에디터/미리보기 영역은 mono font와 `.prose` 규칙을 함께 사용하되, 공개 아카이브 본문보다 더 조밀한 UI 라벨을 허용한다.

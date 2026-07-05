@@ -1,3 +1,11 @@
+---
+type: Design Reference
+title: Page Patterns
+description: 홈, 아티클, 프로젝트, 소개, 도구형 페이지의 반복 레이아웃 패턴.
+tags: ["design", "page-patterns", "layout"]
+timestamp: "2026-07-06T00:00:00+09:00"
+---
+
 # Page Patterns
 
 ## Home
@@ -50,3 +58,5 @@
 ## Tool Pages
 
 `/write`, `/write-project`, `/snippets`는 보조 도구 성격이 강하다. 일부 zinc 계열, rounded input, form UI가 사용되지만, 공개 아카이브 페이지의 핵심 디자인 기준은 `BaseLayout`, 글래스/에디토리얼 패턴이다.
+
+도구형 페이지에서 새 입력, 탭, 다운로드 버튼을 추가할 때도 기본 페이지와 충돌하지 않도록 상단 내비게이션 여백, 라이트/다크 대비, `prose` 미리보기 스타일을 확인한다.

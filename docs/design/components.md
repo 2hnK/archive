@@ -1,3 +1,11 @@
+---
+type: Component Reference
+title: Components
+description: DevArchive 공통 컴포넌트와 재사용 가능한 CSS 패턴 기준.
+tags: ["design", "components", "css"]
+timestamp: "2026-07-06T00:00:00+09:00"
+---
+
 # Components
 
 ## Navbar
@@ -77,3 +85,21 @@
 - 초기 opacity 0, translateY 60px
 - active 상태에서 opacity 1, translateY 0
 - `stagger-1`, `stagger-2`, `stagger-3`로 순차 진입
+
+## Topics Sidebar
+
+`src/components/TopicsSidebar.astro`
+
+- 카테고리/서브카테고리 계층 목록
+- active state는 `#1e66f5`, dark mode는 `#89b4fa`
+- `custom-glass-highlight`로 현재 항목과 hover 항목을 표시
+- `reveal-up`과 `stagger-1`을 사용해 본문과 같은 진입 리듬 유지
+
+## Time Progress
+
+`src/components/TimeProgress.astro`
+
+- 시간 진행률을 표시하는 도구형 위젯
+- `bg-white/50`, `dark:bg-white/5`, blur, border, shadow를 사용해 글래스 톤과 연결
+- 진행 막대에는 year/month/day/hour/minute별 상태색을 사용
+- 이 색상은 전역 브랜드 팔레트가 아니라 위젯 내부 상태 표현으로만 사용

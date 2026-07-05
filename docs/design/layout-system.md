@@ -1,3 +1,11 @@
+---
+type: Design Reference
+title: Layout System
+description: DevArchive의 전역 레이아웃, 페이지 여백, 폭 제한, 반응형 규칙.
+tags: ["design", "layout", "responsive"]
+timestamp: "2026-07-06T00:00:00+09:00"
+---
+
 # Layout System
 
 ## Global Layout
@@ -34,3 +42,4 @@
 - `xl` 미만에서는 아티클 사이드바를 숨기고 모바일 카테고리 chip을 사용한다.
 - 카드와 목록은 모바일에서 1열을 기본으로 한다.
 - 텍스트는 `break-keep`, `line-clamp`, 적절한 `leading`으로 한국어와 영어가 섞인 문장을 안정화한다.
+- 고정 내비게이션이 있는 페이지는 첫 섹션 top padding을 문서화된 기존 범위에서 먼저 선택한다.

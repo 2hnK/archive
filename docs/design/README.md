@@ -1,3 +1,11 @@
+---
+type: Design System Index
+title: Design System
+description: DevArchive 디자인 시스템 문서의 읽기 순서와 반복 UI 패턴.
+tags: ["design", "index", "visual-language"]
+timestamp: "2026-07-06T00:00:00+09:00"
+---
+
 # Design System
 
 이 문서는 DevArchive의 현재 구현에서 반복적으로 사용되는 디자인 규칙을 정리한 인덱스다. 새 디자인을 제안하기보다 이미 구현된 정적 페이지의 공통 기준을 추출한다.
@@ -13,6 +21,15 @@
 7. [Components](components.md)
 8. [Page Patterns](page-patterns.md)
 9. [Do and Don't](do-and-dont.md)
+
+## Implementation Sources
+
+- `src/styles/global.css`: 색상 변수, 글래스 유틸리티, prose, reveal, editorial list의 기준
+- `src/layouts/BaseLayout.astro`: 전역 폰트, 테마, 내비게이션, 푸터 구조
+- `src/components/Navbar.astro`: 고정 글래스 내비게이션과 sliding highlight
+- `src/components/ArticleCard.astro`: 아티클 카드 hover와 이미지 처리
+- `src/components/TopicsSidebar.astro`: 카테고리 계층, active state, blue 상태색
+- `src/components/TimeProgress.astro`: 도구형 진행 위젯의 제한적 상태색 예외
 
 ## Core Keywords
 

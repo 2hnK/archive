@@ -1,9 +1,11 @@
 ---
+type: Article
 title: "Wireshark Lab: DNS"
 description: "로컬 DNS 서버, DNS 캐싱, DNS 레코드 등 Wireshark를 이용한 DNS 패킷 분석 및 실습"
 category: "Network"
 subcategory: "Wireshark Lab"
 date: 2026-04-10
+timestamp: "2026-07-06T00:00:00+09:00"
 imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2000"
 isFeatured: false
 ---

@@ -1,3 +1,11 @@
+---
+type: Development Guide
+title: Development Guide
+description: DevArchive 개발 요구사항, 명령, HTML/CSS 작성 기준, 검증 절차.
+tags: ["development", "astro", "verification"]
+timestamp: "2026-07-06T00:00:00+09:00"
+---
+
 # Development Guide
 
 ## Requirements
@@ -10,7 +18,10 @@
 ```sh
 npm install
 npm run dev
+npm run docs:validate
+npm run check
 npm run build
+npm run verify
 npm run preview
 ```
 
@@ -21,6 +32,8 @@ npm run preview
 - 전역 디자인 규칙은 `src/styles/global.css`의 변수와 컴포넌트 클래스를 먼저 확인한다.
 - 기존 클래스와 레이아웃 구조를 바꾸기보다 필요한 부분을 좁게 확장한다.
 - 콘텐츠 추가는 가능한 한 Markdown content collection 흐름을 따른다.
+- 문서 변경은 [OKF 문서 형식](knowledge-format.md)을 따르고 `npm run docs:validate`로 확인한다.
+- 커밋 전 검증과 커밋 메시지는 [Git 컨벤션과 작업 규칙](git-conventions.md)을 따른다.
 
 ## HTML And CSS Guidelines
 
@@ -49,7 +62,7 @@ npm run preview
 
 변경 후 최소한 다음을 확인한다.
 
-- `npm run build`
+- `npm run verify`
 - 라이트/다크 모드에서 주요 화면 확인
 - 데스크톱/모바일 폭에서 내비게이션, 카드, 본문 폭 확인
 - 새 CSS가 기존 규칙과 중복되거나 충돌하지 않는지 확인

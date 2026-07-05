@@ -1,3 +1,11 @@
+---
+type: Project Structure
+title: Project Structure
+description: DevArchive 저장소의 주요 디렉터리와 Astro 소스 구조.
+tags: ["structure", "astro", "docs"]
+timestamp: "2026-07-06T00:00:00+09:00"
+---
+
 # Project Structure
 
 ## Root
@@ -5,11 +13,16 @@
 - `README.md`: 프로젝트 문서 인덱스
 - `AGENTS.md`: AI 에이전트 작업 규칙
 - `docs/`: 상세 문서
+- `docs/decisions/`: 중요한 설계 결정 기록
+- `docs/reviews/`: 문서, 디자인, 품질 검토 기록
+- `scripts/`: 로컬 검증과 유지관리 스크립트
 - `astro.config.mjs`: Astro 설정
 - `package.json`: 스크립트와 의존성
 - `public/`: 정적 파일, favicon, 영상, 클라이언트 스크립트
 - `src/`: 페이지, 레이아웃, 컴포넌트, 스타일, 콘텐츠
 - `dist/`: 빌드 결과물
+
+`node_modules/`, `dist/`, `.astro/`, `.dump/`는 문서 하네스와 커밋 대상에서 제외한다.
 
 ## Source Tree
 
@@ -41,3 +54,11 @@
 ## Content
 
 아티클은 `src/content/articles/` 아래 Markdown 파일로 관리한다. 이미지는 아티클 하위 `images/` 폴더에 둔다.
+
+아티클 Markdown도 OKF `type` frontmatter를 갖지만, 렌더링에 필요한 필드는 `src/content.config.ts`의 Astro content collection 스키마를 따른다.
+
+## Scripts
+
+- `scripts/validate-docs.mjs`: Git이 추적하는 Markdown의 OKF frontmatter와 로컬 링크를 검증한다.
+- `npm run docs:validate`: 문서 검증만 실행한다.
+- `npm run verify`: 문서 검증, Astro 검사, 정적 빌드를 순서대로 실행한다.

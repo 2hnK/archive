@@ -278,7 +278,7 @@ const BTN_ACTIVE =
     </div><!-- /page container -->
 
     <script>
-      let articleRevealObserver;
+      let articleRevealObserver: IntersectionObserver | null = null;
 
       document.addEventListener("astro:page-load", () => {
         if (articleRevealObserver) articleRevealObserver.disconnect();
@@ -295,7 +295,9 @@ const BTN_ACTIVE =
           },
           { root: null, rootMargin: "0px 0px -50px 0px", threshold: 0.1 },
         );
-        document.querySelectorAll(".reveal-up").forEach((el) => articleRevealObserver.observe(el));
+        document
+          .querySelectorAll<HTMLElement>(".reveal-up")
+          .forEach((el) => articleRevealObserver?.observe(el));
 
         // View Toggle Logic
         const btnFeed = document.getElementById("btn-feed");

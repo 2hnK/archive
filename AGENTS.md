@@ -1,3 +1,11 @@
+---
+type: Agent Instructions
+title: AGENTS.md
+description: DevArchive에서 AI 에이전트가 따라야 하는 작업, 문서, 디자인 규칙.
+tags: ["agent", "instructions", "design", "documentation"]
+timestamp: "2026-07-06T00:00:00+09:00"
+---
+
 # AGENTS.md
 
 ## Role
@@ -12,11 +20,14 @@
 2. docs/overview.md
 3. docs/project-structure.md
 4. docs/development-guide.md
-5. docs/design/README.md
-6. docs/design/design-principles.md
-7. docs/design/visual-language.md
-8. docs/design/components.md
-9. docs/design/do-and-dont.md
+5. docs/knowledge-format.md
+6. docs/harness-engineering.md
+7. docs/git-conventions.md
+8. docs/design/README.md
+9. docs/design/design-principles.md
+10. docs/design/visual-language.md
+11. docs/design/components.md
+12. docs/design/do-and-dont.md
 
 ## Design Consistency Rules
 
@@ -67,7 +78,8 @@
 - README와 docs 문서의 규칙을 위반하지 않았는가?
 - 새로 추가한 UI가 `docs/design` 문서의 원칙과 맞는가?
 - 라이트/다크 모드에서 배경, 텍스트, 보더, 강조색 대비가 유지되는가?
-- `npm run build`가 성공하는가?
+- 문서 변경 시 `npm run docs:validate`가 성공하는가?
+- 전체 변경 시 `npm run verify`가 성공하는가?
 
 ## Avoid
 

@@ -1,3 +1,11 @@
+---
+type: Design Guardrails
+title: Do And Avoid
+description: DevArchive UI를 확장할 때 지켜야 할 디자인 규칙과 피해야 할 변경.
+tags: ["design", "guardrails", "review"]
+timestamp: "2026-07-06T00:00:00+09:00"
+---
+
 # Do And Avoid
 
 ## Do
@@ -9,6 +17,7 @@
 - 카드, 목록, 필터, 목차는 기존 hover/active 패턴을 참고해 만든다.
 - 새 페이지는 기존 page pattern 중 가장 가까운 것을 선택해 확장하거나, 기존 패턴을 조합해 새 구조를 만든다.
 - 기존 패턴으로 부족한 경우에는 현재 톤과 연결되는 새 변형을 만들 수 있다.
+- 새 컴포넌트를 만들면 `docs/design/components.md` 또는 `docs/design/page-patterns.md`에 기준을 갱신한다.
 - 변경 후 라이트/다크 모드와 모바일/데스크톱을 확인한다.
 
 ## Avoid

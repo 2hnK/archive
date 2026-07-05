@@ -1,3 +1,11 @@
+---
+type: Design Reference
+title: Spacing, Radius, Shadow
+description: DevArchive의 여백, 곡률, 그림자 사용 범위와 재사용 규칙.
+tags: ["design", "spacing", "radius", "shadow"]
+timestamp: "2026-07-06T00:00:00+09:00"
+---
+
 # Spacing, Radius, Shadow
 
 ## Spacing
@@ -32,3 +40,4 @@
 - 새 radius scale을 만들기보다 기존 범위를 재사용한다.
 - 글래스 카드에는 border, blur, shadow가 함께 있어야 한다.
 - 그림자를 과하게 늘려 카드가 떠 보이는 방향으로 바꾸지 않는다.
+- 카드 안에 다시 카드형 섹션을 중첩하기보다 목록, hairline, pill, 내부 구분선으로 밀도를 조절한다.

@@ -1,3 +1,11 @@
+---
+type: Design Reference
+title: Visual Language
+description: DevArchive의 시각 톤, 상호작용 특성, 피해야 할 방향.
+tags: ["design", "visual-language", "interaction"]
+timestamp: "2026-07-06T00:00:00+09:00"
+---
+
 # Visual Language
 
 ## Tone
@@ -18,6 +26,13 @@
 - 리스트 hover는 배경 반전, 좌우 padding 변화, arrow rotation으로 반응한다.
 - 카드 hover는 제목 강조색, 이미지 scale, 경계/그림자 변화로 반응한다.
 - 진입 모션은 천천히 올라오는 방식으로 통일한다.
+
+## Source Patterns
+
+- sliding highlight: `Navbar.astro`, `TopicsSidebar.astro`
+- 카드 이미지 scale: `ArticleCard.astro`, 아티클 목록 feed 카드
+- reveal motion: `global.css`의 `.reveal-up`
+- editorial list hover: `global.css`의 `.editorial-list-item`
 
 ## Avoid
 

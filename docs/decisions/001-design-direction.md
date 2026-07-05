@@ -1,3 +1,11 @@
+---
+type: Architecture Decision Record
+title: 001. Preserve Current Editorial Glass Archive Direction
+description: DevArchive의 에디토리얼 글래스 아카이브 디자인 방향을 유지하기로 한 결정.
+tags: ["decision", "design", "editorial", "glass"]
+timestamp: "2026-07-06T00:00:00+09:00"
+---
+
 # 001. Preserve Current Editorial Glass Archive Direction
 
 ## Status

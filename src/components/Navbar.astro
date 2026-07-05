@@ -209,9 +209,9 @@ const navLinks = [
     const navItems = document.querySelectorAll("#nav-menu .nav-link");
 
     if (navMenu && navHighlight && navItems.length > 0) {
-      const activeItem = navMenu.querySelector(".active-nav");
+      const activeItem = navMenu.querySelector<HTMLElement>(".active-nav");
 
-      const moveNavHighlight = (el) => {
+      const moveNavHighlight = (el: HTMLElement) => {
         navHighlight.style.width = `${el.offsetWidth}px`;
         navHighlight.style.transform = `translateX(${el.offsetLeft}px)`;
         navHighlight.style.opacity = "1";
@@ -224,7 +224,7 @@ const navLinks = [
 
       navItems.forEach((item) => {
         item.addEventListener("mouseenter", () => {
-          moveNavHighlight(item);
+          moveNavHighlight(item as HTMLElement);
         });
       });
 

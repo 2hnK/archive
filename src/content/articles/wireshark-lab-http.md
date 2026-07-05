@@ -1,9 +1,11 @@
 ---
+type: Article
 title: "Wireshark Lab: HTTP"
 description: "HTTP 프로토콜의 기본적인 작동 원리와 메시지 형식을 Wireshark를 통해 탐구."
 category: "Network"
 subcategory: "Wireshark Lab"
 date: 2026-03-23
+timestamp: "2026-07-06T00:00:00+09:00"
 imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=2000"
 isFeatured: false
 ---
