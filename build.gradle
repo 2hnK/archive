@@ -1,0 +1,68 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '4.1.0'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.devarchive'
+version = '0.0.1-SNAPSHOT'
+description = 'DevArchive Spring SSR'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+	implementation 'org.commonmark:commonmark:0.24.0'
+	implementation 'org.commonmark:commonmark-ext-gfm-tables:0.24.0'
+	implementation 'org.jsoup:jsoup:1.18.3'
+	testImplementation 'org.springframework.boot:spring-boot-starter-thymeleaf-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-validation-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+sourceSets {
+	main {
+		resources {
+			srcDir "$buildDir/generated-resources/main"
+		}
+	}
+}
+
+def npmCommand = System.getProperty('os.name').toLowerCase().contains('windows') ? 'npm.cmd' : 'npm'
+
+tasks.register('npmCi', Exec) {
+	inputs.file('package-lock.json')
+	outputs.dir('node_modules')
+	commandLine npmCommand, 'ci'
+}
+
+tasks.register('buildCss', Exec) {
+	dependsOn 'npmCi'
+	inputs.file('src/main/resources/styles/global.css')
+	inputs.dir('src/main/resources/templates')
+	outputs.file("$buildDir/generated-resources/main/static/css/app.css")
+	commandLine npmCommand, 'run', 'build:css'
+}
+
+tasks.named('processResources') {
+	dependsOn 'buildCss'
+}
+
+tasks.named('bootRun') {
+	dependsOn 'buildCss'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

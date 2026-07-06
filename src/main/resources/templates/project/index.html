@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: layout(${title}, ${description}, ~{::main})}">
+<body>
+<main class="pt-[20vh] pb-32 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 min-h-[70vh]">
+  <div class="mb-24 reveal-up">
+    <h1 class="text-6xl md:text-8xl font-serif font-black tracking-tighter mb-4 uppercase">
+      Works
+    </h1>
+    <p class="text-[11px] md:text-[13px] font-sans opacity-60 tracking-[0.4em] uppercase mb-12">
+      ARCHIVING CODE & EXPERIENCE.
+    </p>
+  </div>
+
+  <div class="flex flex-col gap-8 pt-8">
+    <a th:each="project, stat : ${projects}"
+       th:href="${project.url()}"
+       class="group relative glass-panel p-10 md:p-14 rounded-[2.5rem] flex flex-col md:flex-row md:items-center justify-between gap-8 transition-all duration-700 ease-out overflow-hidden reveal-up stagger-1">
+      <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <img th:src="${project.image}"
+             alt=""
+             class="w-full h-full object-cover opacity-0 group-hover:opacity-[0.12] dark:group-hover:opacity-[0.18] scale-125 group-hover:scale-105 blur-3xl group-hover:blur-none transition-all duration-[1200ms] cubic-bezier(0.2, 0, 0.2, 1)">
+        <div class="absolute inset-0 bg-gradient-to-br from-bg-color/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+      </div>
+
+      <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-10 w-full">
+        <div class="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-text-color opacity-40 w-full md:w-32 flex-shrink-0">
+          <span class="glass-pill px-3 py-1 mb-3 inline-block border border-text-color/10" th:text="${project.year}">2026</span>
+          <br>
+          <span class="pl-1" th:text="|PROJECT ${#numbers.formatInteger(stat.count, 2)}|">PROJECT 01</span>
+        </div>
+
+        <div class="flex-1">
+          <h2 class="text-4xl md:text-7xl font-serif font-black tracking-tighter mb-6 group-hover:text-accent-color transition-colors duration-500"
+              th:text="${project.title}">
+            Project
+          </h2>
+          <div class="flex flex-col md:flex-row md:items-center gap-8">
+            <p class="font-sans text-sm md:text-base font-medium tracking-tight text-text-color opacity-70 max-w-xl break-keep leading-relaxed"
+               th:text="${project.description}">
+              Description
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span th:each="tag : ${project.tags}"
+                    th:text="${tag}"
+                    class="text-[9px] uppercase font-sans font-bold tracking-widest border border-text-color/30 px-3 py-1 glass-pill opacity-80 group-hover:opacity-100 group-hover:border-accent-color/50 shadow-sm shadow-black/5 dark:shadow-white/5 transition-all">
+                Tag
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex-shrink-0 flex items-center justify-center w-14 h-14 rounded-full border border-text-color/10 group-hover:border-accent-color/50 group-hover:bg-accent-color group-hover:text-white transition-all duration-500">
+          <span class="material-symbols-outlined text-2xl transform group-hover:-rotate-45 transition-transform duration-500">
+            arrow_forward
+          </span>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { root: null, rootMargin: "0px 0px -50px 0px", threshold: 0.1 });
+
+      document.querySelectorAll(".reveal-up").forEach((el) => revealObserver.observe(el));
+    });
+  </script>
+</main>
+</body>
+</html>

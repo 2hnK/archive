@@ -10,7 +10,7 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 ## CSS Variables
 
-`src/styles/global.css`의 현재 핵심 변수:
+`src/main/resources/styles/global.css`의 현재 핵심 변수:
 
 ```css
 :root {
@@ -52,4 +52,4 @@ timestamp: "2026-07-06T00:00:00+09:00"
 - 강조는 먼저 `--accent-color`를 사용한다.
 - 보더는 `border-color`, `text-color`의 opacity, white/black opacity 계열을 우선한다.
 - 페이지별 독립 팔레트를 만들지 않는다.
-- `TimeProgress.astro`의 진행 막대 색상은 제한된 위젯 내부 상태색으로만 취급하고, 새 페이지의 브랜드 팔레트로 확장하지 않는다.
+- 도구형 위젯이나 작성 보조 화면의 상태색은 제한된 내부 상태 표현으로만 취급하고, 새 페이지의 브랜드 팔레트로 확장하지 않는다.

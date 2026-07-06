@@ -1,14 +1,14 @@
 ---
 type: Project Index
 title: DevArchive
-description: Astro 기반 정적 개발 아카이브 사이트의 문서 진입점.
-tags: ["project", "astro", "documentation"]
+description: Spring Boot SSR 기반 개발 아카이브 사이트의 문서 진입점.
+tags: ["project", "spring", "thymeleaf", "documentation"]
 timestamp: "2026-07-06T00:00:00+09:00"
 ---
 
 # DevArchive
 
-DevArchive는 Astro 기반의 정적 개발 아카이브 사이트입니다. 아티클, 프로젝트, 소개 페이지를 에디토리얼 타이포그래피와 글래스모피즘 UI로 구성합니다.
+DevArchive는 Spring Boot와 Thymeleaf 기반의 SSR 개발 아카이브 사이트입니다. 아티클, 프로젝트, 소개 페이지를 에디토리얼 타이포그래피와 글래스모피즘 UI로 구성합니다.
 
 이 README는 긴 설명서가 아니라 프로젝트 문서의 진입점입니다. 상세한 개발 규칙, 구조 설명, 디자인 시스템은 `docs/` 하위 문서를 확인합니다.
 
@@ -26,6 +26,7 @@ DevArchive는 Astro 기반의 정적 개발 아카이브 사이트입니다. 아
 - [Do and Don't](docs/design/do-and-dont.md)
 - [설계 결정 기록](docs/decisions/001-design-direction.md)
 - [OKF와 하네스 결정 기록](docs/decisions/002-adopt-okf-and-harness.md)
+- [Spring SSR Shell 전환 기록](docs/decisions/003-adopt-spring-ssr-shell.md)
 - [문서와 디자인 검토 기록](docs/reviews/documentation-and-design-review-2026-07-06.md)
 
 ## Start Here
@@ -42,5 +43,4 @@ npm run dev
 npm run docs:validate
 npm run verify
 npm run build
-npm run preview
 ```

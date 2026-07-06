@@ -1,29 +1,25 @@
 {
-  "name": "dev-blog",
+  "name": "devarchive-spring-ssr",
   "type": "module",
   "version": "0.0.1",
   "engines": {
-    "node": ">=18.14.0"
+    "node": ">=22.0.0"
   },
   "scripts": {
-    "dev": "astro dev",
-    "check": "astro check",
+    "dev": "gradlew.bat bootRun",
+    "build:css": "tailwindcss -i ./src/main/resources/styles/global.css -o ./build/generated-resources/main/static/css/app.css --minify",
+    "watch:css": "tailwindcss -i ./src/main/resources/styles/global.css -o ./build/generated-resources/main/static/css/app.css --watch",
     "docs:validate": "node scripts/validate-docs.mjs",
-    "harness:verify": "npm run docs:validate && npm run check && npm run build",
-    "verify": "npm run harness:verify",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "gradle:build": "gradlew.bat build",
+    "build": "npm run gradle:build",
+    "verify": "npm run docs:validate && npm run gradle:build"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.8",
+    "@tailwindcss/cli": "^4.2.2",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/forms": "^0.5.11",
     "@tailwindcss/typography": "^0.5.19",
-    "@tailwindcss/vite": "^4.2.2",
-    "astro": "^6.0.6",
-    "tailwindcss": "^4.2.2",
-    "typescript": "^5.9.3"
+    "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
     "yaml": "^2.9.0"

@@ -1,8 +1,8 @@
 ---
 type: Engineering Harness
 title: 하네스 엔지니어링 구성
-description: DevArchive에서 에이전트가 문서와 정적 사이트 변경을 검증하는 최소 하네스.
-tags: ["harness", "verification", "automation", "codex"]
+description: DevArchive에서 에이전트가 문서와 Spring SSR 변경을 검증하는 최소 하네스.
+tags: ["harness", "verification", "spring", "codex"]
 timestamp: "2026-07-06T00:00:00+09:00"
 ---
 
@@ -16,15 +16,12 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 ```sh
 npm run docs:validate
-npm run check
-npm run build
 npm run verify
 ```
 
 - `docs:validate`: OKF frontmatter와 로컬 문서 링크를 검증한다.
-- `check`: Astro 타입/콘텐츠 검사를 실행한다.
-- `build`: 정적 사이트 빌드를 실행한다.
-- `verify`: 문서 검증, Astro 검사, 빌드를 순서대로 실행하는 통합 하네스다.
+- `build`: Tailwind CSS 생성과 Spring Boot 빌드를 실행한다.
+- `verify`: 문서 검증과 Spring Boot 빌드를 순서대로 실행하는 통합 하네스다.
 
 ## 에이전트 작업 흐름
 
@@ -36,7 +33,7 @@ npm run verify
 
 ## 포함하지 않는 것
 
-현재는 정적 Astro 사이트이므로 다음 구성은 추가하지 않는다.
+현재는 파일 기반 콘텐츠를 렌더링하는 SSR 사이트이므로 다음 구성은 추가하지 않는다.
 
 - 별도 관측성 스택
 - 브라우저 기반 시각 회귀 테스트
@@ -51,4 +48,3 @@ npm run verify
 - 새 페이지나 컴포넌트가 생기면 관련 디자인 문서도 함께 갱신한다.
 - 검증 스크립트는 에이전트가 바로 이해할 수 있는 한국어 오류 메시지를 출력한다.
 - 하네스가 실제 개발 흐름보다 무거워지면 축소하거나 분리한다.
-

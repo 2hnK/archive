@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<body>
+<article th:fragment="card(article)" class="group flex flex-col h-full w-full">
+  <a th:if="${article.imageUrl != null}"
+     th:href="${article.url()}"
+     class="img-wrap block w-full aspect-video md:aspect-[4/3] mb-5 overflow-hidden glass-panel">
+    <img th:alt="${article.title}"
+         class="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+         th:src="${article.imageUrl}"
+         loading="lazy">
+  </a>
+  <a th:if="${article.imageUrl == null}"
+     th:href="${article.url()}"
+     class="img-wrap flex items-center justify-center w-full aspect-video md:aspect-[4/3] mb-5 overflow-hidden glass-panel transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02] relative">
+    <span class="absolute inset-0 flex items-center justify-center text-[80px] md:text-[120px] font-black text-black/[0.03] dark:text-white/[0.02] tracking-tighter select-none leading-none opacity-50 overflow-hidden transform -rotate-12 scale-150"
+          th:text="${article.category}">Category</span>
+    <div class="relative z-10 flex flex-col items-center gap-2">
+      <span class="material-symbols-outlined text-[40px] text-black/10 dark:text-white/10">article</span>
+    </div>
+  </a>
+  <div class="content-wrap flex flex-col gap-2.5 flex-grow px-1 mt-1">
+    <div class="flex items-center gap-2 mb-1">
+      <span class="text-[12px] uppercase tracking-widest font-bold text-accent-color" th:text="${article.category}">Category</span>
+      <span class="w-[3px] h-[3px] rounded-full bg-border-color"></span>
+      <time class="text-[11px] font-sans font-medium text-text-color opacity-60 tabular-nums"
+            th:datetime="${article.date}"
+            th:text="${article.dateLabel()}">2026-01-01</time>
+    </div>
+    <h3 class="text-2xl md:text-3xl font-serif font-bold tracking-tight text-text-color group-hover:text-accent-color transition-colors duration-300 leading-[1.3] break-keep">
+      <a th:href="${article.url()}" class="before:absolute before:inset-0 block relative" th:text="${article.title}">
+        Article Title
+      </a>
+    </h3>
+    <p class="text-[15px] font-sans font-medium text-text-color opacity-70 leading-[1.65] line-clamp-2 mt-1"
+       th:text="${article.description}">
+      Description
+    </p>
+  </div>
+</article>
+</body>
+</html>

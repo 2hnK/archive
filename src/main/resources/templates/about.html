@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: layout(${title}, ${description}, ~{::main})}">
+<body>
+<main class="w-full min-h-screen pb-32">
+  <section class="relative w-full min-h-[75vh] flex flex-col items-center justify-center text-center px-6 reveal-up overflow-hidden pt-12 md:pt-20">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] md:w-[45vw] md:h-[45vw] bg-accent-color/8 dark:bg-accent-color/15 rounded-full blur-[120px] pointer-events-none animate-pulse duration-1000"></div>
+
+    <h1 class="text-[8vw] md:text-[5vw] font-sans font-light tracking-[0.2em] md:tracking-[0.3em] uppercase leading-[1.1] text-transparent !bg-clip-text bg-gradient-to-b from-neutral-900 to-neutral-400 dark:from-neutral-100 dark:to-neutral-600 relative z-10 mb-6 md:mb-8">
+      DESIGNING <br> STABILITY
+    </h1>
+
+    <p class="text-[10px] md:text-xs font-mono opacity-50 tracking-[0.4em] uppercase mb-10 md:mb-12 relative z-10">
+      BUILDING CLEARLY
+    </p>
+
+    <div class="max-w-xl relative z-10 mx-auto w-full">
+      <p class="text-base md:text-lg font-serif leading-relaxed opacity-80 italic pb-8 border-b border-border-color/30 px-6 mt-2">
+        "조금은 느리더라도 문제의 본질을<br class="hidden md:block"> 놓치지 않는 개발자가 되겠습니다."
+      </p>
+    </div>
+
+    <div class="flex items-center gap-10 mt-8 relative z-10">
+      <a href="mailto:kimgh921@gmail.com"
+         onclick="navigator.clipboard.writeText('kimgh921@gmail.com'); const el = this.querySelector('.email-text'); const orig = el.innerText; el.innerText = 'COPIED!'; setTimeout(() => el.innerText = orig, 1500);"
+         class="flex flex-col items-center gap-3 opacity-50 hover:opacity-100 hover:text-accent-color hover:-translate-y-1 transition-all duration-300">
+        <span class="material-symbols-outlined text-[24px]">mail</span>
+        <span class="email-text text-[10px] font-sans font-bold tracking-widest uppercase w-12 text-center mt-[1px]">Email</span>
+      </a>
+      <a href="https://github.com/2hnk" target="_blank" class="flex flex-col items-center gap-3 opacity-50 hover:opacity-100 hover:text-accent-color hover:-translate-y-1 transition-all duration-300 pt-1">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+          <path d="M9 18c-4.51 2-5-2-7-2"></path>
+        </svg>
+        <span class="text-[10px] font-sans font-bold tracking-widest uppercase mt-[1px]">Github</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="w-full relative px-6 mt-16 md:mt-32 reveal-up max-w-[1400px] mx-auto">
+    <div class="text-center mb-16 md:mb-24">
+      <h2 class="text-3xl md:text-4xl font-sans font-semibold tracking-tight mb-3">Milestones</h2>
+      <p class="text-[10px] font-sans opacity-40 tracking-widest uppercase">Trajectory</p>
+    </div>
+
+    <div class="relative w-full max-w-4xl mx-auto py-8">
+      <div class="absolute left-6 md:left-1/2 -top-4 -bottom-4 w-[2px] bg-neutral-300 dark:bg-neutral-800 -translate-x-1/2 z-0"></div>
+
+      <div class="flex flex-col gap-16 md:gap-24 relative z-10">
+        <div th:each="item, stat : ${timeline}"
+             th:class="${stat.even} ? 'relative flex flex-col md:flex-row-reverse items-center justify-between group w-full' : 'relative flex flex-col md:flex-row items-center justify-between group w-full'">
+          <div class="absolute left-6 md:left-1/2 top-0 md:top-1/2 -translate-x-1/2 md:-translate-y-1/2 flex items-center justify-center z-10 mt-6 md:mt-0">
+            <div class="w-12 h-12 md:w-16 md:h-16 rounded-full glass-panel flex items-center justify-center border border-transparent group-hover:border-accent-color/30 bg-[var(--bg-color)] group-hover:scale-110 transition-all duration-700 shadow-sm relative">
+              <div class="absolute inset-0 rounded-full bg-accent-color/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+              <img th:src="${item.logo}" class="w-6 h-6 md:w-8 md:h-8 object-contain relative z-10" alt="">
+            </div>
+          </div>
+
+          <div class="w-full md:w-[45%] pl-20 md:pl-0 mt-2 md:mt-0">
+            <div class="glass-panel p-8 rounded-3xl group-hover:-translate-y-2 transition-transform duration-700 border border-transparent group-hover:border-accent-color/10 relative overflow-hidden text-left">
+              <div class="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-br from-accent-color/5 to-transparent transition-opacity duration-700 pointer-events-none"></div>
+
+              <div class="flex items-center flex-wrap gap-2 mb-4">
+                <span class="inline-block px-3 py-1 bg-accent-color/10 text-accent-color text-[10px] font-sans font-bold uppercase tracking-widest rounded-full"
+                      th:text="${item.year}">2026</span>
+              </div>
+
+              <div class="flex items-center flex-wrap gap-3 mb-2">
+                <h3 class="text-lg md:text-xl font-sans font-semibold tracking-tight text-text-color leading-snug"
+                    th:text="${item.description}">Description</h3>
+                <span th:if="${item.badge != null}"
+                      class="inline-flex shrink-0 items-center justify-center gap-1 text-[10px] font-bold text-amber-600 dark:text-amber-500 bg-amber-500/10 px-2 py-[2px] leading-none rounded-full border border-amber-500/20 translate-y-[-1px]">
+                  <span class="material-symbols-outlined text-[12px] leading-none">emoji_events</span>
+                  <span th:text="${item.badge}">Badge</span>
+                </span>
+              </div>
+
+              <p class="text-[11px] md:text-xs font-sans opacity-60 leading-relaxed font-light"
+                 th:text="${item.detail}">Detail</p>
+            </div>
+          </div>
+
+          <div class="hidden md:block w-[45%]"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 mt-32 md:mt-40 reveal-up stagger-1">
+    <div class="text-center mb-16 md:mb-20">
+      <h2 class="text-3xl md:text-4xl font-sans font-semibold tracking-tight mb-3">Tech Specs</h2>
+      <p class="text-[10px] font-sans opacity-40 tracking-widest uppercase">Architecture & Canvas</p>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-[1px] bg-border-color/50 border border-border-color/50 rounded-3xl overflow-hidden glass-panel p-[1px] shadow-sm">
+      <div th:each="skill : ${skills}"
+           class="bg-[var(--bg-color)] p-8 flex flex-col items-center justify-center gap-4 group hover:bg-neutral-500/5 dark:hover:bg-neutral-100/5 transition-colors duration-500 lg:min-h-[140px]">
+        <img th:src="${skill.icon}" th:alt="${skill.name}" class="w-8 h-8 object-contain opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
+        <span class="text-xs font-mono font-bold opacity-80 text-center tracking-wide" th:text="${skill.name}">Skill</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 mt-24 md:mt-32 mb-32 md:mb-40 reveal-up stagger-2">
+    <div class="text-center mb-12 md:mb-16">
+      <h2 class="text-3xl md:text-4xl font-sans font-semibold tracking-tight mb-3">Certifications</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
+      <div th:each="cert : ${certifications}"
+           class="flex items-center gap-5 group cursor-default border-b border-border-color/30 pb-4 hover:border-accent-color/50 transition-colors duration-300">
+        <div class="w-8 h-8 flex items-center justify-center shrink-0">
+          <img th:src="${cert.logo}" th:alt="${cert.item}" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300 rounded-sm">
+        </div>
+        <div class="flex flex-col gap-0.5 flex-1 pl-1">
+          <span class="text-sm md:text-base font-sans font-semibold opacity-90 tracking-tight" th:text="${cert.item}">Certification</span>
+          <span class="font-sans text-[11px] md:text-xs font-light opacity-60 tracking-wide"
+                th:text="|${cert.description} • ${cert.date}|">Issuer · Date</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { root: null, rootMargin: "0px 0px -50px 0px", threshold: 0.1 },
+      );
+
+      document.querySelectorAll(".reveal-up").forEach((el) => revealObserver.observe(el));
+    });
+  </script>
+</main>
+</body>
+</html>

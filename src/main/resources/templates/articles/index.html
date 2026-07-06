@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: layout(${title}, ${description}, ~{::main})}">
+<body>
+<main class="mx-auto w-full pt-[20vh] pb-32">
+  <div class="mx-auto w-full max-w-[1700px] px-4 sm:px-6 md:px-8 mb-16 reveal-up">
+    <div class="mx-auto max-w-[900px] border-b border-border-color pb-10">
+      <h1 class="text-6xl md:text-8xl font-serif font-black tracking-tighter mb-4 uppercase text-text-color">
+        Articles
+      </h1>
+      <div class="flex justify-between items-end gap-8">
+        <p class="text-[11px] md:text-[13px] font-sans opacity-60 tracking-[0.4em] uppercase text-text-color">
+          ARCHIVING CODE & EXPERIENCE.
+        </p>
+
+        <div class="hidden sm:flex items-center glass-pill p-1 select-none mb-0">
+          <div class="relative flex items-center">
+            <div
+              id="toggle-bg"
+              class="absolute w-[38px] h-[32px] custom-glass-highlight rounded-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] left-0 z-0 border border-text-color/10">
+            </div>
+
+            <button
+              id="btn-feed"
+              class="relative z-10 w-[38px] h-[32px] flex justify-center items-center rounded-full text-[#1e66f5] dark:text-[#89b4fa] font-bold transition-colors duration-300"
+              aria-label="Feed View"
+              type="button">
+              <span class="material-symbols-outlined text-[16px]">splitscreen</span>
+            </button>
+            <button
+              id="btn-grid"
+              class="relative z-10 w-[38px] h-[32px] flex justify-center items-center rounded-full text-text-color opacity-50 hover:opacity-100 font-medium transition-opacity duration-300"
+              aria-label="Grid View"
+              type="button">
+              <span class="material-symbols-outlined text-[16px]">grid_view</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mx-auto w-full max-w-[1700px] grid grid-cols-1 xl:grid-cols-[1fr_minmax(0,900px)_1fr] gap-x-8 gap-y-8 xl:gap-y-16 relative px-4 sm:px-6 md:px-8 xl:px-4">
+    <div class="xl:hidden w-full max-w-[900px] mx-auto pb-6 pt-1 relative reveal-up">
+      <div class="relative w-full">
+        <div class="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-[var(--bg-color)] via-[var(--bg-color)]/50 to-transparent z-10 pointer-events-none"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-[var(--bg-color)] via-[var(--bg-color)]/50 to-transparent z-10 pointer-events-none"></div>
+
+        <div class="flex items-center gap-3 overflow-x-auto hide-scrollbar scroll-smooth py-3 px-6 select-none">
+          <a
+            href="/articles"
+            data-filter="all"
+            th:class="${currentCat == null} ? 'mobile-cat-filter glass-pill whitespace-nowrap px-5 py-2 text-[12px] font-bold tracking-tight transition-all duration-500 transform border shadow-sm custom-glass-highlight text-[#1e66f5] dark:text-[#89b4fa] border-white/20 scale-[1.05] z-10' : 'mobile-cat-filter glass-pill whitespace-nowrap px-5 py-2 text-[12px] font-bold tracking-tight transition-all duration-500 transform border shadow-sm bg-transparent text-text-color opacity-30 border-transparent hover:opacity-80 hover:bg-black/5 dark:hover:bg-white/5'">
+            All
+          </a>
+          <a th:each="topic : ${topics}"
+             href="#"
+             th:attr="data-filter-cat=${topic.name}"
+             th:text="${topic.name}"
+             th:class="${currentCat == topic.name} ? 'mobile-cat-filter glass-pill whitespace-nowrap px-5 py-2 text-[12px] font-bold tracking-tight transition-all duration-500 transform border shadow-sm custom-glass-highlight text-[#1e66f5] dark:text-[#89b4fa] border-white/20 scale-[1.05] z-10' : 'mobile-cat-filter glass-pill whitespace-nowrap px-5 py-2 text-[12px] font-bold tracking-tight transition-all duration-500 transform border shadow-sm bg-transparent text-text-color opacity-30 border-transparent hover:opacity-80 hover:bg-black/5 dark:hover:bg-white/5'">
+            Category
+          </a>
+          <div class="min-w-[24px] h-1"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hidden xl:block w-full min-w-0 xl:ml-auto lg:mt-0">
+      <aside class="sidebar-sticky w-full max-w-[280px] ml-auto flex flex-col z-20 hide-scrollbar transition-all duration-500">
+        <div id="sidebar-category-menu"
+             th:replace="~{fragments/topics-sidebar :: topics(${topics}, ${articleCount}, ${currentCat}, ${currentSub})}">
+        </div>
+      </aside>
+    </div>
+
+    <div class="w-full max-w-[900px] mx-auto min-w-0 transition-opacity duration-500 relative min-h-[70vh]">
+      <div id="view-feed" class="w-full flex flex-col transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+        <div class="relative w-full h-full" id="feed-details-container">
+          <div th:each="article : ${articles}"
+               th:attr="data-category=${article.category},data-subcategory=${article.subcategory}"
+               class="post-detail relative w-full flex-col glass-panel rounded-[2.5rem] p-6 md:p-10 mb-12 reveal-up transition-all duration-500">
+            <div class="mb-8">
+              <div class="flex items-center gap-2 mb-4 text-text-color opacity-60 text-[12px] font-bold uppercase tracking-widest font-sans">
+                <span class="text-accent-color max-w-max" th:text="${article.category}">Network</span>
+                <span class="w-[3px] h-[3px] rounded-full bg-border-color"></span>
+                <time class="tabular-nums" th:datetime="${article.date}" th:text="${article.dateLabel()}">2026-01-01</time>
+              </div>
+              <h2 class="text-3xl md:text-5xl font-serif font-bold tracking-tighter text-text-color leading-[1.2] mb-5 break-keep hover:text-accent-color transition-colors">
+                <a th:href="${article.url()}" th:text="${article.title}">Article Title</a>
+              </h2>
+              <a th:if="${article.imageUrl != null}"
+                 th:href="${article.url()}"
+                 class="block w-full aspect-[21/9] md:aspect-[16/9] rounded-[1rem] overflow-hidden bg-black/5 dark:bg-white/5 mb-8 relative group cursor-pointer">
+                <img th:src="${article.imageUrl}"
+                     th:alt="${article.title}"
+                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
+                     loading="lazy">
+              </a>
+            </div>
+
+            <div class="mb-6 space-y-4">
+              <h3 class="text-lg md:text-xl font-sans font-medium text-text-color leading-[1.65] tracking-tight break-keep opacity-90"
+                  th:text="${article.description}">Description</h3>
+              <div class="relative">
+                <p class="text-text-color text-sm leading-[1.8] tracking-tight break-keep line-clamp-4 font-sans opacity-70"
+                   th:text="${article.snippet}">Snippet</p>
+              </div>
+            </div>
+
+            <div class="mt-8 flex justify-end">
+              <a
+                th:href="${article.url()}"
+                class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-border-color/20 dark:border-white/20 bg-transparent hover:bg-text-color hover:text-bg-color hover:border-transparent text-[11px] font-sans font-bold uppercase tracking-[0.2em] text-text-color transition-colors duration-400 group">
+                Read Article
+                <span class="material-symbols-outlined text-[15px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="view-grid"
+        class="hidden opacity-0 translate-y-8 flex-col relative w-full h-0 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pb-20">
+        <div id="article-grid-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-x-8 gap-y-12 h-auto w-full">
+          <div th:each="article : ${articles}"
+               class="article-grid-item h-full flex flex-col reveal-up transition-all duration-500"
+               th:attr="data-category=${article.category},data-subcategory=${article.subcategory}">
+            <div th:replace="~{fragments/article-card :: card(${article})}"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hidden xl:block w-full min-w-0 order-3"></div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { root: null, rootMargin: "0px 0px -50px 0px", threshold: 0.1 },
+      );
+      document.querySelectorAll(".reveal-up").forEach((el) => revealObserver.observe(el));
+
+      const btnFeed = document.getElementById("btn-feed");
+      const btnGrid = document.getElementById("btn-grid");
+      const toggleBg = document.getElementById("toggle-bg");
+      const viewFeed = document.getElementById("view-feed");
+      const viewGrid = document.getElementById("view-grid");
+
+      if (btnFeed && btnGrid && toggleBg && viewFeed && viewGrid) {
+        let isFeed = (localStorage.getItem("article-view") || "feed") === "feed";
+
+        const moveToggle = (btn) => {
+          toggleBg.style.transform = btn === btnFeed ? "translateX(0)" : "translateX(38px)";
+          [btnFeed, btnGrid].forEach((b) => {
+            b.classList.remove("text-[#1e66f5]", "dark:text-[#89b4fa]", "font-bold", "opacity-100");
+            b.classList.add("text-text-color", "font-medium", "opacity-50");
+          });
+          btn.classList.remove("text-text-color", "font-medium", "opacity-50");
+          btn.classList.add("text-[#1e66f5]", "dark:text-[#89b4fa]", "font-bold", "opacity-100");
+        };
+
+        const applyView = () => {
+          moveToggle(isFeed ? btnFeed : btnGrid);
+          if (isFeed) {
+            viewGrid.classList.add("hidden", "opacity-0", "translate-y-8", "pointer-events-none");
+            viewGrid.classList.remove("flex", "h-auto");
+            viewGrid.style.height = "0";
+
+            viewFeed.classList.remove("hidden", "opacity-0", "translate-y-8", "pointer-events-none");
+            viewFeed.classList.add("flex", "opacity-100", "translate-y-0");
+          } else {
+            viewFeed.classList.add("hidden", "opacity-0", "translate-y-8", "pointer-events-none");
+            viewFeed.classList.remove("flex", "opacity-100", "translate-y-0");
+
+            viewGrid.classList.remove("hidden", "pointer-events-none");
+            viewGrid.style.height = "auto";
+            void viewGrid.offsetWidth;
+            viewGrid.classList.add("flex", "opacity-100");
+            viewGrid.classList.remove("translate-y-8");
+          }
+          localStorage.setItem("article-view", isFeed ? "feed" : "grid");
+          setTimeout(() => window.dispatchEvent(new Event("resize")), 50);
+        };
+
+        applyView();
+        btnFeed.addEventListener("click", () => {
+          if (!isFeed) {
+            isFeed = true;
+            applyView();
+          }
+        });
+        btnGrid.addEventListener("click", () => {
+          if (isFeed) {
+            isFeed = false;
+            applyView();
+          }
+        });
+      }
+
+      const btnActiveClasses = "active-item text-blue-600 dark:text-blue-400 font-bold group".split(" ").filter(Boolean);
+      const btnInactiveClasses = "text-apple-textMuted dark:text-apple-darkTextMuted font-medium group".split(" ").filter(Boolean);
+      const mobileActiveClasses = "custom-glass-highlight text-[#1e66f5] dark:text-[#89b4fa] border-white/20 scale-[1.05] z-10".split(" ").filter(Boolean);
+      const mobileInactiveClasses = "bg-transparent text-text-color opacity-30 border-transparent".split(" ").filter(Boolean);
+
+      const catBtns = document.querySelectorAll(".cat-filter");
+      const mobileCatBtns = document.querySelectorAll(".mobile-cat-filter");
+      const gridItems = document.querySelectorAll(".article-grid-item");
+      const feedItems = document.querySelectorAll(".post-detail");
+
+      const executeFilter = (filter, filterCat, filterSub) => {
+        catBtns.forEach((b) => {
+          const isMatch =
+            (filter === "all" && b.dataset.filter === "all") ||
+            (filterCat && !filterSub && b.dataset.filterCat === filterCat && !b.dataset.filterSub) ||
+            (filterCat && filterSub && b.dataset.filterCat === filterCat && b.dataset.filterSub === filterSub);
+          if (isMatch) {
+            b.classList.remove(...btnInactiveClasses);
+            b.classList.add(...btnActiveClasses);
+          } else {
+            b.classList.remove(...btnActiveClasses);
+            b.classList.add(...btnInactiveClasses);
+          }
+        });
+
+        mobileCatBtns.forEach((b) => {
+          const isMatch = (filter === "all" && b.dataset.filter === "all") || (filterCat && b.dataset.filterCat === filterCat);
+          if (isMatch) {
+            b.classList.remove(...mobileInactiveClasses);
+            b.classList.add(...mobileActiveClasses);
+          } else {
+            b.classList.remove(...mobileActiveClasses);
+            b.classList.add(...mobileInactiveClasses);
+          }
+        });
+
+        document.querySelectorAll(".sub-list").forEach((list) => {
+          list.classList.add("hidden");
+          list.classList.remove("flex");
+        });
+
+        if (filterCat) {
+          const group = document.querySelector(`.category-group[data-group-cat="${filterCat}"]`);
+          const subList = group?.querySelector(".sub-list");
+          if (subList) {
+            subList.classList.remove("hidden");
+            subList.classList.add("flex");
+          }
+        }
+
+        const matches = (el) => {
+          if (filter === "all") return true;
+          if (filterSub) {
+            return el.dataset.category === filterCat && el.dataset.subcategory === filterSub;
+          }
+          return el.dataset.category === filterCat;
+        };
+
+        [...gridItems, ...feedItems].forEach((item) => {
+          if (matches(item)) {
+            item.style.display = "";
+            setTimeout(() => {
+              item.style.opacity = "1";
+              item.style.transform = "translateY(0) scale(1)";
+            }, 50);
+          } else {
+            item.style.opacity = "0";
+            item.style.transform = "translateY(10px) scale(0.98)";
+            setTimeout(() => {
+              item.style.display = "none";
+            }, 400);
+          }
+        });
+
+        setTimeout(() => document.dispatchEvent(new Event("update-sliders")), 10);
+      };
+
+      [...Array.from(catBtns), ...Array.from(mobileCatBtns)].forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          executeFilter(btn.dataset.filter, btn.dataset.filterCat, btn.dataset.filterSub);
+        });
+      });
+    });
+  </script>
+</main>
+</body>
+</html>

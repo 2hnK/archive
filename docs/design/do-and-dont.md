@@ -10,7 +10,7 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 ## Do
 
-- 기존 `BaseLayout.astro`와 전역 디자인 토큰을 먼저 확인한다.
+- 기존 `templates/layout/base.html`와 전역 디자인 토큰을 먼저 확인한다.
 - `glass-panel`, `glass-pill`, `custom-glass-highlight` 같은 기존 패턴이 새 요소에 맞는지 먼저 검토한다.
 - 큰 제목은 세리프 기반 에디토리얼 톤을 우선 검토한다.
 - 메타 정보는 작고 조밀한 대문자 라벨 스타일을 우선 검토한다.
@@ -33,7 +33,7 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 ## New Page Checklist
 
-- `BaseLayout.astro`를 사용했는가?
+- 공통 레이아웃 fragment를 사용했는가?
 - 상단 고정 nav와 겹치지 않는가?
 - 제목, subtitle, meta 라벨이 기존 타이포그래피와 맞는가?
 - 카드 또는 목록 패턴을 기존 규칙에서 먼저 검토했는가?

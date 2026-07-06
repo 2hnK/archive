@@ -10,7 +10,7 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 ## Navbar
 
-`src/components/Navbar.astro`
+`src/main/resources/templates/fragments/navbar.html`
 
 - 화면 상단 고정
 - 반투명 배경과 강한 blur
@@ -20,7 +20,7 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 ## Footer
 
-`src/components/Footer.astro`
+`src/main/resources/templates/fragments/footer.html`
 
 - 상단 border
 - 중앙 정렬
@@ -53,7 +53,7 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 ## Article Card
 
-`src/components/ArticleCard.astro`
+`src/main/resources/templates/fragments/article-card.html`
 
 - 이미지 또는 카테고리 기반 placeholder
 - 카테고리, 날짜, 제목, 설명 순서
@@ -88,18 +88,17 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 ## Topics Sidebar
 
-`src/components/TopicsSidebar.astro`
+`src/main/resources/templates/fragments/topics-sidebar.html`
 
 - 카테고리/서브카테고리 계층 목록
 - active state는 `#1e66f5`, dark mode는 `#89b4fa`
 - `custom-glass-highlight`로 현재 항목과 hover 항목을 표시
 - `reveal-up`과 `stagger-1`을 사용해 본문과 같은 진입 리듬 유지
 
-## Time Progress
+## Tool Buttons
 
-`src/components/TimeProgress.astro`
+`.btn-premium`
 
-- 시간 진행률을 표시하는 도구형 위젯
-- `bg-white/50`, `dark:bg-white/5`, blur, border, shadow를 사용해 글래스 톤과 연결
-- 진행 막대에는 year/month/day/hour/minute별 상태색을 사용
-- 이 색상은 전역 브랜드 팔레트가 아니라 위젯 내부 상태 표현으로만 사용
+- 작성 보조 페이지의 복사/다운로드 버튼에 사용
+- 기존 zinc 계열 form UI와 충돌하지 않도록 얇은 border, 작은 산세리프 라벨, accent hover를 사용
+- 공개 아카이브 페이지의 주요 CTA가 아니라 도구형 보조 명령으로만 사용

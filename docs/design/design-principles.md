@@ -30,10 +30,10 @@ DevArchive는 제품 랜딩 페이지보다 개인 개발 아카이브에 가깝
 
 진입 애니메이션은 `reveal-up`처럼 opacity와 translate 중심의 흐름을 우선 참고한다. hover는 scale, color, opacity, arrow rotation 같은 기존 반응과 비슷한 밀도에서 확장한다.
 
-## Static Structure First
+## SSR Structure First
 
-이 프로젝트는 정적 HTML/CSS/Astro 기반 사이트다. 디자인 일관성을 위해 현재 구조를 기본값으로 삼고, 큰 구조 변경이나 UI 라이브러리 도입은 명확한 필요가 있을 때만 검토한다.
+이 프로젝트는 Spring Boot, Thymeleaf, Tailwind CSS 기반 SSR 사이트다. 디자인 일관성을 위해 현재 구조를 기본값으로 삼고, 큰 구조 변경이나 UI 라이브러리 도입은 명확한 필요가 있을 때만 검토한다.
 
 ## Implementation Is The Source
 
-디자인 문서는 구현을 설명하고 가이드하는 문서다. 새 규칙을 만들 때는 먼저 `src/styles/global.css`, `BaseLayout.astro`, 기존 페이지/컴포넌트에서 같은 역할의 패턴이 있는지 확인한다. 문서와 구현이 충돌하면 구현을 확인한 뒤 문서를 갱신하거나, 의도적인 디자인 변경으로 구현을 함께 수정한다.
+디자인 문서는 구현을 설명하고 가이드하는 문서다. 새 규칙을 만들 때는 먼저 `src/main/resources/styles/global.css`, `templates/layout/base.html`, 기존 페이지/fragment에서 같은 역할의 패턴이 있는지 확인한다. 문서와 구현이 충돌하면 구현을 확인한 뒤 문서를 갱신하거나, 의도적인 디자인 변경으로 구현을 함께 수정한다.

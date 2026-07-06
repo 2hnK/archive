@@ -3,6 +3,9 @@ node_modules/
 
 # build output
 dist/
+build/
+.gradle/
+out/
 
 # Astro generated files
 .astro/
@@ -44,3 +47,4 @@ Thumbs.db
 
 # local drafts and dumps
 .dump/
+.tmp-spring-init/

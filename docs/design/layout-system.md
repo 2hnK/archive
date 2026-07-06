@@ -10,7 +10,7 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 ## Global Layout
 
-`BaseLayout.astro`는 고정 내비게이션, 페이지 콘텐츠, 푸터를 포함한다. 본문은 `flex-grow z-10 relative` 컨테이너 안에서 렌더링된다.
+`templates/layout/base.html`은 고정 내비게이션, 페이지 콘텐츠, 푸터를 포함한다. 본문은 `flex-grow z-10 relative` 컨테이너 안에서 렌더링된다.
 
 ## Page Top Spacing
 

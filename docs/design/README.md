@@ -24,12 +24,11 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 ## Implementation Sources
 
-- `src/styles/global.css`: 색상 변수, 글래스 유틸리티, prose, reveal, editorial list의 기준
-- `src/layouts/BaseLayout.astro`: 전역 폰트, 테마, 내비게이션, 푸터 구조
-- `src/components/Navbar.astro`: 고정 글래스 내비게이션과 sliding highlight
-- `src/components/ArticleCard.astro`: 아티클 카드 hover와 이미지 처리
-- `src/components/TopicsSidebar.astro`: 카테고리 계층, active state, blue 상태색
-- `src/components/TimeProgress.astro`: 도구형 진행 위젯의 제한적 상태색 예외
+- `src/main/resources/styles/global.css`: 색상 변수, 글래스 유틸리티, prose, reveal, editorial list의 기준
+- `src/main/resources/templates/layout/base.html`: 전역 폰트, 테마, 내비게이션, 푸터 구조
+- `src/main/resources/templates/fragments/navbar.html`: 고정 글래스 내비게이션과 sliding highlight
+- `src/main/resources/templates/fragments/article-card.html`: 아티클 카드 hover와 이미지 처리
+- `src/main/resources/templates/fragments/topics-sidebar.html`: 카테고리 계층, active state, blue 상태색
 
 ## Core Keywords
 

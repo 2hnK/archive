@@ -2,7 +2,7 @@
 type: Development Guide
 title: Development Guide
 description: DevArchive 개발 요구사항, 명령, HTML/CSS 작성 기준, 검증 절차.
-tags: ["development", "astro", "verification"]
+tags: ["development", "spring", "thymeleaf", "verification"]
 timestamp: "2026-07-06T00:00:00+09:00"
 ---
 
@@ -10,7 +10,8 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 ## Requirements
 
-- Node.js `>=18.14.0`
+- Java 21 이상
+- Node.js `>=22.0.0`
 - npm
 
 ## Commands
@@ -19,19 +20,17 @@ timestamp: "2026-07-06T00:00:00+09:00"
 npm install
 npm run dev
 npm run docs:validate
-npm run check
 npm run build
 npm run verify
-npm run preview
 ```
 
 ## Development Principles
 
-- 현재 Astro 정적 사이트 구조를 유지한다.
-- 새 페이지는 `BaseLayout.astro`를 우선 사용한다.
-- 전역 디자인 규칙은 `src/styles/global.css`의 변수와 컴포넌트 클래스를 먼저 확인한다.
+- 현재 Spring Boot SSR 구조를 유지한다.
+- 새 페이지는 `templates/layout/base.html` 레이아웃 fragment를 우선 사용한다.
+- 전역 디자인 규칙은 `src/main/resources/styles/global.css`의 변수와 컴포넌트 클래스를 먼저 확인한다.
 - 기존 클래스와 레이아웃 구조를 바꾸기보다 필요한 부분을 좁게 확장한다.
-- 콘텐츠 추가는 가능한 한 Markdown content collection 흐름을 따른다.
+- 아티클 콘텐츠 추가는 `src/main/resources/content/articles/`의 Markdown 흐름을 따른다.
 - 문서 변경은 [OKF 문서 형식](knowledge-format.md)을 따르고 `npm run docs:validate`로 확인한다.
 - 커밋 전 검증과 커밋 메시지는 [Git 컨벤션과 작업 규칙](git-conventions.md)을 따른다.
 
@@ -45,18 +44,18 @@ npm run preview
 
 ## Adding Articles
 
-1. `src/content/articles/`에 Markdown 파일을 추가한다.
+1. `src/main/resources/content/articles/`에 Markdown 파일을 추가한다.
 2. 기존 아티클의 frontmatter 구조를 따른다.
-3. 이미지가 필요하면 아티클 이미지 폴더를 함께 둔다.
+3. 이미지가 필요하면 아티클 이미지 폴더를 `src/main/resources/static/content/articles/images/`에 함께 제공한다.
 4. 목록, 상세, 필터에서 노출이 깨지지 않는지 확인한다.
 
 ## Adding Pages
 
-1. `src/pages/`에 Astro 파일을 추가한다.
-2. `BaseLayout.astro`를 사용한다.
+1. `SiteController`에 라우트를 추가한다.
+2. `src/main/resources/templates/`에 Thymeleaf 템플릿을 추가하고 공통 레이아웃 fragment를 사용한다.
 3. 상단 고정 내비게이션을 고려해 충분한 top padding을 둔다.
 4. `docs/design/page-patterns.md`의 기존 페이지 패턴 중 가장 가까운 구조를 따른다.
-5. `npm run build`로 정적 빌드를 확인한다.
+5. `npm run build`로 Spring Boot 빌드를 확인한다.
 
 ## Verification
 

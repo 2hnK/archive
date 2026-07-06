@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: layout(${title}, ${description}, ~{::main})}">
+<body>
+<main class="pt-32 pb-24">
+  <div class="max-w-[900px] mx-auto w-full px-4 sm:px-6 md:px-8 mb-10 border-b border-border-color pb-6">
+    <div class="flex items-center gap-2 mb-2">
+      <a
+        href="/articles"
+        class="flex items-center justify-center w-6 h-6 rounded-full hover:bg-black/10 dark:hover:bg-white/20 transition-colors text-text-color"
+        title="목록으로 돌아가기">
+        <span class="material-symbols-outlined text-[14px]">arrow_back</span>
+      </a>
+      <span class="text-[10px] uppercase tracking-[0.25em] font-bold text-text-color opacity-60">
+        ARTICLES
+      </span>
+    </div>
+
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 w-full">
+      <h1
+        class="text-4xl md:text-5xl font-serif font-bold tracking-tighter text-text-color break-keep leading-[1.2]"
+        th:text="${article.title}">
+        Article Title
+      </h1>
+
+      <div class="flex items-center justify-end gap-2 text-text-color opacity-70 text-[12px] font-sans shrink-0 mb-1 lg:mb-0 uppercase tracking-widest font-bold">
+        <span class="text-text-color">DevArchive</span>
+        <span class="w-[3px] h-[3px] rounded-full bg-border-color"></span>
+        <time th:datetime="${article.date}" class="tabular-nums" th:text="${article.dateLabel()}">2026-01-01</time>
+        <span class="w-[3px] h-[3px] rounded-full bg-border-color"></span>
+        <span class="text-accent-color" th:text="${article.category}">Network</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="mx-auto w-full max-w-[1700px] grid grid-cols-1 xl:grid-cols-[1fr_minmax(0,900px)_1fr] gap-x-8 gap-y-16 relative px-4 sm:px-6 md:px-8 xl:px-4">
+    <div class="hidden xl:block w-full min-w-0 xl:ml-auto lg:mt-0">
+      <aside class="sidebar-sticky w-full max-w-[280px] ml-auto flex flex-col z-20 hide-scrollbar transition-all duration-500">
+        <div th:replace="~{fragments/topics-sidebar :: topics(${topics}, ${articleCount}, ${currentCat}, ${currentSub})}"></div>
+      </aside>
+    </div>
+
+    <div class="w-full max-w-[900px] mx-auto min-w-0 transition-opacity duration-500 relative min-h-[70vh]">
+      <article class="w-full glass-panel rounded-[2.5rem] p-6 md:p-14 reveal-up transition-all duration-500">
+        <div th:if="${article.imageUrl != null}"
+             class="mb-10 md:mb-12 rounded-2xl overflow-hidden shadow-sm reveal-up stagger-1">
+          <img class="w-full h-auto aspect-video object-cover" th:alt="${article.title}" th:src="${article.imageUrl}">
+        </div>
+
+        <div class="block xl:hidden mb-12 bg-black/5 dark:bg-white/5 p-5 md:p-6 rounded-2xl reveal-up stagger-1">
+          <h3 class="text-[12px] font-bold tracking-[0.2em] uppercase text-apple-textMuted dark:text-apple-darkTextMuted mb-4">
+            INDEX
+          </h3>
+          <div class="flex flex-col gap-2 relative">
+            <a th:each="heading : ${article.headings}"
+               th:if="${heading.depth <= 3}"
+               th:href="|#${heading.slug}|"
+               class="toc-item-mobile text-apple-textMuted dark:text-apple-darkTextMuted font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
+               th:attr="data-slug=${heading.slug}">
+              <span class="text-[14px]" th:style="|padding-left: ${(heading.depth - 1) * 12}px|"
+                    th:text="${heading.text}">Heading</span>
+            </a>
+            <div th:if="${#lists.isEmpty(article.headings)}"
+                 class="text-[13px] text-apple-textMuted dark:text-apple-darkTextMuted opacity-60">
+              There is no index.
+            </div>
+          </div>
+        </div>
+
+        <div class="prose max-w-none text-[17px] leading-[1.7] tracking-tight" th:utext="${article.html}">
+        </div>
+      </article>
+    </div>
+
+    <div class="hidden xl:block w-full min-w-0">
+      <aside class="sidebar-sticky w-full max-w-[280px] mr-auto hide-scrollbar reveal-up stagger-2">
+        <div class="flex flex-col pl-4 gap-2">
+          <h3 class="text-[12px] font-bold tracking-[0.2em] uppercase text-text-color opacity-60 mb-2">
+            INDEX
+          </h3>
+          <div class="relative flex flex-col gap-0 pb-2" id="toc-container">
+            <div
+              id="toc-highlight"
+              class="absolute left-0 w-full rounded-[1.2rem] custom-glass-highlight z-20 pointer-events-none opacity-0 transition-all duration-400 ease-[cubic-bezier(0.25,1,0.5,1)]">
+            </div>
+
+            <a th:each="heading : ${article.headings}"
+               th:if="${heading.depth <= 3}"
+               th:href="|#${heading.slug}|"
+               class="toc-item relative z-10 w-full flex items-center py-[4.5px] pr-2 cursor-pointer text-text-color opacity-70 font-sans transition-colors duration-300"
+               th:attr="data-slug=${heading.slug}">
+              <span class="text-[12.5px] line-clamp-1"
+                    th:style="|padding-left: ${(heading.depth - 1) * 14 + 8}px|"
+                    th:text="${heading.text}">Heading</span>
+            </a>
+            <div th:if="${#lists.isEmpty(article.headings)}"
+                 class="py-2 text-[12px] font-medium text-text-color opacity-50">
+              There is no index.
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { root: null, rootMargin: "0px 0px 500px 0px", threshold: 0.05 },
+      );
+      document.querySelectorAll(".reveal-up").forEach((el) => revealObserver.observe(el));
+
+      const tocContainer = document.getElementById("toc-container");
+      const tocHighlight = document.getElementById("toc-highlight");
+      const tocItems = document.querySelectorAll(".toc-item");
+
+      if (tocContainer && tocHighlight && tocItems.length > 0) {
+        let activeTocItem = null;
+        let isHovering = false;
+        const targetTocHeight = 32;
+
+        const moveToc = (el) => {
+          const topOffset = el.offsetTop + (el.offsetHeight - targetTocHeight) / 2;
+          tocHighlight.style.height = `${targetTocHeight}px`;
+          tocHighlight.style.transform = `translateY(${topOffset}px)`;
+          tocHighlight.style.opacity = "1";
+
+          tocItems.forEach((item) => {
+            item.classList.remove("text-blue-600", "dark:text-blue-400", "font-bold");
+            item.classList.add("text-apple-textMuted", "dark:text-apple-darkTextMuted", "font-medium");
+          });
+
+          el.classList.remove("text-apple-textMuted", "dark:text-apple-darkTextMuted", "font-medium");
+          el.classList.add("text-blue-600", "dark:text-blue-400", "font-bold");
+        };
+
+        tocItems.forEach((item) => {
+          item.addEventListener("mouseenter", () => {
+            isHovering = true;
+            moveToc(item);
+          });
+        });
+
+        tocContainer.addEventListener("mouseleave", () => {
+          isHovering = false;
+          if (activeTocItem) {
+            moveToc(activeTocItem);
+          } else {
+            tocHighlight.style.opacity = "0";
+          }
+        });
+
+        tocItems.forEach((item) => {
+          item.addEventListener("click", (e) => {
+            e.preventDefault();
+            const targetId = item.getAttribute("href")?.slice(1);
+            if (!targetId) return;
+            const targetEl = document.getElementById(targetId);
+            if (targetEl) {
+              const headerOffset = 100;
+              const elementPosition = targetEl.getBoundingClientRect().top;
+              const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+              window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+            }
+            activeTocItem = item;
+            moveToc(item);
+          });
+        });
+
+        const headings = Array.from(document.querySelectorAll(".prose h1, .prose h2, .prose h3"));
+        let headingOffsets = [];
+
+        const calculateOffsets = () => {
+          headingOffsets = headings.map((h) => ({
+            id: h.id,
+            offsetTop: h.offsetTop,
+          }));
+        };
+
+        calculateOffsets();
+        window.addEventListener("resize", calculateOffsets);
+
+        const onScroll = () => {
+          const scrollPos = window.scrollY + 120;
+          let currentId = null;
+
+          for (let i = headingOffsets.length - 1; i >= 0; i--) {
+            if (scrollPos >= headingOffsets[i].offsetTop) {
+              currentId = headingOffsets[i].id;
+              break;
+            }
+          }
+
+          if (currentId) {
+            const activeEl = document.querySelector(`.toc-item[data-slug="${currentId}"]`);
+            if (activeEl && activeEl !== activeTocItem) {
+              activeTocItem = activeEl;
+              if (!isHovering) moveToc(activeEl);
+            }
+          } else {
+            const firstEl = tocItems[0];
+            if (firstEl && firstEl !== activeTocItem) {
+              activeTocItem = firstEl;
+              if (!isHovering) moveToc(firstEl);
+            }
+          }
+        };
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        setTimeout(onScroll, 100);
+      }
+
+      document.querySelectorAll(".prose pre").forEach((pre) => {
+        if (pre.parentElement?.classList.contains("code-block-wrapper")) return;
+        const wrapper = document.createElement("div");
+        wrapper.className = "code-block-wrapper relative mt-6 mb-6";
+        pre.parentElement?.insertBefore(wrapper, pre);
+        wrapper.appendChild(pre);
+        const copyBtn = document.createElement("button");
+        copyBtn.className =
+          "copy-btn absolute top-2 right-2 px-3 py-1 bg-white/10 hover:bg-white/20 text-white/50 hover:text-white text-[11px] font-mono rounded backdrop-blur-md transition-all opacity-0 group-hover:opacity-100 cursor-pointer border border-white/10";
+        copyBtn.textContent = "Copy";
+        wrapper.classList.add("group");
+        copyBtn.addEventListener("click", async () => {
+          const codeText = pre.textContent || "";
+          await navigator.clipboard.writeText(codeText);
+          copyBtn.textContent = "Copied!";
+          setTimeout(() => (copyBtn.textContent = "Copy"), 2000);
+        });
+        wrapper.appendChild(copyBtn);
+      });
+    });
+  </script>
+</main>
+</body>
+</html>
