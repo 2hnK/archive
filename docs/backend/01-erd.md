@@ -50,8 +50,8 @@ erDiagram
     varchar name
     varchar slug UK
     int display_order
-    datetime created_at
-    datetime updated_at
+    timestamptz created_at
+    timestamptz updated_at
   }
 
   ARTICLE {
@@ -61,21 +61,22 @@ erDiagram
     varchar title
     varchar description
     varchar image_url
+    varchar image_object_key
     boolean featured
     varchar status
-    longtext content_markdown
-    longtext content_html
-    datetime published_at
-    datetime created_at
-    datetime updated_at
+    text content_markdown
+    text content_html
+    timestamptz published_at
+    timestamptz created_at
+    timestamptz updated_at
   }
 
   TAG {
     bigint id PK
     varchar name
     varchar slug UK
-    datetime created_at
-    datetime updated_at
+    timestamptz created_at
+    timestamptz updated_at
   }
 
   ARTICLE_TAG {
@@ -90,13 +91,16 @@ erDiagram
     varchar description
     varchar year_label
     varchar image_url
+    varchar image_object_key
     varchar video_url
+    varchar video_object_key
     text archival_note
-    longtext content_html
+    text content_markdown
+    text content_html
     varchar status
     int display_order
-    datetime created_at
-    datetime updated_at
+    timestamptz created_at
+    timestamptz updated_at
   }
 
   PROJECT_TAG {
@@ -112,10 +116,20 @@ erDiagram
     varchar language
     varchar tag_label
     int display_order
-    datetime created_at
-    datetime updated_at
+    timestamptz created_at
+    timestamptz updated_at
   }
 ```
+
+## 확정 기준안
+
+- 메인 DB는 PostgreSQL을 사용한다.
+- DB schema 변경 이력은 Flyway migration으로 관리한다.
+- 테스트 DB는 초기에는 H2 또는 Testcontainers PostgreSQL 중 구현 난이도에 맞게 선택한다.
+- 본문은 `content_markdown` 원본을 필수 저장하고, `content_html`은 nullable 캐시 컬럼으로 둔다.
+- 이미지는 DB에 바이너리로 저장하지 않고 URL 또는 object key만 저장한다.
+- 로컬 객체 스토리지는 MinIO Docker 컨테이너를 사용하고, 실제 배포에서는 S3 호환 object storage로 교체할 수 있게 둔다.
+- 삭제는 물리 삭제보다 `DRAFT`, `PUBLISHED`, `ARCHIVED` 상태값 기반으로 먼저 구현한다.
 
 ## 테이블별 역할
 
@@ -134,9 +148,11 @@ erDiagram
 
 - `slug`는 `/articles/{slug}`에 사용하므로 unique가 필요하다.
 - `content_markdown`은 원본 편집본이다.
-- `content_html`은 렌더링 캐시로 둘 수 있다.
-- 처음에는 `content_markdown`만 저장하고 Service에서 HTML 변환해도 된다.
+- `content_html`은 렌더링 캐시이며, 처음에는 `null`이어도 된다.
+- 처음에는 `content_markdown`만 저장하고 Service에서 HTML로 변환한다.
 - `status`는 `DRAFT`, `PUBLISHED`, `ARCHIVED` 정도로 시작한다.
+- `image_url`은 화면에서 바로 사용할 수 있는 public URL이다.
+- `image_object_key`는 MinIO/S3 내부 객체 경로다. 초기 구현에서는 `image_url`만 사용해도 된다.
 
 ### `tag`
 
@@ -158,8 +174,9 @@ Article과 Tag의 다대다 관계를 연결한다.
 프로젝트 목록과 상세 페이지 데이터를 저장한다.
 
 - 기존 `ProjectService`의 하드코딩 데이터를 DB로 옮긴다.
-- 상세 본문은 기존 HTML을 `content_html`에 넣고 시작해도 된다.
+- 상세 본문은 기존 HTML을 `content_html`에 넣고 시작할 수 있다.
 - 프로젝트도 작성/수정 기능을 붙일 예정이면 Markdown 원본 컬럼을 추가한다.
+- 프로젝트 이미지와 영상도 DB에는 URL/object key만 저장한다.
 
 ### `project_tag`
 
@@ -176,39 +193,57 @@ Project와 Tag의 다대다 관계를 연결한다.
 
 ### 본문 저장 방식
 
-선택지:
-
-- Markdown만 DB에 저장하고 요청 시 HTML로 변환
-- Markdown과 HTML을 모두 저장
-- HTML만 저장
-
-권장 시작점:
+확정 기준:
 
 ```text
-content_markdown 저장
-content_html은 nullable 캐시 컬럼
+content_markdown: 필수 원본
+content_html: nullable HTML 캐시
 ```
 
 이유:
 
 - 원본 편집본을 잃지 않는다.
 - 현재 Markdown 기반 글을 옮기기 쉽다.
-- 나중에 HTML 캐시를 추가하면서 성능과 구조를 비교해볼 수 있다.
+- HTML 렌더러, 코드 하이라이트, 목차 생성, sanitize 정책을 나중에 바꿔도 원본에서 다시 생성할 수 있다.
+- 처음에는 요청 시 Markdown을 HTML로 변환하고, 필요할 때 `content_html` 캐시를 채우면 된다.
+- HTML만 저장하면 수정 화면에서 원본 편집 경험이 나빠지고 렌더링 정책 변경에 취약하다.
 
 ### 이미지 저장 방식
 
-초기 권장:
+확정 기준:
 
 ```text
-DB에는 image_url 문자열만 저장
-실제 파일은 src/main/resources/static 또는 외부 스토리지에 저장
+DB에는 image_url 또는 image_object_key 문자열만 저장
+실제 파일은 MinIO/S3 호환 object storage에 저장
 ```
 
 이유:
 
-- DB에 바이너리를 바로 넣는 구조보다 단순하다.
-- 현재 정적 이미지 경로와 잘 맞는다.
-- 나중에 업로드 기능을 붙일 때 파일 저장소 전략만 교체하면 된다.
+- DB가 이미지/영상 바이너리 때문에 무거워지지 않는다.
+- 백업, 복구, migration은 메타데이터 중심으로 유지된다.
+- 브라우저가 URL로 직접 가져가는 정적 리소스 제공에는 object storage와 CDN이 더 적합하다.
+- 로컬 개발은 MinIO로 연습하고, 배포 시 AWS S3, Cloudflare R2, Naver Object Storage 같은 S3 호환 저장소로 교체하기 쉽다.
+- 애플리케이션은 업로드 후 반환된 object key 또는 public URL만 Article/Project에 저장하면 된다.
+
+로컬 MinIO 예시:
+
+```yaml
+services:
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: devarchive
+      MINIO_ROOT_PASSWORD: devarchive-password
+    volumes:
+      - minio-data:/data
+
+volumes:
+  minio-data:
+```
 
 ### 날짜 컬럼
 
@@ -231,10 +266,9 @@ JPA에서는 `LocalDateTime`으로 시작하고, 화면 출력 포맷은 View/DT
 
 ## 아직 결정하지 않은 것
 
-- 사용할 DB: H2, MySQL, PostgreSQL 중 선택 필요
-- 마이그레이션 도구: 직접 schema.sql/data.sql, Flyway, Liquibase 중 선택 필요
-- 본문 HTML 캐시 여부
-- 이미지 업로드 방식
+- 테스트 전략: H2로 시작할지 Testcontainers PostgreSQL까지 갈지 선택 필요
+- `content_html` 캐시를 언제 채울지 선택 필요
+- 이미지 URL을 public bucket URL로 둘지, 애플리케이션이 presigned URL을 발급할지 선택 필요
 - 관리자 인증 도입 시점
 
-DB와 마이그레이션 도구를 확정하면 `docs/decisions/004-adopt-db-backed-content.md`에 결정 기록을 남긴다.
+확정된 DB/스토리지 기준은 [DB 기반 콘텐츠 전환 결정 기록](../decisions/004-adopt-db-backed-content.md)에 남긴다.

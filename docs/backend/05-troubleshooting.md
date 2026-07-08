@@ -156,6 +156,43 @@ Not a managed type
 4. `build.gradle`에 DB driver dependency가 있는지 확인한다.
 5. active profile을 확인한다.
 
+## Flyway Migration 실패
+
+### 증상
+
+애플리케이션 시작 시 Flyway migration 오류가 발생한다.
+
+대표 로그:
+
+```text
+FlywayException
+Validate failed
+Migration checksum mismatch
+```
+
+### 원인 후보
+
+- 이미 적용된 migration 파일을 수정했다.
+- SQL 문법이 PostgreSQL과 맞지 않는다.
+- 테이블 또는 컬럼이 이미 존재한다.
+- migration 파일명이 `V1__description.sql` 형식을 따르지 않는다.
+
+### 확인 순서
+
+1. 오류가 난 migration version을 확인한다.
+2. `flyway_schema_history` 테이블을 확인한다.
+3. 이미 적용된 migration 파일을 수정했는지 확인한다.
+4. PostgreSQL에서 SQL을 직접 실행해 문법 오류를 확인한다.
+
+### 해결 원칙
+
+이미 공유되거나 적용된 migration은 수정하지 않고 새 migration을 추가한다.
+
+```text
+V1__create_articles.sql
+V2__add_article_status.sql
+```
+
 ## Entity 매핑 실패
 
 ### 증상
@@ -175,6 +212,46 @@ Not a managed type
 2. 각 필드의 `@Column(name = "...")` 확인
 3. 실제 DB schema 확인
 4. seed 데이터의 필수값 누락 여부 확인
+
+## MinIO 연결 실패
+
+### 증상
+
+이미지 업로드 또는 조회 시 object storage 연결 오류가 발생한다.
+
+### 원인 후보
+
+- MinIO 컨테이너가 실행되지 않았다.
+- endpoint, access key, secret key가 다르다.
+- bucket이 생성되지 않았다.
+- 애플리케이션에서 path-style access 설정이 필요하다.
+
+### 확인 순서
+
+1. `http://localhost:9001` 콘솔에 접속한다.
+2. bucket이 존재하는지 확인한다.
+3. 애플리케이션 설정의 endpoint와 credentials를 확인한다.
+4. SDK client가 `http://localhost:9000` API endpoint를 바라보는지 확인한다.
+
+## 이미지 URL은 저장됐지만 화면에 표시되지 않음
+
+### 증상
+
+DB에는 `image_url` 또는 `image_object_key`가 저장되어 있지만 브라우저에서 이미지가 보이지 않는다.
+
+### 원인 후보
+
+- DB에 저장된 값이 object key인지 public URL인지 섞였다.
+- bucket 또는 object가 public read가 아니다.
+- 애플리케이션이 object key를 URL로 변환하지 않았다.
+- HTML 본문 이미지 경로 rewrite가 누락됐다.
+
+### 확인 순서
+
+1. DB 컬럼 값이 URL인지 object key인지 확인한다.
+2. 브라우저 network tab에서 이미지 요청 URL과 응답 코드를 확인한다.
+3. MinIO 콘솔에서 object가 실제로 존재하는지 확인한다.
+4. public URL 방식인지 presigned URL 방식인지 정책을 확인한다.
 
 ## Form 값이 DTO에 바인딩되지 않음
 
@@ -305,9 +382,7 @@ var article = articleService.findBySlug(slug)
 
 ## 계속 추가할 항목
 
-- DB migration 실패
 - seed data 중복 insert
 - Markdown 변환 결과 XSS 처리
-- 이미지 경로 rewrite 실패
 - redirect 후 flash attribute 누락
 - enum 값 변경 후 기존 데이터 오류

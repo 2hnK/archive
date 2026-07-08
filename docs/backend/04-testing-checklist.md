@@ -17,6 +17,10 @@ timestamp: "2026-07-09T00:00:00+09:00"
 - [ ] `npm run docs:validate`가 성공한다.
 - [ ] `npm run verify`가 성공한다.
 - [ ] 애플리케이션이 DB 연결 오류 없이 실행된다.
+- [ ] PostgreSQL 컨테이너가 실행 중이다.
+- [ ] Flyway migration이 성공한다.
+- [ ] MinIO 콘솔에 접속할 수 있다.
+- [ ] 이미지 bucket이 생성되어 있다.
 - [ ] `/` 홈이 200으로 응답한다.
 - [ ] 라이트/다크 모드에서 주요 화면 텍스트 대비가 유지된다.
 - [ ] 모바일 폭에서 nav, 카드, 본문이 겹치지 않는다.
@@ -37,6 +41,7 @@ timestamp: "2026-07-09T00:00:00+09:00"
 - [ ] DB의 title, description, body가 화면에 표시된다.
 - [ ] Markdown 또는 HTML 본문 렌더링이 깨지지 않는다.
 - [ ] 이미지 경로가 깨지지 않는다.
+- [ ] DB에는 이미지 바이너리가 아니라 URL/object key만 저장된다.
 - [ ] 목차가 필요한 경우 heading 기반으로 생성된다.
 - [ ] 없는 slug 접근 시 404로 응답한다.
 - [ ] 다른 글의 데이터가 섞이지 않는다.
@@ -50,6 +55,8 @@ timestamp: "2026-07-09T00:00:00+09:00"
 - [ ] 필수값 누락 시 validation 에러가 표시된다.
 - [ ] slug 중복 시 사용자에게 에러가 표시된다.
 - [ ] 잘못된 slug 형식이 차단된다.
+- [ ] 이미지 업로드를 구현했다면 MinIO에 object가 생성된다.
+- [ ] 이미지 업로드 실패 시 Article 저장 정책이 명확하다.
 
 ## Article 수정
 
@@ -107,6 +114,7 @@ timestamp: "2026-07-09T00:00:00+09:00"
 - [ ] 공개 글만 최신순으로 조회된다.
 - [ ] slug unique 제약이 동작한다.
 - [ ] category 관계 조회가 동작한다.
+- [ ] PostgreSQL 기준 migration schema와 Entity 매핑이 맞다.
 
 ## Service 테스트 후보
 
@@ -115,6 +123,8 @@ timestamp: "2026-07-09T00:00:00+09:00"
 - [ ] Article 상세 조회 실패 시 도메인 예외 또는 empty가 반환된다.
 - [ ] Article 수정 시 허용된 필드만 변경된다.
 - [ ] archive 처리 후 공개 목록에서 제외된다.
+- [ ] Markdown 원본에서 HTML 변환 결과가 생성된다.
+- [ ] 이미지 object key에서 public URL 생성이 가능하다.
 
 ## 완료 판정
 

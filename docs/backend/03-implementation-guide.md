@@ -141,6 +141,95 @@ public class ArticleEntity {
 - `@Lob` 사용 시 DB별 실제 타입 차이
 - `LocalDateTime`과 화면 날짜 포맷 분리
 
+## DB와 Migration 기준
+
+이 프로젝트의 DB 기반 콘텐츠 전환은 PostgreSQL과 Flyway를 기준으로 한다.
+
+권장 시작 순서:
+
+1. `build.gradle`에 PostgreSQL JDBC driver와 Flyway 의존성을 추가한다.
+2. 로컬 PostgreSQL을 Docker로 실행한다.
+3. `src/main/resources/db/migration/V1__create_articles.sql`부터 작성한다.
+4. 애플리케이션 시작 시 Flyway migration이 적용되는지 확인한다.
+5. JPA Entity는 migration schema와 이름/타입을 맞춘다.
+
+주의할 점:
+
+- 이미 적용한 Flyway migration 파일은 수정하지 않는다.
+- schema 변경은 `V2__...sql`, `V3__...sql`처럼 새 파일로 추가한다.
+- `spring.jpa.hibernate.ddl-auto=create`에 의존하지 않는다. 학습 초반에도 schema의 기준은 migration 파일로 둔다.
+- 테스트 편의를 위해 H2를 쓰더라도, 운영 기준 SQL은 PostgreSQL을 기준으로 검토한다.
+
+## 본문 렌더링 기준
+
+Article 본문은 `content_markdown`을 원본으로 저장한다.
+
+처음 구현:
+
+```text
+DB content_markdown
+  -> ArticleService
+  -> Markdown renderer
+  -> ArticleDetail.html
+  -> Thymeleaf
+```
+
+나중에 캐시가 필요해지면 다음 구조로 확장한다.
+
+```text
+글 저장/수정 시 content_html 생성
+글 조회 시 content_html이 있으면 사용
+content_html이 없으면 content_markdown을 변환
+```
+
+이 구조를 쓰는 이유:
+
+- 작성/수정 화면에서 원본 Markdown을 그대로 보여줄 수 있다.
+- 렌더링 정책을 바꿔도 원본에서 다시 HTML을 생성할 수 있다.
+- HTML 캐시는 성능 최적화가 필요할 때만 도입할 수 있다.
+
+## 이미지와 Object Storage 기준
+
+이미지와 영상 바이너리는 DB에 저장하지 않는다. DB에는 public URL 또는 object key만 저장한다.
+
+로컬 개발 기준:
+
+```text
+Docker MinIO
+  -> bucket: devarchive
+  -> object key: articles/{slug}/{fileName}
+  -> DB image_object_key 또는 image_url 저장
+```
+
+로컬 MinIO 예시:
+
+```yaml
+services:
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: devarchive
+      MINIO_ROOT_PASSWORD: devarchive-password
+    volumes:
+      - minio-data:/data
+
+volumes:
+  minio-data:
+```
+
+외부 스토리지를 쓰는 이유:
+
+- DB 백업과 migration이 이미지/영상 파일 크기에 끌려가지 않는다.
+- 파일 제공 책임을 애플리케이션 서버와 분리할 수 있다.
+- CDN 또는 S3 호환 저장소로 확장하기 쉽다.
+- AWS를 쓰지 않아도 MinIO, Cloudflare R2, Naver Object Storage처럼 S3 호환 API를 기준으로 연습할 수 있다.
+
+초기 구현에서는 업로드 기능보다 먼저 `image_url` 문자열 저장과 표시를 구현한다. 이후 업로드 기능을 붙일 때 `StorageService`를 만들고 MinIO/S3 SDK 호출을 캡슐화한다.
+
 ## DTO 사용 기준
 
 초기에는 Entity를 template에 직접 넘겨도 학습은 가능하다. 다만 다음 상황이 오면 DTO를 만든다.
@@ -285,9 +374,11 @@ Service 메서드에 붙이는 것을 기본으로 한다. Controller나 Reposit
 5. validation 에러 화면 표시
 6. Article 수정
 7. Article archive/delete
-8. Category 관계
-9. Tag 관계
-10. Project DB 조회
+8. 이미지 URL 저장과 표시
+9. MinIO 업로드 연동
+10. Category 관계
+11. Tag 관계
+12. Project DB 조회
 
 ## 구현할 때 지킬 것
 
