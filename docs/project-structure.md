@@ -13,6 +13,7 @@ timestamp: "2026-07-06T00:00:00+09:00"
 - `README.md`: 프로젝트 문서 인덱스
 - `AGENTS.md`: AI 에이전트 작업 규칙
 - `docs/`: 상세 문서
+- `docs/backend/`: DB 이관, Spring SSR 구현, 테스트, 트러블슈팅 학습 문서
 - `docs/decisions/`: 중요한 설계 결정 기록
 - `docs/reviews/`: 문서, 디자인, 품질 검토 기록
 - `scripts/`: 로컬 검증과 유지관리 스크립트
@@ -63,3 +64,11 @@ timestamp: "2026-07-06T00:00:00+09:00"
 - `scripts/validate-docs.mjs`: Git이 추적하는 Markdown의 OKF frontmatter와 로컬 링크를 검증한다.
 - `npm run docs:validate`: 문서 검증만 실행한다.
 - `npm run verify`: 문서 검증, CSS 빌드, Gradle 테스트/빌드를 순서대로 실행한다.
+
+## Backend Learning Docs
+
+- `docs/backend/01-erd.md`: 파일 기반 콘텐츠를 DB 테이블로 옮기기 위한 ERD 초안
+- `docs/backend/02-migration-plan.md`: 단계별 DB 이관 계획과 완료 기준
+- `docs/backend/03-implementation-guide.md`: Spring MVC, JPA, Thymeleaf 구현 기준
+- `docs/backend/04-testing-checklist.md`: 기능별 수동/자동 테스트 후보
+- `docs/backend/05-troubleshooting.md`: 구현 중 반복되는 에러의 확인 순서와 해결 기록
