@@ -84,7 +84,7 @@ public class SiteController {
 		model.addAttribute("description", "Dynamic Spatial About Page");
 		model.addAttribute("timeline", timeline());
 		model.addAttribute("certifications", certifications());
-		model.addAttribute("skills", skills());
+		model.addAttribute("skillGroups", skillGroups());
 		return "about";
 	}
 
@@ -113,23 +113,29 @@ public class SiteController {
 	private List<Milestone> timeline() {
 		return List.of(
 				new Milestone(
+						"2026.06.26",
+						"SSAFY 1학기 프로젝트",
+						"생성형 AI와 공공데이터를 활용한 Soomgil 서비스로 1학기 관통 프로젝트 우수상 선정",
+						"/assets/ssafy_logo.svg",
+						"우수상"),
+				new Milestone(
 						"2026.01 ~ 현재",
 						"삼성청년SW/AI아카데미(SSAFY)",
 						"체계적인 실무 중심의 교육을 통해 웹 개발 및 AI 활용 능력 역량 강화 및 알고리즘 문제 해결 능력 향상",
 						"/assets/ssafy_logo.svg",
 						null),
 				new Milestone(
-						"2024.03 ~ 2026.02",
-						"국립한밭대학교 컴퓨터공학 학사 졸업",
-						"자료구조, 알고리즘 등 컴퓨터공학 전공 과정을 통해 소프트웨어 엔지니어링의 기본 소양 확립",
-						"/assets/hanbat_logo.svg",
-						null),
-				new Milestone(
 						"2026.02",
 						"KICS 동계종합학술발표회",
 						"KICS 한국통신학회 · 2026년도 동계종합학술발표회(KICS Winter Conference 2026) - 비용효율적인 지능형 AICC를 위한 자가진화형 4계층 정규화 게이트",
 						"/assets/kics_logo.jpg",
-						"장려상"));
+						"장려상"),
+				new Milestone(
+						"2024.03 ~ 2026.02",
+						"국립한밭대학교 컴퓨터공학 학사 졸업",
+						"자료구조, 알고리즘 등 컴퓨터공학 전공 과정을 통해 소프트웨어 엔지니어링의 기본 소양 확립",
+						"/assets/hanbat_logo.svg",
+						null));
 	}
 
 	private List<Certification> certifications() {
@@ -138,18 +144,40 @@ public class SiteController {
 				new Certification("SQLD", "2025.06", "한국데이터산업진흥원", "/assets/sqld_logo.png"));
 	}
 
-	private List<Skill> skills() {
+	private List<SkillGroup> skillGroups() {
 		return List.of(
-				new Skill("Java", "https://cdn.simpleicons.org/openjdk"),
-				new Skill("Python", "https://cdn.simpleicons.org/python"),
-				new Skill("Spring", "https://cdn.simpleicons.org/spring"),
-				new Skill("Spring AI", "https://cdn.simpleicons.org/spring"),
-				new Skill("LangChain", "https://cdn.simpleicons.org/langchain"),
-				new Skill("MySQL", "https://cdn.simpleicons.org/mysql"),
-				new Skill("PostgreSQL", "https://cdn.simpleicons.org/postgresql"),
-				new Skill("Redis", "https://cdn.simpleicons.org/redis"),
-				new Skill("Docker", "https://cdn.simpleicons.org/docker"),
-				new Skill("AWS", "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"));
+				new SkillGroup(
+						"Backend",
+						"Server & Persistence",
+						List.of(
+								new Skill("Java", "https://cdn.simpleicons.org/openjdk"),
+								new Skill("Spring", "https://cdn.simpleicons.org/spring"),
+								new Skill("Spring AI", "https://cdn.simpleicons.org/spring"),
+								new Skill("JPA", "https://cdn.simpleicons.org/hibernate"),
+								new Skill("MyBatis", null))),
+				new SkillGroup(
+						"AI",
+						"Models & Orchestration",
+						List.of(
+								new Skill("Python", "https://cdn.simpleicons.org/python"),
+								new Skill("LangChain", "https://cdn.simpleicons.org/langchain"))),
+				new SkillGroup(
+						"Frontend",
+						"Interface",
+						List.of(new Skill("Vue", "https://cdn.simpleicons.org/vuedotjs"))),
+				new SkillGroup(
+						"Data",
+						"Storage & Cache",
+						List.of(
+								new Skill("MySQL", "https://cdn.simpleicons.org/mysql"),
+								new Skill("PostgreSQL", "https://cdn.simpleicons.org/postgresql"),
+								new Skill("Redis", "https://cdn.simpleicons.org/redis"))),
+				new SkillGroup(
+						"Infra",
+						"Build & Cloud",
+						List.of(
+								new Skill("Docker", "https://cdn.simpleicons.org/docker"),
+								new Skill("AWS", "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"))));
 	}
 
 	private List<Snippet> snippetsData() {

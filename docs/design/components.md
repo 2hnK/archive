@@ -34,7 +34,7 @@ timestamp: "2026-07-06T00:00:00+09:00"
 - `backdrop-filter: blur(...) saturate(...)`
 - 얇은 반투명 border
 - 외부 shadow와 내부 highlight
-- 카드, 이미지 래퍼, 모바일 메뉴, 타임라인 노드에 사용
+- 카드, 이미지 래퍼, 모바일 메뉴에 사용
 
 ## Glass Pill
 
@@ -55,10 +55,12 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 `src/main/resources/templates/fragments/article-card.html`
 
-- 이미지 또는 카테고리 기반 placeholder
+- 피드 카드와 같은 `glass-panel` 컨테이너와 큰 곡률 사용
+- 내부 이미지는 한 단계 작은 곡률로 분리하고, 이미지 또는 카테고리 기반 placeholder 표시
 - 카테고리, 날짜, 제목, 설명 순서
+- 하단 hairline 위에 subcategory와 `Read Article` 링크 배치
 - 제목 hover 시 accent color
-- 이미지 hover scale
+- 카드 hover translate와 이미지 hover scale
 
 ## Editorial List
 
@@ -102,3 +104,12 @@ timestamp: "2026-07-06T00:00:00+09:00"
 - 작성 보조 페이지의 복사/다운로드 버튼에 사용
 - 기존 zinc 계열 form UI와 충돌하지 않도록 얇은 border, 작은 산세리프 라벨, accent hover를 사용
 - 공개 아카이브 페이지의 주요 CTA가 아니라 도구형 보조 명령으로만 사용
+
+## Pagination
+
+`.pagination-button`, `.pagination-ellipsis`
+
+- 아티클 목록 하단의 이전, 페이지 번호, 다음 이동에 사용
+- 원형 글래스 버튼과 텍스트/배경 반전 active 상태를 사용
+- 필터 결과에 따라 페이지 수를 다시 계산하고 URL의 `page` 쿼리를 갱신
+- 페이지가 많으면 현재 페이지 주변과 처음/마지막 페이지 사이를 ellipsis로 축약

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <body>
-<article th:fragment="card(article)" class="group flex flex-col h-full w-full">
+<article th:fragment="card(article)"
+         class="group flex flex-col h-full w-full glass-panel rounded-[2rem] p-5 md:p-6 overflow-hidden transition-transform duration-500 hover:-translate-y-1">
   <a th:if="${article.imageUrl != null}"
      th:href="${article.url()}"
-     class="img-wrap block w-full aspect-video md:aspect-[4/3] mb-5 overflow-hidden glass-panel">
+     class="img-wrap block w-full aspect-video md:aspect-[4/3] mb-6 overflow-hidden rounded-[1.25rem] bg-black/5 dark:bg-white/5">
     <img th:alt="${article.title}"
          class="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
          th:src="${article.imageUrl}"
@@ -12,14 +13,14 @@
   </a>
   <a th:if="${article.imageUrl == null}"
      th:href="${article.url()}"
-     class="img-wrap flex items-center justify-center w-full aspect-video md:aspect-[4/3] mb-5 overflow-hidden glass-panel transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02] relative">
+     class="img-wrap flex items-center justify-center w-full aspect-video md:aspect-[4/3] mb-6 overflow-hidden rounded-[1.25rem] bg-black/5 dark:bg-white/5 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02] relative">
     <span class="absolute inset-0 flex items-center justify-center text-[80px] md:text-[120px] font-black text-black/[0.03] dark:text-white/[0.02] tracking-tighter select-none leading-none opacity-50 overflow-hidden transform -rotate-12 scale-150"
           th:text="${article.category}">Category</span>
     <div class="relative z-10 flex flex-col items-center gap-2">
       <span class="material-symbols-outlined text-[40px] text-black/10 dark:text-white/10">article</span>
     </div>
   </a>
-  <div class="content-wrap flex flex-col gap-2.5 flex-grow px-1 mt-1">
+  <div class="content-wrap flex flex-col gap-2.5 flex-grow px-1">
     <div class="flex items-center gap-2 mb-1">
       <span class="text-[12px] uppercase tracking-widest font-bold text-accent-color" th:text="${article.category}">Category</span>
       <span class="w-[3px] h-[3px] rounded-full bg-border-color"></span>
@@ -36,6 +37,15 @@
        th:text="${article.description}">
       Description
     </p>
+    <div class="mt-auto pt-5 flex items-center justify-between gap-4 border-t border-border-color/15">
+      <span class="text-[9px] font-sans font-bold uppercase tracking-[0.18em] opacity-40"
+            th:text="${article.subcategory}">Series</span>
+      <a th:href="${article.url()}"
+         class="inline-flex items-center gap-2 text-[10px] font-sans font-bold uppercase tracking-[0.18em] opacity-55 group-hover:opacity-100 transition-opacity duration-300">
+        Read Article
+        <span class="material-symbols-outlined text-[15px] group-hover:translate-x-1 transition-transform duration-300">arrow_forward</span>
+      </a>
+    </div>
   </div>
 </article>
 </body>

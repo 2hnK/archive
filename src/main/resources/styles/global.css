@@ -37,7 +37,7 @@
 }
 
 :root {
-  --bg-color: #ffffff;
+  --bg-color: #f4f5f7;
   --text-color: #1a1a1a;
   --border-color: #1a1a1a;
   --accent-color: #D32F2F;
@@ -142,6 +142,49 @@ h1, h2, h3, h4, h5, h6 {
     border-color: color-mix(in srgb, var(--accent-color), transparent 55%);
     background: color-mix(in srgb, var(--accent-color), transparent 92%);
     color: var(--accent-color);
+  }
+
+  .pagination-button {
+    display: inline-flex;
+    width: 2.5rem;
+    height: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid color-mix(in srgb, var(--border-color), transparent 82%);
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--bg-color), transparent 28%);
+    color: var(--text-color);
+    font-family: var(--font-family-sans);
+    font-size: 0.7rem;
+    font-weight: 700;
+    line-height: 1;
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .pagination-button:hover:not(:disabled),
+  .pagination-button.is-active {
+    border-color: var(--text-color);
+    background: var(--text-color);
+    color: var(--bg-color);
+    transform: translateY(-1px);
+  }
+
+  .pagination-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.25;
+  }
+
+  .pagination-ellipsis {
+    display: inline-flex;
+    width: 1.5rem;
+    height: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    font-family: var(--font-family-serif);
+    opacity: 0.45;
   }
 
 }
