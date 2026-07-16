@@ -3,169 +3,166 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
 const allArticles = await getCollection("articles");
-const sortedArticles = allArticles.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const latestArticles = sortedArticles.slice(0, 5); // Just a few for the home page
+const latestArticles = allArticles
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 5);
 
 const projects = [
   {
     title: "Soomgil",
-    desc: "스와이프 취향 데이터를 여행방 추천, 지도 일정 협업, 여행 기록 공유까지 연결한 그룹 여행 웹 앱",
-    date: "2026",
+    description:
+      "스와이프 취향 데이터를 여행방 추천, 지도 일정 협업, 여행 기록 공유까지 연결한 그룹 여행 웹 앱",
+    year: "2026",
     slug: "soomgil",
   },
   {
     title: "Dyslexia Kit",
-    desc: "학습 자료 PDF를 AI를 활용해 난독증을 겪는 학생들을 위한 교안으로 변환하고, TTS·어휘 분석·쓰기 연습을 제공하는 서비스",
-    date: "2025",
+    description:
+      "학습 자료 PDF를 AI를 활용해 난독증을 겪는 학생들을 위한 교안으로 변환하고, TTS·어휘 분석·쓰기 연습을 제공하는 서비스",
+    year: "2025",
     slug: "dyslexia-kit",
   },
 ];
+
+const formatDate = (date: Date) =>
+  date
+    .toLocaleDateString("ko-KR", { year: "numeric", month: "2-digit", day: "2-digit" })
+    .replace(/\./g, "-")
+    .replace(/ /g, "")
+    .slice(0, -1);
 ---
 
-<BaseLayout title="DEVARCHIVE" description="Artistic Dev Blog">
-  <main class="w-full min-h-screen pt-[20vh] pb-32 px-6 md:px-12 lg:px-24">
-    <!-- Hero Typography Section -->
-    <section class="max-w-7xl mx-auto mb-32 md:mb-48 reveal-up">
-      <div class="flex flex-col gap-2 md:gap-0">
-        <h1
-          class="text-[10vw] md:text-[6vw] font-serif font-black leading-[0.8] tracking-tighter uppercase text-transparent !bg-clip-text bg-gradient-to-r from-neutral-900 to-neutral-500 dark:from-neutral-100 dark:to-neutral-500"
-        >
-          ARCHIVING
-        </h1>
-        <div class="flex items-center gap-4 md:gap-12 ml-[10vw]">
-          <span class="block w-12 md:w-32 h-[2px] bg-accent-color md:mt-2"></span>
-          <h1
-            class="text-[10vw] md:text-[6vw] font-serif font-black leading-[0.8] tracking-tighter uppercase"
-          >
-            CODE &
-          </h1>
-        </div>
-        <h1
-          class="text-[10vw] md:text-[6vw] font-serif font-black leading-[0.8] tracking-tighter uppercase text-right mr-[5vw] italic"
-        >
-          EXPERIENCE.
-        </h1>
-      </div>
+<BaseLayout title="DEVARCHIVE" description="김지훈의 개발 기록과 프로젝트 아카이브">
+  <main class="relative w-full min-h-screen overflow-hidden pt-32 md:pt-56 pb-32 px-6 md:px-12 lg:px-24">
+    <div class="absolute top-16 inset-x-0 h-[800px] sm:h-[880px] md:h-[960px] pointer-events-none" aria-hidden="true">
+      <img
+        src="/images/night-cat-wide.png"
+        alt=""
+        width="1672"
+        height="941"
+        fetchpriority="high"
+        decoding="async"
+        class="h-full w-full object-cover object-center opacity-[0.88] saturate-[0.95] contrast-[1.02] dark:opacity-[0.78]"
+      />
+      <div class="absolute inset-0 bg-black/10 dark:bg-black/20"></div>
+      <div class="absolute inset-0 bg-[linear-gradient(180deg,transparent_0%,transparent_65%,var(--bg-color)_100%)]"></div>
+    </div>
 
-      <div
-        class="mt-16 md:mt-24 max-w-xl ml-auto border-l border-accent-color pl-6 reveal-up stagger-1"
-      >
-        <p class="text-lg md:text-xl font-sans font-medium opacity-80 leading-relaxed">
-          An archive of code, thoughts, experience and growth.
+    <section class="relative z-10 max-w-7xl mx-auto mb-40 md:mb-56 reveal-up">
+      <div class="flex items-center justify-between gap-6 border-b border-white/35 pb-4 mb-10 md:mb-14 text-[#fffdf4] drop-shadow-[0_2px_10px_rgba(0,0,0,0.65)]">
+        <p class="text-[10px] md:text-xs font-sans font-bold tracking-[0.28em] uppercase opacity-85">
+          Personal Engineering Blog
+        </p>
+        <p class="hidden sm:block text-[10px] font-mono uppercase tracking-[0.2em] opacity-70">
+          Notes from building and debugging
         </p>
       </div>
+
+      <div class="relative min-h-[380px] md:min-h-[440px] flex items-center -mx-6 px-6 md:-mx-10 md:px-10">
+        <div class="flex w-full flex-col gap-1 md:gap-0">
+          <h1 class="text-[clamp(3rem,10vw,4.5rem)] md:text-[clamp(4rem,5vw,5.5rem)] font-serif font-black leading-[0.82] tracking-tighter uppercase text-[#fffdf4] drop-shadow-[0_4px_18px_rgba(0,0,0,0.72)]">
+            Packets,
+          </h1>
+          <div class="flex items-center gap-4 md:gap-10 md:ml-[8vw]">
+            <span class="block w-10 md:w-24 h-[2px] bg-[#fffdf4]/85 shadow-[0_2px_12px_rgba(0,0,0,0.55)] shrink-0"></span>
+            <h1 class="text-[clamp(3rem,10vw,4.5rem)] md:text-[clamp(4rem,5vw,5.5rem)] font-serif font-black leading-[0.82] tracking-tighter uppercase text-[#fffdf4] drop-shadow-[0_4px_18px_rgba(0,0,0,0.72)]">
+              Systems &
+            </h1>
+          </div>
+          <h1 class="text-[clamp(3rem,10vw,4.5rem)] md:text-[clamp(4rem,5vw,5.5rem)] font-serif font-black italic leading-[0.82] tracking-tighter uppercase md:text-right md:mr-[3vw] text-[#fffdf4] drop-shadow-[0_4px_18px_rgba(0,0,0,0.72)]">
+            Things Shipped.
+          </h1>
+        </div>
+      </div>
     </section>
 
-    <!-- Content Split Layout -->
-    <section class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-24">
-      <!-- Latest Articles -->
+    <section class="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-24">
       <div class="reveal-up">
-        <div class="flex justify-between items-end mb-12">
-          <h2 class="text-4xl font-serif font-bold tracking-tight">Articles</h2>
-          <a
-            href="/articles"
-            class="artistic-link uppercase tracking-widest text-xs font-bold font-sans">View All</a
-          >
+        <div class="flex justify-between items-end mb-8 md:mb-10">
+          <div>
+            <p class="text-[10px] font-sans font-bold uppercase tracking-[0.24em] opacity-40 mb-2">Latest Notes</p>
+            <h2 class="text-4xl md:text-5xl font-serif font-bold tracking-tight">최근 게시물</h2>
+          </div>
+          <a href="/articles" class="artistic-link uppercase tracking-widest text-xs font-bold font-sans">All Articles</a>
         </div>
 
         <div class="editorial-list">
-          {
-            latestArticles.map((article) => (
-              <a
-                href={`/articles/${article.id}`}
-                class="editorial-list-item group block py-8 px-4 cursor-pointer reveal-up stagger-1"
-              >
-                <div class="flex justify-between items-center gap-4">
-                  <div class="flex flex-col gap-1.5">
-                    <h3 class="text-3xl font-serif font-bold tracking-tighter group-hover:text-inherit transition-colors duration-300">
-                      {article.data.title}
-                    </h3>
-                    <div class="flex items-center gap-3 text-sm font-sans opacity-60">
-                      <span>{article.data.description}</span>
-                    </div>
+          {latestArticles.map((article) => (
+            <a
+              href={`/articles/${article.id}`}
+              class="editorial-list-item group block py-8 md:py-10 px-0 md:px-4 cursor-pointer reveal-up stagger-1"
+            >
+              <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-6">
+                <div class="min-w-0 flex flex-col gap-3">
+                  <div class="flex items-center gap-3 text-[10px] font-sans font-bold uppercase tracking-[0.2em] opacity-55">
+                    <span class="text-accent-color">{article.data.category}</span>
+                    <span aria-hidden="true">/</span>
+                    <time datetime={article.data.date.toISOString()}>{formatDate(article.data.date)}</time>
                   </div>
-                  <div class="flex items-center gap-4 shrink-0">
-                    <span class="text-xs font-sans font-bold uppercase tracking-widest opacity-40">
-                      {article.data.date
-                        .toLocaleDateString("ko-KR", {
-                          year: "numeric",
-                          month: "2-digit",
-                          day: "2-digit",
-                        })
-                        .replace(/\./g, "-")
-                        .replace(/ /g, "")
-                        .slice(0, -1)}
-                    </span>
-                    <span class="material-symbols-outlined text-xl editorial-list-arrow">
-                      arrow_forward
-                    </span>
-                  </div>
+                  <h3 class="text-3xl md:text-4xl font-serif font-bold tracking-tighter leading-[1.08] group-hover:text-inherit transition-colors duration-300 break-keep">
+                    {article.data.title}
+                  </h3>
+                  <p class="max-w-2xl text-sm md:text-[15px] font-sans opacity-60 leading-relaxed break-keep line-clamp-2">
+                    {article.data.description}
+                  </p>
                 </div>
-              </a>
-            ))
-          }
+                <div class="flex items-center gap-3 shrink-0 text-[10px] font-sans font-bold uppercase tracking-[0.2em] opacity-50">
+                  <span>Read Note</span>
+                  <span class="material-symbols-outlined text-xl editorial-list-arrow">arrow_forward</span>
+                </div>
+              </div>
+            </a>
+          ))}
         </div>
       </div>
 
-      <!-- Featured Projects (Editorial List Style) -->
-      <div class="reveal-up stagger-1 md:mt-32">
-        <div class="flex justify-between items-end mb-12">
-          <h2 class="text-4xl font-serif font-bold tracking-tight">Works</h2>
-          <a
-            href="/project"
-            class="artistic-link uppercase tracking-widest text-xs font-bold font-sans">View All</a
-          >
+      <aside class="reveal-up stagger-1 md:mt-32">
+        <div class="flex justify-between items-end mb-8 md:mb-10">
+          <div>
+            <p class="text-[10px] font-sans font-bold uppercase tracking-[0.24em] opacity-40 mb-2">Projects</p>
+            <h2 class="text-3xl md:text-4xl font-serif font-bold tracking-tight">프로젝트</h2>
+          </div>
+          <a href="/project" class="artistic-link uppercase tracking-widest text-xs font-bold font-sans">All Projects</a>
         </div>
 
         <div class="editorial-list">
-          {
-            projects.map((proj, idx) => (
-              <a
-                href={`/project/${proj.slug}`}
-                class="editorial-list-item group block py-8 px-4 cursor-pointer reveal-up stagger-2"
-              >
-                <div class="flex justify-between items-center gap-4">
-                  <div class="flex flex-col gap-1.5">
-                    <h3 class="text-3xl font-serif font-bold tracking-tighter group-hover:text-inherit transition-colors duration-300">
-                      {proj.title}
-                    </h3>
-                    <span class="text-sm font-sans opacity-60">{proj.desc}</span>
-                  </div>
-                  <div class="flex items-center gap-4 shrink-0">
-                    <span class="text-xs font-sans font-bold uppercase tracking-widest opacity-40">
-                      {proj.date}
-                    </span>
-                    <span class="material-symbols-outlined text-xl editorial-list-arrow">
-                      arrow_forward
-                    </span>
-                  </div>
+          {projects.map((project) => (
+            <a
+              href={`/project/${project.slug}`}
+              class="editorial-list-item group block py-7 px-0 md:px-4 cursor-pointer reveal-up stagger-2"
+            >
+              <div class="flex justify-between items-start gap-5">
+                <div class="min-w-0 flex flex-col gap-2">
+                  <span class="text-[10px] font-mono font-bold uppercase tracking-[0.18em] opacity-45">{project.year}</span>
+                  <h3 class="text-2xl md:text-3xl font-serif font-bold tracking-tighter group-hover:text-inherit transition-colors duration-300">
+                    {project.title}
+                  </h3>
+                  <p class="text-sm font-sans opacity-60 leading-relaxed line-clamp-3 break-keep">{project.description}</p>
                 </div>
-              </a>
-            ))
-          }
+                <span class="material-symbols-outlined text-xl editorial-list-arrow shrink-0 mt-6">arrow_forward</span>
+              </div>
+            </a>
+          ))}
         </div>
-      </div>
+      </aside>
     </section>
   </main>
-</BaseLayout>
 
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const revealObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("active");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { root: null, rootMargin: "0px 0px -50px 0px", threshold: 0.1 },
-    );
+  <script>
+    document.addEventListener("astro:page-load", () => {
+      const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { root: null, rootMargin: "0px 0px -50px 0px", threshold: 0.1 },
+      );
 
-    const els = document.querySelectorAll(".reveal-up");
-    els.forEach((el) => {
-      revealObserver.observe(el);
+      document.querySelectorAll(".reveal-up").forEach((el) => revealObserver.observe(el));
     });
-  });
-</script>
+  </script>
+</BaseLayout>

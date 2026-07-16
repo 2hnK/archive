@@ -14,7 +14,7 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 ```css
 :root {
-  --bg-color: #ffffff;
+  --bg-color: #f4f5f7;
   --text-color: #1a1a1a;
   --border-color: #1a1a1a;
   --accent-color: #D32F2F;
@@ -30,7 +30,7 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 ## Theme Palette
 
-- Light background: `#ffffff`
+- Light background: `#f4f5f7`
 - Light text/border: `#1a1a1a`
 - Light accent: `#D32F2F`
 - Dark background: `#0f0f0f`
@@ -49,6 +49,7 @@ timestamp: "2026-07-06T00:00:00+09:00"
 ## Usage Rules
 
 - 새 색상 추가 전 기존 변수와 opacity 조합으로 해결한다.
+- 라이트 배경은 색감이 강하지 않은 쿨그레이를 사용해 흰색 글래스 패널과의 명도 차이를 확보한다.
 - 강조는 먼저 `--accent-color`를 사용한다.
 - 보더는 `border-color`, `text-color`의 opacity, white/black opacity 계열을 우선한다.
 - 페이지별 독립 팔레트를 만들지 않는다.

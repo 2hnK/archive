@@ -10,7 +10,7 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 ## Requirements
 
-- Node.js `>=18.14.0`
+- Node.js `22.x`
 - npm
 
 ## Commands
