@@ -16,7 +16,7 @@ DevArchive는 제품 랜딩 페이지보다 개인 개발 아카이브에 가깝
 
 ## Editorial First
 
-큰 제목은 `Playfair Display` 기반 세리프와 강한 무게감으로 페이지의 인상을 만든다. 본문과 UI 조작 요소는 `Inter` 기반 산세리프로 정리한다.
+큰 제목은 `Newsreader`와 `Noto Serif KR` 기반 세리프로 에디토리얼 인상을 만들고, 본문과 UI 조작 요소는 `Manrope`와 `Noto Sans KR` 기반 산세리프로 정리한다.
 
 ## High Contrast With Restrained Accent
 

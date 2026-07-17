@@ -22,6 +22,12 @@ const timeline = [
     logo: ssafyLogo,
   },
   {
+    year: "2024.03 ~ 2026.02",
+    desc: "국립한밭대학교 컴퓨터공학 학사 졸업",
+    detail: "컴퓨터공학 전공 과정을 이수하며 연구 발표와 SW·AI 프로젝트 경험 축적",
+    logo: hanbatLogo,
+  },
+  {
     year: "2026.02",
     desc: "KICS 동계종합학술발표회",
     detail: "KICS 한국통신학회 · 2026년도 동계종합학술발표회(KICS Winter Conference 2026) - 비용효율적인 지능형 AICC를 위한 자가진화형 4계층 정규화 게이트",
@@ -29,10 +35,11 @@ const timeline = [
     badge: "장려상",
   },
   {
-    year: "2024.03 ~ 2026.02",
-    desc: "국립한밭대학교 컴퓨터공학 학사 졸업",
-    detail: "자료구조, 알고리즘 등 컴퓨터공학 전공 과정을 통해 소프트웨어 엔지니어링의 기본 소양 확립",
+    year: "2025.5",
+    desc: "교내 2025 소중한 SW·AI 경진대회",
+    detail: "난독증 아동을 위한 AI 교안 생성 서비스로 SW 부문 1등 수상",
     logo: hanbatLogo,
+    badge: "SW 부문 1등",
   },
 ];
 
@@ -84,6 +91,7 @@ const skillGroups = [
     ],
   },
 ];
+
 ---
 
 <BaseLayout title="About | DEVARCHIVE" description="김지훈의 개발 경험과 기술 스택">
@@ -134,32 +142,30 @@ const skillGroups = [
     <section class="w-full relative px-6 mt-16 md:mt-32 reveal-up max-w-5xl mx-auto">
       <div class="border-b border-border-color/60 pb-6 mb-4">
         <p class="text-[10px] font-sans font-bold opacity-40 tracking-[0.24em] uppercase mb-2">Trajectory</p>
-        <h2 class="text-4xl md:text-5xl font-serif font-bold tracking-tight">Milestones</h2>
+        <h2 class="text-3xl md:text-4xl font-serif font-bold tracking-tight">Milestones</h2>
       </div>
 
-      <div class="relative w-full">
-        <div class="absolute left-[11px] md:left-[179px] top-0 bottom-0 w-[2px]" aria-hidden="true">
+      <div class="relative w-full" data-milestone-timeline>
+        <div class="absolute left-[11px] md:left-[179px] top-0 bottom-0 w-[2px]" data-milestone-track aria-hidden="true">
           <span class="absolute inset-0 bg-[var(--border-color)] opacity-20"></span>
-          <span class="absolute inset-x-0 top-0 h-1/4 bg-[var(--accent-color)] opacity-70"></span>
+          <span class="milestone-highlight" data-milestone-highlight></span>
         </div>
 
         <ol class="relative">
           {timeline.map((item, index) => (
-            <li class="group relative pl-10 md:pl-0 py-9 md:py-11 border-b border-border-color/45 first:border-t first:border-t-transparent">
+            <li class="group relative pl-10 md:pl-0 py-7 md:py-9 border-b border-border-color/45 first:border-t first:border-t-transparent" data-milestone-item>
               <div class="md:grid md:grid-cols-[156px_16px_minmax(0,1fr)] md:gap-x-4 md:items-start">
-                <time class="block mb-3 md:mb-0 text-[11px] font-mono font-bold uppercase tracking-[0.14em] opacity-65 md:pt-2">{item.year}</time>
-                <span class:list={[
-                  "absolute left-0 top-[40px] md:static md:mt-[6px] md:justify-self-center flex w-6 h-6 items-center justify-center rounded-full shadow-[0_0_0_5px_var(--bg-color)] text-[8px] font-mono font-bold transition-all duration-300 z-10",
-                  index === 0
-                    ? "bg-[var(--accent-color)] text-white border-2 border-[var(--accent-color)]"
-                    : "bg-[var(--bg-color)] text-black/65 dark:text-white/65 border-2 border-black/30 dark:border-white/30 group-hover:border-[var(--accent-color)] group-hover:text-[var(--accent-color)] group-hover:scale-110",
-                ]} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                <time class="milestone-date inline-flex w-fit items-center gap-2 mb-4 md:mb-0 md:justify-self-end">
+                  <span class="milestone-date-mark" aria-hidden="true"></span>
+                  <span>{item.year}</span>
+                </time>
+                <span class="milestone-node absolute left-0 top-[40px] md:static md:mt-[6px] md:justify-self-center flex w-6 h-6 items-center justify-center rounded-full shadow-[0_0_0_5px_var(--bg-color)] text-[8px] font-mono font-bold transition-all duration-300 z-10" data-milestone-node aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
                 <div class="min-w-0">
                   <div class="flex items-center flex-wrap gap-x-3 gap-y-2 mb-3">
                     <h3 class="text-2xl md:text-3xl font-serif font-bold tracking-tight leading-tight text-text-color">{item.desc}</h3>
                     {item.badge && (
-                      <span class="inline-flex shrink-0 items-center justify-center gap-1.5 text-[10px] font-sans font-bold text-amber-700 dark:text-amber-400 bg-amber-500/10 px-2.5 py-1 leading-none rounded-full border border-amber-500/25">
-                        <span class="material-symbols-outlined text-[13px] leading-none">emoji_events</span>
+                      <span class="inline-flex shrink-0 items-center justify-center gap-1 text-[9px] font-sans font-bold text-amber-700 dark:text-amber-400 bg-amber-500/10 px-2 py-1 leading-none rounded-full border border-amber-500/25">
+                        <span class="material-symbols-outlined award-icon leading-none">emoji_events</span>
                         {item.badge}
                       </span>
                     )}
@@ -173,32 +179,31 @@ const skillGroups = [
       </div>
     </section>
 
-    <section class="max-w-5xl mx-auto px-6 mt-32 md:mt-40 reveal-up stagger-1">
-      <div class="flex items-end justify-between gap-6 border-b border-border-color/60 pb-6 mb-4">
-        <div>
-          <p class="text-[10px] font-sans font-bold opacity-40 tracking-[0.24em] uppercase mb-2">Architecture & Canvas</p>
-          <h2 class="text-4xl md:text-5xl font-serif font-bold tracking-tight">Tech Specs</h2>
-        </div>
-        <p class="hidden md:block max-w-xs text-right text-xs font-sans opacity-45 leading-relaxed break-keep">역할과 사용 맥락으로 정리한 기술 구성</p>
+    <section class="max-w-5xl mx-auto px-6 mt-24 md:mt-32 reveal-up stagger-1">
+      <div class="border-b border-border-color/60 pb-5 mb-2">
+        <p class="text-[10px] font-sans font-bold opacity-40 tracking-[0.24em] uppercase mb-2">Architecture & Canvas</p>
+        <h2 class="text-3xl md:text-4xl font-serif font-bold tracking-tight">Tech Specs</h2>
       </div>
 
-      <div class="glass-panel rounded-3xl overflow-hidden border border-border-color/45 bg-white/75 dark:bg-[var(--bg-color)] shadow-sm">
+      <div class="tech-spec-list">
         {skillGroups.map((group, index) => (
-          <div class="grid grid-cols-1 md:grid-cols-[190px_minmax(0,1fr)] border-b border-border-color/45 last:border-b-0">
-            <div class="p-6 md:p-8 bg-neutral-50/70 dark:bg-white/[0.025] border-b md:border-b-0 md:border-r border-border-color/45">
-              <span class="block text-[9px] font-mono font-bold opacity-35 tracking-[0.18em] mb-2">{String(index + 1).padStart(2, "0")}</span>
-              <h3 class="text-2xl font-serif font-bold tracking-tight mb-1">{group.name}</h3>
-              <p class="text-[10px] font-sans uppercase tracking-[0.14em] opacity-40">{group.description}</p>
+          <div class="tech-spec-row grid grid-cols-1 md:grid-cols-[190px_minmax(0,1fr)] gap-4 md:gap-8 py-5 md:py-6 border-b border-border-color/30">
+            <div class="tech-spec-label relative md:pr-7">
+              <div class="mb-2">
+                <span class="text-[9px] font-mono font-bold opacity-35 tracking-[0.18em]">{String(index + 1).padStart(2, "0")}</span>
+              </div>
+              <h3 class="text-xl md:text-2xl font-serif font-bold tracking-tight mb-1">{group.name}</h3>
+              <p class="text-[9px] font-sans uppercase tracking-[0.13em] opacity-40">{group.description}</p>
             </div>
-            <div class="p-5 md:p-6 flex flex-wrap content-center gap-3">
+            <div class="flex flex-wrap content-center gap-x-7 gap-y-1">
               {group.skills.map((skill) => (
-                <div class="group/skill flex flex-1 sm:flex-none min-w-[132px] items-center gap-3 rounded-2xl border border-border-color/45 bg-white dark:bg-white/[0.035] px-4 py-3.5 hover:-translate-y-1 hover:border-accent-color/25 hover:shadow-sm transition-all duration-300">
+                <div class="tech-skill-item group/skill flex min-w-[112px] items-center gap-2.5 py-2.5">
                   {skill.icon ? (
-                    <img src={skill.icon} alt={skill.name} class="w-7 h-7 object-contain opacity-85 group-hover/skill:opacity-100 group-hover/skill:scale-110 transition-all duration-300" />
+                    <img src={skill.icon} alt={skill.name} class="w-5 h-5 object-contain opacity-75 group-hover/skill:opacity-100 transition-opacity duration-300" />
                   ) : (
-                    <span class="w-7 h-7 rounded-lg bg-[var(--text-color)] text-[var(--bg-color)] flex items-center justify-center text-[8px] font-mono font-bold tracking-tighter" aria-hidden="true">MB</span>
+                    <span class="w-5 h-5 bg-[var(--text-color)] text-[var(--bg-color)] flex items-center justify-center text-[6px] font-mono font-bold tracking-tighter" aria-hidden="true">MB</span>
                   )}
-                  <span class="text-xs font-mono font-bold opacity-80 tracking-wide">{skill.name}</span>
+                  <span class="text-[11px] font-mono font-semibold tracking-wide">{skill.name}</span>
                 </div>
               ))}
             </div>
@@ -207,21 +212,23 @@ const skillGroups = [
       </div>
     </section>
 
-    <section class="max-w-4xl mx-auto px-6 mt-24 md:mt-32 mb-32 md:mb-40 reveal-up stagger-2">
-      <div class="text-center mb-12 md:mb-16">
-        <h2 class="text-3xl md:text-4xl font-sans font-semibold tracking-tight mb-3">Certifications</h2>
+    <section class="max-w-5xl mx-auto px-6 mt-16 md:mt-24 mb-24 md:mb-32 reveal-up stagger-2">
+      <div class="border-b border-border-color/60 pb-5 mb-0">
+        <p class="text-[10px] font-sans font-bold opacity-40 tracking-[0.24em] uppercase mb-2">Credentials</p>
+        <h2 class="text-3xl md:text-4xl font-serif font-bold tracking-tight">Certifications</h2>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
+      <div class="certification-list grid grid-cols-1 md:grid-cols-2 md:gap-x-10">
         {certifications.map((certification) => (
-          <div class="flex items-center gap-5 group cursor-default border-b border-border-color/30 pb-4 hover:border-accent-color/50 transition-colors duration-300">
-            <div class="w-8 h-8 flex items-center justify-center shrink-0">
-              <img src={certification.logo.src} alt={certification.item} class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300 rounded-sm" />
+          <article class="certification-item group grid grid-cols-[36px_minmax(0,1fr)_auto] items-center gap-4 py-5 border-b border-border-color/30 cursor-default">
+            <div class="w-9 h-9 flex items-center justify-center shrink-0">
+              <img src={certification.logo.src} alt={certification.item} class="w-7 h-7 object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300 rounded-sm" />
             </div>
-            <div class="flex flex-col gap-0.5 flex-1 pl-1">
-              <span class="text-sm md:text-base font-sans font-semibold opacity-90 tracking-tight">{certification.item}</span>
-              <span class="font-sans text-[11px] md:text-xs font-light opacity-60 tracking-wide">{certification.desc} • {certification.date}</span>
+            <div class="min-w-0">
+              <h3 class="text-lg md:text-xl font-serif font-bold tracking-tight leading-tight group-hover:text-accent-color transition-colors duration-300">{certification.item}</h3>
+              <p class="mt-1 font-sans text-[10px] md:text-[11px] opacity-45 tracking-wide truncate">{certification.desc}</p>
             </div>
-          </div>
+            <time class="font-mono text-[9px] font-bold tracking-[0.1em]">{certification.date}</time>
+          </article>
         ))}
       </div>
     </section>
@@ -250,6 +257,63 @@ const skillGroups = [
         label.textContent = "COPIED!";
         window.setTimeout(() => (label.textContent = "Email"), 1500);
       });
+
+      type TimelineWindow = Window & { __milestoneController?: AbortController };
+      const timelineWindow = window as TimelineWindow;
+      timelineWindow.__milestoneController?.abort();
+
+      const timeline = document.querySelector<HTMLElement>("[data-milestone-timeline]");
+      const track = timeline?.querySelector<HTMLElement>("[data-milestone-track]");
+      const highlight = timeline?.querySelector<HTMLElement>("[data-milestone-highlight]");
+      const items = Array.from(timeline?.querySelectorAll<HTMLElement>("[data-milestone-item]") ?? []);
+      const nodes = items.map((item) => item.querySelector<HTMLElement>("[data-milestone-node]"));
+
+      if (timeline && track && highlight && items.length > 0 && nodes.every(Boolean)) {
+        const controller = new AbortController();
+        timelineWindow.__milestoneController = controller;
+        let frame = 0;
+
+        const updateTimeline = () => {
+          const focusY = window.innerHeight * 0.46;
+          const nodeElements = nodes as HTMLElement[];
+          const centersInViewport = nodeElements.map((node) => {
+            const rect = node.getBoundingClientRect();
+            return rect.top + rect.height / 2;
+          });
+          const currentIndex = centersInViewport.reduce(
+            (closestIndex, center, index) =>
+              Math.abs(center - focusY) < Math.abs(centersInViewport[closestIndex] - focusY)
+                ? index
+                : closestIndex,
+            0,
+          );
+
+          items.forEach((item, index) => {
+            const isCurrent = index === currentIndex;
+            if (isCurrent) item.setAttribute("aria-current", "true");
+            else item.removeAttribute("aria-current");
+            nodeElements[index].classList.toggle("is-current", isCurrent);
+          });
+
+          const trackRect = track.getBoundingClientRect();
+          const currentItemRect = items[currentIndex].getBoundingClientRect();
+          const slotTop = Math.max(0, currentItemRect.top - trackRect.top);
+          const slotBottom = Math.min(trackRect.height, currentItemRect.bottom - trackRect.top);
+
+          highlight.style.top = `${slotTop}px`;
+          highlight.style.height = `${Math.max(0, slotBottom - slotTop)}px`;
+        };
+
+        const scheduleTimelineUpdate = () => {
+          window.cancelAnimationFrame(frame);
+          frame = window.requestAnimationFrame(updateTimeline);
+        };
+
+        window.addEventListener("scroll", scheduleTimelineUpdate, { passive: true, signal: controller.signal });
+        window.addEventListener("resize", scheduleTimelineUpdate, { passive: true, signal: controller.signal });
+        document.addEventListener("astro:before-swap", () => controller.abort(), { once: true, signal: controller.signal });
+        scheduleTimelineUpdate();
+      }
     });
   </script>
 </BaseLayout>

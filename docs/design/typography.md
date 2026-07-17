@@ -12,9 +12,11 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 `src/styles/global.css`의 테마 변수 기준:
 
-- Serif: `"Playfair Display", serif`
-- Sans: `"Inter", sans-serif`
-- Mono: `"Fira Code", "JetBrains Mono", monospace`
+- Serif: `"Newsreader", "Noto Serif KR", serif`
+- Sans: `"Manrope", "Noto Sans KR", sans-serif`
+- Mono: `"IBM Plex Mono", "Noto Sans KR", monospace`
+
+영문과 한글이 섞인 제목에서는 각 계열의 한글 fallback을 함께 사용해 획의 대비와 본문 밀도가 자연스럽게 이어지도록 한다.
 
 ## Headings
 
