@@ -7,35 +7,41 @@ import eipLogo from "../assets/engineer_information_processing_logo.png";
 const milestoneGroups = [
   {
     year: "2026.01 ~ 현재",
+    dateTime: "2026-01",
     desc: "삼성청년SW/AI아카데미(SSAFY)",
-    detail: "체계적인 실무 중심의 교육을 통해 웹 개발 및 AI 활용 능력 역량 강화 및 알고리즘 문제 해결 능력 향상",
+    detail: "웹 개발과 AI 활용 역량 및 알고리즘 문제 해결 능력 강화",
     achievements: [
       {
         year: "2026.06.26",
+        dateTime: "2026-06-26",
         desc: "SSAFY 1학기 프로젝트",
-        detail: "생성형 AI와 공공데이터를 활용한 Soomgil 서비스로 1학기 관통 프로젝트 우수상 선정",
+        detail: "생성형 AI와 공공데이터를 활용한 Soomgil 서비스로 1학기 관통 프로젝트 우수상 수상",
         badge: "우수상",
       },
     ],
   },
   {
     year: "2024.03 ~ 2026.02",
+    dateTime: "2024-03",
     desc: "국립한밭대학교 컴퓨터공학과",
     detail: "컴퓨터공학 전공 과정을 이수하며 연구 발표와 SW·AI 프로젝트 경험 축적",
     achievements: [
       {
         year: "2026.02",
+        dateTime: "2026-02",
         desc: "컴퓨터공학 학사 졸업",
-        detail: "컴퓨터공학 전공 과정 이수",
+        detail: "컴퓨터공학 학사 과정 이수",
       },
       {
         year: "2026.02",
+        dateTime: "2026-02",
         desc: "KICS 동계종합학술발표회",
         detail: "비용효율적인 지능형 AICC를 위한 자가진화형 4계층 정규화 게이트 연구 발표",
         badge: "장려상",
       },
       {
         year: "2025.05",
+        dateTime: "2025-05",
         desc: "교내 2025 소중한 SW·AI 경진대회",
         detail: "난독증 아동을 위한 AI 교안 생성 서비스로 SW 부문 1등 수상",
         badge: "SW 부문 1등",
@@ -45,8 +51,8 @@ const milestoneGroups = [
 ];
 
 const certifications = [
-  { item: "정보처리기사", date: "2025.09", desc: "한국산업인력공단", logo: eipLogo },
-  { item: "SQLD", date: "2025.06", desc: "한국데이터산업진흥원", logo: sqldLogo },
+  { item: "정보처리기사", date: "2025.09", dateTime: "2025-09", desc: "한국산업인력공단", logo: eipLogo },
+  { item: "SQLD", date: "2025.06", dateTime: "2025-06", desc: "한국데이터산업진흥원", logo: sqldLogo },
 ];
 
 const skillGroups = [
@@ -54,10 +60,10 @@ const skillGroups = [
     name: "Backend",
     description: "Server & Persistence",
     skills: [
-      { name: "Java", icon: "https://cdn.simpleicons.org/openjdk" },
-      { name: "Spring", icon: "https://cdn.simpleicons.org/spring" },
-      { name: "Spring AI", icon: "https://cdn.simpleicons.org/spring" },
-      { name: "JPA", icon: "https://cdn.simpleicons.org/hibernate" },
+      { name: "Java", icon: "/icons/skills/openjdk.svg" },
+      { name: "Spring", icon: "/icons/skills/spring.svg" },
+      { name: "Spring AI", icon: "/icons/skills/spring.svg" },
+      { name: "JPA", icon: "/icons/skills/hibernate.svg" },
       { name: "MyBatis", icon: null },
     ],
   },
@@ -65,30 +71,30 @@ const skillGroups = [
     name: "AI",
     description: "Models & Orchestration",
     skills: [
-      { name: "Python", icon: "https://cdn.simpleicons.org/python" },
-      { name: "LangChain", icon: "https://cdn.simpleicons.org/langchain" },
+      { name: "Python", icon: "/icons/skills/python.svg" },
+      { name: "LangChain", icon: "/icons/skills/langchain.svg" },
     ],
   },
   {
     name: "Frontend",
     description: "Interface",
-    skills: [{ name: "Vue", icon: "https://cdn.simpleicons.org/vuedotjs" }],
+    skills: [{ name: "Vue", icon: "/icons/skills/vuedotjs.svg" }],
   },
   {
     name: "Data",
     description: "Storage & Cache",
     skills: [
-      { name: "MySQL", icon: "https://cdn.simpleicons.org/mysql" },
-      { name: "PostgreSQL", icon: "https://cdn.simpleicons.org/postgresql" },
-      { name: "Redis", icon: "https://cdn.simpleicons.org/redis" },
+      { name: "MySQL", icon: "/icons/skills/mysql.svg" },
+      { name: "PostgreSQL", icon: "/icons/skills/postgresql.svg" },
+      { name: "Redis", icon: "/icons/skills/redis.svg" },
     ],
   },
   {
     name: "Infra",
     description: "Build & Cloud",
     skills: [
-      { name: "Docker", icon: "https://cdn.simpleicons.org/docker" },
-      { name: "AWS", icon: "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" },
+      { name: "Docker", icon: "/icons/skills/docker.svg" },
+      { name: "AWS", icon: "/icons/skills/aws.svg" },
     ],
   },
 ];
@@ -96,43 +102,49 @@ const skillGroups = [
 ---
 
 <BaseLayout title="About | DEVARCHIVE" description="김지훈의 개발 경험과 기술 스택">
-  <main class="w-full min-h-screen pb-32">
+  <main class="w-full min-h-screen pb-16 md:pb-20">
     <section class="relative w-full min-h-[68vh] flex flex-col items-center justify-center px-6 reveal-up overflow-hidden pt-24 pb-12 md:pt-28 md:pb-16">
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] md:w-[45vw] md:h-[45vw] bg-accent-color/8 dark:bg-accent-color/15 rounded-full blur-[120px] pointer-events-none animate-pulse duration-1000"></div>
 
       <div class="relative z-10 mx-auto grid w-full max-w-4xl items-center gap-10 md:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] md:gap-16">
         <figure class="glass-panel mx-auto w-full max-w-[280px] rounded-[2rem] p-2 shadow-xl transition-transform duration-700 md:max-w-none md:-rotate-1 hover:rotate-0">
           <img
-            src="/images/profile.png"
+            src="/images/profile.webp"
             alt="김지훈 프로필"
-            width="1086"
-            height="1448"
+            width="720"
+            height="960"
             decoding="async"
+            fetchpriority="high"
             class="aspect-[3/4] w-full rounded-[1.5rem] object-cover object-center"
           />
         </figure>
 
         <div class="text-center md:text-left">
           <h1 class="mb-4 text-2xl md:text-3xl font-serif font-bold tracking-tight">안녕하세요, 김지훈입니다.</h1>
-          <p class="text-base md:text-lg font-serif leading-relaxed opacity-80 italic pb-8 border-b border-border-color/30 px-4 md:px-0">
-            "조금은 느리더라도 문제의 본질을<br class="hidden md:block" /> 놓치지 않는 개발자가 되겠습니다."
+          <p class="mb-4 px-4 text-sm font-sans leading-relaxed opacity-65 break-keep md:px-0 md:text-base">
+            Spring 기반 백엔드와 생성형 AI 응용 서비스를 만들고 있습니다.
+          </p>
+          <p class="text-base md:text-lg font-serif leading-relaxed opacity-80 italic pb-8 border-b border-border-color/30 px-4 md:px-0 break-keep">
+            조금은 느리더라도 문제의 본질을<br class="hidden md:block" /> 놓치지 않는 개발자가 되겠습니다.
           </p>
 
           <div class="flex items-center justify-center md:justify-start gap-10 mt-8">
-            <a
-              href="mailto:kimgh921@gmail.com"
+            <button
+              type="button"
               data-copy-email
+              aria-label="이메일 주소 복사"
+              title="이메일 주소 복사"
               class="flex flex-col items-center gap-3 opacity-50 hover:opacity-100 hover:text-accent-color hover:-translate-y-1 transition-all duration-300"
             >
-              <span class="material-symbols-outlined text-[24px]">mail</span>
-              <span class="email-text text-[10px] font-sans font-bold tracking-widest uppercase w-12 text-center mt-[1px]">Email</span>
-            </a>
-            <a href="https://github.com/2hnk" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-3 opacity-50 hover:opacity-100 hover:text-accent-color hover:-translate-y-1 transition-all duration-300 pt-1">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+              <span class="material-symbols-outlined text-[24px]" aria-hidden="true">mail</span>
+              <span class="email-text text-[10px] font-sans font-bold tracking-widest uppercase w-12 text-center mt-[1px]" aria-live="polite">Email</span>
+            </button>
+            <a href="https://github.com/2hnk" target="_blank" rel="noopener noreferrer" aria-label="GitHub 새 창에서 열기" class="flex flex-col items-center gap-3 opacity-50 hover:opacity-100 hover:text-accent-color hover:-translate-y-1 transition-all duration-300 pt-1">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
               <span class="text-[10px] font-sans font-bold tracking-widest uppercase mt-[1px]">Github</span>
             </a>
-            <a href="https://www.instagram.com/__kimjihun" target="_blank" rel="noopener noreferrer" class="flex flex-col items-center gap-3 opacity-50 hover:opacity-100 hover:text-accent-color hover:-translate-y-1 transition-all duration-300 pt-1">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            <a href="https://www.instagram.com/__kimjihun" target="_blank" rel="noopener noreferrer" aria-label="Instagram 새 창에서 열기" class="flex flex-col items-center gap-3 opacity-50 hover:opacity-100 hover:text-accent-color hover:-translate-y-1 transition-all duration-300 pt-1">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
               <span class="text-[10px] font-sans font-bold tracking-widest uppercase mt-[1px]">Instagram</span>
             </a>
           </div>
@@ -157,7 +169,7 @@ const skillGroups = [
             <li class="milestone-group relative border-b border-border-color/45" data-milestone-group>
               <div class="milestone-main-entry relative pl-12 md:pl-0 py-7 md:py-9" data-milestone-entry>
                 <div class="md:grid md:grid-cols-[148px_30px_minmax(0,1fr)] md:gap-x-4 md:items-start">
-                  <time class="milestone-date milestone-main-date inline-flex w-fit items-center gap-2 mb-4 md:mb-0 md:justify-self-end">
+                  <time datetime={group.dateTime} class="milestone-date milestone-main-date inline-flex w-fit items-center gap-2 mb-4 md:mb-0 md:justify-self-end">
                     <span class="milestone-date-mark" aria-hidden="true"></span>
                     <span>{group.year}</span>
                   </time>
@@ -170,7 +182,7 @@ const skillGroups = [
                       {group.achievements.map((achievement) => (
                         <li class="milestone-branch-item relative py-4 pl-8 md:pl-9 border-t border-border-color/25" data-milestone-entry data-milestone-child>
                           <span class="milestone-node milestone-child-node" data-milestone-node aria-hidden="true"></span>
-                          <time class="milestone-date milestone-child-date inline-flex w-fit items-center gap-2">
+                          <time datetime={achievement.dateTime} class="milestone-date milestone-child-date inline-flex w-fit items-center gap-2">
                             <span class="milestone-date-mark" aria-hidden="true"></span>
                             <span>{achievement.year}</span>
                           </time>
@@ -198,7 +210,7 @@ const skillGroups = [
 
     <section class="max-w-5xl mx-auto px-6 mt-24 md:mt-32 reveal-up stagger-1">
       <div class="border-b border-border-color/60 pb-5 mb-2">
-        <p class="text-[10px] font-sans font-bold opacity-40 tracking-[0.24em] uppercase mb-2">Architecture & Canvas</p>
+        <p class="text-[10px] font-sans font-bold opacity-40 tracking-[0.24em] uppercase mb-2">Technical Focus</p>
         <h2 class="text-3xl md:text-4xl font-serif font-bold tracking-tight">Tech Specs</h2>
       </div>
 
@@ -216,7 +228,7 @@ const skillGroups = [
               {group.skills.map((skill) => (
                 <div class="tech-skill-item group/skill flex min-w-[112px] items-center gap-2.5 py-2.5">
                   {skill.icon ? (
-                    <img src={skill.icon} alt={skill.name} class="w-5 h-5 object-contain opacity-75 group-hover/skill:opacity-100 transition-opacity duration-300" />
+                    <img src={skill.icon} alt="" width="20" height="20" loading="lazy" decoding="async" class="w-5 h-5 object-contain opacity-75 group-hover/skill:opacity-100 transition-opacity duration-300" />
                   ) : (
                     <span class="w-5 h-5 bg-[var(--text-color)] text-[var(--bg-color)] flex items-center justify-center text-[6px] font-mono font-bold tracking-tighter" aria-hidden="true">MB</span>
                   )}
@@ -229,7 +241,7 @@ const skillGroups = [
       </div>
     </section>
 
-    <section class="max-w-5xl mx-auto px-6 mt-16 md:mt-24 mb-24 md:mb-32 reveal-up stagger-2">
+    <section class="max-w-5xl mx-auto px-6 mt-16 md:mt-24 mb-12 md:mb-16 reveal-up stagger-2">
       <div class="border-b border-border-color/60 pb-5 mb-0">
         <p class="text-[10px] font-sans font-bold opacity-40 tracking-[0.24em] uppercase mb-2">Credentials</p>
         <h2 class="text-3xl md:text-4xl font-serif font-bold tracking-tight">Certifications</h2>
@@ -238,13 +250,13 @@ const skillGroups = [
         {certifications.map((certification) => (
           <article class="certification-item group grid grid-cols-[36px_minmax(0,1fr)_auto] items-center gap-4 py-5 border-b border-border-color/30 cursor-default">
             <div class="w-9 h-9 flex items-center justify-center shrink-0">
-              <img src={certification.logo.src} alt={certification.item} class="w-7 h-7 object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300 rounded-sm" />
+              <img src={certification.logo.src} alt="" width="28" height="28" loading="lazy" decoding="async" class="w-7 h-7 object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-300 rounded-sm" />
             </div>
             <div class="min-w-0">
               <h3 class="text-lg md:text-xl font-serif font-bold tracking-tight leading-tight group-hover:text-accent-color transition-colors duration-300">{certification.item}</h3>
               <p class="mt-1 font-sans text-[10px] md:text-[11px] opacity-45 tracking-wide truncate">{certification.desc}</p>
             </div>
-            <time class="font-mono text-[9px] font-bold tracking-[0.1em]">{certification.date}</time>
+            <time datetime={certification.dateTime} class="font-mono text-[9px] font-bold tracking-[0.1em]">{certification.date}</time>
           </article>
         ))}
       </div>
@@ -267,12 +279,16 @@ const skillGroups = [
 
       document.querySelectorAll(".reveal-up").forEach((el) => revealObserver.observe(el));
 
-      document.querySelector<HTMLElement>("[data-copy-email]")?.addEventListener("click", () => {
-        void navigator.clipboard.writeText("kimgh921@gmail.com");
+      document.querySelector<HTMLElement>("[data-copy-email]")?.addEventListener("click", async () => {
         const label = document.querySelector<HTMLElement>(".email-text");
         if (!label) return;
-        label.textContent = "COPIED!";
-        window.setTimeout(() => (label.textContent = "Email"), 1500);
+        try {
+          await navigator.clipboard.writeText("kimgh921@gmail.com");
+          label.textContent = "COPIED!";
+          window.setTimeout(() => (label.textContent = "Email"), 1500);
+        } catch {
+          window.location.href = "mailto:kimgh921@gmail.com";
+        }
       });
 
       type TimelineWindow = Window & { __milestoneController?: AbortController };

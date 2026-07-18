@@ -519,6 +519,21 @@ h1, h2, h3, h4, h5, h6 {
 .stagger-3 { transition-delay: 450ms; }
 .stagger-4 { transition-delay: 600ms; }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal-up,
+  .reveal-up.active {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    transition-delay: 0s;
+    will-change: auto;
+  }
+}
+
 /* Artistic Link Hover Effect */
 .artistic-link {
   position: relative;

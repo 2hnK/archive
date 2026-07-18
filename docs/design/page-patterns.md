@@ -3,7 +3,7 @@ type: Design Reference
 title: Page Patterns
 description: 홈, 아티클, 프로젝트, 소개, 도구형 페이지의 반복 레이아웃 패턴.
 tags: ["design", "page-patterns", "layout"]
-timestamp: "2026-07-06T00:00:00+09:00"
+timestamp: "2026-07-18T00:00:00+09:00"
 ---
 
 # Page Patterns
@@ -54,6 +54,7 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 - 세로형 프로필 사진과 짧은 인용문을 나란히 배치한 editorial hero
 - 인용문 위에는 이름을 포함한 짧은 인사말을 두어 페이지의 주체를 명확히 표시
+- 인사말과 인용문 사이에는 현재의 기술 역할을 설명하는 한 문장을 배치해 첫 화면에서 개발자 정체성을 전달
 - 모바일에서는 프로필 사진과 인용문을 한 열로 쌓아 인물 구도를 유지
 - 은은한 accent glow
 - 날짜 축과 본문을 나란히 배치한 계층형 세로 editorial timeline

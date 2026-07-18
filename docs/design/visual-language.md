@@ -3,7 +3,7 @@ type: Design Reference
 title: Visual Language
 description: DevArchive의 시각 톤, 상호작용 특성, 피해야 할 방향.
 tags: ["design", "visual-language", "interaction"]
-timestamp: "2026-07-06T00:00:00+09:00"
+timestamp: "2026-07-18T00:00:00+09:00"
 ---
 
 # Visual Language
@@ -26,6 +26,7 @@ timestamp: "2026-07-06T00:00:00+09:00"
 - 리스트 hover는 배경 반전, 좌우 padding 변화, arrow rotation으로 반응한다.
 - 카드 hover는 제목 강조색, 이미지 scale, 경계/그림자 변화로 반응한다.
 - 진입 모션은 천천히 올라오는 방식으로 통일한다.
+- 사용자가 모션 감소를 요청하거나 JavaScript를 사용할 수 없는 환경에서는 진입 모션을 생략하고 콘텐츠를 즉시 노출한다.
 
 ## Source Patterns
 
