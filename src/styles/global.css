@@ -41,6 +41,7 @@
   --text-color: #1a1a1a;
   --border-color: #1a1a1a;
   --accent-color: #D32F2F;
+  --milestone-accent-color: #1e66f5;
 }
 
 html {
@@ -54,6 +55,7 @@ html {
   --text-color: #f4f0db;
   --border-color: #f4f0db;
   --accent-color: #ff4d4d;
+  --milestone-accent-color: #89b4fa;
 }
 
 body {
@@ -120,7 +122,7 @@ h1, h2, h3, h4, h5, h6 {
     inset-inline: 0;
     top: 0;
     height: 0;
-    background: var(--accent-color);
+    background: var(--milestone-accent-color);
     opacity: 0.78;
     transition: top 0.55s var(--transition-timing-function-artistic), height 0.55s var(--transition-timing-function-artistic);
   }
@@ -167,12 +169,12 @@ h1, h2, h3, h4, h5, h6 {
 
   .milestone-branch-item:hover h4,
   .milestone-branch-item:hover .milestone-child-date {
-    color: var(--accent-color);
+    color: var(--milestone-accent-color);
   }
 
   .milestone-branch-item:hover::before {
     width: 1.45rem;
-    background: var(--accent-color);
+    background: var(--milestone-accent-color);
   }
 
   .milestone-child-node {
@@ -188,29 +190,29 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .milestone-node.is-current {
-    background: var(--accent-color);
+    background: var(--milestone-accent-color);
     color: white;
-    border-color: var(--accent-color);
+    border-color: var(--milestone-accent-color);
     transform: scale(1.1);
   }
 
   .milestone-main-entry:hover .milestone-main-node:not(.is-current),
   .milestone-branch-item:hover .milestone-child-node:not(.is-current) {
-    border-color: var(--accent-color);
-    color: var(--accent-color);
+    border-color: var(--milestone-accent-color);
+    color: var(--milestone-accent-color);
     transform: scale(1.1);
   }
 
   .milestone-main-entry:hover .milestone-main-node.is-current,
   .milestone-branch-item:hover .milestone-child-node.is-current {
-    background: var(--accent-color);
-    border-color: var(--accent-color);
+    background: var(--milestone-accent-color);
+    border-color: var(--milestone-accent-color);
     color: white;
   }
 
   .milestone-branch-item[aria-current="true"]::before {
     width: 1.45rem;
-    background: var(--accent-color);
+    background: var(--milestone-accent-color);
   }
 
   .award-icon {
@@ -239,7 +241,7 @@ h1, h2, h3, h4, h5, h6 {
 
   .milestone-main-entry[aria-current="true"] .milestone-main-date,
   .milestone-branch-item[aria-current="true"] .milestone-child-date {
-    color: var(--accent-color);
+    color: var(--milestone-accent-color);
     transform: translateX(-2px);
   }
 

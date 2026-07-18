@@ -3,7 +3,7 @@ type: Design Reference
 title: Color System
 description: DevArchive의 CSS 변수, 테마 팔레트, 상태색 사용 규칙.
 tags: ["design", "color", "tokens"]
-timestamp: "2026-07-06T00:00:00+09:00"
+timestamp: "2026-07-18T00:00:00+09:00"
 ---
 
 # Color System
@@ -39,12 +39,12 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 ## Secondary State Colors
 
-토픽, 목차, 뷰 토글의 활성 상태에는 기존 블루 계열이 사용된다.
+토픽, 목차, 뷰 토글, About 마일스톤의 현재 위치와 hover 상태에는 기존 블루 계열이 사용된다.
 
 - Light active blue: `#1e66f5`
 - Dark active blue: `#89b4fa`
 
-이 색은 이미 구현된 상태 표시용 보조색으로 참고한다. 새 브랜드 컬러처럼 넓게 쓰기보다, 필터나 active state처럼 목적이 분명한 곳에 맞춰 사용한다.
+이 색은 이미 구현된 상태 표시용 보조색으로 참고한다. 새 브랜드 컬러처럼 넓게 쓰기보다, 필터·타임라인 진행 상태·active state처럼 목적이 분명한 곳에 맞춰 사용한다. About 마일스톤은 `--milestone-accent-color`로 라이트/다크 값을 전환한다.
 
 ## Usage Rules
 
