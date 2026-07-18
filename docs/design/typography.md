@@ -18,6 +18,8 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 영문과 한글이 섞인 제목에서는 각 계열의 한글 fallback을 함께 사용해 획의 대비와 본문 밀도가 자연스럽게 이어지도록 한다.
 
+한글 세리프에는 `Noto Serif KR`, 한글 본문과 UI에는 `Noto Sans KR`을 사용한다. 두 글꼴의 중립적인 획과 폭을 활용해 한글·영문 혼용 제목과 긴 기술 설명의 안정적인 리듬을 유지한다. 두 글꼴은 SIL Open Font License를 따르며, 배포 조건은 [Noto Fonts](https://github.com/notofonts/noto-fonts)의 공식 저장소를 기준으로 한다.
+
 ## Headings
 
 전역 `h1`-`h6`는 세리프, `font-weight: 700`, `line-height: 1.1`, `letter-spacing: -0.02em`을 기본으로 한다.

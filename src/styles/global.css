@@ -19,6 +19,9 @@
   --color-artistic-darkBorder: #f4f0db;
 
   /* Fonts */
+  --font-serif: "Newsreader", "Noto Serif KR", serif;
+  --font-sans: "Manrope", "Noto Sans KR", sans-serif;
+  --font-mono: "IBM Plex Mono", "Noto Sans KR", monospace;
   --font-family-serif: "Newsreader", "Noto Serif KR", serif;
   --font-family-sans: "Manrope", "Noto Sans KR", sans-serif;
   --font-family-mono: "IBM Plex Mono", "Noto Sans KR", monospace;
@@ -72,6 +75,14 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-serif);
 }
 
+.font-sans {
+  font-family: var(--font-family-sans);
+}
+
+.font-mono {
+  font-family: var(--font-family-mono);
+}
+
 @layer components {
   /* Glassmorphism Utilities */
   .glass-panel {
@@ -120,6 +131,62 @@ h1, h2, h3, h4, h5, h6 {
     border: 2px solid color-mix(in srgb, var(--text-color), transparent 70%);
   }
 
+  .milestone-main-node {
+    box-shadow: 0 0 0 6px var(--bg-color);
+  }
+
+  .milestone-branch-list {
+    position: relative;
+  }
+
+  .milestone-branch-list::before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 1.25rem;
+    bottom: 1.25rem;
+    width: 1px;
+    background: color-mix(in srgb, var(--text-color), transparent 78%);
+  }
+
+  .milestone-branch-item::before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 1.25rem;
+    width: 1.1rem;
+    height: 1px;
+    background: color-mix(in srgb, var(--text-color), transparent 68%);
+    transition: width 0.35s var(--transition-timing-function-artistic), background-color 0.3s ease;
+  }
+
+  .milestone-branch-item h4,
+  .milestone-branch-item .milestone-child-date {
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .milestone-branch-item:hover h4,
+  .milestone-branch-item:hover .milestone-child-date {
+    color: var(--accent-color);
+  }
+
+  .milestone-branch-item:hover::before {
+    width: 1.45rem;
+    background: var(--accent-color);
+  }
+
+  .milestone-child-node {
+    position: absolute;
+    left: -1px;
+    top: calc(1.25rem - 5px);
+    z-index: 2;
+    width: 9px;
+    height: 9px;
+    border-width: 1px;
+    border-radius: 9999px;
+    box-shadow: 0 0 0 4px var(--bg-color);
+  }
+
   .milestone-node.is-current {
     background: var(--accent-color);
     color: white;
@@ -127,16 +194,23 @@ h1, h2, h3, h4, h5, h6 {
     transform: scale(1.1);
   }
 
-  [data-milestone-item]:hover .milestone-node:not(.is-current) {
+  .milestone-main-entry:hover .milestone-main-node:not(.is-current),
+  .milestone-branch-item:hover .milestone-child-node:not(.is-current) {
     border-color: var(--accent-color);
     color: var(--accent-color);
     transform: scale(1.1);
   }
 
-  [data-milestone-item]:hover .milestone-node.is-current {
+  .milestone-main-entry:hover .milestone-main-node.is-current,
+  .milestone-branch-item:hover .milestone-child-node.is-current {
     background: var(--accent-color);
     border-color: var(--accent-color);
     color: white;
+  }
+
+  .milestone-branch-item[aria-current="true"]::before {
+    width: 1.45rem;
+    background: var(--accent-color);
   }
 
   .award-icon {
@@ -163,12 +237,14 @@ h1, h2, h3, h4, h5, h6 {
     transition: width 0.35s var(--transition-timing-function-artistic), opacity 0.3s ease;
   }
 
-  [data-milestone-item][aria-current="true"] .milestone-date {
+  .milestone-main-entry[aria-current="true"] .milestone-main-date,
+  .milestone-branch-item[aria-current="true"] .milestone-child-date {
     color: var(--accent-color);
     transform: translateX(-2px);
   }
 
-  [data-milestone-item][aria-current="true"] .milestone-date-mark {
+  .milestone-main-entry[aria-current="true"] .milestone-main-date .milestone-date-mark,
+  .milestone-branch-item[aria-current="true"] .milestone-child-date .milestone-date-mark {
     width: 1.25rem;
     opacity: 1;
   }

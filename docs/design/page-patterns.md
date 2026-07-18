@@ -56,8 +56,8 @@ timestamp: "2026-07-06T00:00:00+09:00"
 - 인용문 위에는 이름을 포함한 짧은 인사말을 두어 페이지의 주체를 명확히 표시
 - 모바일에서는 프로필 사진과 인용문을 한 열로 쌓아 인물 구도를 유지
 - 은은한 accent glow
-- 날짜 축과 본문을 나란히 배치한 단일 세로 editorial timeline
-- milestone은 현재 SSAFY 경험에서 대학 과정과 재학 중 성과로 이어지는 서사 순서로 배치한다. 카드보다 hairline과 세리프 제목으로 위계를 만들며, 현재 viewport 기준선에 가까운 항목의 행 전체를 한 칸씩 따라가는 2px accent 구간과 순번 node로 흐름을 명확히 표시한다. 날짜는 짧은 line marker로 구분하고 수상 항목만 작은 badge로 강조한다.
+- 날짜 축과 본문을 나란히 배치한 계층형 세로 editorial timeline
+- milestone은 SSAFY와 대학 과정을 큰 가지로 두고, 각 과정에서 이룬 프로젝트·졸업·연구·수상을 작은 가지로 연결한다. 큰 가지는 순번이 있는 큰 node, 작은 가지는 들여쓰기한 hairline과 작은 node로 구분한다. 스크롤 강조는 현재 큰 가지의 주 축과 해당 성과 node를 함께 표시하며, 작은 가지 hover 시 제목·날짜·연결선·node가 accent color로 함께 반응한다. 수상 항목만 작은 badge로 강조한다.
 - Tech Specs는 별도 외곽 카드 없이 Backend, AI, Frontend, Data, Infra 역할별 hairline 행과 작은 아이콘 목록으로 구성한다.
 - Certifications는 로고, 발급처, 취득 시점을 한 줄 안에서 구분하는 2열 compact list로 구성한다.
 
