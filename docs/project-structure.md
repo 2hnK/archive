@@ -3,7 +3,7 @@ type: Project Structure
 title: Project Structure
 description: DevArchive 저장소의 주요 디렉터리와 Astro 소스 구조.
 tags: ["structure", "astro", "docs"]
-timestamp: "2026-07-06T00:00:00+09:00"
+timestamp: "2026-07-21T00:00:00+09:00"
 ---
 
 # Project Structure
@@ -30,6 +30,7 @@ timestamp: "2026-07-06T00:00:00+09:00"
 - `src/pages/articles/`: 아티클 목록과 상세 라우트
 - `src/pages/project/`: 프로젝트 상세 라우트
 - `src/components/`: 내비게이션, 푸터, 카드, 토픽 사이드바 등 재사용 컴포넌트
+- `src/components/react-bits/`: About에서만 선택적으로 hydration하는 React interaction island
 - `src/layouts/`: 공통 HTML 구조와 전역 스타일 로딩
 - `src/styles/global.css`: Tailwind 설정, 디자인 토큰, 공통 컴포넌트 스타일
 - `src/content/articles/`: Markdown 아티클 콘텐츠
@@ -37,7 +38,7 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 ## Layouts
 
-`src/layouts/BaseLayout.astro`가 현재 사이트의 기본 레이아웃이다. Google Fonts, Material Symbols, 전역 CSS, 테마 적용 스크립트, `Navbar`, `Footer`를 포함한다.
+`src/layouts/BaseLayout.astro`가 현재 사이트의 기본 레이아웃이다. Google Fonts, Material Symbols, 전역 CSS, 테마 적용 스크립트, `Navbar`, 화면 폭 전체의 `Footer`를 포함한다.
 
 `src/layouts/Layout.astro`는 Astro 기본 템플릿에 가까운 레이아웃이며, 현재 주요 페이지의 디자인 기준은 아니다. 새 페이지는 특별한 이유가 없으면 `BaseLayout.astro`를 사용한다.
 
@@ -48,7 +49,7 @@ timestamp: "2026-07-06T00:00:00+09:00"
 - `/articles/[slug]`: 아티클 상세, 본문 카드, 좌측 토픽, 우측 목차
 - `/project`: 프로젝트 카드 목록
 - `/project/[slug]`: 프로젝트 상세 기록
-- `/about`: 소개, 이력, 기술 스택, 자격 정보
+- `/about`: 소개, 이력, 기술 스택, 자격 정보를 에디토리얼 글래스 register로 구성한 기준 페이지
 - `/write`, `/write-project`, `/snippets`: 작성/보조/실험 성격의 정적 도구 페이지
 
 ## Content

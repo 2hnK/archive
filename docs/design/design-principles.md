@@ -3,7 +3,7 @@ type: Design Principles
 title: Design Principles
 description: DevArchive의 에디토리얼 글래스 아카이브 디자인 원칙.
 tags: ["design", "principles", "editorial", "glass"]
-timestamp: "2026-07-06T00:00:00+09:00"
+timestamp: "2026-07-21T00:00:00+09:00"
 ---
 
 # Design Principles
@@ -20,15 +20,19 @@ DevArchive는 제품 랜딩 페이지보다 개인 개발 아카이브에 가깝
 
 ## High Contrast With Restrained Accent
 
-기본 색은 흰색/검정 또는 다크 배경/크림 텍스트다. 강조는 레드 계열 `--accent-color`를 우선 사용한다. 아티클 필터처럼 상태 표시가 필요한 곳은 기존 블루 계열을 참고한다. 새 색상이 필요하면 기존 변수와 조화를 이루는지 먼저 확인한다.
+기본 색은 흰색/검정 또는 다크 배경/크림 텍스트다. 강조와 상태 표시는 절제된 블루 계열 `--accent-color`를 우선 사용한다. 넓은 색면보다 hairline, 작은 라벨, 링크와 hover 반응에 제한해 사용하며, 새 색상이 필요하면 기존 변수와 조화를 이루는지 먼저 확인한다.
 
 ## Glass As Container
 
 주요 카드와 내비게이션은 반투명 배경, blur, 얇은 보더, 내부 하이라이트를 사용한다. 글래스 효과는 장식이 아니라 콘텐츠 그룹을 구분하는 컨테이너 역할이다.
 
-## Motion Is Slow And Minimal
+관련 항목이 반복될 때는 작은 글래스 카드를 여러 개 만드는 대신 하나의 패널 안에서 hairline으로 구획하는 방식을 먼저 검토한다. About의 Milestones, Tech Specs, Certifications가 이 패턴의 기준이다.
 
-진입 애니메이션은 `reveal-up`처럼 opacity와 translate 중심의 흐름을 우선 참고한다. hover는 scale, color, opacity, arrow rotation 같은 기존 반응과 비슷한 밀도에서 확장한다.
+## Motion Is Restrained And Purposeful
+
+진입 애니메이션은 `reveal-up`처럼 짧은 opacity와 translate 흐름을 우선 참고한다. hover는 color, opacity, hairline, 1~2px 이동 또는 약 1% 확대처럼 결과를 방해하지 않는 범위에서 사용한다. 흔들림, 반복 반짝임, 큰 glare는 사용하지 않는다.
+
+현재 위치를 알려야 하는 상호작용에서는 여러 항목을 동시에 강조하지 않는다. About의 섹션 번호처럼 현재 스크롤 상태만 blue accent로 표시하고 나머지는 중립 상태를 유지한다.
 
 ## Static Structure First
 

@@ -3,7 +3,7 @@ type: Project Index
 title: DevArchive
 description: Astro 기반 정적 개발 아카이브 사이트의 문서 진입점.
 tags: ["project", "astro", "documentation"]
-timestamp: "2026-07-06T00:00:00+09:00"
+timestamp: "2026-07-21T00:00:00+09:00"
 ---
 
 # DevArchive
@@ -26,7 +26,9 @@ DevArchive는 Astro 기반의 정적 개발 아카이브 사이트입니다. 아
 - [Do and Don't](docs/design/do-and-dont.md)
 - [설계 결정 기록](docs/decisions/001-design-direction.md)
 - [OKF와 하네스 결정 기록](docs/decisions/002-adopt-okf-and-harness.md)
+- [선택적 React Bits island 결정 기록](docs/decisions/003-selective-react-bits-islands.md)
 - [문서와 디자인 검토 기록](docs/reviews/documentation-and-design-review-2026-07-06.md)
+- [최신 문서와 디자인 정합성 검토](docs/reviews/documentation-and-design-review-2026-07-21.md)
 
 ## Start Here
 

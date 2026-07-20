@@ -3,7 +3,7 @@ type: Design Reference
 title: Page Patterns
 description: 홈, 아티클, 프로젝트, 소개, 도구형 페이지의 반복 레이아웃 패턴.
 tags: ["design", "page-patterns", "layout"]
-timestamp: "2026-07-18T00:00:00+09:00"
+timestamp: "2026-07-21T00:00:00+09:00"
 ---
 
 # Page Patterns
@@ -15,52 +15,64 @@ timestamp: "2026-07-18T00:00:00+09:00"
 - 사진은 비교적 선명하게 노출하되 하단 단방향 gradient로 목록 진입 전에 배경색에 흡수
 - 히어로 타이포그래피와 메타 라벨은 따뜻한 흰색과 깊은 shadow를 사용해 사진 위 대비를 확보
 - 히어로 상단 여백과 높이는 viewport 높이 단위 대신 고정 spacing을 사용해 최근 게시물과 프로젝트의 세로 시작점을 일정하게 유지
-- accent line으로 시각적 리듬 형성
-- 별도 소개 문장과 주제 태그 없이 히어로 다음에 최근 게시물을 바로 배치
-- 하단은 최근 게시물과 대표 프로젝트를 동일 비율로 배치한 2열 editorial list
+- 배경은 desktop 기준 1280px까지 이어지고 gradient는 92% 지점부터 시작해 사진의 하단을 충분히 보여준다.
+- `Archive Index` 섹션에는 중간 크기의 상단 여백을 두어 배경 이미지의 fade와 목록 사이에 과도하지 않은 호흡을 만든다.
+- 별도 소개 문장과 주제 태그 없이 히어로 다음에 `Archive Index / 2026` 메타 행을 배치해 노트와 프로젝트 수를 먼저 요약한다.
+- 하단은 최근 게시물과 대표 프로젝트를 약 55:45 비율로 배치한다. 노트에는 순번을, 프로젝트에는 `Selected Works` 라벨을 사용해 편집물 목록처럼 구분한다.
+- Home은 React island 없이 `reveal-up`과 기존 `editorial-list` hover만 사용한다.
+- 모바일에서는 두 목록을 한 열로 쌓고, 텍스트 위계와 hairline 구조를 유지한다.
 
 ## Articles Index
 
-- 상단의 큰 `Articles` 제목과 feed/grid view toggle은 같은 row에서 하단 정렬
-- `xl` 이상: 좌측 토픽 사이드바, 중앙 900px 콘텐츠
-- `xl` 미만: 모바일 category chip
-- feed view는 큰 `glass-panel` 카드
-- grid view는 `ArticleCard` 2열
+- 상단의 큰 `Articles` 제목과 feed/grid view toggle은 같은 row에서 하단 정렬한다.
+- `xl` 이상: 좌측 토픽 사이드바와 중앙 900px 콘텐츠를 사용한다.
+- `xl` 미만: 모바일 category chip을 제공한다.
+- feed view는 큰 곡률의 `glass-panel` 카드, grid view는 `ArticleCard` 2열을 사용한다.
+- 필터, view toggle, 현재 topic은 sliding glass highlight로 상태를 표시한다.
 - 목록 하단은 필터 결과를 기준으로 계산되는 숫자형 페이지네이션 사용
 
 ## Article Detail
 
-- 상단 title/meta bar
-- 3열 구조: 좌측 topic, 중앙 article card, 우측 TOC
-- 본문은 `glass-panel` 안의 `.prose`
-- 목차는 sliding highlight와 scroll spy
+- 상단 title/meta bar를 사용한다.
+- 좌측 topic, 중앙 article card, 우측 TOC의 3열 구조를 사용한다.
+- 본문과 대표 이미지는 큰 곡률의 `glass-panel` 안에 배치한다.
+- 목차는 sliding highlight와 scroll spy로 현재 위치를 표시한다.
 
 ## Project Index
 
-- 큰 `Projects` 제목
-- 프로젝트별 큰 `glass-panel` 카드
-- 연도 pill, 제목, 설명, 태그, 원형 arrow action
-- hover 시 배경 이미지가 은은하게 드러남
+- 큰 `Projects` 제목을 사용한다.
+- 프로젝트마다 큰 `glass-panel` 카드를 사용한다.
+- 연도 pill, 제목, 설명, 태그, 원형 arrow action을 배치한다.
+- hover에서는 배경 이미지가 은은하게 드러나고 콘텐츠와 화살표가 작게 이동한다.
 
 ## Project Detail
 
-- back link
-- 연도 pill과 초대형 세리프 제목
-- 설명은 accent border-left로 강조
-- 미디어는 큰 radius와 깊은 shadow
-- 하단은 sidebar meta와 prose content의 12열 구조
+- back link와 연도 pill, 초대형 세리프 제목을 순서대로 배치한다.
+- 설명은 accent border-left로 강조한다.
+- 미디어에는 큰 radius와 깊은 shadow를 적용한다.
+- 하단은 sidebar meta와 prose content의 12열 구조를 사용한다.
 
 ## About
 
-- 세로형 프로필 사진과 짧은 인용문을 나란히 배치한 editorial hero
-- 인용문 위에는 이름을 포함한 짧은 인사말을 두어 페이지의 주체를 명확히 표시
-- 인사말과 인용문 사이에는 현재의 기술 역할을 설명하는 한 문장을 배치해 첫 화면에서 개발자 정체성을 전달
+- 모바일 190px, 데스크톱 200px 너비의 4:5 미니멀 프로필 사진과 짧은 인용문을 나란히 배치한 editorial hero
+- Hero 전체에 하나의 넓고 낮은 대비의 `glass-panel`을 사용해 사진과 소개를 묶되, 내부 정보는 hairline 위계를 유지한다.
+- 프로필 사진은 오버레이·번호·그림자 없이 얇은 하단선과 외부 메타 한 줄만 사용한다. hover는 반짝임 없이 색감 복원과 1% 수준의 미세 확대만 사용한다.
+- `PORTRAIT / 01`과 `ABOUT / PROFILE` hairline을 같은 높이에 맞추고, 인사말은 한 줄을 우선하도록 크기를 제한한다.
+- 역할 나열 strip은 두지 않고, Spring 백엔드와 생성형 AI 작업 분야 및 실제 작업 태도를 의도적으로 줄을 나눈 두 문장으로 설명한다.
+- 이메일 복사 버튼, GitHub, Instagram은 흔들림 없이 밑줄이 확장되며 각각 사이트 accent blue, monochrome, magenta 계열 hover 색을 사용한다.
 - 모바일에서는 프로필 사진과 인용문을 한 열로 쌓아 인물 구도를 유지
-- 은은한 accent glow
-- 날짜 축과 본문을 나란히 배치한 계층형 세로 editorial timeline
-- milestone은 SSAFY와 대학 과정을 큰 가지로 두고, 각 과정에서 이룬 프로젝트·졸업·연구·수상을 작은 가지로 연결한다. 큰 가지는 순번이 있는 큰 node, 작은 가지는 들여쓰기한 hairline과 작은 node로 구분한다. 스크롤 강조는 현재 큰 가지의 주 축과 해당 성과 node를 함께 표시하며, 작은 가지 hover 시 제목·날짜·연결선·node가 accent color로 함께 반응한다. 수상 항목만 작은 badge로 강조한다.
-- Tech Specs는 별도 외곽 카드 없이 Backend, AI, Frontend, Data, Infra 역할별 hairline 행과 작은 아이콘 목록으로 구성한다.
-- Certifications는 로고, 발급처, 취득 시점을 한 줄 안에서 구분하는 2열 compact list로 구성한다.
+- 각 섹션은 220px sticky rail에 순번, kicker, 제목만 두어 간결하게 구성하며 긴 영문 제목도 rail 범위를 넘지 않게 크기를 조절한다. 순번은 현재 스크롤이 머무는 섹션만 accent blue로 표시하고 나머지는 옅은 중립색을 유지한다.
+- Milestones는 원형 node 중심 timeline 대신 과정별 큰 순번과 날짜를 사용하는 Editorial Ledger로 구성한다. 성과별 하위 번호와 `Current` 라벨은 생략하고 수상 badge만 accent로 강조한다.
+- Tech Specs는 하나의 큰 글래스 카드 안에 Backend, AI, Frontend, Data, Infra, Testing을 3×2 hairline 구획으로 나눈 directory로 구성한다. 각 구획은 20px 상하·24px 좌우 패딩을 사용하고 기술 목록의 하단선을 같은 높이로 맞춘다. 기술 표식은 Simple Icons 기반 SVG를 같은 규격으로 렌더링하고 항상 각 브랜드 원색을 표시하며, 구획 hover에는 미세한 크기 변화만 사용한다. 공식 표식이 없는 항목은 가장 가까운 플랫폼 아이콘을 사용한다.
+- Certifications는 번호·취득일, 자격명·발급처, 우측 상단 원본 색상 로고와 하단 verified 상태를 구분한 2열 credential register로 구성한다. Milestones와 함께 통합 글래스 카드의 외곽 상·하단선은 생략하고 내부 구분선만 유지한다.
+- Milestone, Tech Specs, Certifications의 hover는 accent hairline/텍스트, 아주 작은 이동, 옅은 단방향 배경을 공통 규칙으로 사용한다.
+
+## Global Footer
+
+- 페이지 콘텐츠와 분리되는 상단 hairline을 가진 화면 폭 전체의 낮은 글래스 밴드다.
+- 내부는 `max-w-[1700px]`로 제한하고 브랜드, Navigation, Contact를 데스크톱 한 행에 배치한다.
+- `Archive footer / 연도` 메타와 짧은 파란 선으로 About의 에디토리얼 문법을 연결한다.
+- 하단에는 저작권·지역과 `Back to top`만 두며 큰 곡률, 넓은 여백, 전체 패널 hover는 사용하지 않는다.
 
 ## Tool Pages
 

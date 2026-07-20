@@ -3,7 +3,7 @@ type: Design Reference
 title: Typography
 description: DevArchive의 폰트 패밀리, 제목, 본문, 메타 라벨, 코드 타이포그래피 기준.
 tags: ["design", "typography", "tokens"]
-timestamp: "2026-07-06T00:00:00+09:00"
+timestamp: "2026-07-21T00:00:00+09:00"
 ---
 
 # Typography
@@ -26,6 +26,8 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 페이지 히어로는 `font-black`, `tracking-tighter`, `uppercase`, 큰 viewport 기반 크기를 자주 사용한다. 단, 작은 패널 내부에는 hero급 크기를 사용하지 않는다.
 
+About 인사말은 프로필과 함께 있는 제한된 패널 안에서 한 줄을 우선하고 `clamp` 기반 크기로 조절한다. sticky rail의 섹션 제목은 rail 폭을 넘지 않도록 긴 제목에 별도 크기 변형을 허용한다.
+
 ## Body
 
 본문은 산세리프 중심이며, Markdown 본문은 `.prose`가 담당한다.
@@ -38,7 +40,7 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 메타 정보, 카테고리, 버튼 라벨은 다음 특징을 따른다.
 
-- `text-[10px]`-`text-[13px]`
+- `text-[8px]`-`text-[13px]`
 - uppercase
 - `tracking-widest` 또는 `tracking-[0.2em]` 이상
 - `font-bold`

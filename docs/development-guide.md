@@ -3,7 +3,7 @@ type: Development Guide
 title: Development Guide
 description: DevArchive 개발 요구사항, 명령, HTML/CSS 작성 기준, 검증 절차.
 tags: ["development", "astro", "verification"]
-timestamp: "2026-07-06T00:00:00+09:00"
+timestamp: "2026-07-21T00:00:00+09:00"
 ---
 
 # Development Guide
@@ -41,6 +41,8 @@ npm run preview
 - 공통 UI는 컴포넌트로 분리하되, 단순 반복이 아닌 경우 과도하게 추상화하지 않는다.
 - 기존 Tailwind 유틸리티 조합을 먼저 재사용한다.
 - `glass-panel`, `glass-pill`, `custom-glass-highlight`, `editorial-list`, `reveal-up`, `prose`와 같은 기존 공통 스타일을 우선한다.
+- 여러 관련 항목은 작은 카드를 반복하기보다 단일 `glass-panel`과 내부 hairline으로 묶는 패턴을 우선 검토한다.
+- React hydration은 정적 HTML/CSS로 해결할 수 없는 제한된 상호작용에만 사용한다. 현재 React Bits 사용 범위는 About의 두 interaction island다.
 - 반응형 기준은 기존 `sm`, `md`, `lg`, `xl` 분기와 폭 제한을 따른다.
 
 ## Adding Articles
@@ -65,4 +67,5 @@ npm run preview
 - `npm run verify`
 - 라이트/다크 모드에서 주요 화면 확인
 - 데스크톱/모바일 폭에서 내비게이션, 카드, 본문 폭 확인
+- hover/focus, 스크롤 active state, `prefers-reduced-motion` 확인
 - 새 CSS가 기존 규칙과 중복되거나 충돌하지 않는지 확인

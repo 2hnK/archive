@@ -3,7 +3,7 @@ type: Design Reference
 title: Spacing, Radius, Shadow
 description: DevArchive의 여백, 곡률, 그림자 사용 범위와 재사용 규칙.
 tags: ["design", "spacing", "radius", "shadow"]
-timestamp: "2026-07-06T00:00:00+09:00"
+timestamp: "2026-07-21T00:00:00+09:00"
 ---
 
 # Spacing, Radius, Shadow
@@ -16,6 +16,8 @@ timestamp: "2026-07-06T00:00:00+09:00"
 - 페이지 하단: `pb-24`, `pb-32`
 - 큰 섹션 간격: `mb-24`, `mb-32`, `md:mb-48`, `mt-32`
 - 카드 내부: `p-6`, `md:p-10`, `p-10`, `md:p-14`
+- About directory 구획: 상하 `20px`, 좌우 `24px`
+- Footer band: 모바일 `24px`, 데스크톱 상하 `28px` 안팎
 - 작은 UI 간격: `gap-1`, `gap-2`, `gap-3`
 - 콘텐츠 카드/목록 간격: `gap-8`, `gap-12`, `gap-24`
 
@@ -28,6 +30,8 @@ timestamp: "2026-07-06T00:00:00+09:00"
 - 아티클 피드 카드: `rounded-[2.5rem]`
 - 프로젝트 상세 미디어: `rounded-[2.2rem]`, `md:rounded-[3rem]`
 - 일반 도구형 입력: `rounded-lg`, `rounded-xl`
+- About 통합 register/directory: `rounded-[1.75rem]`
+- Footer: 화면 좌우에 붙는 `rounded-none` 예외
 
 ## Shadow
 
@@ -39,5 +43,6 @@ timestamp: "2026-07-06T00:00:00+09:00"
 
 - 새 radius scale을 만들기보다 기존 범위를 재사용한다.
 - 글래스 카드에는 border, blur, shadow가 함께 있어야 한다.
+- 화면 경계를 정의하는 Footer는 전체 폭 상단선과 위쪽 그림자를 사용하고 좌우·하단 border와 곡률은 생략한다.
 - 그림자를 과하게 늘려 카드가 떠 보이는 방향으로 바꾸지 않는다.
 - 카드 안에 다시 카드형 섹션을 중첩하기보다 목록, hairline, pill, 내부 구분선으로 밀도를 조절한다.
