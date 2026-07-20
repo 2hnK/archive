@@ -27,19 +27,20 @@ export default function BlurText({
   return (
     <span ref={rootRef} className={`react-bits-blur-text ${className}`} aria-label={text}>
       {segments.map((segment, index) => {
-        const spacing = animateBy === "words" && index < segments.length - 1 ? " " : "";
+        const needsWordGap = animateBy === "words" && index < segments.length - 1;
+        const renderedSegment = animateBy === "letters" && segment === " " ? "\u00A0" : segment;
 
         return (
           <motion.span
             key={`${segment}-${index}`}
             aria-hidden="true"
             className="inline-block"
+            style={needsWordGap ? { marginRight: "0.22em" } : undefined}
             initial={shouldReduceMotion ? false : hiddenState}
             animate={isInView || shouldReduceMotion ? visibleState : undefined}
             transition={{ duration: 0.55, delay: (delay * index) / 1000, ease: [0.22, 1, 0.36, 1] }}
           >
-            {segment}
-            {spacing}
+            {renderedSegment}
           </motion.span>
         );
       })}

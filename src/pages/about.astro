@@ -162,15 +162,9 @@ const skillGroups: SkillGroup[] = [
 
 <BaseLayout title="About | DEVARCHIVE" description="김지훈의 개발 경험과 기술 스택">
   <main class="w-full min-h-screen pb-16 md:pb-20">
-    <section class="relative w-full overflow-hidden px-6 pb-20 pt-32 reveal-up md:pb-28 md:pt-40">
-      <div class="pointer-events-none absolute left-[16%] top-[42%] h-[28rem] w-[28rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-color/[0.045] blur-[130px] dark:bg-accent-color/[0.08]" aria-hidden="true"></div>
-
-      <div class="about-hero-glass glass-panel relative z-10 mx-auto grid w-full max-w-5xl items-start gap-12 rounded-[2rem] p-5 md:grid-cols-[200px_minmax(0,1fr)] md:gap-12 md:p-8 lg:gap-16 lg:p-10">
-        <div class="about-portrait-column mx-auto w-full max-w-[190px] md:max-w-[200px]">
-          <div class="mb-4 flex items-center justify-between border-b border-border-color/35 pb-4 font-mono text-[9px] font-semibold uppercase tracking-[0.18em] opacity-45">
-            <span>Portrait / 01</span>
-            <span>Daejeon · KR</span>
-          </div>
+    <section class="relative w-full px-6 pb-20 pt-32 reveal-up md:pb-28 md:pt-40">
+      <div class="relative z-10 mx-auto grid w-full max-w-4xl items-center gap-12 md:grid-cols-[minmax(260px,320px)_minmax(0,1fr)] md:gap-14 lg:gap-16">
+        <div class="about-profile-card mx-auto w-full max-w-[280px] md:max-w-[320px]">
           <div class="about-profile-plate">
             <img
               src="/images/profile.webp"
@@ -179,33 +173,26 @@ const skillGroups: SkillGroup[] = [
               height="960"
               decoding="async"
               fetchpriority="high"
-              class="about-profile-image aspect-[4/5] w-full object-cover object-center"
+              class="about-profile-image aspect-[3/4] w-full object-cover object-center"
             />
-          </div>
-          <div class="about-profile-meta">
-            <span>Kim Jihun</span>
-            <span>2026</span>
           </div>
         </div>
 
         <div class="min-w-0 text-center md:text-left">
-          <div class="mb-7 flex items-center justify-between border-b border-border-color/35 pb-4 font-sans text-[9px] font-bold uppercase tracking-[0.24em] opacity-50">
-            <span>About / Profile</span>
-          </div>
-
-          <h1 class="text-[clamp(2.35rem,4.2vw,3.6rem)] font-serif font-bold leading-[1.01] tracking-[-0.05em] break-keep">
+          <h1 class="text-[clamp(2rem,3.2vw,2.7rem)] font-serif font-bold leading-[1.08] tracking-[-0.04em] break-keep">
             <BlurText client:load text="안녕하세요, 김지훈입니다." animateBy="words" delay={95} />
           </h1>
 
-          <p class="mt-7 max-w-2xl border-t border-border-color/25 pt-7 text-sm font-sans leading-[1.85] opacity-65 break-keep md:text-base">
+          <p class="mt-5 max-w-2xl text-sm font-sans leading-[1.8] opacity-65 break-keep md:text-base">
             <span class="block">Spring 기반 백엔드와 생성형 AI를 활용한 웹 서비스를 만들고 있습니다.</span>
-            <span class="mt-1 block">새 기능을 서둘러 붙이기보다, 왜 필요한지부터 살펴보고 나중에도 쉽게 고칠 수 있게 만드는 편입니다.</span>
           </p>
-          <blockquote class="mt-7 border-l-2 border-accent-color/65 pl-5 text-left text-lg font-serif italic leading-relaxed opacity-80 break-keep md:text-xl">
-            조금은 느리더라도 문제의 본질을 놓치지 않는 개발자가 되겠습니다.
+          <blockquote class="mt-4 text-left text-lg font-serif italic leading-[1.7] opacity-80 break-keep">
+            <span class="block">조금은 느리더라도 문제의 본질을</span>
+            <span class="block">놓치지 않는 개발자가 되겠습니다.</span>
           </blockquote>
 
-          <div class="mt-9 flex items-center justify-center gap-7 md:justify-start">
+          <div class="mt-7 border-t border-border-color/45 pt-6">
+          <div class="flex items-center justify-center gap-7 md:justify-start">
             <button type="button" data-copy-email aria-label="이메일 주소 복사" title="이메일 주소 복사" class="about-social-link about-social-link--email">
               <span class="material-symbols-outlined text-[22px]" aria-hidden="true">mail</span>
               <span class="email-text" aria-live="polite">Email</span>
@@ -218,6 +205,7 @@ const skillGroups: SkillGroup[] = [
               <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
               <span>Instagram</span>
             </a>
+          </div>
           </div>
         </div>
       </div>
@@ -401,6 +389,28 @@ const skillGroups: SkillGroup[] = [
       window.addEventListener("scroll", requestSectionUpdate, { passive: true, signal: sectionController.signal });
       window.addEventListener("resize", requestSectionUpdate, { passive: true, signal: sectionController.signal });
       document.addEventListener("astro:before-swap", () => sectionController.abort(), { once: true });
+
+      const profileCard = document.querySelector<HTMLElement>(".about-profile-card");
+      const reduceProfileMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (profileCard && !reduceProfileMotion) {
+        const resetProfileTilt = () => {
+          profileCard.style.setProperty("--profile-tilt-x", "0.35deg");
+          profileCard.style.setProperty("--profile-tilt-y", "-0.7deg");
+          profileCard.style.setProperty("--profile-tilt-z", "-0.45deg");
+        };
+
+        profileCard.addEventListener("pointermove", (event) => {
+          if (event.pointerType === "touch") return;
+          const bounds = profileCard.getBoundingClientRect();
+          const horizontal = (event.clientX - bounds.left) / bounds.width - 0.5;
+          const vertical = (event.clientY - bounds.top) / bounds.height - 0.5;
+          profileCard.style.setProperty("--profile-tilt-x", `${(-vertical * 3.2).toFixed(2)}deg`);
+          profileCard.style.setProperty("--profile-tilt-y", `${(horizontal * 4).toFixed(2)}deg`);
+          profileCard.style.setProperty("--profile-tilt-z", `${(horizontal * 0.25).toFixed(2)}deg`);
+        }, { passive: true, signal: sectionController.signal });
+        profileCard.addEventListener("pointerleave", resetProfileTilt, { signal: sectionController.signal });
+      }
 
       document.querySelector<HTMLElement>("[data-copy-email]")?.addEventListener("click", async () => {
         const label = document.querySelector<HTMLElement>(".email-text");

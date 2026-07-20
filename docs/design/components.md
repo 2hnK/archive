@@ -24,7 +24,7 @@ timestamp: "2026-07-21T00:00:00+09:00"
 `src/components/Footer.astro`
 
 - 화면 좌우에 맞닿는 얇은 `glass-panel` 밴드를 사용해 푸터 영역임을 명확히 한다.
-- 브랜드와 짧은 설명, Navigation, Contact는 데스크톱에서 한 행에 배치하고 모바일에서만 세로로 쌓는다.
+- 브랜드, Navigation, Contact는 데스크톱에서 한 행에 배치하고 모바일에서만 세로로 쌓는다.
 - 브랜드 위에는 파란 짧은 선과 `Archive footer / 연도` 메타 라벨을 두어 About의 에디토리얼 문법을 잇는다.
 - 하단 hairline에는 저작권·지역과 `Back to top`을 배치한다.
 - 큰 곡률과 넓은 내부 여백은 피하고, 링크의 짧은 underline 확장과 화살표의 2px 상승만 사용한다.
@@ -100,8 +100,8 @@ timestamp: "2026-07-21T00:00:00+09:00"
 - `BlurText`는 About 인사말을 단어 단위로 한 번만 드러내며, 제목의 크기와 줄바꿈은 Astro 마크업과 전역 타이포그래피가 결정한다.
 - `AnimatedContent`는 About 정보 섹션의 첫 진입만 보조한다. 섹션 내부 hover와 링크는 정적 HTML/CSS로 유지한다.
 - Home은 배경 사진, 타이포그래피, `reveal-up`, `editorial-list`만 사용하며 React island를 두지 않는다.
-- 프로필 사진은 React 효과와 장식 오버레이를 사용하지 않는다. 이미지의 색감 복원과 1% 수준의 미세 확대만 사용하는 CSS 기반 미니멀 포트레이트를 사용한다.
-- `prefers-reduced-motion`에서는 BlurText와 AnimatedContent 이동, 프로필 확대를 멈추고 정적인 최종 형태를 제공한다.
+- 프로필 사진은 React 효과와 장식 오버레이를 사용하지 않는다. 이미지는 3:4 비율과 고정 크기를 유지하고, 흰색 계열 테두리와 절제된 그림자의 카드만 마우스 위치에 따라 최대 약 2도 틸트한다.
+- `prefers-reduced-motion`에서는 BlurText와 AnimatedContent 이동, 프로필 틸트를 멈추고 정적인 최종 형태를 제공한다.
 - 새 React Bits 효과는 기존 두 island로 해결할 수 없는 이유와 결정 문서 갱신 없이 추가하지 않는다.
 
 ## Topics Sidebar
