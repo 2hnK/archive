@@ -1,0 +1,58 @@
+---
+interface Props {
+  category: string;
+  date: string;
+  dateTime: string;
+  title: string;
+  description: string;
+  imageUrl?: string;
+  subcategory?: string;
+  href: string;
+}
+
+const { category, date, dateTime, title, description, imageUrl, subcategory, href } = Astro.props;
+---
+
+<article class="home-article-card glass-panel h-full overflow-hidden rounded-[1.75rem] transition-[border-color,box-shadow] duration-300 hover:border-accent-color/25 hover:shadow-[0_14px_36px_rgba(0,0,0,0.08)]">
+  <a href={href} class="group grid h-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-color sm:grid-cols-[minmax(170px,0.78fr)_minmax(0,1.22fr)]">
+    <div class="relative aspect-[16/10] overflow-hidden bg-black/5 sm:aspect-auto sm:min-h-[290px] dark:bg-white/5">
+      {imageUrl ? (
+        <img
+          src={imageUrl}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          class="h-full w-full object-cover saturate-[0.88] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.025] motion-reduce:transform-none motion-reduce:transition-none"
+        />
+      ) : (
+        <div class="flex h-full min-h-48 items-center justify-center font-serif text-5xl font-bold tracking-[-0.06em] opacity-10" aria-hidden="true">
+          {category}
+        </div>
+      )}
+      <div class="absolute inset-0 bg-[linear-gradient(180deg,transparent_55%,rgba(0,0,0,0.2)_100%)]" aria-hidden="true"></div>
+    </div>
+
+    <div class="flex min-w-0 flex-col p-6 md:p-7">
+      <div class="flex flex-wrap items-center gap-x-3 gap-y-1 font-sans text-[9px] font-bold uppercase tracking-[0.16em]">
+        <span class="text-accent-color">{category}</span>
+        <span class="h-px w-5 bg-border-color/25" aria-hidden="true"></span>
+        <time datetime={dateTime} class="opacity-42">{date}</time>
+      </div>
+
+      <h3 class="mt-5 font-serif text-[1.75rem] font-bold leading-[1.08] tracking-[-0.035em] transition-colors duration-300 group-hover:text-accent-color md:text-[2rem]">
+        {title}
+      </h3>
+      <p class="mt-3 line-clamp-3 font-sans text-sm leading-[1.7] opacity-58 break-keep">
+        {description}
+      </p>
+
+      <div class="mt-6 flex items-center justify-between gap-4 border-t border-border-color/15 pt-5 font-sans text-[9px] font-bold uppercase tracking-[0.16em] sm:mt-auto">
+        <span class="opacity-38">{subcategory || "Article"}</span>
+        <span class="inline-flex items-center gap-2 opacity-52 transition-opacity duration-300 group-hover:opacity-100">
+          Read Article
+          <span class="material-symbols-outlined text-[16px] transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none motion-reduce:transition-none" aria-hidden="true">arrow_forward</span>
+        </span>
+      </div>
+    </div>
+  </a>
+</article>

@@ -1,26 +1,31 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import HomeArticleCard from "../components/HomeArticleCard.astro";
+import HomeProjectCard from "../components/HomeProjectCard.astro";
 import { getCollection } from "astro:content";
 
-const allArticles = await getCollection("articles");
-const latestArticles = allArticles
+const latestArticles = (await getCollection("articles"))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 5);
+  .slice(0, 3);
 
 const projects = [
   {
     title: "Soomgil",
-    description:
-      "스와이프 취향 데이터를 여행방 추천, 지도 일정 협업, 여행 기록 공유까지 연결한 그룹 여행 웹 앱",
+    description: "스와이프 취향 데이터를 여행방 추천, 지도 일정 협업, 여행 기록 공유까지 연결한 그룹 여행 웹 앱",
+    tags: ["Vue 3", "TypeScript", "Spring Boot", "Mapbox GL JS", "PostgreSQL", "Redis"],
+    href: "/project/soomgil",
     year: "2026",
-    slug: "soomgil",
+    image: "/images/projects/soomgil-trip-planning-cc0.jpg",
+    imagePosition: "center",
   },
   {
     title: "Dyslexia Kit",
-    description:
-      "학습 자료 PDF를 AI를 활용해 난독증을 겪는 학생들을 위한 교안으로 변환하고, TTS·어휘 분석·쓰기 연습을 제공하는 서비스",
+    description: "학습 자료 PDF를 AI 활용해 난독증을 겪는 학생들을 위한 교안으로 변환하고, TTS·어휘 분석·쓰기 연습을 제공하는 서비스",
+    tags: ["Spring Boot", "React", "FastAPI", "LangChain", "PostgreSQL", "AWS"],
+    href: "/project/dyslexia-kit",
     year: "2025",
-    slug: "dyslexia-kit",
+    image: "/images/projects/dyslexia-kit-children-reading-public-domain.jpg",
+    imagePosition: "center 42%",
   },
 ];
 
@@ -33,125 +38,114 @@ const formatDate = (date: Date) =>
 ---
 
 <BaseLayout title="DEVARCHIVE" description="김지훈의 개발 기록과 프로젝트 아카이브">
-  <main class="relative w-full min-h-screen overflow-hidden pt-32 md:pt-56 pb-32 px-6 md:px-12 lg:px-24">
-    <div class="absolute top-16 inset-x-0 h-[1080px] sm:h-[1180px] md:h-[1280px] pointer-events-none" aria-hidden="true">
-      <img
-        src="/images/night-cat-wide.png"
-        alt=""
-        width="1672"
-        height="941"
-        fetchpriority="high"
-        decoding="async"
-        class="h-full w-full object-cover object-center opacity-[0.88] saturate-[0.95] contrast-[1.02] dark:opacity-[0.78]"
-      />
-      <div class="absolute inset-0 bg-black/10 dark:bg-black/20"></div>
-      <div class="absolute inset-0 bg-[linear-gradient(180deg,transparent_0%,transparent_92%,var(--bg-color)_100%)]"></div>
-    </div>
-
-    <section class="relative z-10 max-w-7xl mx-auto mb-64 md:mb-[30rem] reveal-up">
-      <div class="flex items-center justify-between gap-6 border-b border-white/35 pb-4 mb-10 md:mb-14 text-[#fffdf4] drop-shadow-[0_2px_10px_rgba(0,0,0,0.65)]">
-        <p class="text-[10px] md:text-xs font-sans font-bold tracking-[0.28em] uppercase opacity-85">
-          Personal Engineering Blog
-        </p>
-        <p class="hidden sm:block text-[10px] font-mono uppercase tracking-[0.2em] opacity-70">
-          Notes from building and debugging
-        </p>
+  <main class="home-landing relative w-full overflow-hidden">
+    <section class="relative isolate flex min-h-[700px] items-center overflow-hidden px-6 pb-20 pt-32 sm:min-h-[720px] md:min-h-[760px] md:px-12 md:pb-24 md:pt-36 lg:px-24">
+      <div class="absolute inset-0 -z-20 pointer-events-none" aria-hidden="true">
+        <img
+          src="/images/night-cat-wide.png"
+          alt=""
+          width="1672"
+          height="941"
+          fetchpriority="high"
+          decoding="async"
+          class="h-full w-full object-cover object-[58%_center] saturate-[0.88] contrast-[1.05] md:object-center"
+        />
       </div>
+      <div class="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(3,6,9,0.88)_0%,rgba(3,6,9,0.68)_48%,rgba(3,6,9,0.28)_100%)]" aria-hidden="true"></div>
+      <div class="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(3,6,9,0.26)_0%,rgba(3,6,9,0.06)_50%,rgba(3,6,9,0.52)_88%,var(--bg-color)_100%)]" aria-hidden="true"></div>
 
-      <div class="relative min-h-[380px] md:min-h-[440px] flex items-center -mx-6 px-6 md:-mx-10 md:px-10">
-        <div class="flex w-full flex-col gap-1 md:gap-0">
-          <h1 class="text-[clamp(3rem,10vw,4.5rem)] md:text-[clamp(4rem,5vw,5.5rem)] font-serif font-black leading-[0.82] tracking-tighter uppercase text-[#fffdf4] drop-shadow-[0_4px_18px_rgba(0,0,0,0.72)]">
-            Packets,
-          </h1>
-          <div class="flex items-center gap-4 md:gap-10 md:ml-[8vw]">
-            <span class="block w-10 md:w-24 h-[2px] bg-[#fffdf4]/85 shadow-[0_2px_12px_rgba(0,0,0,0.55)] shrink-0"></span>
-            <h1 class="text-[clamp(3rem,10vw,4.5rem)] md:text-[clamp(4rem,5vw,5.5rem)] font-serif font-black leading-[0.82] tracking-tighter uppercase text-[#fffdf4] drop-shadow-[0_4px_18px_rgba(0,0,0,0.72)]">
-              Systems &
-            </h1>
+      <div class="relative z-10 mx-auto w-full max-w-7xl">
+        <div class="max-w-[920px] text-[#fffdf4] reveal-up">
+          <div class="flex items-center gap-3 font-sans text-[9px] font-bold uppercase tracking-[0.24em] text-[#fffdf4]/78 sm:text-[10px]">
+            <span class="h-1.5 w-1.5 shrink-0 bg-[#8eb6ff]" aria-hidden="true"></span>
+            <span>Personal Engineering Blog</span>
+            <span class="hidden h-px w-20 bg-white/25 sm:block" aria-hidden="true"></span>
           </div>
-          <h1 class="text-[clamp(3rem,10vw,4.5rem)] md:text-[clamp(4rem,5vw,5.5rem)] font-serif font-black italic leading-[0.82] tracking-tighter uppercase md:text-right md:mr-[3vw] text-[#fffdf4] drop-shadow-[0_4px_18px_rgba(0,0,0,0.72)]">
-            Things Shipped.
+
+          <h1 class="mt-7 font-serif text-[clamp(2.2rem,11vw,5rem)] font-bold leading-[0.9] tracking-[-0.055em] drop-shadow-[0_4px_20px_rgba(0,0,0,0.55)] md:mt-9 md:text-[clamp(4.5rem,6vw,5.75rem)]">
+            <span class="block">Packets, <span class="whitespace-nowrap">Systems &</span></span>
+            <span class="mt-1 block md:mt-2">Things <span class="text-[#a9c8ff]">Shipped.</span></span>
           </h1>
+
+          <p class="mt-7 max-w-xl font-sans text-sm leading-[1.8] text-[#fffdf4]/72 sm:text-[15px] md:mt-8 md:text-base">
+            <span class="block">Notes from building and debugging systems.</span>
+            <span class="block">Network protocols, backend, AI, and everything in between.</span>
+          </p>
+
+          <nav class="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center md:mt-10" aria-label="Home quick links">
+            <a
+              href="/articles"
+              class="group inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-white/80 bg-[#fffdf4] px-6 font-sans text-[10px] font-bold uppercase tracking-[0.18em] text-[#101318] shadow-[0_10px_28px_rgba(0,0,0,0.24)] transition-[transform,box-shadow,background-color] duration-300 hover:-translate-y-px hover:bg-white hover:shadow-[0_14px_32px_rgba(0,0,0,0.3)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:min-w-44"
+            >
+              Browse Articles
+              <span class="material-symbols-outlined text-[17px] transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">arrow_forward</span>
+            </a>
+            <a
+              href="/project"
+              class="group inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-white/35 bg-black/15 px-6 font-sans text-[10px] font-bold uppercase tracking-[0.18em] text-[#fffdf4] backdrop-blur-md transition-[transform,border-color,background-color] duration-300 hover:-translate-y-px hover:border-white/60 hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:min-w-40"
+            >
+              View Projects
+              <span class="material-symbols-outlined text-[17px] transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">arrow_forward</span>
+            </a>
+          </nav>
         </div>
       </div>
     </section>
 
-    <section class="relative z-10 max-w-7xl mx-auto pt-16 md:pt-20">
-      <div class="mb-12 flex flex-col gap-4 border-y border-border-color/35 py-5 font-sans text-[9px] font-bold uppercase tracking-[0.22em] reveal-up sm:flex-row sm:items-center sm:justify-between">
-        <span>Archive Index / 2026</span>
-        <span class="font-mono opacity-45">{String(latestArticles.length).padStart(2, "0")} Notes · {String(projects.length).padStart(2, "0")} Projects</span>
+    <section class="relative mx-auto w-full max-w-[1400px] px-6 pb-4 pt-14 md:px-12 md:pt-20 lg:px-16">
+      <div class="flex flex-col gap-4 border-b border-border-color/20 pb-5 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <div class="flex items-center gap-3 font-sans text-[9px] font-bold uppercase tracking-[0.22em] opacity-48">
+            <span class="h-1.5 w-1.5 bg-accent-color" aria-hidden="true"></span>
+            Recent Articles
+          </div>
+          <h2 class="mt-3 font-serif text-3xl font-bold tracking-[-0.04em] md:text-4xl">Latest Notes</h2>
+        </div>
+        <a href="/articles" class="group inline-flex items-center gap-2 self-start font-sans text-[9px] font-bold uppercase tracking-[0.18em] opacity-50 transition-opacity duration-300 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-color sm:self-auto">
+          View all articles
+          <span class="material-symbols-outlined text-[16px] transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none motion-reduce:transition-none" aria-hidden="true">arrow_forward</span>
+        </a>
       </div>
 
-      <div class="grid grid-cols-1 gap-24 lg:grid-cols-[minmax(0,1.1fr)_minmax(400px,0.9fr)] lg:gap-12">
-      <div class="reveal-up">
-        <div class="flex justify-between items-end mb-8 md:mb-10">
-          <div>
-            <p class="text-[10px] font-sans font-bold uppercase tracking-[0.24em] opacity-40 mb-2">Latest Notes</p>
-            <h2 class="text-4xl md:text-5xl font-serif font-bold tracking-tight">최근 게시물</h2>
-          </div>
-          <a href="/articles" class="artistic-link uppercase tracking-widest text-xs font-bold font-sans">All Articles</a>
-        </div>
-
-        <div class="editorial-list">
-          {latestArticles.map((article, index) => (
-            <a
+      <div class="mt-7 grid grid-cols-1 gap-5 lg:grid-cols-2">
+        {latestArticles.map((article, index) => (
+          <div class={`reveal-up ${index === 1 ? "stagger-1" : ""}`}>
+            <HomeArticleCard
+              category={article.data.category}
+              date={formatDate(article.data.date)}
+              dateTime={article.data.date.toISOString()}
+              title={article.data.title}
+              description={article.data.description}
+              imageUrl={article.data.imageUrl}
+              subcategory={article.data.subcategory}
               href={`/articles/${article.id}`}
-              class="editorial-list-item group block py-8 md:py-10 px-0 md:px-4 cursor-pointer reveal-up stagger-1"
-            >
-              <div class="grid gap-5 sm:grid-cols-[36px_minmax(0,1fr)_auto] sm:items-center">
-                <span class="font-mono text-[9px] font-bold tracking-[0.16em] opacity-25 transition-colors duration-300 group-hover:text-accent-color group-hover:opacity-100" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-                <div class="min-w-0 flex flex-col gap-3">
-                  <div class="flex items-center gap-3 text-[10px] font-sans font-bold uppercase tracking-[0.2em] opacity-55">
-                    <span class="text-accent-color">{article.data.category}</span>
-                    <span aria-hidden="true">/</span>
-                    <time datetime={article.data.date.toISOString()}>{formatDate(article.data.date)}</time>
-                  </div>
-                  <h3 class="text-3xl md:text-4xl font-serif font-bold tracking-tighter leading-[1.08] group-hover:text-inherit transition-colors duration-300 break-keep">
-                    {article.data.title}
-                  </h3>
-                  <p class="max-w-2xl text-sm md:text-[15px] font-sans opacity-60 leading-relaxed break-keep line-clamp-2">
-                    {article.data.description}
-                  </p>
-                </div>
-                <div class="flex items-center gap-3 shrink-0 text-[10px] font-sans font-bold uppercase tracking-[0.2em] opacity-50">
-                  <span>Read Note</span>
-                  <span class="material-symbols-outlined text-xl editorial-list-arrow">arrow_forward</span>
-                </div>
-              </div>
-            </a>
-          ))}
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="relative mx-auto mt-20 w-full max-w-[1400px] px-6 pb-24 md:mt-28 md:px-12 md:pb-32 lg:px-16">
+      <div class="flex flex-col gap-4 border-b border-border-color/20 pb-5 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <div class="flex items-center gap-3 font-sans text-[9px] font-bold uppercase tracking-[0.22em] opacity-48">
+            <span class="h-1.5 w-1.5 bg-accent-color" aria-hidden="true"></span>
+            Selected Projects
+          </div>
+          <h2 class="mt-3 font-serif text-3xl font-bold tracking-[-0.04em] md:text-4xl">Featured Works</h2>
         </div>
+        <a href="/project" class="group inline-flex items-center gap-2 self-start font-sans text-[9px] font-bold uppercase tracking-[0.18em] opacity-50 transition-opacity duration-300 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-color sm:self-auto">
+          View all projects
+          <span class="material-symbols-outlined text-[16px] transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none motion-reduce:transition-none" aria-hidden="true">arrow_forward</span>
+        </a>
       </div>
 
-      <aside class="reveal-up stagger-1 lg:mt-24 lg:border-l lg:border-border-color/20 lg:pl-12">
-        <div class="flex justify-between items-end mb-8 md:mb-10">
-          <div>
-            <p class="text-[10px] font-sans font-bold uppercase tracking-[0.24em] opacity-40 mb-2">Selected Works</p>
-            <h2 class="text-3xl md:text-4xl font-serif font-bold tracking-tight">프로젝트</h2>
+      <div class="mt-7 grid grid-cols-1 gap-5 lg:grid-cols-2">
+        {projects.map((project, index) => (
+          <div class={`reveal-up ${index === 1 ? "stagger-1" : ""}`}>
+            <HomeProjectCard {...project} />
           </div>
-          <a href="/project" class="artistic-link uppercase tracking-widest text-xs font-bold font-sans">All Projects</a>
-        </div>
-
-        <div class="editorial-list">
-          {projects.map((project) => (
-            <a
-              href={`/project/${project.slug}`}
-              class="editorial-list-item group block py-7 px-0 md:px-4 cursor-pointer reveal-up stagger-2"
-            >
-              <div class="flex justify-between items-start gap-5">
-                <div class="min-w-0 flex flex-col gap-2">
-                  <span class="text-[10px] font-mono font-bold uppercase tracking-[0.18em] opacity-45">{project.year}</span>
-                  <h3 class="text-2xl md:text-3xl font-serif font-bold tracking-tighter group-hover:text-inherit transition-colors duration-300">
-                    {project.title}
-                  </h3>
-                  <p class="text-sm font-sans opacity-60 leading-relaxed line-clamp-3 break-keep">{project.description}</p>
-                </div>
-                <span class="material-symbols-outlined text-xl editorial-list-arrow shrink-0 mt-6">arrow_forward</span>
-              </div>
-            </a>
-          ))}
-        </div>
-      </aside>
+        ))}
       </div>
     </section>
   </main>

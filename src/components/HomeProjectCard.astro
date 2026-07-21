@@ -1,0 +1,47 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  year: string;
+  image: string;
+  href: string;
+  tags: string[];
+  imagePosition?: string;
+}
+
+const { title, description, year, image, href, tags, imagePosition = "center" } = Astro.props;
+---
+
+<article class="home-project-card group relative min-h-[390px] overflow-hidden rounded-[1.75rem] border border-white/15 bg-[#101419] shadow-[0_16px_42px_rgba(0,0,0,0.12)] md:min-h-[430px]">
+  <a href={href} class="absolute inset-0 block focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-color" aria-label={`${title} 프로젝트 보기`}>
+    <img
+      src={image}
+      alt=""
+      loading="lazy"
+      decoding="async"
+      class="home-project-card-image absolute inset-0 h-full w-full object-cover saturate-[0.82] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.025] motion-reduce:transform-none motion-reduce:transition-none"
+      style={`object-position: ${imagePosition}`}
+    />
+    <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,6,9,0.2)_0%,rgba(3,6,9,0.28)_36%,rgba(3,6,9,0.92)_100%)]" aria-hidden="true"></div>
+
+    <div class="relative z-10 flex h-full min-h-[390px] flex-col justify-between p-6 text-[#fffdf4] md:min-h-[430px] md:p-8">
+      <div class="flex items-center justify-between gap-4">
+        <span class="rounded-full border border-white/30 bg-black/15 px-3 py-1.5 font-mono text-[9px] font-semibold tracking-[0.14em] backdrop-blur-md">{year}</span>
+        <span class="flex h-11 w-11 items-center justify-center rounded-full border border-white/35 bg-black/15 backdrop-blur-md transition-[border-color,background-color,transform] duration-300 group-hover:-translate-y-px group-hover:border-white/65 group-hover:bg-white/10 motion-reduce:transform-none motion-reduce:transition-none" aria-hidden="true">
+          <span class="material-symbols-outlined text-[20px]">arrow_outward</span>
+        </span>
+      </div>
+
+      <div>
+        <p class="font-sans text-[9px] font-bold uppercase tracking-[0.2em] text-[#a9c8ff]">Selected Project</p>
+        <h3 class="mt-3 font-serif text-4xl font-bold tracking-[-0.045em] md:text-5xl">{title}</h3>
+        <p class="mt-3 max-w-xl line-clamp-2 font-sans text-sm leading-[1.7] text-[#fffdf4]/68 break-keep">{description}</p>
+        <ul class="mt-6 flex flex-wrap gap-2" aria-label={`${title} 기술 스택`}>
+          {tags.slice(0, 5).map((tag) => (
+            <li class="rounded-full border border-white/22 bg-black/15 px-3 py-1.5 font-sans text-[8px] font-semibold tracking-wide text-[#fffdf4]/76 backdrop-blur-md">{tag}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </a>
+</article>

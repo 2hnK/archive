@@ -14,6 +14,7 @@ timestamp: "2026-07-21T00:00:00+09:00"
 
 - 화면 상단 고정
 - 반투명 배경과 강한 blur
+- 홈에서는 야간 히어로와 이어지는 어두운 저투명도 glass 변형을 사용하고 링크·아이콘을 따뜻한 흰색으로 표시하며, 히어로를 벗어나면 현재 라이트·다크 테마의 기본 표면과 텍스트 색으로 복귀
 - 중앙 nav link는 대문자, 작은 글자, sliding highlight 사용
 - 우측 아이콘 버튼은 원형 hover와 색상 변화 사용
 - 모바일에서도 GitHub, Instagram, 테마, 메뉴 액션을 유지하되 32px 크기로 밀도를 조절
@@ -64,6 +65,15 @@ timestamp: "2026-07-21T00:00:00+09:00"
 - 카테고리, 날짜, 제목, 설명 순서로 구성한다.
 - 하단 hairline 위에 subcategory와 `Read Article` 링크를 배치한다.
 - 제목 hover 시 accent color, 이미지 hover 시 미세한 scale을 적용한다.
+
+## Home Content Cards
+
+`src/components/HomeArticleCard.astro`, `src/components/HomeProjectCard.astro`
+
+- 홈 아티클 카드는 모바일에서 이미지와 본문을 쌓고, 넓은 화면에서는 썸네일과 메타·제목·설명을 좌우로 배치하는 compact glass card다.
+- 홈 프로젝트 카드는 기존 프로젝트 대표 이미지를 전체 배경으로 사용하고 하단 gradient 위에 연도, 제목, 설명, 기술 태그를 배치한다.
+- 두 카드 모두 홈의 요약 탐색에만 사용하며 공용 `ArticleCard`와 프로젝트 인덱스 카드의 구조를 대체하지 않는다.
+- hover는 accent border·텍스트, 이미지 약 2.5% 확대, 화살표 1px 이동 범위로 제한하고 `prefers-reduced-motion`에서는 transform transition을 제거한다.
 
 ## Editorial List
 

@@ -65,6 +65,40 @@ body {
   transition: background-color 0.8s var(--transition-timing-function-artistic), color 0.8s var(--transition-timing-function-artistic);
 }
 
+#main-nav.home-nav {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+  background: rgba(3, 6, 9, 0.24);
+}
+
+#main-nav.home-nav .text-text-color {
+  color: #fffdf4;
+}
+
+#main-nav.home-nav .custom-glass-highlight {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+#main-nav.home-nav.home-nav-scrolled {
+  border-bottom-color: color-mix(in srgb, var(--border-color), transparent 88%);
+  background: color-mix(in srgb, var(--bg-color), transparent 20%);
+}
+
+#main-nav.home-nav.home-nav-scrolled .text-text-color {
+  color: var(--text-color);
+}
+
+#main-nav.home-nav.home-nav-scrolled .custom-glass-highlight {
+  border-color: color-mix(in srgb, var(--border-color), transparent 86%);
+  background: color-mix(in srgb, var(--bg-color), transparent 30%);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--text-color), transparent 90%), inset 0 1px 0 rgba(255, 255, 255, 0.32);
+}
+
+body:has(.home-landing) .site-footer {
+  margin-top: 0;
+}
+
 /* Base Typography Styles */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-serif);
