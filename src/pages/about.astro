@@ -179,14 +179,14 @@ const skillGroups: SkillGroup[] = [
         </div>
 
         <div class="min-w-0 text-center md:text-left">
-          <h1 class="text-[clamp(2rem,3.2vw,2.7rem)] font-serif font-bold leading-[1.08] tracking-[-0.04em] break-keep">
+          <h1 class="whitespace-nowrap text-[clamp(1.7rem,7.3vw,2.7rem)] font-serif font-bold leading-[1.08] tracking-[-0.04em] sm:text-[clamp(2rem,3.2vw,2.7rem)]">
             <BlurText client:load text="안녕하세요, 김지훈입니다." animateBy="words" delay={95} />
           </h1>
 
           <p class="mt-5 max-w-2xl text-sm font-sans leading-[1.8] opacity-65 break-keep md:text-base">
             <span class="block">Spring 기반 백엔드와 생성형 AI를 활용한 웹 서비스를 만들고 있습니다.</span>
           </p>
-          <blockquote class="mt-4 text-left text-lg font-serif italic leading-[1.7] opacity-80 break-keep">
+          <blockquote class="mt-4 text-lg font-serif italic leading-[1.7] opacity-80 break-keep">
             <span class="block">조금은 느리더라도 문제의 본질을</span>
             <span class="block">놓치지 않는 개발자가 되겠습니다.</span>
           </blockquote>
@@ -362,9 +362,10 @@ const skillGroups: SkillGroup[] = [
 
       const updateActiveSection = () => {
         if (!aboutSections.length) return;
-        const marker = window.innerHeight * 0.4;
+        const isMobileLayout = window.matchMedia("(max-width: 767px)").matches;
+        const marker = isMobileLayout ? Math.min(window.innerHeight * 0.22, 160) : window.innerHeight * 0.4;
         const isPageEnd = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 8;
-        let activeSection = aboutSections[0];
+        let activeSection: HTMLElement | null = null;
 
         if (isPageEnd) {
           activeSection = aboutSections[aboutSections.length - 1];
@@ -374,7 +375,10 @@ const skillGroups: SkillGroup[] = [
           });
         }
 
-        aboutSections.forEach((section) => section.classList.toggle("about-section-active", section === activeSection));
+        aboutSections.forEach((section) => {
+          const isActive = section === activeSection;
+          section.classList.toggle("about-section-active", isActive);
+        });
       };
 
       const requestSectionUpdate = () => {

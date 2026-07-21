@@ -60,8 +60,8 @@ timestamp: "2026-07-21T00:00:00+09:00"
 - 소개 영역은 제목, 한 문장 소개, 의도적으로 두 줄로 나눈 짧은 인용문, hairline과 소셜 링크 순서로 구성하고 인사말은 한 줄을 우선하도록 크기를 제한한다.
 - 역할 나열 strip은 두지 않고, Spring 백엔드와 생성형 AI 작업 분야를 한 문장으로 설명한다.
 - 이메일 복사 버튼, GitHub, Instagram은 흔들림 없이 밑줄이 확장되며 각각 사이트 accent blue, monochrome, magenta 계열 hover 색을 사용한다.
-- 모바일에서는 프로필 사진과 소개문을 한 열로 쌓아 인물 구도를 유지
-- 각 섹션은 220px sticky rail에 순번, kicker, 제목만 두어 간결하게 구성하며 긴 영문 제목도 rail 범위를 넘지 않게 크기를 조절한다. 순번은 현재 스크롤이 머무는 섹션만 accent blue로 표시하고 나머지는 옅은 중립색을 유지한다.
+- 모바일에서는 프로필 사진과 소개문을 한 열로 쌓아 인물 구도를 유지하고, 인사말은 좁은 화면에서도 한 줄을 우선한다.
+- 데스크톱의 각 섹션은 220px sticky rail에 순번, kicker, 제목만 두어 간결하게 구성하며 긴 영문 제목도 rail 범위를 넘지 않게 크기를 조절한다. 모바일에서는 같은 정보를 낮은 sticky 헤더로 재배치해 콘텐츠를 읽는 동안에도 현재 번호가 내비게이션 아래에 남도록 한다. 순번은 현재 스크롤이 머무는 섹션만 accent blue로 표시하고, 첫 섹션 진입 전과 비활성 섹션은 옅은 중립색을 유지한다.
 - Milestones는 원형 node 중심 timeline 대신 과정별 큰 순번과 날짜를 사용하는 Editorial Ledger로 구성한다. 성과별 하위 번호와 `Current` 라벨은 생략하고 수상 badge만 accent로 강조한다.
 - Tech Specs는 하나의 큰 글래스 카드 안에 Backend, AI, Frontend, Data, Infra, Testing을 3×2 hairline 구획으로 나눈 directory로 구성한다. 각 구획은 20px 상하·24px 좌우 패딩을 사용하고 기술 목록의 하단선을 같은 높이로 맞춘다. 기술 표식은 Simple Icons 기반 SVG를 같은 규격으로 렌더링하고 항상 각 브랜드 원색을 표시하며, 구획 hover에는 미세한 크기 변화만 사용한다. 공식 표식이 없는 항목은 가장 가까운 플랫폼 아이콘을 사용한다.
 - Certifications는 번호·취득일, 자격명·발급처, 우측 상단 원본 색상 로고와 하단 verified 상태를 구분한 2열 credential register로 구성한다. Milestones와 함께 통합 글래스 카드의 외곽 상·하단선은 생략하고 내부 구분선만 유지한다.
