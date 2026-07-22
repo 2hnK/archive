@@ -6,7 +6,7 @@ category: "AI"
 subcategory: "LLM Pipeline"
 date: 2026-07-22
 timestamp: "2026-07-22T00:00:00+09:00"
-imageUrl: "./images/ai-textbook-chunking-strategy/chunking-experiment-results.png"
+imageUrl: "./images/ai-textbook-chunking-strategy/chunking-strategies-overview.png"
 isFeatured: true
 projects:
   - "dyslexia-kit"
