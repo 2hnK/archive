@@ -3,7 +3,7 @@ type: Development Guide
 title: Development Guide
 description: DevArchive 개발 요구사항, 명령, HTML/CSS 작성 기준, 검증 절차.
 tags: ["development", "astro", "verification"]
-timestamp: "2026-07-21T00:00:00+09:00"
+timestamp: "2026-07-22T00:00:00+09:00"
 ---
 
 # Development Guide
@@ -49,8 +49,9 @@ npm run preview
 
 1. `src/content/articles/`에 Markdown 파일을 추가한다.
 2. 기존 아티클의 frontmatter 구조를 따른다.
-3. 이미지가 필요하면 아티클 이미지 폴더를 함께 둔다.
-4. 목록, 상세, 필터에서 노출이 깨지지 않는지 확인한다.
+3. 특정 프로젝트의 문제 해결 기록이면 `projects` 배열에 `/project/[slug]`의 slug를 추가한다.
+4. 이미지가 필요하면 아티클 이미지 폴더를 함께 둔다.
+5. 목록, 상세, 필터와 연결된 프로젝트 상세에서 노출이 깨지지 않는지 확인한다.
 
 ## Adding Pages
 

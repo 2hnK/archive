@@ -3,7 +3,7 @@ type: Project Structure
 title: Project Structure
 description: DevArchive 저장소의 주요 디렉터리와 Astro 소스 구조.
 tags: ["structure", "astro", "docs"]
-timestamp: "2026-07-21T00:00:00+09:00"
+timestamp: "2026-07-22T00:00:00+09:00"
 ---
 
 # Project Structure
@@ -54,7 +54,7 @@ timestamp: "2026-07-21T00:00:00+09:00"
 
 ## Content
 
-아티클은 `src/content/articles/` 아래 Markdown 파일로 관리한다. 이미지는 아티클 하위 `images/` 폴더에 둔다.
+아티클은 `src/content/articles/` 아래 Markdown 파일로 관리한다. 이미지는 아티클 하위 `images/` 폴더에 둔다. 프로젝트에서 파생된 기술 글은 아티클 frontmatter의 `projects` 배열에 프로젝트 slug를 기록해 양쪽 상세 화면에서 관계를 표시한다.
 
 아티클 Markdown도 OKF `type` frontmatter를 갖지만, 렌더링에 필요한 필드는 `src/content.config.ts`의 Astro content collection 스키마를 따른다.
 

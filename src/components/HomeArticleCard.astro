@@ -1,24 +1,27 @@
 ---
+type ArticleImage = string | { src: string };
+
 interface Props {
   category: string;
   date: string;
   dateTime: string;
   title: string;
   description: string;
-  imageUrl?: string;
+  imageUrl?: ArticleImage;
   subcategory?: string;
   href: string;
 }
 
 const { category, date, dateTime, title, description, imageUrl, subcategory, href } = Astro.props;
+const resolvedImageUrl = typeof imageUrl === "string" ? imageUrl : imageUrl?.src;
 ---
 
 <article class="home-article-card glass-panel h-full overflow-hidden rounded-[1.75rem] transition-[border-color,box-shadow] duration-300 hover:border-accent-color/25 hover:shadow-[0_14px_36px_rgba(0,0,0,0.08)]">
   <a href={href} class="group grid h-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-color sm:grid-cols-[minmax(170px,0.78fr)_minmax(0,1.22fr)]">
     <div class="relative aspect-[16/10] overflow-hidden bg-black/5 sm:aspect-auto sm:min-h-[290px] dark:bg-white/5">
-      {imageUrl ? (
+      {resolvedImageUrl ? (
         <img
-          src={imageUrl}
+          src={resolvedImageUrl}
           alt=""
           loading="lazy"
           decoding="async"

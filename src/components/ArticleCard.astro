@@ -1,21 +1,24 @@
 ---
 // src/components/ArticleCard.astro
+type ArticleImage = string | { src: string };
+
 interface Props {
   category: string;
   date: string;
   title: string;
   description: string;
-  imageUrl?: string;
+  imageUrl?: ArticleImage;
   subcategory?: string;
   href: string;
 }
 
 const { category, date, title, description, imageUrl, subcategory, href } = Astro.props;
+const resolvedImageUrl = typeof imageUrl === "string" ? imageUrl : imageUrl?.src;
 ---
 <article class="group flex flex-col h-full w-full glass-panel rounded-[2rem] p-5 md:p-6 overflow-hidden transition-transform duration-500 hover:-translate-y-1">
-  {imageUrl ? (
+  {resolvedImageUrl ? (
     <a href={href} class="img-wrap block w-full aspect-video md:aspect-[4/3] mb-6 overflow-hidden rounded-[1.25rem] bg-black/5 dark:bg-white/5">
-      <img alt={title} class="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]" src={imageUrl} loading="lazy" />
+      <img alt={title} class="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]" src={resolvedImageUrl} loading="lazy" />
     </a>
   ) : (
     <a href={href} class="img-wrap flex items-center justify-center w-full aspect-video md:aspect-[4/3] mb-6 overflow-hidden rounded-[1.25rem] bg-black/5 dark:bg-white/5 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02] relative">

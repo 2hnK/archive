@@ -19,6 +19,14 @@ const formattedDate = entry.data.date.toLocaleDateString("ko-KR");
 
 const currentCat = entry.data.category;
 const currentSub = entry.data.subcategory;
+const relatedProjects = entry.data.projects;
+const articleImageUrl =
+  typeof entry.data.imageUrl === "string" ? entry.data.imageUrl : entry.data.imageUrl?.src;
+const formatProjectTitle = (slug: string) =>
+  slug
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
 ---
 
 <BaseLayout title={`${entry.data.title} | DEVARCHIVE`} description={entry.data.description}>
@@ -99,7 +107,7 @@ const currentSub = entry.data.subcategory;
                 <img
                   class="w-full h-auto aspect-video object-cover"
                   alt={entry.data.title}
-                  src={entry.data.imageUrl}
+                  src={articleImageUrl}
                 />
               </div>
             )
@@ -146,6 +154,37 @@ const currentSub = entry.data.subcategory;
           <div class="prose max-w-none text-[17px] leading-[1.7] tracking-tight">
             <Content />
           </div>
+
+          {
+            relatedProjects.length > 0 && (
+              <section class="mt-16 border-t border-text-color/10 pt-8" aria-labelledby="related-projects-title">
+                <h2
+                  id="related-projects-title"
+                  class="mb-5 font-sans text-[10px] font-bold uppercase tracking-[0.25em] text-text-color opacity-45"
+                >
+                  Related Project
+                </h2>
+                <div class="divide-y divide-text-color/10 border-y border-text-color/10">
+                  {relatedProjects.map((projectSlug) => (
+                    <a
+                      href={`/project/${projectSlug}`}
+                      class="group flex items-center justify-between gap-6 py-5 font-sans text-text-color transition-colors hover:text-accent-color focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-color"
+                    >
+                      <span class="font-serif text-2xl font-bold tracking-tight">
+                        {formatProjectTitle(projectSlug)}
+                      </span>
+                      <span
+                        class="material-symbols-outlined text-[20px] transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transform-none motion-reduce:transition-none"
+                        aria-hidden="true"
+                      >
+                        arrow_forward
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              </section>
+            )
+          }
         </article>
       </div>
 

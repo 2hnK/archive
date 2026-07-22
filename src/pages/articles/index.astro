@@ -28,6 +28,8 @@ const categories = Object.keys(categoryTree).sort();
 const totalArticleCount = sortedArticles.length;
 const currentCategory = Astro.url.searchParams.get("cat") || "";
 const currentSubcategory = Astro.url.searchParams.get("sub") || "";
+const resolveImageUrl = (imageUrl: string | { src: string } | undefined) =>
+  typeof imageUrl === "string" ? imageUrl : imageUrl?.src;
 
 // Extract raw text for feed preview (removing markdown syntaxes)
 const getSnippet = (body: string) => {
@@ -201,7 +203,7 @@ const getSnippet = (body: string) => {
                         onclick={`window.location.href='/articles/${entry.id}'`}
                       >
                         <img
-                          src={entry.data.imageUrl}
+                          src={resolveImageUrl(entry.data.imageUrl)}
                           alt={entry.data.title}
                           class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
                           loading="lazy"

@@ -3,7 +3,7 @@ type: Design Reference
 title: Page Patterns
 description: 홈, 아티클, 프로젝트, 소개, 도구형 페이지의 반복 레이아웃 패턴.
 tags: ["design", "page-patterns", "layout"]
-timestamp: "2026-07-21T00:00:00+09:00"
+timestamp: "2026-07-22T00:00:00+09:00"
 ---
 
 # Page Patterns
@@ -38,6 +38,7 @@ timestamp: "2026-07-21T00:00:00+09:00"
 - 좌측 topic, 중앙 article card, 우측 TOC의 3열 구조를 사용한다.
 - 본문과 대표 이미지는 큰 곡률의 `glass-panel` 안에 배치한다.
 - 목차는 sliding highlight와 scroll spy로 현재 위치를 표시한다.
+- 프로젝트 관계가 있으면 본문 카드 하단의 내부 hairline 목록으로 연결하며 별도 중첩 카드를 만들지 않는다.
 
 ## Project Index
 
@@ -52,6 +53,7 @@ timestamp: "2026-07-21T00:00:00+09:00"
 - 설명은 accent border-left로 강조한다.
 - 미디어에는 큰 radius와 깊은 shadow를 적용한다.
 - 하단은 sidebar meta와 prose content의 12열 구조를 사용한다.
+- 연결된 아티클은 본문 아래 하나의 `glass-panel` 안에서 hairline으로 구분한 목록으로 표시한다.
 
 ## About
 
