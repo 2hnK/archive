@@ -490,6 +490,14 @@ h1, h2, h3, h4, h5, h6 {
   margin: 2.5rem 0;
 }
 
+.prose blockquote p {
+  margin: 0;
+}
+
+.prose blockquote p + p {
+  margin-top: 1em;
+}
+
 .prose h1, .prose h2, .prose h3, .prose h4 {
   font-family: var(--font-family-serif);
   font-weight: 700;
