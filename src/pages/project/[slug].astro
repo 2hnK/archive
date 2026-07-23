@@ -29,6 +29,80 @@ export async function getStaticPaths() {
       year: "2026",
       image: "/images/projects/soomgil-trip-planning-cc0.jpg",
       video: "/videos/Soomgil-demo.mp4",
+      screenshots: [
+        {
+          src: "/images/projects/soomgil/home.webp",
+          title: "Home",
+          description: "검색과 추천, 커뮤니티, 다가오는 여행을 한 화면에서 연결하는 홈",
+          alt: "Soomgil 검색, 여행 추천, 커뮤니티, 다가오는 여행 정보를 보여주는 홈 화면",
+          width: 1920,
+          height: 1996,
+        },
+        {
+          src: "/images/projects/soomgil/search.webp",
+          title: "Search",
+          description: "여행·장소·여행기·사용자를 한 번에 탐색하는 통합 검색",
+          alt: "Soomgil 제주 검색 결과를 여행, 장소, 여행기별로 나눈 통합 검색 화면",
+          width: 1920,
+          height: 1463,
+        },
+        {
+          src: "/images/projects/soomgil/search-place.webp",
+          title: "Place Detail",
+          description: "장소 사진과 운영 정보, 접근성 조건을 확인하는 상세 보기",
+          alt: "Soomgil 제주마방목지 사진, 운영 정보, 접근성 정보를 보여주는 장소 상세 화면",
+          width: 1920,
+          height: 953,
+        },
+        {
+          src: "/images/projects/soomgil/my-trip.webp",
+          title: "My Trip",
+          description: "초대받은 여행과 진행 중인 계획을 확인하는 여행 대시보드",
+          alt: "Soomgil 제주도 여행 티켓과 여행 목록을 보여주는 내 여행 대시보드",
+          width: 1920,
+          height: 1072,
+        },
+        {
+          src: "/images/projects/soomgil/trip-planner.webp",
+          title: "Collaborative Planner",
+          description: "지도 위 일정을 함께 편집하고 AI 가이드와 대화하는 여행 계획 화면",
+          alt: "Soomgil 제주도 지도 일정과 실시간 AI 가이드 패널을 함께 보여주는 여행 계획 화면",
+          width: 1920,
+          height: 953,
+        },
+        {
+          src: "/images/projects/soomgil/super-like.webp",
+          title: "Swipe Preference",
+          description: "LIKE·NOPE·SUPER LIKE로 장소 취향을 수집하는 핵심 흐름",
+          alt: "Soomgil 장소 카드와 상세 정보를 보며 여행 취향을 수집하는 화면",
+          width: 1920,
+          height: 1056,
+        },
+        {
+          src: "/images/projects/soomgil/community.webp",
+          title: "Community",
+          description: "여행 기록과 검증된 루트를 둘러보는 커뮤니티 피드",
+          alt: "Soomgil 추천 여행기와 최신 여행기 카드 목록을 보여주는 커뮤니티 화면",
+          width: 1920,
+          height: 1709,
+        },
+        {
+          src: "/images/projects/soomgil/community-feed.webp",
+          title: "Community Detail",
+          description: "여행 기록의 반응과 댓글을 이어 보는 커뮤니티 상세",
+          alt: "Soomgil 여행 기록 게시물과 댓글 대화를 함께 보여주는 커뮤니티 상세 화면",
+          width: 1920,
+          height: 953,
+        },
+        {
+          src: "/images/projects/soomgil/records.webp",
+          title: "Travel Records",
+          description: "여행별 사진을 모아 다시 탐색하는 기록 갤러리",
+          alt: "Soomgil 여행별 사진을 모아 보여주는 여행 기록 갤러리 화면",
+          width: 1920,
+          height: 1902,
+        },
+      ],
       archivalNote:
         "스와이프로 모은 개인 취향을 그룹 여행 계획, 지도 일정 편집, 여행 기록 공유까지 이어 붙인 서비스 개발 기록",
       content: `<h2>Project Overview</h2>
@@ -290,6 +364,7 @@ Mapbox / Google GenAI / KTO tourism data</code></pre>
       year: "2025",
       image: "/images/projects/dyslexia-kit-children-reading-public-domain.jpg",
       video: "/videos/dyslexia-kit-demo.mp4",
+      screenshots: [],
       content: `<h2>Project Overview</h2>
 
 <p>
@@ -480,6 +555,7 @@ Frontend 학습 화면 제공</code></pre>
 }
 
 const { project } = Astro.props;
+const projectScreenshots = project.screenshots ?? [];
 const relatedArticles = (await getCollection("articles"))
   .filter((entry) => entry.data.projects.includes(project.slug))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
@@ -547,6 +623,223 @@ const relatedArticles = (await getCollection("articles"))
           }
         </div>
       </section>
+
+      {
+        projectScreenshots.length > 0 && (
+          <section
+            class="mb-24 reveal-up"
+            aria-labelledby="project-screens-title"
+            data-project-gallery
+          >
+            <div class="mb-7 flex items-end justify-between gap-6">
+              <div>
+                <p class="mb-2 font-sans text-[10px] font-black uppercase tracking-[0.3em] opacity-35">
+                  Product Screens
+                </p>
+                <h2
+                  id="project-screens-title"
+                  class="font-serif text-3xl font-bold tracking-tight md:text-4xl"
+                >
+                  Interface Walkthrough
+                </h2>
+              </div>
+
+              <div class="flex shrink-0 items-center gap-2">
+                <span class="mr-1 hidden font-sans text-[9px] font-bold uppercase tracking-[0.18em] tabular-nums opacity-40 sm:inline">
+                  {String(projectScreenshots.length).padStart(2, "0")} Screens
+                </span>
+                <button
+                  type="button"
+                  class="glass-pill inline-flex h-10 w-10 items-center justify-center border border-text-color/10 transition-[border-color,color,opacity] hover:border-accent-color/50 hover:text-accent-color focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-color disabled:cursor-not-allowed disabled:opacity-25"
+                  aria-label="이전 프로젝트 화면 보기"
+                  data-gallery-previous
+                >
+                  <span class="material-symbols-outlined text-[18px]" aria-hidden="true">
+                    arrow_back
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  class="glass-pill inline-flex h-10 w-10 items-center justify-center border border-text-color/10 transition-[border-color,color,opacity] hover:border-accent-color/50 hover:text-accent-color focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-color disabled:cursor-not-allowed disabled:opacity-25"
+                  aria-label="다음 프로젝트 화면 보기"
+                  data-gallery-next
+                >
+                  <span class="material-symbols-outlined text-[18px]" aria-hidden="true">
+                    arrow_forward
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <div class="-mx-6 px-6 md:-mx-12 md:px-12 lg:mx-0 lg:px-0">
+              <div
+                class="project-gallery-track flex snap-x snap-mandatory gap-5 overflow-x-auto overscroll-x-contain pb-2 md:gap-6"
+                data-gallery-track
+                tabindex="0"
+                aria-label={`${project.title} 프로젝트 화면 갤러리`}
+              >
+                {projectScreenshots.map((screen, index) => (
+                  <figure class="w-[82vw] shrink-0 snap-start sm:w-[48%] xl:w-[31.5%]">
+                    <button
+                      type="button"
+                      class="group block w-full cursor-zoom-in overflow-hidden rounded-[1.5rem] border border-black/10 bg-black/[0.025] text-left shadow-[0_18px_45px_-24px_rgba(0,0,0,0.28)] transition-[border-color,transform] duration-500 hover:-translate-y-px hover:border-accent-color/30 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-color dark:border-white/10 dark:bg-white/[0.025] dark:shadow-[0_22px_55px_-26px_rgba(0,0,0,0.72)] motion-reduce:transform-none motion-reduce:transition-none"
+                      aria-label={`${screen.title} 화면 확대해서 보기`}
+                      data-gallery-open
+                      data-gallery-src={screen.src}
+                      data-gallery-alt={screen.alt}
+                      data-gallery-title={screen.title}
+                      data-gallery-description={screen.description}
+                      data-gallery-width={screen.width}
+                      data-gallery-height={screen.height}
+                    >
+                      <div class="aspect-video overflow-hidden">
+                        <img
+                          src={screen.src}
+                          alt={screen.alt}
+                          width={screen.width}
+                          height={screen.height}
+                          loading="lazy"
+                          decoding="async"
+                          class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.01] motion-reduce:transform-none motion-reduce:transition-none"
+                        />
+                      </div>
+                    </button>
+                    <figcaption class="mt-4 flex gap-4 border-t border-text-color/10 pt-4">
+                      <span class="font-mono text-[10px] font-bold tabular-nums text-accent-color">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <div>
+                        <h3 class="font-serif text-xl font-bold tracking-tight">
+                          {screen.title}
+                        </h3>
+                        <p class="mt-1 max-w-2xl font-sans text-xs leading-relaxed opacity-55 break-keep sm:text-sm">
+                          {screen.description}
+                        </p>
+                      </div>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+
+            <dialog
+              class="project-gallery-dialog m-auto max-h-none max-w-none overflow-visible bg-transparent p-0 text-text-color backdrop:bg-black/70 backdrop:backdrop-blur-sm"
+              aria-labelledby="project-gallery-dialog-title"
+              aria-describedby="project-gallery-dialog-description"
+              data-gallery-dialog
+            >
+              <div class="project-gallery-dialog-surface relative w-[min(94vw,1500px)] overflow-hidden rounded-[1.75rem] border border-white/15 shadow-[0_35px_100px_-24px_rgba(0,0,0,0.72)] backdrop-blur-xl">
+                <div class="project-gallery-dialog-close absolute left-3 top-3 z-20 flex items-center overflow-hidden rounded-full border border-text-color/15 sm:left-5 sm:top-5">
+                  <button
+                    type="button"
+                    class="inline-flex h-10 w-10 items-center justify-center transition-colors hover:text-accent-color focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent-color disabled:cursor-not-allowed disabled:opacity-25"
+                    aria-label="이미지 축소"
+                    data-gallery-zoom-out
+                  >
+                    <span class="material-symbols-outlined text-[19px]" aria-hidden="true">
+                      zoom_out
+                    </span>
+                  </button>
+                  <button
+                    type="button"
+                    class="h-10 min-w-14 border-x border-text-color/10 px-2 font-mono text-[9px] font-bold tabular-nums transition-colors hover:text-accent-color focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent-color"
+                    aria-label="이미지 확대 초기화"
+                    data-gallery-zoom-reset
+                  >
+                    <span data-gallery-zoom-value>100%</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="inline-flex h-10 w-10 items-center justify-center transition-colors hover:text-accent-color focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-accent-color disabled:cursor-not-allowed disabled:opacity-25"
+                    aria-label="이미지 확대"
+                    data-gallery-zoom-in
+                  >
+                    <span class="material-symbols-outlined text-[19px]" aria-hidden="true">
+                      zoom_in
+                    </span>
+                  </button>
+                </div>
+
+                <button
+                  type="button"
+                  class="project-gallery-dialog-close glass-pill absolute right-3 top-3 z-10 inline-flex h-11 w-11 items-center justify-center border border-text-color/15 transition-[border-color,color] hover:border-accent-color/50 hover:text-accent-color focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-color sm:right-5 sm:top-5"
+                  aria-label="확대 화면 닫기"
+                  data-gallery-close
+                >
+                  <span class="material-symbols-outlined text-[20px]" aria-hidden="true">
+                    close
+                  </span>
+                </button>
+
+                <div
+                  class="project-gallery-dialog-viewport relative max-h-[82vh] min-h-[240px] overflow-auto bg-black/[0.035] dark:bg-white/[0.025]"
+                  data-gallery-dialog-viewport
+                >
+                  <button
+                    type="button"
+                    class="project-gallery-dialog-close glass-pill absolute left-3 top-1/2 z-10 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-text-color/15 transition-[border-color,color] hover:border-accent-color/50 hover:text-accent-color focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-color sm:left-5 sm:h-12 sm:w-12"
+                    aria-label="이전 확대 화면 보기"
+                    data-gallery-dialog-previous
+                  >
+                    <span class="material-symbols-outlined text-[20px]" aria-hidden="true">
+                      arrow_back
+                    </span>
+                  </button>
+
+                  <div
+                    class="flex min-h-[240px] w-max min-w-full items-start justify-center p-3 sm:p-6"
+                    data-gallery-dialog-canvas
+                  >
+                    <img
+                      src={projectScreenshots[0].src}
+                      alt=""
+                      width={projectScreenshots[0].width}
+                      height={projectScreenshots[0].height}
+                      draggable="false"
+                      class="block h-auto max-h-[76vh] w-auto max-w-full cursor-zoom-in object-contain select-none"
+                      data-gallery-dialog-image
+                      data-gallery-zoom-toggle
+                    />
+                  </div>
+
+                  <button
+                    type="button"
+                    class="project-gallery-dialog-close glass-pill absolute right-3 top-1/2 z-10 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-text-color/15 transition-[border-color,color] hover:border-accent-color/50 hover:text-accent-color focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-color sm:right-5 sm:h-12 sm:w-12"
+                    aria-label="다음 확대 화면 보기"
+                    data-gallery-dialog-next
+                  >
+                    <span class="material-symbols-outlined text-[20px]" aria-hidden="true">
+                      arrow_forward
+                    </span>
+                  </button>
+                </div>
+
+                <div class="flex items-start justify-between gap-6 border-t border-text-color/10 px-5 py-4 sm:px-7 sm:py-5">
+                  <div>
+                    <h3
+                      id="project-gallery-dialog-title"
+                      class="font-serif text-xl font-bold tracking-tight sm:text-2xl"
+                      data-gallery-dialog-title
+                    />
+                    <p
+                      id="project-gallery-dialog-description"
+                      class="mt-1 font-sans text-xs leading-relaxed opacity-55 break-keep sm:text-sm"
+                      data-gallery-dialog-description
+                    />
+                  </div>
+                  <span
+                    class="shrink-0 pt-1 font-mono text-[10px] font-bold tabular-nums opacity-40"
+                    aria-live="polite"
+                    data-gallery-dialog-count
+                  >
+                    01 / {String(projectScreenshots.length).padStart(2, "0")}
+                  </span>
+                </div>
+              </div>
+            </dialog>
+          </section>
+        )
+      }
 
       <!-- Content Narrative Area -->
       <section class="grid grid-cols-1 lg:grid-cols-12 gap-20">
@@ -675,6 +968,239 @@ const relatedArticles = (await getCollection("articles"))
       );
 
       document.querySelectorAll(".reveal-up").forEach((el) => revealObserver.observe(el));
+
+      document.querySelectorAll("[data-project-gallery]").forEach((gallery) => {
+        const track = gallery.querySelector("[data-gallery-track]");
+        const previousButton = gallery.querySelector("[data-gallery-previous]");
+        const nextButton = gallery.querySelector("[data-gallery-next]");
+
+        if (
+          !(track instanceof HTMLElement) ||
+          !(previousButton instanceof HTMLButtonElement) ||
+          !(nextButton instanceof HTMLButtonElement)
+        ) {
+          return;
+        }
+
+        const updateButtonState = () => {
+          const maxScrollLeft = track.scrollWidth - track.clientWidth;
+          previousButton.disabled = track.scrollLeft <= 4;
+          nextButton.disabled = track.scrollLeft >= maxScrollLeft - 4;
+        };
+
+        const getScrollStep = () => {
+          const firstItem = track.querySelector("figure");
+          if (!(firstItem instanceof HTMLElement)) {
+            return track.clientWidth * 0.8;
+          }
+
+          const trackStyle = window.getComputedStyle(track);
+          const gap = Number.parseFloat(trackStyle.columnGap || trackStyle.gap) || 0;
+          return firstItem.offsetWidth + gap;
+        };
+
+        const scrollGallery = (direction: number) => {
+          const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          track.scrollBy({
+            left: direction * getScrollStep(),
+            behavior: reduceMotion ? "auto" : "smooth",
+          });
+        };
+
+        previousButton.addEventListener("click", () => scrollGallery(-1));
+        nextButton.addEventListener("click", () => scrollGallery(1));
+        track.addEventListener("scroll", updateButtonState, { passive: true });
+        window.addEventListener("resize", updateButtonState, { passive: true });
+        updateButtonState();
+
+        const dialog = gallery.querySelector("[data-gallery-dialog]");
+        const dialogImage = gallery.querySelector("[data-gallery-dialog-image]");
+        const dialogTitle = gallery.querySelector("[data-gallery-dialog-title]");
+        const dialogDescription = gallery.querySelector("[data-gallery-dialog-description]");
+        const dialogCount = gallery.querySelector("[data-gallery-dialog-count]");
+        const dialogViewport = gallery.querySelector("[data-gallery-dialog-viewport]");
+        const closeButton = gallery.querySelector("[data-gallery-close]");
+        const modalPreviousButton = gallery.querySelector("[data-gallery-dialog-previous]");
+        const modalNextButton = gallery.querySelector("[data-gallery-dialog-next]");
+        const zoomOutButton = gallery.querySelector("[data-gallery-zoom-out]");
+        const zoomResetButton = gallery.querySelector("[data-gallery-zoom-reset]");
+        const zoomInButton = gallery.querySelector("[data-gallery-zoom-in]");
+        const zoomValue = gallery.querySelector("[data-gallery-zoom-value]");
+        const modalTriggers = Array.from(
+          gallery.querySelectorAll("[data-gallery-open]"),
+        ).filter((trigger): trigger is HTMLButtonElement => trigger instanceof HTMLButtonElement);
+
+        if (
+          !(dialog instanceof HTMLDialogElement) ||
+          !(dialogImage instanceof HTMLImageElement) ||
+          !(dialogTitle instanceof HTMLElement) ||
+          !(dialogDescription instanceof HTMLElement) ||
+          !(dialogCount instanceof HTMLElement) ||
+          !(dialogViewport instanceof HTMLElement) ||
+          !(closeButton instanceof HTMLButtonElement) ||
+          !(modalPreviousButton instanceof HTMLButtonElement) ||
+          !(modalNextButton instanceof HTMLButtonElement) ||
+          !(zoomOutButton instanceof HTMLButtonElement) ||
+          !(zoomResetButton instanceof HTMLButtonElement) ||
+          !(zoomInButton instanceof HTMLButtonElement) ||
+          !(zoomValue instanceof HTMLElement) ||
+          modalTriggers.length === 0
+        ) {
+          return;
+        }
+
+        let activeModalIndex = 0;
+        let modalZoom = 1;
+        const minimumZoom = 1;
+        const maximumZoom = 2.5;
+        const zoomStep = 0.25;
+
+        const applyModalZoom = () => {
+          if (!dialogImage.naturalWidth || !dialogImage.naturalHeight) {
+            return;
+          }
+
+          const horizontalPadding = window.innerWidth >= 640 ? 48 : 24;
+          const availableWidth = Math.max(240, dialogViewport.clientWidth - horizontalPadding);
+          const availableHeight = Math.max(220, window.innerHeight * 0.72);
+          const fitScale = Math.min(
+            availableWidth / dialogImage.naturalWidth,
+            availableHeight / dialogImage.naturalHeight,
+            1,
+          );
+
+          dialogImage.style.maxWidth = "none";
+          dialogImage.style.maxHeight = "none";
+          dialogImage.style.width = `${Math.round(dialogImage.naturalWidth * fitScale * modalZoom)}px`;
+          dialogImage.style.height = `${Math.round(dialogImage.naturalHeight * fitScale * modalZoom)}px`;
+          dialogImage.classList.toggle("is-zoomed", modalZoom > minimumZoom);
+          zoomValue.textContent = `${Math.round(modalZoom * 100)}%`;
+          zoomOutButton.disabled = modalZoom <= minimumZoom;
+          zoomInButton.disabled = modalZoom >= maximumZoom;
+        };
+
+        const setModalZoom = (nextZoom: number, resetScroll = false) => {
+          modalZoom = Math.min(maximumZoom, Math.max(minimumZoom, nextZoom));
+          applyModalZoom();
+
+          if (resetScroll) {
+            dialogViewport.scrollTo({ top: 0, left: 0 });
+          }
+        };
+
+        const resetModalZoom = () => {
+          setModalZoom(minimumZoom, true);
+        };
+
+        const showModalScreen = (index: number) => {
+          activeModalIndex = (index + modalTriggers.length) % modalTriggers.length;
+          const trigger = modalTriggers[activeModalIndex];
+
+          dialogImage.src = trigger.dataset.gallerySrc ?? "";
+          dialogImage.alt = trigger.dataset.galleryAlt ?? "";
+          dialogImage.width = Number(trigger.dataset.galleryWidth) || dialogImage.width;
+          dialogImage.height = Number(trigger.dataset.galleryHeight) || dialogImage.height;
+          dialogTitle.textContent = trigger.dataset.galleryTitle ?? "";
+          dialogDescription.textContent = trigger.dataset.galleryDescription ?? "";
+          dialogCount.textContent = `${String(activeModalIndex + 1).padStart(2, "0")} / ${String(modalTriggers.length).padStart(2, "0")}`;
+          modalZoom = minimumZoom;
+          requestAnimationFrame(resetModalZoom);
+        };
+
+        dialogImage.addEventListener("load", resetModalZoom);
+        dialogImage.addEventListener("click", () => {
+          setModalZoom(modalZoom === minimumZoom ? 2 : minimumZoom, true);
+        });
+        zoomOutButton.addEventListener("click", () => {
+          setModalZoom(modalZoom - zoomStep);
+        });
+        zoomResetButton.addEventListener("click", resetModalZoom);
+        zoomInButton.addEventListener("click", () => {
+          setModalZoom(modalZoom + zoomStep);
+        });
+
+        modalTriggers.forEach((trigger, index) => {
+          trigger.addEventListener("click", () => {
+            showModalScreen(index);
+            dialog.showModal();
+            requestAnimationFrame(resetModalZoom);
+          });
+        });
+
+        modalPreviousButton.addEventListener("click", () => {
+          showModalScreen(activeModalIndex - 1);
+        });
+        modalNextButton.addEventListener("click", () => {
+          showModalScreen(activeModalIndex + 1);
+        });
+        closeButton.addEventListener("click", () => {
+          resetModalZoom();
+          dialog.close();
+        });
+        dialog.addEventListener("keydown", (event) => {
+          if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            showModalScreen(activeModalIndex - 1);
+          } else if (event.key === "ArrowRight") {
+            event.preventDefault();
+            showModalScreen(activeModalIndex + 1);
+          }
+        });
+        dialog.addEventListener("click", (event) => {
+          if (event.target === dialog) {
+            dialog.close();
+          }
+        });
+      });
     });
   </script>
+
+  <style>
+    .project-gallery-track {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .project-gallery-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .project-gallery-track:focus-visible {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 6px;
+    }
+
+    .project-gallery-dialog[open] {
+      animation: project-gallery-dialog-in 180ms ease-out;
+    }
+
+    .project-gallery-dialog-surface {
+      background: color-mix(in srgb, var(--bg-color) 95%, transparent);
+    }
+
+    .project-gallery-dialog-close {
+      background: color-mix(in srgb, var(--bg-color) 82%, transparent);
+    }
+
+    [data-gallery-zoom-toggle].is-zoomed {
+      cursor: zoom-out;
+    }
+
+    @keyframes project-gallery-dialog-in {
+      from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.99);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .project-gallery-dialog[open] {
+        animation: none;
+      }
+    }
+  </style>
 </BaseLayout>
